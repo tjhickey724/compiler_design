@@ -8,7 +8,7 @@ We will follow the text book fairly closely with the goal of completing the firs
 4. [Abstract Syntax](#abstract-syntax)
 5. [Semantic Analysis](#semantic-analysis)
 6. [Activation Records](#activation-records)
-7. Translation to IR trees
+7. [Translation to IR trees](Translation-to-IR-trees)
 8. Basic Blocks and Traces
 9. Instruction Selection
 10. Liveness Analysis
@@ -50,4 +50,16 @@ of the variables that appear in the program, e.g. the possible types they can st
 ## Activation Records
 A key feature of all modern programming languages is that they allow the user to use procedural abstraction to solve problems.  Procedural abstraction is implemented by creating a stack frame for each procedure call and one key part of the compiling process is specifying the structure of these stack frames. These structured frames are called Activation Records, they are a representation of a function/procedure/method that can be used to easily generate the code for procedure calls.
 
+
+## Translation to IR trees
+
+## Basic Blocks and Traces
+
+## Instruction Selection
+
+## Liveness Analysis
+
+## Register Allocation
+
+## Putting it all together
 
