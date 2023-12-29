@@ -4,8 +4,8 @@ We will follow the text book fairly closely with the goal of completing the firs
 
 1. [Intro](#intro)
 2. [Lexing](#lexical-analysis)
-3. Parsing
-4. Abstract Syntax
+3. [Parsing](#parsing)
+4. [Abstract Syntax](#abstract-syntax)
 5. Semantic Analysis
 6. Activation Records
 7. Translation to IR trees
