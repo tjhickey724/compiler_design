@@ -52,6 +52,7 @@ A key feature of all modern programming languages is that they allow the user to
 
 
 ## Translation to IR trees
+At this point we can produce trees representing the program which can then be used to compile to many different back ends (e.g. different CPUs or byte codes).
 
 ## Basic Blocks and Traces
 
