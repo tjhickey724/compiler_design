@@ -9,7 +9,7 @@ We will follow the text book fairly closely with the goal of completing the firs
 5. [Semantic Analysis](#semantic-analysis)
 6. [Activation Records](#activation-records)
 7. [Translation to IR trees](#translation-to-ir-trees)
-8. Basic Blocks and Traces
+8. [Basic Blocks and Traces](#Basic-Blocks-and-Traces)
 9. Instruction Selection
 10. Liveness Analysis
 11. Register Allocation
