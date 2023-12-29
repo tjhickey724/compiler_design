@@ -10,7 +10,7 @@ We will follow the text book fairly closely with the goal of completing the firs
 6. [Activation Records](#activation-records)
 7. [Translation to IR trees](#translation-to-ir-trees)
 8. [Basic Blocks and Traces](#Basic-Blocks-and-Traces)
-9. [Instruction Selection](#Instruction Selection)
+9. [Instruction Selection](#Instruction-Selection)
 10. Liveness Analysis
 11. Register Allocation
 12. Putting it all together
