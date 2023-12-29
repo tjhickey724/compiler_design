@@ -6,8 +6,8 @@ We will follow the text book fairly closely with the goal of completing the firs
 2. [Lexing](#lexical-analysis)
 3. [Parsing](#parsing)
 4. [Abstract Syntax](#abstract-syntax)
-5. Semantic Analysis
-6. Activation Records
+5. [Semantic Analysis](#semantic-analysis)
+6. [Activation Records](#activation-records)
 7. Translation to IR trees
 8. Basic Blocks and Traces
 9. Instruction Selection
@@ -42,4 +42,12 @@ that the program does indeed follow the grammar rules and it generates a tree st
 
 ## Abstract Syntax
 The trees used to represent the grammatical structure of the program do not have to be the same ones defining the language, and usually we want a simpler grammar that still captures all important features of the language. 
+
+## Semantic Analysis
+Once the tree structure has been determine we need to analyze the tree to see that it makes sense, for example that the program isn't trying to add a string and an array, or multiply a date by a file! This is the semantic analysis phase and we typically create a symbol table which gives semantic meaning to each
+of the variables that appear in the program, e.g. the possible types they can store and which parts of the program they can be accessed from (i.e. the scope).
+
+## Activation Records
+A key feature of all modern programming languages is that they allow the user to use procedural abstraction to solve problems.  Procedural abstraction is implemented by creating a stack frame for each procedure call and one key part of the compiling process is specifying the structure of these stack frames. These structured frames are called Activation Records, they are a representation of a function/procedure/method that can be used to easily generate the code for procedure calls.
+
 
