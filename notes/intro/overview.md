@@ -34,4 +34,12 @@ Compilers on the other hand, use the tree structure to convert the program from 
 
 
 ## Lexical Analysis
+This is the process of converting the text file into a sequence of tokens that are typically described by regular expressions. Typical tokens are constants (integers, floating point numbers), keywords (if, for, while, class), operator symbols ( "+-*/.(){}[]\n\t<=" etc.) We will specify the tokens using regular expressions and recognize them using Determinstic Finite Automata. This phase will also detect and report on lexical errors (e.g. sequences of characters that don't match any of the legal tokens in the language).
+
+## Parsing
+Program are written in formal languages with very specific grammar rules.  The parsing Phase tests to see
+that the program does indeed follow the grammar rules and it generates a tree structure that represents the grammatical and lexical structure of the program.
+
+## Abstract Syntax
+The trees used to represent the grammatical structure of the program do not have to be the same ones defining the language, and usually we want a simpler grammar that still captures all important features of the language. 
 
