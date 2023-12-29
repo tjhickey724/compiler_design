@@ -23,7 +23,14 @@ There are two ways of running a program on a computer -- using an interpreter or
 * reading the program as a text file and converting it into a in internal representation as a tree structure
 
 Interpreters then run the program by creating a "virtual machine" and using the tree to modify the state of this virtual machine while performing side effects on the operating system (like reading/writing files). 
-* converting the tree to a low level lana
+
+Compilers on the other hand, use the tree structure to convert the program from a high level language to a low level language. 
+* If the low level language is "machine language" then the operating system can run the program directly on the CPU.
+* if the low level language is "assembly language", then one can invoke an "assembler" to convert the program to "machine language"
+* if the low level language is byte code for the Java Virtual Machine, then the program can be interpreted using the "java" command
+* if the "low level language" is another high level language (like C or C++ or C# or Rust or Java), then the compiler for that language can be used to compile and run or interpret the program.
+
+
 
 
 ## Lexical Analysis
