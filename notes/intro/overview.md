@@ -52,15 +52,23 @@ A key feature of all modern programming languages is that they allow the user to
 
 
 ## Translation to IR trees
-At this point we can produce trees representing the program which can then be used to compile to many different back ends (e.g. different CPUs or byte codes).
+At this point we can produce trees representing the program which can then be used to compile to many different back ends (e.g. different CPUs or byte codes). This is the end of the "front end" part of the compiler it results in an Intermediate Representation which can then be used my many different back ends.
 
 ## Basic Blocks and Traces
+This is an optimization phase where the IR tree is simplified by breaking the code up into regions that don't contain any jumps or branches or procedure calls. Each basic block ends with a jump to another basic block or to the code to stop the program. By ordering the basic blocks cleverly we can eliminate many of the jump statements which can speed up execution, sequences of basic blocks are called traces.
 
 ## Instruction Selection
+The next step is to convert the tree into an abstract machine code called 3 address code in which
+the instructions perform arithetic operations on registers (e.g. add R1 and R2 and put result in R3)
+or move values between registers or between registers and memory.
 
 ## Liveness Analysis
+This is an optimization phase, in the previous step we assumed there were infinitely many registers available, but in practice a given CPU will have a limited number of registers. When compiling the body of a function, we know at compile time the names of all of the variables that can be accessed in that code. Moreover, the code can be modeled as a directed graph of instructions and for each instruction we can determine which of the variables have a value that will be needed in the future. This is called liveness analysis and allows us to assign variables to registers in an efficient way that saves time and space.
+
 
 ## Register Allocation
+In this phase we determine which registers each live variable should be placed in and with this knowledge we can generate the final assembly code.!
 
 ## Putting it all together
+Once we get to this point you can put it all together to create a compiler for a subset of Java, or any other Objected-Oriented language.
 
