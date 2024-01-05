@@ -37,7 +37,7 @@ If R is a regular expression, define L(R) to the language it generates, then
 
 ### Exercise. 
 Write a python function ```regen(R,s,n)``` 
-whose input is a regular expression$R$  and a string $s$ and an integer $n$ which
+whose input is a regular expression $R$  and a string $s$ and an integer $n$ which
 returns the set of all strings of length $n$ in the language $L(R)$
 This is tricky because the unions in steps 3 and 4 are not necessarily disjoint! The slow method is
 to generate the set of all strings of length $n$ in the language and then test if $s$ is in that set.
