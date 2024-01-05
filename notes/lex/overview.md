@@ -12,7 +12,7 @@ Typical tokens are
 
 ## Regular Expressions
 Tokens are usually expressed using Regular Expressions. These are expressions formed from
-* characters
+* characters taken from an set $C$ of letters (e.g. unicode characters or digits or ASCII characters)
 * operators
   * | = disjunction or choice
   * . = concatenation 
@@ -24,6 +24,7 @@ e.g. abababacabacacac
 
 If R is a regular expression, define L(R) to the language it generates, then
 * $L(c) = \\{c\\}$  for any character c
-* $L(R_1 . R_2) = \\{a.b | a \in L(R_1) \wedge b\in L(R_2)\\}$
-* $L(R_1 | R_2) = \\{c | c \in L(R_1) \vee c\in L(R_2)\\}$
+* $L(R_1 . R_2) = \\{a.b | a \in L(R_1) \wedge b\in L(R_2)\\}$,
+  where $a . b$ is the concatenation of strings a and b
+* $L(R_1 | R_2) = L(R_1) \cup L(R_2)$
 * $L(R*) = \bigcup_\limits{n=0}^\infty L(R)^n$
