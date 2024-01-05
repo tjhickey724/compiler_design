@@ -42,5 +42,29 @@ returns the set of all strings of length $n$ in the language $L(R)$
 This is tricky because the unions in steps 3 and 4 are not necessarily disjoint! The slow method is
 to generate the set of all strings of length $n$ in the language and then test if $s$ is in that set.
 
-## Deterministic Finite Automata
-Another way to represent 
+## Finite Automata
+Another way to define regular languages is by using a directed graph whose edges are labelled with characters.  The graph $G$ consists of a set $N$ of nodes include a start node $N_0$. A subset $F\subseteq N$ of the nodes are marked as final nodes. Each of the edges in the graph is labelled with a character.
+Each path through the graph starting at the start state $N_0$ and ending in a final state defines a sequence of characters (the characters on the edges of the path), and the set of all such strings is called the language defined by that automata.  
+
+The Finite Automata is called a Deterministic Finite Automata (DFA) if for each node, all of the edges leaving that node have distinct labels; otherwise it is a Nondeterministic Finite Automata (NFA).
+
+## Converting a Regular Expression to an NFA
+We can define this algorithm recursively...
+
+## Recognizing strings using an DFA
+This is a standard state machine where the node represents the current state and the edge determines
+which state to move into next.
+
+## Recognizing strings using an NFA
+In this case, we keep track of the set of all possible states the NFA could be in. This is a standard
+construction that works with any non-deterministic algorithm
+
+## Converting an NFA to a DFA
+The states of the DFA are the sets of states that the NFA could be in at that point in time.
+
+## Finding the maximal match for a DFA
+We usually want to find the longest prefix of a string that the DFA accepts.
+To do this we just keep track of the last final state encountered. If we reach an error state,
+then we revert back to the last final state.
+
+
