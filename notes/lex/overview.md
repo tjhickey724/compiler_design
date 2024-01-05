@@ -24,8 +24,8 @@ For example (a.(b|c))*  represent the set $S$ of strings consisting of zero or m
 $S = \\{\epsilon, ab, ac, abab, abac, acab, acac, ababab, ababac, abacab, ... \\}$
 
 If R is a regular expression, define L(R) to the language it generates, then
-* $L(c) = \\{]alpha\\}$  for any character $\alpha$
+* $L(c) = \\{\alpha\\}$  for any character $\alpha$
 * $L(R_1 . R_2) = \\{\alpha . \beta | \alpha \in L(R_1) \wedge \beta\in L(R_2)\\}$,
-  where $alpha . \beta$ is the concatenation of strings $\alpha$ and $\beta$
+  where $\alpha . \beta$ is the concatenation of strings $\alpha$ and $\beta$
 * $L(R_1 | R_2) = L(R_1) \cup L(R_2)$
 * $L(R*) = \bigcup_\limits{n=0}^\infty L(R)^n$
