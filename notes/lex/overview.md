@@ -14,9 +14,9 @@ Typical tokens are
 Tokens are usually expressed using Regular Expressions. These are expressions formed from
 * characters taken from an set $C$ of letters (e.g. unicode characters or digits or ASCII characters)
 * operators
-  * | = disjunction or choice
-  * . = concatenation 
-  * * = zero or more repetitions
+  * '|' is disjunction or choice
+  * '.' is concatenation 
+  * '*' is zero or more repetitions
 * parentheses
 
 For example (a.(b|c))*  represent the set $S$ of strings consisting of zero or more repetitions of ab or ac
