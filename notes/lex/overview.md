@@ -23,5 +23,7 @@ For example (a.(b|c))*  represent the set of strings consisting of zero or more 
 e.g. abababacabacacac
 
 If R is a regular expression, define L(R) to the language it generates, then
-* L(c) = {c}  for any character c
-* $L(R_1 . R_2) = \\{a.b | a \in L(R_1), b\in L(R_2)\\}$
+* $L(c) = \\{c\\}$  for any character c
+* $L(R_1 . R_2) = \\{a.b | a \in L(R_1) \wedge b\in L(R_2)\\}$
+* $L(R_1 | R_2) = \\{c | c \in L(R_1) \vee c\in L(R_2)\\}$
+* $L(R*) = \bigcup_limits{n=0}^\infty\\{a | a \in L(R)^n\\}$
