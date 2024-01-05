@@ -42,7 +42,7 @@ returns the set of all strings of length $n$ in the language $L(R)$
 This is tricky because the unions in steps 3 and 4 are not necessarily disjoint! The slow method is
 to generate the set of all strings of length $n$ in the language and then test if $s$ is in that set.
 
-## Finite Automata
+## Finite Automata aka Finite State Machines
 Another way to define regular languages is by using a directed graph whose edges are labelled with characters.  The graph $G$ consists of a set $N$ of nodes include a start node $N_0$. A subset $F\subseteq N$ of the nodes are marked as final nodes. Each of the edges in the graph is labelled with a character.
 Each path through the graph starting at the start state $N_0$ and ending in a final state defines a sequence of characters (the characters on the edges of the path), and the set of all such strings is called the language defined by that automata.  
 
