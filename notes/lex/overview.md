@@ -19,13 +19,28 @@ Tokens are usually expressed using Regular Expressions. These are expressions fo
   * '*' is zero or more repetitions
 * parentheses
 
-For example (a.(b|c))*  represent the set $S$ of strings consisting of zero or more repetitions of ab or ac
+## Regular Languages
+Each regular expressions defines a set of strings, called a regular language.
+
+For example (a.(b|c))*  represent the set $S$ of strings consisting of zero or more repetitions of ab or ac. We let $\epsilon$ denote the empty string.
 
 $S = \\{\epsilon, ab, ac, abab, abac, acab, acac, ababab, ababac, abacab, ... \\}$
 
+We can define the language $L(R)$ accepted by a regular expression $R$ recursively as follows:
+
 If R is a regular expression, define L(R) to the language it generates, then
-* $L(c) = \\{\alpha\\}$  for any character $\alpha$
-* $L(R_1 . R_2) = \\{\alpha . \beta | \alpha \in L(R_1) \wedge \beta\in L(R_2)\\}$,
+1. $L(c) = \\{\alpha\\}$  for any character $\alpha$
+2. $L(R_1 . R_2) = \\{\alpha . \beta | \alpha \in L(R_1) \wedge \beta\in L(R_2)\\}$,
   where $\alpha . \beta$ is the concatenation of strings $\alpha$ and $\beta$
-* $L(R_1 | R_2) = L(R_1) \cup L(R_2)$
-* $L(R*) = \bigcup_\limits{n=0}^\infty L(R)^n$
+3. $L(R_1 | R_2) = L(R_1) \cup L(R_2)$
+4. $L(R*) = \bigcup_\limits{n=0}^\infty L(R)^n$
+
+### Exercise. 
+Write a python function ```regen(R,s,n)``` 
+whose input is a regular expression$R$  and a string $s$ and an integer $n$ which
+returns the set of all strings of length $n$ in the language $L(R)$
+This is tricky because the unions in steps 3 and 4 are not necessarily disjoint! The slow method is
+to generate the set of all strings of length $n$ in the language and then test if $s$ is in that set.
+
+## Deterministic Finite Automata
+Another way to represent 
