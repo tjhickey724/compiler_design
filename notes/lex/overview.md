@@ -24,4 +24,4 @@ e.g. abababacabacacac
 
 If R is a regular expression, define L(R) to the language it generates, then
 * L(c) = {c}  for any character c
-* $L(R_1 . R_2) = \{a.b | a \in L(R_1), b\in L(R_2)\}$
+* $L(R_1 . R_2) = \\{a.b | a \in L(R_1), b\in L(R_2)\\}$
