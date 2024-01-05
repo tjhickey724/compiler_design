@@ -5,5 +5,9 @@ taught by Professor Tim Hickey.
 
 ## Week 1
 * L01: Wed 1/10/2024 [Overview of Compilation](../notes/intro/overview.md)
+* L02: Thu 1/11/2024 [Lexical Analysis](../notes/lex/overview.md)
+
+## Week 2
+
 
 
