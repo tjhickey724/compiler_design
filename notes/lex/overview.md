@@ -20,11 +20,12 @@ Tokens are usually expressed using Regular Expressions. These are expressions fo
 * parentheses
 
 For example (a.(b|c))*  represent the set of strings consisting of zero or more repetitions of ab or ac
-e.g. abababacabacacac
+
+$\\{\epsilon, ab, ac, abab, abac, acab, acac, ababab, ababac, abacab, ... \\}$
 
 If R is a regular expression, define L(R) to the language it generates, then
-* $L(c) = \\{c\\}$  for any character c
-* $L(R_1 . R_2) = \\{a.b | a \in L(R_1) \wedge b\in L(R_2)\\}$,
-  where $a . b$ is the concatenation of strings a and b
+* $L(c) = \\{]alpha\\}$  for any character $\alpha$
+* $L(R_1 . R_2) = \\{\alpha . \beta | \alpha \in L(R_1) \wedge \beta\in L(R_2)\\}$,
+  where $alpha . \beta$ is the concatenation of strings $\alpha$ and $\beta$
 * $L(R_1 | R_2) = L(R_1) \cup L(R_2)$
 * $L(R*) = \bigcup_\limits{n=0}^\infty L(R)^n$
