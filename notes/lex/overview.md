@@ -19,9 +19,9 @@ Tokens are usually expressed using Regular Expressions. These are expressions fo
   * * = zero or more repetitions
 * parentheses
 
-For example (a.(b|c))*  represent the set of strings consisting of zero or more repetitions of ab or ac
+For example (a.(b|c))*  represent the set $S$ of strings consisting of zero or more repetitions of ab or ac
 
-$\\{\epsilon, ab, ac, abab, abac, acab, acac, ababab, ababac, abacab, ... \\}$
+$S = \\{\epsilon, ab, ac, abab, abac, acab, acac, ababab, ababac, abacab, ... \\}$
 
 If R is a regular expression, define L(R) to the language it generates, then
 * $L(c) = \\{]alpha\\}$  for any character $\alpha$
