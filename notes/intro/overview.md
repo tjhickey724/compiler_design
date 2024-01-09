@@ -1,6 +1,6 @@
 # Overview
 
-We will follow the text book fairly closely with the goal of completing the first 11 chapters
+We will follow the text book fairly closely with the goal of completing the first 12 chapters
 
 1. [Intro](#intro)
 2. [Lexing](#lexical-analysis)
