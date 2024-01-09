@@ -31,7 +31,12 @@ Compilers on the other hand, use the tree structure to convert the program from 
 * if the low level language is byte code for the Java Virtual Machine, then the program can be interpreted using the "java" command
 * if the "low level language" is another high level language (like C or C++ or C# or Rust or Java), then the compiler for that language can be used to compile and run or interpret the program.
 
-
+We will walk through some of the stages of compiling with this piece of code
+Consider the following mini-java program
+``` java
+a := 5+3; b := (print(a,a-1), 10*a); print(b)
+```
+as described in  Section 1.3 of Modern Compiler Implementation in Java (2nd edition.
 
 
 ## Lexical Analysis
@@ -40,6 +45,7 @@ This is the process of converting the text file into a sequence of tokens that a
 ## Parsing
 Program are written in formal languages with very specific grammar rules.  The parsing Phase tests to see
 that the program does indeed follow the grammar rules and it generates a tree structure that represents the grammatical and lexical structure of the program.
+
 
 ## Abstract Syntax
 The trees used to represent the grammatical structure of the program do not have to be the same ones defining the language, and usually we want a simpler grammar that still captures all important features of the language. 
