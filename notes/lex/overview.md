@@ -67,4 +67,14 @@ We usually want to find the longest prefix of a string that the DFA accepts.
 To do this we just keep track of the last final state encountered. If we reach an error state,
 then we revert back to the last final state.
 
+## Implementing a Lexer
+The idea here is to define tokens by NFAs and to combine them into a single DFA
+where the final states are labelled by the type of token that has been recognized.
+We then can write a program which finds the maximal match for a given string, then removes
+that string, and repeats the process. For each maximal match it adds the token type and the string to a list.
+The algorithm thus converts a string to a list of tokens. The last "token" could be a string that doesn't
+match with anything.
+
+### Exercise
+Implement the lexer in Python, as described above.
 
