@@ -14,7 +14,7 @@ int main() {
         printf("%d\t%d\n", i, square); } 
     return 0; } 
 ```
-which prompts the user for an integer n and then prints a table of the squares of all integers fromm 1 to n
+which prompts the user for an integer n and then prints a table of the squares of all integers from 1 to n
 
 If we compile this in a Mac terminal with
 ``` bash
