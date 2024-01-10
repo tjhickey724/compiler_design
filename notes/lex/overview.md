@@ -19,6 +19,12 @@ Tokens are usually expressed using Regular Expressions. These are expressions fo
   * '*' is zero or more repetitions
 * parentheses
 
+We can define regular expressions over an alphabet $\Sigma$ as follows:
+R is a regular expression if
+* $R = a$  for some $a \in \Sigma$
+* $R = R_1.R_2$ where $R_1,R_2$ are regular expressions
+* $R = R_1*$ where $R_1$ is a regular expression
+
 ## Regular Languages
 Each regular expressions defines a set of strings, called a regular language.
 
@@ -28,8 +34,8 @@ $S = \\{\epsilon, ab, ac, abab, abac, acab, acac, ababab, ababac, abacab, ... \\
 
 We can define the language $L(R)$ accepted by a regular expression $R$ recursively as follows:
 
-If R is a regular expression, define L(R) to the language it generates, then
-1. $L(c) = \\{\alpha\\}$  for any character $\alpha$
+If R is a regular expression oer an alphabet $\Sigma$, define L(R) to the language it generates, then
+1. $L(\alpha) = \\{\alpha\\}$  for any character $\alpha\in\Sigma$
 2. $L(R_1 . R_2) = \\{\alpha . \beta | \alpha \in L(R_1) \wedge \beta\in L(R_2)\\}$,
   where $\alpha . \beta$ is the concatenation of strings $\alpha$ and $\beta$
 3. $L(R_1 | R_2) = L(R_1) \cup L(R_2)$
