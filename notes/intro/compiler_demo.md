@@ -36,7 +36,91 @@ Number  Square          Square Root
 In this class, you will learn how to compile programs in a subset of Java (called minijava)
 to assembly language, which can then be converted to an a.out file in machine language.
 
+
 ## Assembly on an Intel Macbook Pro
+We can see the assembly language produced by the C compiler on the Mac using
+``` bash
+ gcc -S -o test_intel.s test.c
+```
+``` assembly
+	.section	__TEXT,__text,regular,pure_instructions
+	.build_version macos, 10, 15, 4	sdk_version 10, 15, 4
+	.globl	_main                   ## -- Begin function main
+	.p2align	4, 0x90
+_main:                                  ## @main
+	.cfi_startproc
+## %bb.0:
+	pushq	%rbp
+	.cfi_def_cfa_offset 16
+	.cfi_offset %rbp, -16
+	movq	%rsp, %rbp
+	.cfi_def_cfa_register %rbp
+	subq	$32, %rsp
+	movl	$0, -4(%rbp)
+	leaq	L_.str(%rip), %rdi
+	movb	$0, %al
+	callq	_printf
+	leaq	L_.str.1(%rip), %rdi
+	leaq	-8(%rbp), %rsi
+	movl	%eax, -20(%rbp)         ## 4-byte Spill
+	movb	$0, %al
+	callq	_scanf
+	leaq	L_.str.2(%rip), %rdi
+	movl	%eax, -24(%rbp)         ## 4-byte Spill
+	movb	$0, %al
+	callq	_printf
+	leaq	L_.str.3(%rip), %rdi
+	movl	%eax, -28(%rbp)         ## 4-byte Spill
+	movb	$0, %al
+	callq	_printf
+	movl	$1, -12(%rbp)
+LBB0_1:                                 ## =>This Inner Loop Header: Depth=1
+	movl	-12(%rbp), %eax
+	cmpl	-8(%rbp), %eax
+	jg	LBB0_4
+## %bb.2:                               ##   in Loop: Header=BB0_1 Depth=1
+	movl	-12(%rbp), %eax
+	imull	-12(%rbp), %eax
+	movl	%eax, -16(%rbp)
+	movl	-12(%rbp), %esi
+	movl	-16(%rbp), %edx
+	leaq	L_.str.4(%rip), %rdi
+	movb	$0, %al
+	callq	_printf
+## %bb.3:                               ##   in Loop: Header=BB0_1 Depth=1
+	movl	-12(%rbp), %eax
+	addl	$1, %eax
+	movl	%eax, -12(%rbp)
+	jmp	LBB0_1
+LBB0_4:
+	xorl	%eax, %eax
+	addq	$32, %rsp
+	popq	%rbp
+	retq
+	.cfi_endproc
+                                        ## -- End function
+	.section	__TEXT,__cstring,cstring_literals
+L_.str:                                 ## @.str
+	.asciz	"Enter an integer n: "
+
+L_.str.1:                               ## @.str.1
+	.asciz	"%d"
+
+L_.str.2:                               ## @.str.2
+	.asciz	"\nNumber\tSquare\n"
+
+L_.str.3:                               ## @.str.3
+	.asciz	"----------------------------------\n"
+
+L_.str.4:                               ## @.str.4
+	.asciz	"%d\t%d\n"
+
+
+.subsections_via_symbols
+
+```
+
+## Assembly on an Intel Macbook Pro with variant Assembly Language
 We can see the assembly language produced by the C compiler on the Mac using
 ``` bash
  gcc -S -masm=intel -o test_intel.s test.c
