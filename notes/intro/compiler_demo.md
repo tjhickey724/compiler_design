@@ -33,7 +33,10 @@ Number  Square          Square Root
 4       16              2.00
 5       25              2.24
 ```
+In this class, you will learn how to compile programs in a subset of Java (called minijava)
+to assembly language, which can then be converted to an a.out file in machine language.
 
+## Assembly on an Intel Macbook Pro
 We can see the assembly language produced by the C compiler on the Mac using
 ``` bash
  gcc -S -masm=intel -o test_intel.s test.c
@@ -120,4 +123,73 @@ L_.str.4:                               ## @.str.4
 
 .subsections_via_symbols
 
+```
+
+## Compiling on a linux machine
+If instead we run that command on one of the departments Linux machines we get the following code
+which is in the x86-64 Assembly Language:
+``` assembly
+	.file	"test.c"
+	.section	.rodata
+.LC0:
+	.string	"Enter an integer n: "
+.LC1:
+	.string	"%d"
+.LC2:
+	.string	"\nNumber\tSquare"
+	.align 8
+.LC3:
+	.string	"----------------------------------"
+.LC4:
+	.string	"%d\t%d\n"
+	.text
+	.globl	main
+	.type	main, @function
+main:
+.LFB0:
+	.cfi_startproc
+	pushq	%rbp
+	.cfi_def_cfa_offset 16
+	.cfi_offset 6, -16
+	movq	%rsp, %rbp
+	.cfi_def_cfa_register 6
+	subq	$16, %rsp
+	movl	$.LC0, %edi
+	movl	$0, %eax
+	call	printf
+	leaq	-12(%rbp), %rax
+	movq	%rax, %rsi
+	movl	$.LC1, %edi
+	movl	$0, %eax
+	call	__isoc99_scanf
+	movl	$.LC2, %edi
+	call	puts
+	movl	$.LC3, %edi
+	call	puts
+	movl	$1, -4(%rbp)
+	jmp	.L2
+.L3:
+	movl	-4(%rbp), %eax
+	imull	-4(%rbp), %eax
+	movl	%eax, -8(%rbp)
+	movl	-8(%rbp), %edx
+	movl	-4(%rbp), %eax
+	movl	%eax, %esi
+	movl	$.LC4, %edi
+	movl	$0, %eax
+	call	printf
+	addl	$1, -4(%rbp)
+.L2:
+	movl	-12(%rbp), %eax
+	cmpl	%eax, -4(%rbp)
+	jle	.L3
+	movl	$0, %eax
+	leave
+	.cfi_def_cfa 7, 8
+	ret
+	.cfi_endproc
+.LFE0:
+	.size	main, .-main
+	.ident	"GCC: (GNU) 4.8.5 20150623 (Red Hat 4.8.5-39)"
+	.section	.note.GNU-stack,"",@progbits
 ```
