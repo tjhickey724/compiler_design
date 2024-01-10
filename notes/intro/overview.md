@@ -38,6 +38,8 @@ a := 5+3; b := (print(a,a-1), 10*a); print(b)
 ```
 as described in  Section 1.3 of Modern Compiler Implementation in Java (2nd edition.
 
+[Gwew](./compiler_demo.md) is a link to some examples of the result of compiling a simple C program to assembly language
+
 
 ## Lexical Analysis
 This is the process of converting the text file into a sequence of tokens that are typically described by regular expressions. Typical tokens are constants (integers, floating point numbers), keywords (if, for, while, class), operator symbols ( "+-*/.(){}[]\n\t<=" etc.) We will specify the tokens using regular expressions and recognize them using Determinstic Finite Automata. This phase will also detect and report on lexical errors (e.g. sequences of characters that don't match any of the legal tokens in the language).
