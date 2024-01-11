@@ -67,17 +67,7 @@ Each path through the graph starting at the start state $N_0$ and ending in a fi
 
 The Finite Automata is called a Deterministic Finite Automata (DFA) if for each node, all of the edges leaving that node have distinct labels; otherwise it is a Nondeterministic Finite Automata (NFA). The NFAs are most convenient for describing regular languages, but testing if a string is accepted by an NFA is challenging. 
 
-For a DFA D it is relatively easy to see if a string $\omega$ is accepted by D with the following algorithm.
-First let $S$ be the set of states of the DFA and $\Sigma$ the alphabet for the DFA and assume one of the states is an "Error" state $E$.
 
-Let $\delta:S\times \Sigma \rightarrow S$ be the function defined by
-* $\delta(s_1,\sigma) = s_2$ if there is an edge from $s_1$ to $s_2$ labelled with $\sigma$
-* $\delta(s_1,\sigma) = E$, if there is no edge from $s_1$ labelled with $\sigma$
-
-The following algorithm will determine if a string $\omega$ of length $n$ is accepted by the DFA.
-* let $s_0$ be the start state
-* define $s_{i+1} = \delta(s_i,\omega_i)$ for each $i$ from 0 to $n-1$ if $s_i\ne E$, otherwise $s_{i+1}=E$
-If $s_n$ is a final state, then the string is accepted, otherwise it is not accepted.
 
 ## Converting a Regular Expression to an NFA
 We can define this algorithm to convert a Regular Expression R to an NFA as follows.
@@ -97,6 +87,7 @@ Convert the following regular expression $R_1$ to an NFA $N_1$ using the algorit
 
 
 
+
 ## Eliminating epsilon edges from a NFA
 The epsilon edges are convenient for writing NFAs but make analyzing them harder. Luckily it is relatively easy to eliminate them
 as follows:
@@ -111,9 +102,27 @@ Why does this terminate?
 This is a standard state machine where the node represents the current state and the edge determines
 which state to move into next.
 
+For a DFA D it is relatively easy to see if a string $\omega$ is accepted by D with the following algorithm.
+First let $S$ be the set of states of the DFA and $\Sigma$ the alphabet for the DFA and assume one of the states is an "Error" state $E$.
+
+Let $\delta:S\times \Sigma \rightarrow S$ be the function defined by
+* $\delta(s_1,\sigma) = s_2$ if there is an edge from $s_1$ to $s_2$ labelled with $\sigma$
+* $\delta(s_1,\sigma) = E$, if there is no edge from $s_1$ labelled with $\sigma$
+
+The following algorithm will determine if a string $\omega$ of length $n$ is accepted by the DFA.
+* let $s_0$ be the start state
+* define $s_{i+1} = \delta(s_i,\omega_i)$ for each $i$ from 0 to $n-1$ if $s_i\ne E$, otherwise $s_{i+1}=E$
+If $s_n$ is a final state, then the string is accepted, otherwise it is not accepted.
+
+Note that we can have the final states labelled with token types, so a DFA could not only accept a string, it could classify it!
+
+How would we find the longest possible match for a DFA?
+* run the algorithm above, but keep track of each $i$ for which $s_i$ is a final state,
+* when an Error state is reached or the end of the string, return the last final state, and restart the DFA from position $i$.
+
 ## Recognizing strings using an NFA
 In this case, we keep track of the set of all possible states the NFA could be in. This is a standard
-construction that works with any non-deterministic algorithm
+construction that works with any non-deterministic algorithm.
 
 ## Converting an NFA to a DFA
 The states of the DFA are the sets of states that the NFA could be in at that point in time.
@@ -122,6 +131,11 @@ The states of the DFA are the sets of states that the NFA could be in at that po
 We usually want to find the longest prefix of a string that the DFA accepts.
 To do this we just keep track of the last final state encountered. If we reach an error state,
 then we revert back to the last final state.
+
+### Exercise
+* Create an NFA for recognizing the tokens in the mini-java program above where the final states are labelled with the type of the token.
+* Convert the NFA to a DFA
+* Show how the DFA could be used to find the 
 
 ## Implementing a Lexer
 The idea here is to define tokens by NFAs and to combine them into a single DFA
