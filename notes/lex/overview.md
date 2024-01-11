@@ -69,25 +69,38 @@ Each path through the graph starting at the start state $N_0$ and ending in a fi
 
 The Finite Automata is called a Deterministic Finite Automata (DFA) if for each node, all of the edges leaving that node have distinct labels; otherwise it is a Nondeterministic Finite Automata (NFA). The NFAs are most convenient for describing regular languages, but testing if a string is accepted by an NFA is challenging. 
 
+We can represent an NFA as a set of triples:
+* $(s_i,c_i,t_i) \in S\times\Sigma\times S$ which represents the edge from node $s_i$ to node $t_i$ labelled with symbol $c_i$
+
+Equivalently we could view it as a partial function $\delta$ from $S\times\Sigma$ to $S$ which explains which state to change to for a given symbol.
+
 
 
 ## Converting a Regular Expression to an NFA
 We can define this algorithm to convert a Regular Expression R to an NFA as follows.
 * construct the parse tree for R
+ * this is pretty easy for humans to do, for small examples, but we won't explain how to do this programmatically until we discuss parsing!
 * for each node in the parse tree constuct an NFA with a single start state and a single final state as follows:
  * for a leaf labelled with a symbol $s$ we have s simple NFA  start -> final where the edge is labelled with s
- * for a dot node R1 . R2  add an epsilon edge between the final node of R1 and the start node of R2
- * for a bar node R1 | R2  create a new start and final node and have epsilon edges from the new start node to the starts of R1 and R2
-    and expilon edges from the final nodes of R1 and R2 to the new final node
- * for a star node R1*  create new start and final node with epsilon edge from the new start to the start and to the final,
+ * for a dot node R1 . R2
+   * add an epsilon edge between the final node of R1 and the start node of R2
+   * OR just identify the final state of R1 with the start state of R2
+ * for a bar node R1 | R2
+  * create a new start and final node and have epsilon edges from the new start node to the starts of R1 and R2
+    and expilon edges from the final nodes of R1 and R2 to the new final node.
+  * OR just identify the start states of R1 and R2 and the final state of R1 and R2
+ * for a star node R1*
+   * create new start and final node with epsilon edge from the new start to the start and to the final,
    and and epsilon edge from the final of R1 to the start of R1
+
+The only place we need to introduce epsilon edges is for the star nodes.
 
 ### Exercise
 Convert the following regular expression $R_1$ to an NFA $N_1$ using the algorithm above:
 * R1 = ```(a.(b|c))*$
 *  Remove the epsolon edges from $N_1$ to get a new NFA $N_2$
-
-
+*  Do the same with R2 = ```(a.b|c)*``` (which is the same as ```((a.b)|c)*```
+*  Now with ```(a.b*|c)*
 
 
 ## Eliminating epsilon edges from a NFA
@@ -96,10 +109,12 @@ as follows:
 * pick an epsiolon edge e from node N1 to a non-final node N2. for every edge out of N2 to a node N2 with label S, add an edge from N1 to N3 labelled with S,
 * delete that epsilon edge and repeat until there are no more epsilon edges.
 
-Why does this terminate?
+Does this always terminate? Why? How could you prove it?
+
 When it terminates, the only epsilon edges are to final states, so we simply make the nodes with those epsilon edges into final states.
 
 ### Exercise
+* eliminate the epsilon edges from the examples in the previous exercise.
 
 ## Recognizing strings using an DFA
 This is a standard state machine where the node represents the current state and the edge determines
