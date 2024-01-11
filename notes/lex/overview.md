@@ -17,12 +17,12 @@ Typical tokens are
 
 ## Regular Expressions
 Tokens are usually expressed using Regular Expressions. These are expressions formed from
-* characters taken from an set $C$ of letters (e.g. unicode characters or digits or ASCII characters)
+* characters taken from a set $\Sigma$ of letters (e.g. unicode characters or digits or ASCII characters)
 * operators
   * '|' is disjunction or choice
   * '.' is concatenation 
   * '*' is zero or more repetitions
-* parentheses
+* parentheses "()"
 
 We can define regular expressions over an alphabet $\Sigma$ as follows:
 R is a regular expression if
@@ -34,7 +34,8 @@ It is useful to allow the empty string $\epsilon$ in Regular Expressions because
 represent optional elements as  $(\epsilon | R)$
 
 ### Exercise
-*  ```R1 = (0*.1.0*.1)*```   What is the language that this RE generates?
+*  Write the RE for any numbers of as or bs followed by a c
+*  Let ```R1 = 0*.(1.0*.1.0*)*```   What is the language that this RE generates?
 
 
 ## Regular Languages
@@ -61,6 +62,11 @@ a := 5+3; b := (print(a,a-1), 10*a); print(b)
 and give names and regular expressions for each token type, e.g.
 * ```NUM`` = integer constant = 1.(0|1)*
 
+* The RE for a single digit is D=0|1|2|3|4|5|6|7|7|9 and non-zero digits could be N=1|2|3|4|5|6|7|8|9
+* Likewise we can define a RE for letters L =a|b|c|...|A|B|..|Z
+* What is a RE for Java (or Python) identifiers using D,N,L
+* What is a RE for integer constants like 2024 or 123
+
 
 ### Exercise. 
 Write a regular expression for the language of binary numbers where the number of ones is a multiple of 3!
@@ -77,7 +83,10 @@ We can represent an NFA as a set of triples:
 
 Equivalently we could view it as a partial function $\delta$ from $S\times\Sigma$ to $S$ which explains which state to change to for a given symbol.
 
+We can see if a deterministic finite automata accepts a string by using the DFA to change state for each symbol and checking to see if the last state is a final state.
 
+### Exercise: 
+* Draw a DFA for the RE '0*.(1.0*.1.0*)*' and trace through the state changes for 0001101110001000
 
 ## Converting a Regular Expression to an NFA
 We can define this algorithm to convert a Regular Expression R to an NFA as follows.
@@ -106,18 +115,6 @@ Convert the following regular expression $R_1$ to an NFA $N_1$ using the algorit
 *  Now with ```(a.b*|c)*
 
 
-## Eliminating epsilon edges from a NFA
-The epsilon edges are convenient for writing NFAs but make analyzing them harder. Luckily it is relatively easy to eliminate them
-as follows:
-* pick an epsiolon edge e from node N1 to a non-final node N2. for every edge out of N2 to a node N2 with label S, add an edge from N1 to N3 labelled with S,
-* delete that epsilon edge and repeat until there are no more epsilon edges.
-
-Does this always terminate? Why? How could you prove it?
-
-When it terminates, the only epsilon edges are to final states, so we simply make the nodes with those epsilon edges into final states.
-
-### Exercise
-* eliminate the epsilon edges from the examples in the previous exercise.
 
 ## Recognizing strings using an DFA
 This is a standard state machine where the node represents the current state and the edge determines
@@ -142,13 +139,28 @@ Note that we can have the final states labelled with token types, so a DFA could
 In this case, we keep track of the set of all possible states the NFA could be in. This is a standard
 construction that works with any non-deterministic algorithm. To do this we keep track of all of the possible states we might be in.
 
+## Exercise: Try this out!
+
 ## Converting an NFA to a DFA
 The states of the DFA are the sets of states that the NFA could be in at that point in time.
+
 We can define the next state function on the power set by 
 * $\delta(U,\sigma) = \\{\delta(u,\sigma) : \forall u \in U\\}$
 * the start state if $\\s_o\\}$ and the final states are those subsets that contain a final state.
 We only care about those states which are reachable from the start state so in general we won't have $2^n$ states in our DFA,
 but in the worst case, that is a possibility.
+
+### Exercise: Try this out!
+
+## Converting NFA to DFA when there are episolon edges
+
+Step 1 is to define the epsiolon expansion of a node n to be the set of all nodes you can reach from n by following epsilon edges.
+We then replace each node by its epsilon expansion add combine all of the non-epsilon edges.
+
+This new NFA has no epsilon edges so we proceed as before.
+
+### Exercise.  Try this out!
+
 
 ## Finding the maximal match for a DFA
 We usually want to find the longest prefix of a string that the DFA accepts.
