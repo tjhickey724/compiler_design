@@ -91,18 +91,18 @@ We can see if a deterministic finite automata accepts a string by using the DFA 
 ## Converting a Regular Expression to an NFA
 We can define this algorithm to convert a Regular Expression R to an NFA as follows.
 * construct the parse tree for R
- * this is pretty easy for humans to do, for small examples, but we won't explain how to do this programmatically until we discuss parsing!
+  * this is pretty easy for humans to do, for small examples, but we won't explain how to do this programmatically until we discuss parsing!
 * for each node in the parse tree constuct an NFA with a single start state and a single final state as follows:
- * for a leaf labelled with a symbol $s$ we have s simple NFA  start -> final where the edge is labelled with s
- * for a dot node R1 . R2
-   * add an epsilon edge between the final node of R1 and the start node of R2
-   * OR just identify the final state of R1 with the start state of R2
- * for a bar node R1 | R2
-  * create a new start and final node and have epsilon edges from the new start node to the starts of R1 and R2
+  * for a leaf labelled with a symbol $s$ we have s simple NFA  start -> final where the edge is labelled with s
+  * for a dot node R1 . R2
+    * add an epsilon edge between the final node of R1 and the start node of R2
+    * OR just identify the final state of R1 with the start state of R2
+  * for a bar node R1 | R2
+    * create a new start and final node and have epsilon edges from the new start node to the starts of R1 and R2
     and expilon edges from the final nodes of R1 and R2 to the new final node.
-  * OR just identify the start states of R1 and R2 and the final state of R1 and R2
- * for a star node R1*
-   * create new start and final node with epsilon edge from the new start to the start and to the final,
+    * OR just identify the start states of R1 and R2 and the final state of R1 and R2
+  * for a star node R1*
+    * create new start and final node with epsilon edge from the new start to the start and to the final,
    and and epsilon edge from the final of R1 to the start of R1
 
 The only place we need to introduce epsilon edges is for the star nodes.
