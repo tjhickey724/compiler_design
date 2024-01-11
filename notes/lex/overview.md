@@ -30,6 +30,8 @@ R is a regular expression if
 It is useful to allow the empty string $\epsilon$ in Regular Expressions because you can use it to
 represent optional elements as  $(\epsilon | R)$
 
+### Exercise
+*  ```R1 = (0*.1.0*.1)*```   What is the language that this RE generates?
 
 
 ## Regular Languages
@@ -82,7 +84,7 @@ We can define this algorithm to convert a Regular Expression R to an NFA as foll
 
 ### Exercise
 Convert the following regular expression $R_1$ to an NFA $N_1$ using the algorithm above:
-*  ```R1 = (0*.1.0*.1)*```   What is the language that this RE generates?
+* R1 = ```(a.(b|c))*$
 *  Remove the epsolon edges from $N_1$ to get a new NFA $N_2$
 
 
@@ -91,10 +93,11 @@ Convert the following regular expression $R_1$ to an NFA $N_1$ using the algorit
 ## Eliminating epsilon edges from a NFA
 The epsilon edges are convenient for writing NFAs but make analyzing them harder. Luckily it is relatively easy to eliminate them
 as follows:
-* pick an epsiolon edge e from node N1 to node N2. for every edge out of N2 to a node N2 with label S, add an edge from N1 to N3 labelled with S,
+* pick an epsiolon edge e from node N1 to a non-final node N2. for every edge out of N2 to a node N2 with label S, add an edge from N1 to N3 labelled with S,
 * delete that epsilon edge and repeat until there are no more epsilon edges.
 
 Why does this terminate?
+When it terminates, the only epsilon edges are to final states, so we simply make the nodes with those epsilon edges into final states.
 
 ### Exercise
 
@@ -116,26 +119,33 @@ If $s_n$ is a final state, then the string is accepted, otherwise it is not acce
 
 Note that we can have the final states labelled with token types, so a DFA could not only accept a string, it could classify it!
 
-How would we find the longest possible match for a DFA?
-* run the algorithm above, but keep track of each $i$ for which $s_i$ is a final state,
-* when an Error state is reached or the end of the string, return the last final state, and restart the DFA from position $i$.
 
 ## Recognizing strings using an NFA
 In this case, we keep track of the set of all possible states the NFA could be in. This is a standard
-construction that works with any non-deterministic algorithm.
+construction that works with any non-deterministic algorithm. To do this we keep track of all of the possible states we might be in.
 
 ## Converting an NFA to a DFA
 The states of the DFA are the sets of states that the NFA could be in at that point in time.
+We can define the next state function on the power set by 
+* $\delta(U,\sigma) = \\{\delta(u,\sigma) : \forall u \in U\\}$
+* the start state if $\\s_o\\}$ and the final states are those subsets that contain a final state.
+We only care about those states which are reachable from the start state so in general we won't have $2^n$ states in our DFA,
+but in the worst case, that is a possibility.
 
 ## Finding the maximal match for a DFA
 We usually want to find the longest prefix of a string that the DFA accepts.
 To do this we just keep track of the last final state encountered. If we reach an error state,
 then we revert back to the last final state.
 
+
+How would we find the longest possible match for a DFA?
+* run the algorithm above, but keep track of each $i$ for which $s_i$ is a final state,
+* when an Error state is reached or the end of the string, return the last final state, and restart the DFA from position $i$.
+
 ### Exercise
 * Create an NFA for recognizing the tokens in the mini-java program above where the final states are labelled with the type of the token.
 * Convert the NFA to a DFA
-* Show how the DFA could be used to find the 
+* Show how the DFA could be used to convert the program into a list of tokens.
 
 ## Implementing a Lexer
 The idea here is to define tokens by NFAs and to combine them into a single DFA
