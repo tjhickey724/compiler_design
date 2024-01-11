@@ -109,7 +109,7 @@ The only place we need to introduce epsilon edges is for the star nodes.
 
 ### Exercise
 Convert the following regular expression $R_1$ to an NFA $N_1$ using the algorithm above:
-* R1 = ```(a.(b|c))*$
+* R1 = ```(a.(b|c))*```
 *  Remove the epsolon edges from $N_1$ to get a new NFA $N_2$
 *  Do the same with R2 = ```(a.b|c)*``` (which is the same as ```((a.b)|c)*```
 *  Now with ```(a.b*|c)*
