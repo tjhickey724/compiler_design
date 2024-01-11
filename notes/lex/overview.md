@@ -28,6 +28,7 @@ We can define regular expressions over an alphabet $\Sigma$ as follows:
 R is a regular expression if
 * $R = a$  for some $a \in \Sigma \cup \\{\epsilon\\}$ where $\epsilon$ denotes the empty string.
 * $R = R_1.R_2$ where $R_1,R_2$ are regular expressions
+* * $R = R_1|R_2$ where $R_1,R_2$ are regular expressions
 * $R = R_1*$ where $R_1$ is a regular expression
 
 It is useful to allow the empty string $\epsilon$ in Regular Expressions because you can use it to
