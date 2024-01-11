@@ -10,6 +10,8 @@ Typical tokens are
 * punctuation and operators (+ - * / // % ' " ! # )
 * variable names (x interval Interval int2string main
 
+
+
 ## Regular Expressions
 Tokens are usually expressed using Regular Expressions. These are expressions formed from
 * characters taken from an set $C$ of letters (e.g. unicode characters or digits or ASCII characters)
@@ -21,9 +23,14 @@ Tokens are usually expressed using Regular Expressions. These are expressions fo
 
 We can define regular expressions over an alphabet $\Sigma$ as follows:
 R is a regular expression if
-* $R = a$  for some $a \in \Sigma$
+* $R = a$  for some $a \in \Sigma \cup \\{\epsilon\\}$ where $\epsilon$ denotes the empty string.
 * $R = R_1.R_2$ where $R_1,R_2$ are regular expressions
 * $R = R_1*$ where $R_1$ is a regular expression
+
+It is useful to allow the empty string $\epsilon$ in Regular Expressions because you can use it to
+represent optional elements as  $(\epsilon | R)$
+
+
 
 ## Regular Languages
 Each regular expressions defines a set of strings, called a regular language.
@@ -41,21 +48,64 @@ If R is a regular expression oer an alphabet $\Sigma$, define L(R) to the langua
 3. $L(R_1 | R_2) = L(R_1) \cup L(R_2)$
 4. $L(R*) = \bigcup_\limits{n=0}^\infty L(R)^n$
 
+### Exercise
+List all of the tokens in the following program 
+```
+a := 5+3; b := (print(a,a-1), 10*a); print(b)
+```
+and give names and regular expressions for each token type, e.g.
+* ```NUM`` = integer constant = 1.(0|1)*
+
+
 ### Exercise. 
-Write a python function ```regen(R,s,n)``` 
-whose input is a regular expression $R$  and a string $s$ and an integer $n$ which
-returns the set of all strings of length $n$ in the language $L(R)$
-This is tricky because the unions in steps 3 and 4 are not necessarily disjoint! The slow method is
-to generate the set of all strings of length $n$ in the language and then test if $s$ is in that set.
+Write a regular expression for the language of binary numbers where the number of ones is a multiple of 3!
 
 ## Finite Automata aka Finite State Machines
-Another way to define regular languages is by using a directed graph whose edges are labelled with characters.  The graph $G$ consists of a set $N$ of nodes include a start node $N_0$. A subset $F\subseteq N$ of the nodes are marked as final nodes. Each of the edges in the graph is labelled with a character.
+Another way to define regular languages is by using a directed graph whose edges are labelled with characters.  The graph $G$ consists of a set $N$ of nodes include a start node $N_0$. A subset $F\subseteq N$ of the nodes are marked as final nodes. Each of the edges in the graph is labelled with a character from some alphabet $\Sigma$ or with the empty string $\epsilon$
+
 Each path through the graph starting at the start state $N_0$ and ending in a final state defines a sequence of characters (the characters on the edges of the path), and the set of all such strings is called the language defined by that automata.  
 
-The Finite Automata is called a Deterministic Finite Automata (DFA) if for each node, all of the edges leaving that node have distinct labels; otherwise it is a Nondeterministic Finite Automata (NFA).
+The Finite Automata is called a Deterministic Finite Automata (DFA) if for each node, all of the edges leaving that node have distinct labels; otherwise it is a Nondeterministic Finite Automata (NFA). The NFAs are most convenient for describing regular languages, but testing if a string is accepted by an NFA is challenging. 
+
+For a DFA D it is relatively easy to see if a string $\omega$ is accepted by D with the following algorithm.
+First let $S$ be the set of states of the DFA and $\Sigma$ the alphabet for the DFA and assume one of the states is an "Error" state $E$.
+
+Let $\delta:S\times \Sigma \rightarrow S$ be the function defined by
+* $\delta(s_1,\sigma) = s_2$ if there is an edge from $s_1$ to $s_2$ labelled with $\sigma$
+* $\delta(s_1,\sigma) = E$, if there is no edge from $s_1$ labelled with $\sigma$
+
+The following algorithm will determine if a string $\omega$ of length $n$ is accepted by the DFA.
+* let $s_0$ be the start state
+* define $s_{i+1} = \delta(s_i,\omega_i)$ for each $i$ from 0 to $n-1$ if $s_i\ne E$, otherwise $s_{i+1}=E$
+If $s_n$ is a final state, then the string is accepted, otherwise it is not accepted.
 
 ## Converting a Regular Expression to an NFA
-We can define this algorithm recursively...
+We can define this algorithm to convert a Regular Expression R to an NFA as follows.
+* construct the parse tree for R
+* for each node in the parse tree constuct an NFA with a single start state and a single final state as follows:
+ * for a leaf labelled with a symbol $s$ we have s simple NFA  start -> final where the edge is labelled with s
+ * for a dot node R1 . R2  add an epsilon edge between the final node of R1 and the start node of R2
+ * for a bar node R1 | R2  create a new start and final node and have epsilon edges from the new start node to the starts of R1 and R2
+    and expilon edges from the final nodes of R1 and R2 to the new final node
+ * for a star node R1*  create new start and final node with epsilon edge from the new start to the start and to the final,
+   and and epsilon edge from the final of R1 to the start of R1
+
+### Exercise
+Convert the following regular expression $R_1$ to an NFA $N_1$ using the algorithm above:
+*  ```R1 = (0*.1.0*.1)*```   What is the language that this RE generates?
+*  Remove the epsolon edges from $N_1$ to get a new NFA $N_2$
+
+
+
+## Eliminating epsilon edges from a NFA
+The epsilon edges are convenient for writing NFAs but make analyzing them harder. Luckily it is relatively easy to eliminate them
+as follows:
+* pick an epsiolon edge e from node N1 to node N2. for every edge out of N2 to a node N2 with label S, add an edge from N1 to N3 labelled with S,
+* delete that epsilon edge and repeat until there are no more epsilon edges.
+
+Why does this terminate?
+
+### Exercise
 
 ## Recognizing strings using an DFA
 This is a standard state machine where the node represents the current state and the edge determines
