@@ -2,6 +2,9 @@
 
 Lexical Analysis is the phase of compilatio when the program is transformed from a sequence of characters to a sequence of tokens. The tokens correspond to the core vocabulary of the formal language. 
 
+On this page we'll define Lexical Analysis, Regular expressions, Regular Languages, DFAs, and NFAs and show how they are all related
+and how to convert one into another...
+
 ## Tokens
 Typical tokens are
 * integer constants (123  -77 +1234 0777 0xfff 0b110011)
