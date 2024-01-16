@@ -277,3 +277,6 @@ would be translated into
 [('id','test'),('whitespace',' '),('equals','='),('whitespace',' '),('id','x'),('mult','*'),('id','y')]
 ```
 You'll need to find all of the tokens in the minijava language and create nfas for each one.
+
+# Jupyter Notebook
+[Here](NFA%2BDFA.ipynb) is a link to a jupyter notebook containing the code from this lesson
