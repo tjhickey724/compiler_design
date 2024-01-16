@@ -174,6 +174,14 @@ Let's define the algorithm more precisely, as in the text. You can convert this 
 We will assume the NFA is represented as a set $E$ of labelled edges $(s,t,c)\in S\times\Sigma^*$ where $S$ is the set of states and $\Sigma^*$ is the alphabet $\Sigma$ with the epsilon character $\epsilon$ added, where
 * $(s,t,c)$ represents an edge from state $s$ to state $t$ with edge labelled $c$
 
+Here are two NFAs
+``` python
+nfa1 = {'start':0,'final':{0,2},'edges':{(0,1,'a'),(1,0,'b'),(1,0,'c'),(1,2,'b'),(2,0,'c')}}
+nfa2 = {'start':0,'final':{0,2},
+        'edges':{(0,1,'epsilon'),(1,2,'epsilon'),(1,3,'epsilon'),(2,3,'epsilon'),
+                 (1,3,'a'),(2,2,'a'),(3,3,'b'),(2,3,'c'),(3,2,'epsilon')}}
+```
+
 The first step is to define the epsilon closure of a set $T$ of states. This is the set of states you can get to by following only edges labelled with $\epsilon$.  
 
 ``` python
@@ -191,8 +199,29 @@ def closure(NFA,S):
         next_states = epsilon_edge(NFA,T)
         print('epsilon edges',T,'epsilon',T.union(next_states))
     return T
-     
+```
 
+Once we have the closure we can easily write the NFA recognizer:
+``` python
+def dfa_edge(nfa,s,c):
+    ''' returns closure of all states reachable from a state in s by an edge labelled c '''
+    s1 = {e[1] for e in nfa['edges'] if e[0] in s and e[2]==c}
+    s2 = closure(nfa,s1)
+    return s2
+
+def is_final(nfa,state):
+    ''' return True if the nfa state is a final state '''
+    return len(state.intersection(nfa['final']))>0
+
+def nfa_accepts(nfa,chars):
+    ''' returns True if the nfa accepts the string of chars '''
+    state = closure(nfa,{nfa['start']})
+    for i in range(len(chars)):
+        c = chars[i]
+        state1=state
+        state = dfa_edge(nfa,state,c)
+        print('dfa_edge',state1,c,state)
+    return is_final(nfa,state)
 ```
 
 ## Exercise: Try this out!
@@ -208,14 +237,8 @@ but in the worst case, that is a possibility.
 
 ### Exercise: Try this out!
 
-## Converting NFA to DFA when there are episolon edges
 
-Step 1 is to define the epsiolon expansion of a node n to be the set of all nodes you can reach from n by following epsilon edges.
-We then replace each node by its epsilon expansion add combine all of the non-epsilon edges.
-
-This new NFA has no epsilon edges so we proceed as before.
-
-### Exercise.  Try this out!
+### Homework 1: Write the NFA to DFA converter
 
 
 ## Finding the maximal match for a DFA
@@ -228,19 +251,29 @@ How would we find the longest possible match for a DFA?
 * run the algorithm above, but keep track of each $i$ for which $s_i$ is a final state,
 * when an Error state is reached or the end of the string, return the last final state, and restart the DFA from position $i$.
 
-### Exercise
-* Create an NFA for recognizing the tokens in the mini-java program above where the final states are labelled with the type of the token.
-* Convert the NFA to a DFA
-* Show how the DFA could be used to convert the program into a list of tokens.
+### Homework 2: Modify the DFA converter to return the longest match
+Keep track of the last final state encountered and return that state and the recognized string, when a error state arises.
 
-## Implementing a Lexer
-The idea here is to define tokens by NFAs and to combine them into a single DFA
-where the final states are labelled by the type of token that has been recognized.
-We then can write a program which finds the maximal match for a given string, then removes
-that string, and repeats the process. For each maximal match it adds the token type and the string to a list.
-The algorithm thus converts a string to a list of tokens. The last "token" could be a string that doesn't
-match with anything.
+## Homework problem 3: Tokenizer¶
+Write a tokenizer which accepts a list of token definitions of the form
+``` python
+(token_name,  NFA)
+```
+and generates a DFA for recognizing those tokens!
+Ideally we would use a Regular Expression instead of an NFA, but we need to read the next chapter to learn how to
+parse a Regular Expression into a tree that can be converted into an NFA. We'll do this next week.
 
-### Exercise
-Implement the lexer in Python, as described above.
-
+### Homework problem 4: Lexer
+Implement the lexer for minijava lexer in Python. It should accept a minijava program and return a sequence of tokens of the form
+``` python
+(token_name, token_chars)
+```
+For example
+``` python
+test = x*y
+```
+would be translated into
+``` python
+[('id','test'),('whitespace',' '),('equals','='),('whitespace',' '),('id','x'),('mult','*'),('id','y')]
+```
+You'll need to find all of the tokens in the minijava language and create nfas for each one.
