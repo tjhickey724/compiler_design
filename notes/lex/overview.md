@@ -233,9 +233,8 @@ We can define the next state function on the power set by
 * $\delta(U,\sigma) = \\{\delta(u,\sigma) : \forall u \in U\\}$
 * the start state if $\\s_o\\}$ and the final states are those subsets that contain a final state.
 We only care about those states which are reachable from the start state so in general we won't have $2^n$ states in our DFA,
-but in the worst case, that is a possibility.
-
-### Exercise: Try this out!
+but in the worst case, that is a possibility. So use a breadth-first or depth-first search to find those states (and give them
+state names as integers not sets!) See the Textbook for details...
 
 
 ### Homework 1: Write the NFA to DFA converter
