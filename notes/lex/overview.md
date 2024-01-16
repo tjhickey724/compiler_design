@@ -140,6 +140,13 @@ Note that we can have the final states labelled with token types, so a DFA could
 In this case, we keep track of the set of all possible states the NFA could be in. This is a standard
 construction that works with any non-deterministic algorithm. To do this we keep track of all of the possible states we might be in.
 
+Let's define the algorithm more precisely, as in the text. You can convert this into a Python program fairly easily, but we'll use pseudo code.
+
+We will assume the NFA is represented as a set $E$ of labelled edges $(s,t,c)\in S\times\Sigma^*$ where $S$ is the set of states and $\Sigma^*$ is the alphabet $\Sigma$ with the epsilon character $\epsilon$ added, where
+* $(s,t,c)$ represents an edge from state $s$ to state $t$ with edge labelled $c$
+
+The first step is to define the epsilon closure of a set $T$ of states. This is the set of states you can get to by following only edges labelled with $\epsilon$.  
+
 ## Exercise: Try this out!
 
 ## Converting an NFA to a DFA
