@@ -135,6 +135,35 @@ If $s_n$ is a final state, then the string is accepted, otherwise it is not acce
 
 Note that we can have the final states labelled with token types, so a DFA could not only accept a string, it could classify it!
 
+Here is a Python program for determining if a DFA recognizes a string of characters
+``` python
+# we represent a dfa by a dictionary giving the start state, final states, and a set of edges of the form (head,tail,char)
+dfa1 = {'start':0,'final':{0},'edges':{(0,1,'a'),(1,0,'b'),(1,0,'c')}}
+
+def edge(dfa,state,c):
+    ''' return the next state, or 'error' if there is no next state'''
+    next_states = [e[1] for e in dfa['edges'] if e[0]==state and e[2]==c]
+    if len(next_states)==1:
+        return next_states[0]
+    else:
+        return 'error'
+
+def accepts(dfa,chars):
+    ''' return True if the dfa accepts the string of chars '''
+    state = dfa['start']
+    for i in range(len(chars)):
+        c = chars[i]
+        state1 = edge(dfa,state,c)
+        print('traverse edge',state,c,state1)
+        if state1=='error':
+            return False
+        else:
+            state=state1
+    return state in dfa['final']
+    
+
+```
+
 
 ## Recognizing strings using an NFA
 In this case, we keep track of the set of all possible states the NFA could be in. This is a standard
@@ -146,6 +175,25 @@ We will assume the NFA is represented as a set $E$ of labelled edges $(s,t,c)\in
 * $(s,t,c)$ represents an edge from state $s$ to state $t$ with edge labelled $c$
 
 The first step is to define the epsilon closure of a set $T$ of states. This is the set of states you can get to by following only edges labelled with $\epsilon$.  
+
+``` python
+def epsilon_edge(NFA,S):
+    ''' returns all states reachable from a state in s by an edge labelled epsilon '''
+    return {e[1] for e in NFA['edges'] if e[0] in S and e[2]=='epsilon'}
+
+def closure(NFA,S):
+    ''' returns set of states reachable from a state in S following epsilon edges'''
+    T=S
+    next_states = epsilon_edge(NFA,S)
+    print('epsilon edges',T,'epsilon',T.union(next_states))
+    while not next_states.issubset(T):
+        T = T.union(next_states)
+        next_states = epsilon_edge(NFA,T)
+        print('epsilon edges',T,'epsilon',T.union(next_states))
+    return T
+     
+
+```
 
 ## Exercise: Try this out!
 
