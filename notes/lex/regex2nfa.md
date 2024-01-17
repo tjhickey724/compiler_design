@@ -2,6 +2,7 @@
 
 Below is a program that converts regular expressions to NFAs with a liberal use of epsilon transitions.
 
+First we define some functions to generate parse trees from regular expression operators:
 ``` python
 def star(R):
     return ('star',R)
@@ -9,7 +10,10 @@ def bar(R1,R2):
     return ('bar',R1,R2)
 def dot(R1,R2):
     return ('dot',R1,R2)
+```
 
+Now we can use this to convert a RegEx parse tree into an NFA recursively:
+``` python
 def convert_RE_to_NFA(RE,start):
     ''' 
         The idea is to generate an NFA from a regular expression
