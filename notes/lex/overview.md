@@ -266,29 +266,16 @@ For example, with the DFA recognizing strings ending in 00 or 11, we would get
 
 
 
-## Exercise: Tokenizer¶
-Write a tokenizer which accepts a list of token definitions of the form
+## Exercise: lexical_analyzer¶
+Write a lexical_analyzer which accepts a list of token definitions of the form
 ``` python
 (token_name,  NFA)
 ```
-and generates a DFA for recognizing those tokens!
+and generates a DFA for recognizing those tokens which could be used with the "tokenizer" function above.
+
 Ideally we would use a Regular Expression instead of an NFA, but we need to read the next chapter to learn how to
 parse a Regular Expression into a tree that can be converted into an NFA. We'll do this next week.
 
-### Exercise: Lexer
-Implement the lexer for minijava lexer in Python. It should accept a minijava program and return a sequence of tokens of the form
-``` python
-(token_name, token_chars)
-```
-For example
-``` python
-test = x*y
-```
-would be translated into
-``` python
-[('id','test'),('whitespace',' '),('equals','='),('whitespace',' '),('id','x'),('mult','*'),('id','y')]
-```
-You'll need to find all of the tokens in the minijava language and create nfas for each one.
 
 # Jupyter Notebook
 [Here](NFA%2BDFA.ipynb) is a link to a jupyter notebook containing the code from this lesson
