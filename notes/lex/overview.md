@@ -261,8 +261,8 @@ The function should repeatedly
 * repeat until the end of the list
 
 For example, with the DFA recognizing strings ending in 00 or 11, we would get
-* nfa - {'start':0,final:{2,4},edges:{(0,1,'0'),(1,2,'0'),(0,3,'1'),(3,4,'1'),(2,2,'0'),(4,4,'1'),(2,3,'1'),(
-* tokenizer(nfa,"010001110101100101") -> [('01000',2),('111',3),('01011',3),('00',2),('1','error'),('0','error'),('1','error')]
+* nfa = {'start':0,final:{2,4},edges:{(0,1,'0'),(1,2,'0'),(0,3,'1'),(3,4,'1'),(2,2,'0'),(4,4,'1'),(2,3,'1'),(4,1,'0'),(1,3,'1'),(3,1,'0')}}
+* tokenizer(nfa,"01000111010") -> [('01000111',4),('0','error'),('1','error'),('0','error')]
 
 
 
