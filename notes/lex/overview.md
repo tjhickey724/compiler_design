@@ -237,7 +237,7 @@ but in the worst case, that is a possibility. So use a breadth-first or depth-fi
 state names as integers not sets!) See the Textbook for details...
 
 
-### Homework 1: Write the NFA to DFA converter
+### Exercise: Write the NFA to DFA converter
 
 
 ## Finding the maximal match for a DFA
@@ -250,10 +250,10 @@ How would we find the longest possible match for a DFA?
 * run the algorithm above, but keep track of each $i$ for which $s_i$ is a final state,
 * when an Error state is reached or the end of the string, return the last final state, and restart the DFA from position $i$.
 
-### Homework 2: Modify the DFA converter to return the longest match
+### Exercise: Modify the DFA converter to return the longest match
 Keep track of the last final state encountered and return that state and the recognized string, when a error state arises.
 
-## Homework problem 3: Tokenizer¶
+## Exercise: Tokenizer¶
 Write a tokenizer which accepts a list of token definitions of the form
 ``` python
 (token_name,  NFA)
@@ -262,7 +262,7 @@ and generates a DFA for recognizing those tokens!
 Ideally we would use a Regular Expression instead of an NFA, but we need to read the next chapter to learn how to
 parse a Regular Expression into a tree that can be converted into an NFA. We'll do this next week.
 
-### Homework problem 4: Lexer
+### Exercise: Lexer
 Implement the lexer for minijava lexer in Python. It should accept a minijava program and return a sequence of tokens of the form
 ``` python
 (token_name, token_chars)
