@@ -253,6 +253,19 @@ How would we find the longest possible match for a DFA?
 ### Exercise: Modify the DFA converter to return the longest match
 Keep track of the last final state encountered and return that state and the recognized string, when a error state arises.
 
+### Exercise: Write a function tokenizer(dfa,chars) to convert a string chars into a list of tokens
+The function should repeatedly 
+* find the longest prefix p of chars accepted by the dfa,
+* add that to the list along with the accepting state (p,s)
+* if no prefix is accepted, then skip the next character c and generate an error (c,'error')
+* repeat until the end of the list
+
+For example, with the DFA recognizing strings ending in 00 or 11, we would get
+* nfa - {'start':0,final:{2,4},edges:{(0,1,'0'),(1,2,'0'),(0,3,'1'),(3,4,'1'),(2,2,'0'),(4,4,'1'),(2,3,'1'),(
+* tokenizer(nfa,"010001110101100101") -> [('01000',2),('111',3),('01011',3),('00',2),('1','error'),('0','error'),('1','error')]
+
+
+
 ## Exercise: Tokenizer¶
 Write a tokenizer which accepts a list of token definitions of the form
 ``` python
