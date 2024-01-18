@@ -163,14 +163,13 @@ but in the worst case, that is a possibility. So use a breadth-first or depth-fi
 state names as integers not sets!) See the Textbook for details...
 
 
-### Exercise: Write the NFA to DFA converter
+### Exercise: Write an NFA to DFA converter
 
 
 ## Finding the maximal match for a DFA
 We usually want to find the longest prefix of a string that the DFA accepts.
 To do this we just keep track of the last final state encountered. If we reach an error state,
 then we revert back to the last final state.
-
 
 How would we find the longest possible match for a DFA?
 * run the algorithm above, but keep track of each $i$ for which $s_i$ is a final state,
@@ -189,18 +188,6 @@ The function should repeatedly
 For example, with the DFA recognizing strings ending in 00 or 11, we would get
 * nfa = {'start':0,final:{2,4},edges:{(0,1,'0'),(1,2,'0'),(0,3,'1'),(3,4,'1'),(2,2,'0'),(4,4,'1'),(2,3,'1'),(4,1,'0'),(1,3,'1'),(3,1,'0')}}
 * tokenizer(nfa,"01000111010") -> [('01000111',4),('0','error'),('1','error'),('0','error')]
-
-
-
-## Exercise: lexical_analyzer¶
-Write a lexical_analyzer which accepts a list of token definitions of the form
-``` python
-(token_name,  NFA)
-```
-and generates a DFA for recognizing those tokens which could be used with the "tokenizer" function above.
-
-Ideally we would use a Regular Expression instead of an NFA, but we need to read the next chapter to learn how to
-parse a Regular Expression into a tree that can be converted into an NFA. We'll do this next week.
 
 
 # Jupyter Notebook
