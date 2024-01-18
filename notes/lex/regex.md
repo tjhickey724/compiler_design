@@ -1,17 +1,4 @@
-On this page we'll define Lexical Analysis, Regular expressions, Regular Languages, DFAs, and NFAs and show how they are all related
-and how to convert one into another...
-
-## Tokens
-Typical tokens are
-* integer constants (123  -77 +1234 0777 0xfff 0b110011)
-* decimal constants (0.0 2.718281828 -3.141592  6.022e23)
-* keywords (while for if then else elif class function def and or not void public private ...)
-* punctuation and operators (+ - * / // % ' " ! # )
-* variable names (x interval Interval int2string main
-
-
-
-## Regular Expressions
+# Regular Expressions
 Tokens are usually expressed using Regular Expressions. These are expressions formed from
 * characters taken from a set $\Sigma$ of letters (e.g. unicode characters or digits or ASCII characters)
 * operators
