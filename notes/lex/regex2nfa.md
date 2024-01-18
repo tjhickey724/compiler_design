@@ -15,7 +15,7 @@ def dot(R1,R2):
 ```
 e.g.
 ``` python
-start(dot('a',bar('b','c))) ==>
+star(dot('a',bar('b','c))) ==>
 ('star',('dot','a',('bar', 'b','c')))
 ```
 
