@@ -17,7 +17,7 @@ Typical tokens for a programming language are
 * [Regular Expressions](./regex.md) are used to describe the set of strings acceptable for each token type
 * [Finite Automata](./nfadfa.md) are directed graphs with edge labels which can also be used to generate efficient programs for recognizing tokens defined by a regular expression. There are two types NFAs = Non-deterministic finite automata and DFAs = Deterministic Finite Automata. Every DFA is an NFA, and every NFA can be converted into a DFA (though possibly with exponentially more states).
 * We can [convert Regular Expressions to NFAs](./regex2nfa.md) and [NFAs to Regular Expressions](./nfa2regex.md). So they are equivalent ways of specifying tokens.
-* By combining all of these algorithms we can [create a lexical analyzer](./building_lexers.md) which are linear if the string has no lexical errors.
+* By combining all of these algorithms we can [create a lexical analyzer](./building_lexers.md) which finds each token in time O(n) where n is the length of the string. So the total time is at most $O(n * t)$ where t is the number of tokens and n is the length of the string. This could be quadratic in the number of tokens...
 
 # Jupyter Notebook
 [Here](NFA%2BDFA.ipynb) is a link to a jupyter notebook containing the code from this lesson
