@@ -53,3 +53,14 @@ def convert_RE_to_NFA(RE,start):
                     + R1['edges'] 
                     + ((R1['final'],R1['start'],'epsilon'),)}
 ```
+
+## Exercise: Extend RegEx language
+* add some new operators such as
+  * plus(R) which is one or more occurrences of R
+  * repeat(R,n) which is exactly n occurrences of R
+  * option(R) which is zero or one occurences of R
+
+modify the '''convert_RE_to_NFA''' function to handle these extended operators
+
+
+
