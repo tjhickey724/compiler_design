@@ -15,6 +15,6 @@ The textbook we will use is
 ## Week 2 1/15/2024-1/19/2024 Parsing
 * Mon 1/15/2024 MLK Day, no class
 * L03: Wed 1/17/2024 [Lexical Analysis](../notes/lex/overview.md)
-
+* L04: Thu 1/18/2024 [RegEx to NFA](../notes/lex/regex2nfa.md)
 
 
