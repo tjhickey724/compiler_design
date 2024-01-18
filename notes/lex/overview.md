@@ -13,6 +13,7 @@ Typical tokens for a programming language are
 * punctuation and operators (+ - * / // % ' " ! # )
 * variable names (x interval Interval int2string main
 
+## Overview of Lexical Analysis
 * [Regular Expressions](./regex.md) are used to describe the set of strings acceptable for each token type
 * [Finite Automata](./nfadfa.md) are directed graphs with edge labels which can also be used to generate efficient programs for recognizing tokens defined by a regular expression. There are two types NFAs = Non-deterministic finite automata and DFAs = Deterministic Finite Automata. Every DFA is an NFA, and every NFA can be converted into a DFA (though possibly with exponentially more states).
 * We can [convert Regular Expressions to NFAs](./regex2nfa.md) and [NFAs to Regular Expressions](./nfa2regex.md). So they are equivalent ways of specifying tokens.
