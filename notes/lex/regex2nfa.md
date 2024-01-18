@@ -1,6 +1,8 @@
 # Regular Expressions to NFAs
 
 Below is a program that converts regular expressions to NFAs with a liberal use of epsilon transitions.
+This algorithm is a key part of the process of building a lexical scanner as we typically define
+tokens by regular expressions. After we convert it to an NFA, the next step is to convert the NFA to a DFA.
 
 First we define some functions to generate parse trees from regular expression operators:
 ``` python
