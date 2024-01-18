@@ -13,6 +13,11 @@ def bar(R1,R2):
 def dot(R1,R2):
     return ('dot',R1,R2)
 ```
+e.g.
+``` python
+start(dot('a',bar('b','c))) ==>
+('star',('dot','a',('bar', 'b','c')))
+```
 
 Now we can use this to convert a RegEx parse tree into an NFA recursively:
 ``` python
