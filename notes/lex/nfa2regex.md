@@ -1,6 +1,10 @@
 # Converting a NFA to a Regular Expression
 
 In this note we sketch an algorithm for converting an NFA to a regular expression.
+This is not an essential step in creating a Lexical Analyzer but does help show
+that the languages accepted by regular expressions and NFAs are the same. It can
+also make it easier to understand what the NFA accepts.
+
 The key idea is to transform it by steps into a Generalized NFA (GNFA)
 where the edges are labelled with regular expressions.  We can then show how
 to eliminate duplicate edges (between the same two states) and eliminate
