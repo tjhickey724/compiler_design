@@ -12,9 +12,13 @@ The textbook we will use is
 * L01: Wed 1/10/2024 [Overview of Compilation](../notes/intro/overview.md)
 * L02: Thu 1/11/2024 [Lexical Analysis](../notes/lex/overview.md)
 
-## Week 2 1/15/2024-1/19/2024 Parsing
+## Week 2 1/15/2024-1/19/2024 Lexical Analysis
 * Mon 1/15/2024 MLK Day, no class
 * L03: Wed 1/17/2024 [Lexical Analysis](../notes/lex/overview.md)
 * L04: Thu 1/18/2024 [RegEx to NFA](../notes/lex/regex2nfa.md)
+
+## Week 3: 1/22/2024-1/26/2024 Parsing
+* L05: Mon 1/26/2024 [Intro to Parsing](../notes/parsing/overview.md)
+
 
 
