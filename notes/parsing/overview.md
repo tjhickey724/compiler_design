@@ -3,7 +3,7 @@
 Programming Languages are defined, syntactically by a formal grammar, called a Context Free Grammar.
 
 ## Context Free Grammars
-Such a grammar $G$ defines a set of strings $L(G)$ in $\Sigma^*$ where $\Sigma$ is the set of terminals for the Language.
+A **context free grammar** $G$ defines a set of strings $L(G)$ in $\Sigma^*$ where $\Sigma$ is the set of terminals for the Language.
 The language is defined by a start symbol $S$ and a set of rewrite rules, called productions, of the form:
 
 $N -> \alpha$
@@ -13,10 +13,10 @@ where $N$ is a symbol from the set ${\cal N}$ of non-terminals, and $\alpha$ is 
 For example, here is a grammar defining simple arithmetic expressions:
 
 ```
-E -> T+T
-E -> T-T
-T -> F*F
-T -> F/F
+E -> E+T
+E -> E-T
+T -> E*F
+T -> T/F
 F -> id
 F -> num
 F -> (E)
@@ -24,18 +24,26 @@ F -> (E)
 where id,num,(, and ). are the terminals and E,T,F are the nonterminals, and E is the start symbol.
 
 ## Derivations
-Given a grammar G, we can define a derivation to be a sequence of strings  of terminal and nonterminals (ie. in $({\cal N}\cup\Sigma)^*$)
+Given a grammar G, we can define a **derivation** to be a sequence of strings  of terminal and nonterminals (ie. in $({\cal N}\cup\Sigma)^*$)
 where each string is obtained from the previous one by replacing one of the nonterminals $N$ by the right hand side of a production $N -> \alpha$
 in the grammar.
 
 For example, here is a derivation of id + id * id
 ```
-E -> T + T
+E -> E + T
+  -> T + T
   -> F + T
   -> id + T
+  -> id + T * F
   -> id + F * F
-  -> it + id * F
+  -> id + id * F
   -> id + id * id
 ```
+This is called a **leftmost derivation** because at each step we replace the leftmost non-terminal with the right hand side of a production.
+We can likewise define rightmost derivations, and some derivations are neither leftmost nor rightmost.
+
+Given a derivation of a string $\sigma$ from the grammar, we can construct a **parse tree** whose root is the start symbol $S$
+and the non-leaf nodes are all non-terminals, and the children of any node $N$ are given by the production used to rewrite that node
+in the derivation.
 
 
