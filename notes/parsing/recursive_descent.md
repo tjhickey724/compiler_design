@@ -99,8 +99,8 @@ To calculate first and follow we use a similar iterative process.
 Repeat these steps until there is no longer any change in ```first[s]``` for any s
 
 We can easily generalize First to a sequence of terminals and nonterminals
-* first[ $X_1\ldots\X_k$  ] = first( $X_1$ ) if $X_1$ is not nullable
-* first[ $X_1\ldots\X_k$  ] = first( $X_1$ ) union first( $X_2\ldots X_k$ ) if $X_1$ is nullable
+* first[ $X_1\ldots X_k$  ] = first( $X_1$ ) if $X_1$ is not nullable
+* first[ $X_1\ldots X_k$  ] = first( $X_1$ ) union first( $X_2\ldots X_k$ ) if $X_1$ is nullable
 
 Continue iterating through these rules until there is no change in ```nullable```
 * why does this terminate?
