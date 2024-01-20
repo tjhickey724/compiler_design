@@ -142,10 +142,13 @@ Alas, this is pretty common, e.g. addition is left associative and so the natura
 
 We can remove the left recursion, by introducing a new nontermial E'
 * $E \rightarrow T E'$
-* $E' \rightarrow + E'$
+* $E' \rightarrow + T E'$
 * $E' \rightarrow \epsilon$
 * $T \rightarrow id$
 * $T \rightarrow num$
 
-and this will be an LL(1) grammar.
+and this will be an LL(1) grammar. Some parser generators allow rules with the star operator
+* $E \rightarrow T (+ T)*$
+
+which is implemented with this transformation under the hood.
 
