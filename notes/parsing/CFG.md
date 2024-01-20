@@ -22,7 +22,7 @@ where id,num,(, and ). are the terminals and E,T,F are the nonterminals, and E i
 ## Derivations
 Given a grammar G, we can define a **derivation** to be a sequence of strings  of terminal and nonterminals (ie. in $({\cal N}\cup\Sigma)^*$)
 where each string is obtained from the previous one by replacing one of the nonterminals $N$ by the right hand side of a production $N -> \alpha$
-in the grammar.
+in the grammar. The strings that are generated during a derivation are called **sentential forms**.
 
 For example, here is a derivation of id + id * id
 ```
@@ -52,5 +52,5 @@ E -> E+E
 E -> id
 E -> num
 ```
-as the string ```id + id + id``` has two different parse trees.
+Show that the string ```id + id + id``` has two different parse trees, which is what it means for the grammar to be ambiguous.
 
