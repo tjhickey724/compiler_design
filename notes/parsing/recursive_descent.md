@@ -118,4 +118,18 @@ Continue iterating through these rules until there is no change in ```nullable``
 * why does this terminate?
 * why is it correct?
 
+## LL(1) Predictive Parsers
+Once we have found the first and follow and nullable sets for each nonterminal, we can easily create a predictive parsers as we did in the LL(0) example above.
 
+The idea is to create a table, useRule, whose rows are the non-terminals and whose columns are the terminal.
+For each production $p = S\rightarrow X_1\ldots $ and each $T$ in first[S] we add $p$ to row $S$ and column $T$ of the table, so
+
+```useRule[S,T]``` will be as set of productions that we can use to expand nonterminal S when the next token is T.
+
+If this rule has any entries with more than one rule, then it is not LL(1) and can't be used for an LL(1) parser.  We can generalize the operations above
+and look for the first $k$ symbols starting a production rather than the first symbol, and likewise construct a LL(k) table, but these are usually too large to be useful.
+
+One we have the useRule table built, we can parse any string just as in the LL(0) example above.
+
+## Drawbacks
+One major problem is that
