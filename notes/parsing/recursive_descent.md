@@ -76,3 +76,8 @@ nullable(S) = a boolean value which is true if S can drive the empty string
 follow(S) = the set of all terminals that can follow the non-terminal S in any sentential form generated from the start symbol
 ```
 
+To calculate nullable(S) for all S, first set nullable(S) to be false for all S.
+
+Then for each rule $S\rightarrow T_1\ldots T_k$
+* if $k=0$, that is if $S\rightarrow \epsilon$, set ```nullable(S)=True```
+* 
