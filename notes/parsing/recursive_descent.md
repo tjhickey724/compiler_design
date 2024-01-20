@@ -132,4 +132,20 @@ and look for the first $k$ symbols starting a production rather than the first s
 One we have the useRule table built, we can parse any string just as in the LL(0) example above.
 
 ## Drawbacks
-One major problem is that
+One major problem is that any grammar that is left-recursive can not be LL(1). That is if we can find a leftmost derivation starting with $L$ that create a new sentential form also starting with $L$, then the grammar is left recursive. 
+
+Alas, this is pretty common, e.g. addition is left associative and so the natural grammar rule to use is
+* $E \rightarrow E + T$
+* $E \rightarrow T$
+* $T \rightarrow id$
+* $T \rightarrow num$
+
+We can remove the left recursion, by introducing a new nontermial E1
+* $E \rightarrow T E1$
+* $E1 \rightarrow + E1$
+* $E1 \rightarrow \epsilon$
+* $T \rightarrow id$
+* $T \rightarrow num$
+
+and this will be an LL(1) grammar.
+
