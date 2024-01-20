@@ -31,7 +31,7 @@ L -> ; S L
 E -> num
 ```
 Here 
-* the terminals are $\\{if, then, else, begin, print, end, num, ';', '-'\\}$ and
+* the terminals are ```if, then, else, begin, print, end, num, ';', '-'``` and
 * the nonterminals are $\\{S,L,E\\}$
 
 Let's see how to parse a string, say
