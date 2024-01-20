@@ -80,4 +80,4 @@ To calculate nullable(S) for all S, first set nullable(S) to be false for all S.
 
 Then for each rule $S\rightarrow T_1\ldots T_k$
 * if $k=0$, that is if $S\rightarrow \epsilon$, set ```nullable(S)=True```
-* 
+* if $k>0$ and all $T_i$ are nullable, again set ```nullable(S)=True```
