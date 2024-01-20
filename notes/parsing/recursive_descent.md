@@ -140,10 +140,10 @@ Alas, this is pretty common, e.g. addition is left associative and so the natura
 * $T \rightarrow id$
 * $T \rightarrow num$
 
-We can remove the left recursion, by introducing a new nontermial E1
-* $E \rightarrow T E1$
-* $E1 \rightarrow + E1$
-* $E1 \rightarrow \epsilon$
+We can remove the left recursion, by introducing a new nontermial E'
+* $E \rightarrow T E'$
+* $E' \rightarrow + E'$
+* $E' \rightarrow \epsilon$
 * $T \rightarrow id$
 * $T \rightarrow num$
 
