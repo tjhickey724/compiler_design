@@ -11,4 +11,9 @@ where $A \rightarrow \alpha\beta$ is a production in the grammar and $x$ is a te
 The States of an LR(1) parser consist of sets of LR(1)-items that correspond to the most recent
 rewriting rules that could have been applied in a leftmost derivation.
 
+This is similar to the NFA to DFA transformation... we try to keep track of all of the states
+we could be at if we had a non-deterministic parser that had to choose which rule to apply
+in trying to generate a derivation for the current string. 
+
+
 
