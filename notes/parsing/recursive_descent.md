@@ -15,7 +15,7 @@ We generate a leftmost derivation $S_0,\ldots,S_n$ of the string $\omega$ as fol
 * let $S_0$ be the sentential form consisting of the start symbol $S$
 * in the $i$ th step, let $k$ be the position of the first non-terminal $N$ in the sentential form $S_i$
   * the first $k-1$ characters in $S_i$ must match the first $k-1$ characters of $\omega$. Let $c=\omega[k]$ be the next character.
-  * use $c$ to determine which of the grammar rules for $N$ should be used next (We'll talk about how to do this next!)
+  * **use $c$ to determine which of the grammar rules for $N$ should be used next** (We'll talk about how to do this next!)
   * replace $N$ with the left hand side of the chosen grammar rule and extend the parse tree by adding the LHS of the rule as the children of $N$
 * continue until $S_n = \omega$
 
