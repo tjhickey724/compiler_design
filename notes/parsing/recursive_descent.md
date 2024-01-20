@@ -135,6 +135,9 @@ and look for the first $k$ symbols starting a production rather than the first s
 One we have the useRule table built, we can parse any string just as in the LL(0) example above.
 
 ## Drawbacks and Work arounds
+Some common grammars have features that make them non-LL(1), but we can usually find workarounds..
+
+### Left Recursion
 One major problem is that any grammar that is left-recursive can not be LL(1). That is if we can find a leftmost derivation starting with $L$ that create a new sentential form also starting with $L$, then the grammar is left recursive. 
 
 Alas, this is pretty common, e.g. addition is left associative and so the natural grammar rule to use is
@@ -154,5 +157,16 @@ and this will be an LL(1) grammar. Some parser generators allow rules with the s
 * $E \rightarrow T (+ T)*$
 
 which is implemented with this transformation under the hood.
+
+## Left factoring
+Another issue is when two productions have the same prefix, e.g.
+* S -> if E then S
+* S -> if E then S else S
+We can resolve this again by introducing a new nonterminal S' and left-factoring the rules
+* S -> if E then S S'
+* S' -> else S
+* S' -> epsilon
+
+This removes the conflict and can be used to make the grammar LL(1)
 
 Almost all programming languages can be described by an LL(1) grammar, so this is all we need for compiler design.
