@@ -76,8 +76,32 @@ nullable(S) = a boolean value which is true if S can drive the empty string
 follow(S) = the set of all terminals that can follow the non-terminal S in any sentential form generated from the start symbol
 ```
 
+### Nullable[S]
 To calculate nullable(S) for all S, first set nullable(S) to be false for all S.
 
 Then for each rule $S\rightarrow T_1\ldots T_k$
 * if $k=0$, that is if $S\rightarrow \epsilon$, set ```nullable(S)=True```
 * if $k>0$ and all $T_i$ are nullable, again set ```nullable(S)=True```
+
+Continue iterating through these rules until there is no change in ```nullable```
+* why does this terminate?
+* why is it correct?
+
+### First[S]
+To calculate first and follow we use a similar iterative process.
+
+* set ```first[s]= \\{\\}$ for all S initially
+* for each production $S\rightarrow X_1\ldots X_n$
+  * if $X_1$ is a terminal, add it to ``first[S]``
+  * if $X_1$ is a non-terminal, add ```first[X1]``` to ```first[S]```, as anything that can start X1 can also start S
+  * if $X_1\ldots X_j$ are nullable, then add first[$X_{j+1}$] to ```first[S]```, do this for each j from 1 to k
+
+Repeat these steps until there is no longer any change in ```first[s]``` for any s
+
+### Follow[S]
+Set it to the empty set intially for each nonterminal S, then iterate the following steps until there is no change in any follow set
+
+* for each rule and each pair $i,j$ of positions in the rule, $S\rightarrow X_1\ldots X_i \ldots X_j \ldots X_k$
+  * if $X_{i+1}\ldots X_{j-1}$ are nullable, add first[$X_j$] to  follow[$X_i$]
+
+
