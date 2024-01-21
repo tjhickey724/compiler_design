@@ -7,7 +7,11 @@ using a set of LR(1)-items.  These LR(1)-items have the following form:
 
 $$(A \rightarrow \alpha \cdot \beta , x)$$
 
-where $A \rightarrow \alpha\beta$ is a production in the grammar and $x$ is a terminal symbol.
+where $A \rightarrow \alpha\beta$ is a production in the grammar and $x$ is a terminal symbol
+and $\alpha$ and $\beta$ are (possibly empty) strings of terminals and non-terminals. An LR(1) item
+indicates a position in a left-to-right leftmost derivation stating that the derivation involves
+that rule but only the part up through $\alpha$ has been fully derived, and the part in $\beta$
+has not been expanded to capture any terminals.
 
 The States of an LR(1) parser consist of sets of LR(1)-items that correspond to the most recent
 rewriting rules that could have been applied in a leftmost derivation.
