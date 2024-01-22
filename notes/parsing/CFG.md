@@ -11,13 +11,15 @@ For example, here is a grammar defining simple arithmetic expressions:
 ```
 E -> E+T
 E -> E-T
-T -> E*F
+T -> T*F
 T -> T/F
 F -> id
 F -> num
 F -> (E)
 ```
 where id,num,(, and ). are the terminals and E,T,F are the nonterminals, and E is the start symbol.
+The grammar rules are designed so that the arithmetic operators are right associative (i.e. a+b+c is parsed as (a+b)+c)
+and that mult and div have higher precedences that add and sub (i.e. a*b+c/d is parsed as (a*b)+(c/d) )
 
 ## Derivations
 Given a grammar G, we can define a **derivation** to be a sequence of strings  of terminal and nonterminals (ie. in $({\cal N}\cup\Sigma)^*$)
