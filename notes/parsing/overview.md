@@ -7,7 +7,7 @@ then the grammar specifies a parse tree built on top of those tokens. After pars
 and to generate the code.
 
 If the grammar satisfies certain syntactic properties, we can easily construct an efficient parser for that grammar.
-The main kinds of grammars consider in compiler design are as follows (where $k\ge 0$ is a integer specifying the "lookahead" needed by the parser).
+The main kinds of grammars considered in compiler design are as follows (where $k\ge 0$ is a integer specifying the "lookahead" needed by the parser).
 * [LL(k) - recursive descent parsers](./recursive_descent.md)
 * LR(k) - shift-reduce parsers with
 * SLR - simple LR parsers
