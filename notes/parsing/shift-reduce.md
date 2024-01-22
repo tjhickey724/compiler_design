@@ -1,5 +1,7 @@
 # Shift-Reduce Parsing
 
+#UNDER CONSTRUCTION
+
 In this note we present the main ideas of shift-reduce parsing and LR grammars.
 
 The key idea is to keep track of the current state of a parser after seeing a prefix of the input
