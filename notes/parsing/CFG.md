@@ -44,6 +44,7 @@ Given a derivation of a string $\sigma$ from the grammar, we can construct a **p
 and the non-leaf nodes are all non-terminals, and the children of any node $N$ are given by the production used to rewrite that node
 in the derivation.
 
+## Ambiguous Grammars
 If a string has two different parse trees for a particular grammar, we say the grammar is **ambiguous**. For compiling programming languages,
 we do not want to have ambiguous grammars because we will use the parse tree to generate the assembly language, and we would like the 
 result of the compilation to depend on the program itself and not the particular parse tree we use.
