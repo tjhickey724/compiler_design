@@ -6,16 +6,18 @@ $N -> \alpha$
 
 where $N$ is a symbol from the set ${\cal N}$ of non-terminals, and $\alpha$ is a string of nonterminals and terminals, possibly empty.
 
-For example, here is a grammar defining simple arithmetic expressions:
+For example, here is a grammar with 9 productions defining simple arithmetic expressions:
 
 ```
-E -> E+T
-E -> E-T
-T -> T*F
-T -> T/F
-F -> id
-F -> num
-F -> (E)
+1 E -> E+T
+2 E -> E-T
+3 E -> T
+4 T -> T*F
+5 T -> T/F
+6 T -> F
+7 F -> id
+8 F -> num
+9 F -> (E)
 ```
 where id,num,(, and ). are the terminals and E,T,F are the nonterminals, and E is the start symbol.
 The grammar rules are designed so that the arithmetic operators are right associative (i.e. a+b+c is parsed as (a+b)+c)
@@ -26,23 +28,24 @@ Given a grammar G, we can define a **derivation** to be a sequence of strings  o
 where each string is obtained from the previous one by replacing one of the nonterminals $N$ by the right hand side of a production $N -> \alpha$
 in the grammar. The strings that are generated during a derivation are called **sentential forms**.
 
-For example, here is a derivation of id + id * id
+For example, here is a leftmost derivation of id + id * id
 ```
-E -> E + T
-  -> T + T
-  -> F + T
-  -> id + T
-  -> id + T * F
-  -> id + F * F
-  -> id + id * F
-  -> id + id * id
+E -> E + T          rule 1  
+  -> T + T          rule 3
+  -> F + T          rule 6
+  -> id + T         rule 7
+  -> id + T * F     rule 4
+  -> id + F * F     rule 6
+  -> id + id * F    rule 7
+  -> id + id * id   rule 7
 ```
 This is called a **leftmost derivation** because at each step we replace the leftmost non-terminal with the right hand side of a production.
 We can likewise define rightmost derivations, and some derivations are neither leftmost nor rightmost.
 
 Given a derivation of a string $\sigma$ from the grammar, we can construct a **parse tree** whose root is the start symbol $S$
 and the non-leaf nodes are all non-terminals, and the children of any node $N$ are given by the production used to rewrite that node
-in the derivation.
+in the derivation. Here is the parse tree for the derivation above:
+![parse tree](./parsetree.jpg)
 
 ## Ambiguous Grammars
 If a string has two different parse trees for a particular grammar, we say the grammar is **ambiguous**. For compiling programming languages,
