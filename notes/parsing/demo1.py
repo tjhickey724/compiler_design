@@ -1,4 +1,15 @@
-      
+'''
+LL(0) parser for the following grammar
+S -> if E then S else S
+S -> begin S L
+S -> print E
+L -> end
+L -> ; S L
+E -> num
+The parser has a method for each non-terminal
+It looks at the next character to decide which production rule to apply.
+'''
+
 
 class parser():
     def __init__(self,tokens):
