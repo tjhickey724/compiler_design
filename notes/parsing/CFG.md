@@ -45,6 +45,7 @@ We can likewise define rightmost derivations, and some derivations are neither l
 Given a derivation of a string $\sigma$ from the grammar, we can construct a **parse tree** whose root is the start symbol $S$
 and the non-leaf nodes are all non-terminals, and the children of any node $N$ are given by the production used to rewrite that node
 in the derivation. Here is the parse tree for the derivation above:
+
 ![parse tree](./parsetree.jpg)
 
 ## Ambiguous Grammars
