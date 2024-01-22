@@ -14,6 +14,7 @@ The main kinds of grammars consider in compiler design are as follows (where $k\
 * LALR(l) - lookahead shift-reduce parsers
 
 There are parsers for general context free grammars, e.g. [Earley's parser](https://en.wikipedia.org/wiki/Earley_parser).
+These can be useful for parsing Natural Language, but are too inefficient (time complexity of $O(n^3)$) to be useful for programming languages.
 
 The [javacc](https://javacc.github.io/javacc/) parser generator uses an LL(1) parser
 while the [sablecc](https://sablecc.org/) parser generator uses an LALR(1) parser.
