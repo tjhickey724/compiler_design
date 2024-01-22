@@ -134,6 +134,20 @@ and look for the first $k$ symbols starting a production rather than the first s
 
 One we have the useRule table built, we can parse any string just as in the LL(0) example above.
 
+## Example.
+Let's try the Grammar 3.12 example from the book ..
+```
+Z -> d
+Z -> X Y Z
+Y ->
+Y -> X
+X -> Y
+X -> a
+```
+and lets compute nullable, first, and follow to get the parser in Figure 3.14.
+
+
+
 ## Drawbacks and Work arounds
 Some common grammars have features that make them non-LL(1), but we can usually find workarounds..
 
@@ -170,3 +184,8 @@ We can resolve this again by introducing a new nonterminal S' and left-factoring
 This removes the conflict and can be used to make the grammar LL(1)
 
 Almost all programming languages can be described by an LL(1) grammar, so this is all we need for compiler design.
+
+## Example. 
+Let's work through the simple arithmetic expressions grammar from Chapter 3 (Grammar 3.15), to get the First/Follow/Nullable data (Table 3.16)
+and the predictive parsing data (Table 3.17).
+
