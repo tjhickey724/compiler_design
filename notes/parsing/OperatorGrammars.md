@@ -27,4 +27,8 @@ rather than
 (3+4)*5
 ```
 
+## Reverse Polish Notation
+Early electronic calculators used a simpler (to implement) syntax for arithmetic expressions.
+
+
 
