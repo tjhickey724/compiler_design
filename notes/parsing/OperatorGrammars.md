@@ -28,7 +28,13 @@ rather than
 ```
 
 ## Reverse Polish Notation
-Early electronic calculators used a simpler (to implement) syntax for arithmetic expressions.
+Early electronic calculators used a simpler (to implement) syntax for arithmetic expressions using a stack.
+The user would push values onto a stack and then apply operation, that would pop the top 2 elements off the stack,
+apply the operation, and push it down again.  For example
+```
+```
+
+
 
 
 
