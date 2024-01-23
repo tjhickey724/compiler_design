@@ -51,6 +51,35 @@ The infix version of this expression is
 5 + 4 * 3
 ```
 
+## Parsing Polish Notation
+The goal of parsing an arithmetic expression is to generate the parse tree for that expression.
+For Prefix notation, we can use an LL(0) parser
+```
+E -> Op E E
+E -> F
+F -> num |id
+```
+
+## Parsing Reverse Polish Notation
+The parse an expression in reverse polish notation, we need to use an LR parserl
+We keep pushing thing on the stack and if we see ```( ... Val Val Op)``` at the top of the stack
+we apply the operator to the values to get ```Op(Val,Val)``` which we push onto the stack!
+For example
+```
+| 5 4 3 * + ->
+5 | 4 3 * + ->
+5 4 | 3 * + ->
+5 4 3 | * + ->
+5 4 3 * | + ->
+5 times(4,3) | + ->
+add(5,times(4,3))
+```
+
+## Parsing Infix Notation
+To parse infix notation we can use an LR approach, but we resolve conflicts using the precedence and assocativity properties of the operators.
+
+
+
 
 
 
