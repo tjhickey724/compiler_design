@@ -32,6 +32,23 @@ Early electronic calculators used a simpler (to implement) syntax for arithmetic
 The user would push values onto a stack and then apply operation, that would pop the top 2 elements off the stack,
 apply the operation, and push it down again.  For example
 ```
+Command         Stack
+push 5          5
+push 4          5 4
+push 3          5 4 3
+multiply        5 12
+add             17
+```
+So the expression ``` 5 4 3 * +``` would evaluate to 17.
+
+Another variation of this approach is to put the operator before the operand, this is called Polish Notation, 
+and is so named because a Polish Logician first popularized this approach. For the previous example, the polish notation would be
+```
++ 5 * 4 3
+```
+The infix version of this expression is
+```
+5 + 4 * 3
 ```
 
 
