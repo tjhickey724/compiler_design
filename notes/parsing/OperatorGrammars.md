@@ -3,6 +3,12 @@
 One very important class of languages are the operator expression languages.
 Every programming language includes some kind of arithmetic and/or boolean expressions
 and these are typically expressed as infix operators with specified associativity and precedence.
+Here are some examples of arithmetic expressions in Java
+``` java
+(x+2)*(y - x)
+((x++ >> 2*y/--z)%z*w
+```
+Here is a list of [all java operators with their precedence and associativity](https://introcs.cs.princeton.edu/java/11precedence/)
 
 Such Expression Grammars can easily be handled by LL(1) or LR(1) parsers, but it is instructive to look
 at these languages in isolation, not as part of a programming language, to see how we can best parse them.
