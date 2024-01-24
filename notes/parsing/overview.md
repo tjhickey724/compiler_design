@@ -6,6 +6,9 @@ The Grammar is what allows us to generate a parse tree from a program. First we 
 then the grammar specifies a parse tree built on top of those tokens. After parsing, the parse tree is used to analyze the program
 and to generate the code.
 
+A special case of CFGs are the [Operator Grammars](./OperatorGrammars.md) which are easy to understand and give a good introduction to both
+LL and LR parsing.
+
 If the grammar satisfies certain syntactic properties, we can easily construct an efficient parser for that grammar.
 The main kinds of grammars considered in compiler design are as follows (where $k\ge 0$ is a integer specifying the "lookahead" needed by the parser).
 * [LL(k) - recursive descent parsers](./recursive_descent.md)  
