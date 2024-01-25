@@ -14,7 +14,10 @@ Here is a link to a Lexical Analyzer for a simple language for arithmetic expres
 
 
 ## Running javacc
-To run these examples, you need to visit [the javacc site](https://javacc.github.io/javacc/) and download the javacc.jar file, then give the following commands
+To run these examples, you need to visit [the javacc site](https://javacc.github.io/javacc/) and download the javacc.jar file.
+Actually download the javacc.7.0.12.zip file, unzip it, and you'll find javacc.jar in the bootstrap folder. 
+
+Once you have the jar file, give the following commands to create the lexical analyzer.
 
 ``` bash
  % java -classpath javacc javacc cal.jj 
