@@ -5,6 +5,8 @@ and then generates an LL(1) recursive descent parser. You can add functionality 
 act as an interpreter or will generate a parse tree (concrete or abstract). Since it is a recursive descent parser
 the actions you add are identical to ones you would add for traversing a tree in a depth-first left-to-right fashion.
 
+Here is a nice [tutorial for using javacc](https://www.engr.mun.ca/~theo/JavaCC-Tutorial/javacc-tutorial.pdf)
+
 ## Lexical Analysis
 Here is a link to a Lexical Analyzer for a simple language for arithmetic expressions. This is from a compiler course at WPI
 
@@ -48,3 +50,16 @@ NUMBER:    100
 and here is a parser/interpreter for evaluating arithmetic expressions using javacc
 
 [parse and evaluate](https://gist.github.com/jac18281828/2435b575b699684a4ee36201af472d04)
+
+Run this as
+```
+% java -classpath javacc.jar javacc Calculator.jj
+% javac Calculator.java
+% java Calculator
+4*5+5*6
+50
+1+2
+3
+```
+
+```
