@@ -12,7 +12,7 @@ Here is a link to a Lexical Analyzer for a simple language for arithmetic expres
 
 
 ## Running javacc
-To run these examples, you need to visit the javacc site and download the javacc.jar file, then give the following commands
+To run these examples, you need to visit [the javacc site](https://javacc.github.io/javacc/) and download the javacc.jar file, then give the following commands
 
 ``` bash
  % java -classpath javacc javacc cal.jj 
