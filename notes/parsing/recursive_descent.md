@@ -155,14 +155,14 @@ Some common grammars have features that make them non-LL(1), but we can usually 
 One major problem is that any grammar that is left-recursive can not be LL(1). That is if we can find a leftmost derivation starting with $L$ that create a new sentential form also starting with $L$, then the grammar is left recursive. 
 
 Alas, this is pretty common, e.g. addition is left associative and so the natural grammar rule to use is
-* $S \rightarrow E \$ $
+* $S \rightarrow E \$$
 * $E \rightarrow E + T$
 * $E \rightarrow T$
 * $T \rightarrow id$
 * $T \rightarrow num$
 
 We can remove the left recursion, by introducing a new nontermial E'
-* $S \rightarrow E \$ $
+* $S \rightarrow E \$$
 * $E \rightarrow T E'$
 * $E' \rightarrow + T E'$
 * $E' \rightarrow \epsilon$
