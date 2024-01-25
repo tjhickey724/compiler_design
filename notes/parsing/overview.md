@@ -20,6 +20,8 @@ The main kinds of grammars considered in compiler design are as follows (where $
 * LALR(l) - lookahead shift-reduce parsers
   most commonly used LR parser (efficient in time and space)
 
+the [javacc compiler generator](./javacc.md) generates a lexical analyzer and an LL(1) recursive descent parser from annotated specifications.
+
 There are parsers for general context free grammars, e.g. [Earley's parser](https://en.wikipedia.org/wiki/Earley_parser).
 These can be useful for parsing Natural Language, but are too inefficient (time complexity of $O(n^3)$) to be useful for programming languages.
 
