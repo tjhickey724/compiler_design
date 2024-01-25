@@ -54,6 +54,8 @@ and here is a parser/interpreter for evaluating arithmetic expressions using jav
 
 [parse and evaluate](https://gist.github.com/jac18281828/2435b575b699684a4ee36201af472d04)
 
+[cal.jj](./cal.jj)
+
 Run this as
 ```
 % java -classpath javacc.jar javacc Calculator.jj
