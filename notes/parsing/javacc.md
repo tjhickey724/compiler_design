@@ -12,6 +12,7 @@ Here is a link to a Lexical Analyzer for a simple language for arithmetic expres
 
 [arith expr lexical analyzer](https://web.cs.wpi.edu/~kal/courses/cs4533/JAVACC/JavaccScanner.htm)
 
+[cal.jj](./cal.jj)
 
 ## Running javacc
 To run these examples, you need to visit [the javacc site](https://javacc.github.io/javacc/) and download the javacc.jar file.
@@ -54,7 +55,7 @@ and here is a parser/interpreter for evaluating arithmetic expressions using jav
 
 [parse and evaluate](https://gist.github.com/jac18281828/2435b575b699684a4ee36201af472d04)
 
-[cal.jj](./cal.jj)
+
 
 Run this as
 ```
