@@ -1,0 +1,69 @@
+/*
+ * This is cal.jj file.
+ */
+
+options {
+  IGNORE_CASE = false;
+}
+
+PARSER_BEGIN(cal)
+
+import java.io.*;
+
+public class cal {
+
+  public static void main(String[] args) throws FileNotFoundException
+  {
+    if ( args.length < 1 ) {
+       System.out.println("Please pass in the filename for a parameter.");
+       System.exit(1);
+    }
+
+    SimpleCharStream stream = new SimpleCharStream(
+                                  new FileInputStream(args[0]),0,0);
+    Token temp_token = null;
+
+    calTokenManager TkMgr = new calTokenManager(stream);
+
+    do {
+        temp_token = TkMgr.getNextToken();
+
+        switch(temp_token.kind) {
+
+         case LPAREN:    System.out.println("LPAREN:    " + temp_token.image);
+           break;
+         case RPAREN:    System.out.println("RPAREN:    " + temp_token.image);
+           break;
+         case ADD_OP:    System.out.println("ADD_OP:    " + temp_token.image);
+           break;
+         case MULT_OP:   System.out.println("MULT_OP:   " + temp_token.image);
+           break;
+         case NUMBER:    System.out.println("NUMBER:    " + temp_token.image);
+           break;
+         default:
+           if ( temp_token.kind != EOF )
+             System.out.println("OTHER: " + temp_token.image);
+           break;
+        }
+    } while (temp_token.kind != EOF);
+  }
+}
+
+PARSER_END(cal)
+
+SKIP: /* Whitespace */
+{
+  "\t"
+| "\n"
+| "\r"
+| " "
+}
+
+TOKEN:
+{
+   <LPAREN:    "(" >
+|  <RPAREN:    ")" >
+|  <ADD_OP:    "+" | "-" >
+|  <MULT_OP:   "*" | "/" >
+|  <NUMBER:    (["0"-"9"])+ > 
+}
