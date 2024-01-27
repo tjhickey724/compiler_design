@@ -101,6 +101,9 @@ Let's draw the Abstract Syntax Tree for the following valid Java expression (usi
 ``` java
 e || e || e && e && f + f * d . d . c * f + f == f == e
 ```
+and lets create a CFG for that will parse this expression with the correct associativity!
+
+Then we'll convert into a LL(1) compatible form.
 
 
 
