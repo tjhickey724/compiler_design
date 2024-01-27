@@ -96,6 +96,14 @@ To parse infix notation we can use an LR approach, but we resolve conflicts usin
 We can also change the grammar so as to enforce the precedence and associativity rules, and use a standard LL or LR parser approach. This is
 what is usually done.
 
+Let's draw the Abstract Syntax Tree for the following valid Java expression (using the [Java precedence values](https://introcs.cs.princeton.edu/java/11precedence/)
+
+``` java
+e || e || e && e && f + f * d . d . c * f + f == f == e
+```
+
+
+
 
 
 
