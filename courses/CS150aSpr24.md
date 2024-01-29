@@ -24,7 +24,10 @@ The textbook we will use is
     * write summaries of both and a question for MLA HW
 * L05: Mon 1/22/2024 [Intro to Parsing](../notes/parsing/overview.md)
 * L06: Wed 1/24/2024 [Intro to Parsing](../notes/parsing/overview.md)
-* L07: Thu 1/24/2024 
+* L07: Thu 1/24/2024 [Intro to Parsing](../notes/parsing/overview.md)
+
+## Week 4: 1/29/2024-2/2/2024 Parsing
+* L08: Thu 1/24/2024 [Intro to Parsing](../notes/parsing/overview.md) 
 
 
 
