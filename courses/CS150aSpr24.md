@@ -27,7 +27,8 @@ The textbook we will use is
 * L07: Thu 1/24/2024 [Intro to Parsing](../notes/parsing/overview.md)
 
 ## Week 4: 1/29/2024-2/2/2024 Parsing
-* L08: Mon 1/29/2024 [Intro to Parsing](../notes/parsing/overview.md) 
+* L08: Mon 1/29/2024 [Parsing Infix Notation](../notes/parsing/OperatorGrammars.md) then LR parsing in [Intro to Parsing](../notes/parsing/overview.md)
+
 
 
 
