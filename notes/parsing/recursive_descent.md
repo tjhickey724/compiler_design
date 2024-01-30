@@ -124,7 +124,7 @@ Once we have found the first and follow and nullable sets for each nonterminal, 
 The idea is to create a table, useRule, whose rows are the non-terminals and whose columns are the terminal.
 For each production $p$ which has the form $S\rightarrow \gamma $  for some (possibly empty) sequence $\gamma$ of terminals and non-terminals
 
-* for each $T$ in first[ $\gamma $] we add $p$ to row $S$ and column $T$ of the table,
+* for each $T$ in first[ $\gamma $ ] we add $p$ to row $S$ and column $T$ of the table,
 * if $\gamma$ is nullable, we add $p$ to row $S$ and column $T$ for each $T$ in follow[S]
 
 ```useRule[S,T]``` will be a set of productions that we can use to expand nonterminal S when the next token is T.
