@@ -94,7 +94,7 @@ To calculate first and follow we use a similar iterative process.
 * for each production $S\rightarrow X_1\ldots X_n$
   * if $X_1$ is a terminal, add it to ``first[S]``
   * if $X_1$ is a non-terminal, add ```first[X1]``` to ```first[S]```, as anything that can start X1 can also start S
-  * if $X_1\ldots X_j$ are nullable, then add first[$X_{j+1}$] to ```first[S]```, do this for each j from 1 to k
+  * if $X_1\ldots X_j$ are nullable, then add first[ $X_{j+1}$ ] to ```first[S]```, do this for each j from 1 to k
 
 Repeat these steps until there is no longer any change in ```first[s]``` for any s
 
