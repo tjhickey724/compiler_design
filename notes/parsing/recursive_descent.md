@@ -90,7 +90,7 @@ Continue iterating through these rules until there is no change in ```nullable``
 ### First[S]
 To calculate first and follow we use a similar iterative process.
 
-* set ```first[s]= \\{\\}$ for all S initially
+* set ```first[s]= {}``` for all S initially
 * for each production $S\rightarrow X_1\ldots X_n$
   * if $X_1$ is a terminal, add it to ``first[S]``
   * if $X_1$ is a non-terminal, add ```first[X1]``` to ```first[S]```, as anything that can start X1 can also start S
