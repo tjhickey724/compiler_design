@@ -110,7 +110,7 @@ We can easily generalize First to a sequence of terminals and nonterminals
 Set it to the empty set intially for each nonterminal S, then iterate the following steps until there is no change in any follow set
 
 * for each rule and each pair $i,j$ of positions in the rule,
-  * $S\rightarrow X_1\ldots X_i X_{i+1}\ldots X_{j-1} X_j \ldots X_k$
+  * $X\rightarrow X_1\ldots X_i X_{i+1}\ldots X_{j-1} X_j \ldots X_k$
   * if $X_{i+1}\ldots X_{k}$ are nullable, add follow[ $X$ ] to  follow[ $X_i$ ]
   * if $X_{i+1}\ldots X_{j-1}$ are nullable, add first[ $X_j$ ] to  follow[ $X_i$ ]
 
