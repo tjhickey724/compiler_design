@@ -2,20 +2,29 @@
 
 Let's work through an example of LL parsing for expressions.
 
-Consider the following grammar: G0
+Consider the following grammar: G0 which allows for arithmetic expressions of 
+integers, variables, object attributes and array elements
 ```
 1  S  -> E $
 2  E  -> E + T
 3  E  -> T
 4  T  -> T * F
 5  T  -> F
-6  F  -> v
-7  F  -> (E)
-8  F  -> v[E]
-9  F  -> F.v
+6  F  -> G.v       attribute access for objects
+7  F  -> G[E]      array indexing
+8  F  -> G
+9  G  -> (E)
+10 G  -> v         variable tokens
+11 G  -> n         integer tokens
 ```
-where v is the token symbol for identifiers,
-and rule 8 corresponds to array lookup and rule 9 to field access in an object.
+Some examples of strings that could be parsed in this language are:
+```
+node[(r+s+1)*3*t].value.dollars$
+car.info[constants.PRICE] + base + discount$
+pixel[2*row+1][col+5].red$
+```
+You could easily extend this to add other operators (-,/,%,...)
+Let's draw the parse tree for one of these...
 
 ## Removing Left Recursion and Left Factors
 The first step is to remove the left recursion. 
