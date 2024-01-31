@@ -68,4 +68,9 @@ Run this as
 3
 ```
 
-```
+## Conversion of Arithmetic Expressions to Reverse Polish Notation
+This javacc file parses arithmetic expressions but instead of evaluating them it prints them out in Reverse Polish Notation,
+i.e. as a postfix depth first traversal of the parse tree.
+
+[arithexpr.jj](./arithexpr.jj)
+
