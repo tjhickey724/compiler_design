@@ -10,12 +10,12 @@ integers, variables, object attributes and array elements
 3  E  -> T
 4  T  -> T * F
 5  T  -> F
-6  F  -> G.v       attribute access for objects
-7  F  -> G[E]      array indexing
+6  F  -> F.v       attribute access for objects
+7  F  -> F[E]      array indexing
 8  F  -> G
-9  G  -> (E)
-10 G  -> v         variable tokens
-11 G  -> n         integer tokens
+9  G  -> v         variable tokens
+10 G  -> (E)
+
 ```
 Some examples of strings that could be parsed in this language are:
 ```
