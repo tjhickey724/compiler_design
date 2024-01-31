@@ -28,6 +28,8 @@ The textbook we will use is
 
 ## Week 4: 1/29/2024-2/2/2024 Parsing
 * L08: Mon 1/29/2024 [Parsing Infix Notation](../notes/parsing/OperatorGrammars.md) then LR parsing in [Intro to Parsing](../notes/parsing/overview.md)
+* L09: Wed 1/31/2024 [Extended example of LL(1) parsing of expressions](../notes/parsing/expressionDemo.md)
+
 
 
 
