@@ -118,6 +118,20 @@ Continue iterating through these rules until there is no change in ```nullable``
 * why does this terminate?
 * why is it correct?
 
+### Exercise: 
+find nullable, first, follow for the LL(1) version of the simple expression language:
+```
+S  -> E$
+E  -> T E1
+E1 -> + T E1
+E1 -> epsilon
+T  -> F T1
+T1 -> * F T1
+T1 -> epsilon
+F  -> x
+F  -> (E)
+```
+
 ## LL(1) Predictive Parsers
 Once we have found the first and follow and nullable sets for each nonterminal, we can easily create a predictive parsers as we did in the LL(0) example above.
 
@@ -133,6 +147,9 @@ If this rule has any entries with more than one rule, then it is not LL(1) and c
 and look for the first $k$ symbols starting a production rather than the first symbol, and likewise construct a LL(k) table, but these are usually too large to be useful.
 
 One we have the useRule table built, we can parse any string just as in the LL(0) example above.
+
+### Exercise
+Create the predictive parser for the simple expression language above
 
 ## Example.
 Let's try the Grammar 3.12 example from the book ..
