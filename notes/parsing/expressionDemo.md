@@ -54,14 +54,14 @@ So we need to compute the first and follow sets next by iterating through each r
 
 Applying that to our grammar we get:
 ```
-first(S) += first(E)
-first(E) += first(T)
-first(E1) += {'+'}
-first(T) += first(F)
-first(T1) += {'*'}
-first(F) += first(G)
-first(F1) += {'.', '['}
-first(G) += {'v', '('}
+first(S) += first(E)     from S -> E$
+first(E) += first(T)     from E -> T E1
+first(E1) += {'+'}       from T1 -> + T E1
+first(T) += first(F)     from T -> F T1
+first(T1) += {'*'}       from T1 -> * F T1
+first(F) += first(G)     from F -> G F1
+first(F1) += {'.', '['}  from F1 -> .v F1 and F1 -> [E] F1
+first(G) += {'v', '('}   from G -> v and G -> (E)
 ```
 We keep iterating this process until there is no change in the first sets..
 It is more efficient to start at the last production and move up!
