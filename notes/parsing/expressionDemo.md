@@ -101,29 +101,18 @@ We only need to worry about the non-terminals that have more than one rules E1,T
 as there is no choice for the others S,E,T,F
 
 ```
-E1 -> + T E1      if t = +
-E1 -> epsilon     if t in $ ] )
-T1 -> * F T1      if t = *
-T1 -> epsilon     if t in + $ ] )
-F1 -> . v F1      if t = '.'
+E1 -> + T E1      if t = +          i.e. t in first (+ T E1)
+E1 -> epsilon     if t in $ ] )     i.e. t in follow E1
+T1 -> * F T1      if t = *          i.e. t in first (* F T1)
+T1 -> epsilon     if t in + $ ] )   i.e. t in follow T1
+F1 -> . v F1      if t = '.'        etc.
 F1 -> [E] F1      if t = '['
 F1 -> epsilon     if t in * + $ ] )
 G  -> v           if t = v
 G  -> (E)         if t = (
 ```
-and this gives us our LL(1) parsing table for G1
-
-The next step is to notice that rules 6 and 8 have a common left factor (the terminal v)
-So we either need to use left factoring, or use a local lookahead of 2 provided follow(F) does not contain "["
-
-## Calculate nullable, first, and follow for the non-terminals in G1
-We apply the algorithms in the book to calculate the set of nullable non-terminals
-and the terminal sets first and follow for each non-terminal
-
-## Generate the parsing table
-Next we create a parsing table which states, for each nonterminal to be expanded in a leftmost derivation
-and for each terminal that is the next unparsed element of the string, which rules we could use to expand that non-terminal
-If the parsing table contains no duplicate entries in any cell, then the language in LL(1).
+and this gives us our LL(1) parsing table for G1 and there are no conflicts so the grammar is LL(1)
+and this table can be used to parse the language of expressions.
 
 ## Next up
 The next thing we will do is show how to write javacc programs to parse LL(1) grammars, including this one.
