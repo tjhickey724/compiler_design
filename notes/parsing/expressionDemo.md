@@ -56,7 +56,7 @@ Applying that to our grammar we get:
 ```
 first(S) += first(E)     from S -> E$
 first(E) += first(T)     from E -> T E1
-first(E1) += {'+'}       from T1 -> + T E1
+first(E1) += {'+'}       from E1 -> + T E1
 first(T) += first(F)     from T -> F T1
 first(T1) += {'*'}       from T1 -> * F T1
 first(F) += first(G)     from F -> G F1
