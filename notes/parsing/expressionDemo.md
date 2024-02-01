@@ -52,6 +52,17 @@ So we need to compute the first and follow sets next by iterating through each r
 * if A is not nullable the go to the next rule
 * if A is nullable, add first(B) to first(N), then look at the next non-terminal B, and continue
 
+Applying that to our grammar we get:
+```
+first(S) += first(E)
+first(E) += first(T)
+first(E1) += {'+'}
+first(T) += first(F)
+first(T1) += {'*'}
+first(F) += first(G)
+first(F1) += {'.', '['}
+first(G) += {'v', '('}
+```
 We keep iterating this process until there is no change in the first sets..
 It is more efficient to start at the last production and move up!
 ```
@@ -59,11 +70,11 @@ It is more efficient to start at the last production and move up!
 S              v (
 E              v (
 E1  +
-T               v ( + 
+T              v (  
 T1  *
-F               v (
+F              v (
 F1  . [
-G    v (
+G   v (
 ```
 Next we compute the follow sets by iterating through each rule N -> A ... X Y U ... Z and applying the following algorithm
 * add first(Y) to follow(X)  as anything that begins a Y can follow an X
@@ -72,13 +83,13 @@ Next we compute the follow sets by iterating through each rule N -> A ... X Y U 
 * if X is the last element in the rule or if Y U ... Z are all nullable, add follow(N) to follow(X)
 
 So for us the rules are
-* follow(E) += { '$', ']', ')' }
-* follow(E1) += follow(E)
-* follow(T) += first(E1) + follow(E)
-* follow(T1) += follow(T)
-* follow(F) += first(T1) + follow(T)
-* follow(F1) += follow(F)
-* follow(G) += first(F1) + follow(F)
+* follow(E) += { '$', ']', ')' }     from rules 1,10,13
+* follow(E1) += follow(E)            from E -> T E1
+* follow(T) += first(E1) + follow(E) from E1 -> + T E1 and  E -> T E1 with E1 nullable
+* follow(T1) += follow(T)            from T -> F T1
+* follow(F) += first(T1) + follow(T) from T1 -> * F T1  and T -> F T1 with T1 nullable
+* follow(F1) += follow(F)            from F -> G F1
+* follow(G) += first(F1) + follow(F) from F -> G F1 with F1 nullable
 
 So let's try that with our grammar
 ```
@@ -86,7 +97,7 @@ So let's try that with our grammar
 S   v (       ACCEPT
 E   v (       $ ] )
 E1  +         $ ] )
-T   * v (     +  $ ] )
+T   v (       +  $ ] )
 T1  *         +  $ ] )
 F   v (       * + $ ] )
 F1  . [       * + $ ] )
