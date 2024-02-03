@@ -84,7 +84,7 @@ Then we apply the following rules to process state[n]
 Keep iterating these two operations until there is no more change of state[n]
 
 * Shift: look at the next character vn and create a state[n+1] by finding all rules from state[n] of the form $(A\rightarrow \alpha . vn \beta,k)$ and
-  adding $$(A\rightarrow \alpha  vn . \beta,k)$ to state[n+1], then go back to the prediction and reduction steps to complete state[n+1]
+  adding $(A\rightarrow \alpha  vn . \beta,k)$ to state[n+1], then go back to the prediction and reduction steps to complete state[n+1]
 
 When the end of the string is reached, if we have the production $P\rightarrow S \$.$ in the last state, then the string is in the language, otherwise it is not!
            
