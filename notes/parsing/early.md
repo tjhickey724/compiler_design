@@ -26,11 +26,14 @@ and let try to get a derivation for abc. There are two derivations
 1  P          -> rule 1  P -> S $         P -> . S $
 2  S $        -> rule 2  S -> AB C        P -> . S $  S -> . AB C
 3  AB C $     -> rule 4  AB -> a b        P -> . S $  S -> . AB C   AB -> .a b
-4 |a b C $    -> scan a and b,            P -> . S $  S -> AB . C   AB -> a b.
-5  a b| C $   -> rule 10 C -> c       P -> . S $  S -> AB . C   C -> . c C
-6  a b|c  $  -> scan c
-6  a b c | $  -> rule 11 C -> epsilon
-7  a b c $
+4 |a b C $    -> scan a and b,            P -> . S $  S -> . AB C   AB -> a b.  
+5  a b|C $    -> recognize an AB          P -> . S $  S -> AB . C   
+5  a b|C $    -> rule 10 C -> c           P -> . S $  S -> AB . C   C -> . c 
+6  a b|c  $   -> scan c                   P -> . S $  S -> AB . C   C -> c .
+6  a b c | $  -> recognize a C            P -> . S $  S -> AB C . 
+7  a b c | $  -> recognize an S           P -> S . $
+8  a b c $ |  -> scan $                   P -> S $ .
+9  a b c $ |  -> recognize P, done!       
 ```
 or
 ```
@@ -48,6 +51,29 @@ The Early model is to try to run all of the possible parses at once.
 So for each character in the input, starting from position 0, we keep track of all of the rules we could have used so far in the derivation
 and we keep track of "where" in the rule we are. For example at step 4 in both derivations, we have derived a string starting with "a"
 but in the first derivation the next non-terminal is AB, where as in the second derivation the next nonterminal is A.
+```
+character state  LR states
+            0    P -> . S $   S -> .AB C  S -> .A BC  AB -> .a AB b  AB -> .ab  A -> .a A  A -> .a 
+a
+            1    AB -> a . AB b/0    AB -> a . b/0    A -> a . A/0   A -> a ./0      (find all LR items starting with an 'a', note we may have recognized an A, from state 0
+                 AB -> . a AB b/1    AB -> . a b/1     (we can now look for another AB  using the rules AB -> a . AB b /0)
+                 S -> A . BC  (this is because we had A -> a/0 and in state 0 we were trying to parse an A with S -> .A BC, which we have parsed!
+                 BC -> . b BC c/1    BC -> .b c /1
+b
+            2    AB -> a b./0     BC -> b . BC c/1    BC -> b . c /1    
+                 BC -> . b BC c/2   BC -> .b c/2
+                 S -> AB . C /0  (since we have recognized an AB with AB -> a b./0 and that comes from state 0 where we were looking for an AB in S -> .AB C)
+                 C -> . c C/2    C -> .c /2
+c
+            3    BC -> b c./1    C-> c. C/2   C -> c./2
+                 S -> AB C ./0   (as we found C->c./2, and in state 2 we had S -> AB . C/0, so we found that C and can advance it)
+                 S -> A BC ./0   (as we have found BC -> b c./1, and in state 1 we were looking for S -> A . BC/0, which we found)
+                 P -> S.$        (as we have found an S that we were looking for in state 0, as P -> .S $, so we advance the dot)
+$
+            4    P -> S $ .  and we have recognized the start symbol P so the parse is over!
+```
+   
+           
 
 
 
