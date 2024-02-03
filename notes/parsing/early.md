@@ -72,7 +72,21 @@ c
 $
             4    P -> S $ .  and we have recognized the start symbol P so the parse is over!
 ```
-   
+
+## Early's algorithm
+We start with the start symbol ```P -> . S$``` with the end of file character attached, this is state0
+and we want to parse  string v = v0 v1 v2 .... vm
+Then we apply the following rules to process state[n]
+* Prediction: for every rule $(A \rightarrow \alpha . B \beta,k)$ in state[n], add the rules $(B\rightarrow . \gamma,n)$ to state[n] for each $B\rightarrow \gamma$ in the grammar
+* Reduction: for every rule $(A \rightarrow \alpha .,k)$ in state[n], go to state[k] and find all rules of the form $(C\rightarrow \beta . A \gamma,j)$ and add
+  the rules $(C\rightarrow \beta A . \gamma,j)$ to state[n]
+
+Keep iterating these two operations until there is no more change of state[n]
+
+* Shift: look at the next character vn and create a state[n+1] by finding all rules from state[n] of the form $(A\rightarrow \alpha . vn \beta,k)$ and
+  adding $$(A\rightarrow \alpha  vn . \beta,k)$ to state[n+1], then go back to the prediction and reduction steps to complete state[n+1]
+
+When the end of the string is reached, if we have the production $P\rightarrow S \$.$ in the last state, then the string is in the language, otherwise it is not!
            
 
 
