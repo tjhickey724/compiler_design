@@ -112,6 +112,7 @@ E -> v
 ```
 and try to parse "v + v + v" which has two parses...
 ```
+closure(S-> . E $, 0) =>
 N0 =
 S -> . E $     0
 E -> . E + E   0
@@ -122,7 +123,7 @@ and the other two items we get by prediction.
 
 Next we see the "v" so we can shift it 
 ```
-Shift(v) =>
+Reduce(Shift(v)) =>
 N1 =
 E -> v .       0
 E -> E . + E   0
@@ -133,7 +134,7 @@ and the next two come by reducing and finding LR items in N0 that expect an E
 Next we see a "+ so we can shift the second rule, 
 If we had seen a "$" we could have parsed "v $" into an S, but we saw a "+" so
 ```
-Shift(+) =>
+Closure(Shift(+)) =>
 N2 =
 E -> E + . E  0
 E -> . E + E  2
