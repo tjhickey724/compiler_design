@@ -33,15 +33,69 @@ We will also attach to each item $A\rightarrow \alpha . \beta$ the index of the 
 
 ```
 N0 =
-S -> . E $
-E -> . T
-T -> . T + F
-T -> . F
-F -> . ( E )
+S -> . E $     0
+E -> . T       0
+T -> . T + F   0
+T -> . F       0
+F -> . ( E )   0
 ```
 These correspond to the first five steps of a top-down leftmost derivation of the string
 ``` 
 S -> E$ -> T$ -> T+F$ -> F+F$ => (E)+F$
 ```
+After we see the left parenthesis '(' we go to state N1 which is the set of LR-items active at the beginning of the parse
+```
+N1 =
+F -> ( . E )  0
+E -> . E + T  1
+E -> . T      1
+T -> . F      1
+F -> . V      1
+```
+After seeing the v we can reduce v to F and to T and to E and get
+```
+N2 =
+F -> v .      1
+T -> F .      1
+E -> T .      1
+E -> E . + T  1
+```
+Next we see the + and advance to state N3
+```
+N3 =
+E -> E + . T  1
+T -> . F      3
+F -> . v      3
+```
+after we see the v at position 3 we go to N4
+```
+E -> E + T .  1
+E -> E . + T  1
+```
+Observe that the first item ``` E -> E + T .  1```
+indicates that we were looking for a E at node 1 in the rule ```E -> . E + T  1```
+and since we've found that E we can advance the dot over the E to get
+```E-> E . + T  1```
+
+Try to calculate all of the rest of these node sets...
+You can do it out of order, for example
+```
+N8 =
+T -> T * . F  0
+F -> . ( E )  8
+```
+The idea behind LR parsing is to generate LR sets by using two operations
+* shift - when we move from N(i) to N(i+1) by scanning a terminal $t$ we
+  find each LR item in N(i) which was expecting a "t", i.e. of the form
+* $A\rightarrow \alpha . t \beta,   j$
+* and advance the dot past t and put this new rule in N(i+1)
+* $A\rightarrow \alpha t . \beta,   j$
+
+
+
+
+
+
+
 
 
