@@ -22,5 +22,26 @@ F -> v
 F -> (E)
 ```
 Below is a parse tree for the string "(v+v+v)*(v+v)$"
-![LRParseTree](./LRParseTree.jpg)
+<img src="./LRParseTree.jpg" alt="LR Parse Tree" width="50%">
+
+At each position of the string (from 0 before the first character to 13 after the last character)
+we can associate a set of LR items for that parse tree. We will show how to generate these sets of LR items
+even when we've only seen the a prefix of the string!
+
+We will let $N_i$ be the set of LR(0)-items at position i.
+We will also attach to each item $A\rightarrow \alpha . \beta$ the index of the string at which $\alpha$ starts.
+
+```
+N0 =
+S -> . E $
+E -> . T
+T -> . T + F
+T -> . F
+F -> . ( E )
+```
+These correspond to the first five steps of a top-down leftmost derivation of the string
+``` 
+S -> E$ -> T$ -> T+F$ -> F+F$ => (E)+F$
+```
+
 
