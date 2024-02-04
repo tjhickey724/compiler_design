@@ -13,7 +13,7 @@ Either or both of $\alpha$ and $\beta$ can be empty (i.e. $\epsilon$)
 
 Consider the following left-recursive unambiguous grammar for arithmetic expressions
 ```
-S -> E \$
+S -> E $
 E -> E + T
 E -> T
 T -> T * F
