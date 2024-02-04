@@ -21,3 +21,6 @@ T -> F
 F -> v
 F -> (E)
 ```
+Below is a parse tree for the string "(v+v+v)*(v+v)$"
+![LRParseTree](./LRParseTree.jpg)
+
