@@ -56,6 +56,8 @@ parse
 The challenge her is knowing when to shift and when to reduce. 
 In step 11 though we had two choices... we could have reduced with E->T  or with E->E+T
 
+[Here is a Python notebook](./LR0.ipynb)  with a parser for this language.
+
 
 
 
