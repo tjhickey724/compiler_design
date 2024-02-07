@@ -57,6 +57,9 @@ In step 11 though we had two choices...
 * we could have reduced with E->T  or
 * we could have reduced with E->E+T
 
+The Shifts and Reduces correspond to a depth-first postfix traversal of the parse tree, where we Shift
+over terminals and reduce over non-terminals.
+
 We will show how to create a DFA that scans the stack and determines whether to shift or to reduce.
 For LR(0) languages, such a DFA will not have any conflicts..
 
