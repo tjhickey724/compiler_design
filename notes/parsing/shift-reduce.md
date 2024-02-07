@@ -53,7 +53,12 @@ parse
 17 S0
 ```
 The challenge her is knowing when to shift and when to reduce. 
-In step 11 though we had two choices... we could have reduced with E->T  or with E->E+T
+In step 11 though we had two choices... 
+* we could have reduced with E->T  or
+* we could have reduced with E->E+T
+
+We will show how to create a DFA that scans the stack and determines whether to shift or to reduce.
+For LR(0) languages, such a DFA will not have any conflicts..
 
 [Here is a Python notebook](./LR0.ipynb)  with a parser for this language.
 
