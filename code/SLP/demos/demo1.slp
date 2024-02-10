@@ -1,0 +1,6 @@
+a=355;
+b=113;
+c=a/b;
+d=1;
+d=(d+c/d)/2;
+System.out.println(d);
