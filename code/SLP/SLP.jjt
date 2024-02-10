@@ -1,0 +1,190 @@
+/*
+ * This is SLP.jj file.
+ * It will build a tree for straightline programs that we can traverse using the Visitor pattern!
+ */
+
+options {
+  MULTI=true;
+  VISITOR=true;
+  NODE_DEFAULT_VOID=true;
+  IGNORE_CASE=false;
+}
+
+PARSER_BEGIN(SLP)
+public class SLP {
+
+  /** Main entry point. */
+  public static void main(String args[]) {
+    System.out.println("Reading from standard input...");
+    SLP t = new SLP(System.in);
+    try {
+      ASTStart n = t.Start();
+      SLPVisitor v = new SLPDumpVisitor();
+      n.jjtAccept(v, null);
+      System.out.println("Thank you.");
+    } catch (Exception e) {
+      System.out.println("Oops.");
+      System.out.println(e.getMessage());
+      e.printStackTrace();
+    }
+  }
+}
+PARSER_END(SLP)
+
+SKIP: /* Whitespace */
+{
+  "\t"
+| "\n"
+| "\r"
+| " "
+}
+
+TOKEN:
+{
+   <PUBLIC:     "public">
+|  <CLASS:      "class">
+|  <STATIC:     "static">
+|  <VOID:       "void">
+|  <MAIN:       "main">
+|  <STRING:     "String">
+|  <EXTENDS:    "extends">
+|  <RETURN:     "return">
+|  <INT:        "int">
+|  <BOOLEAN:    "boolean">
+|  <TRUE:       "true">
+|  <FALSE:      "false">
+|  <IF:         "if">
+|  <ELSE:       "else">
+|  <WHILE:      "while">
+|  <PRINTLN:    "System.out.println">
+|  <LENGTH:     "length">
+|  <THIS:       "this">
+|  <NEW:        "new">
+|  <BANG:       "!">
+|  <COLON:      ":">
+|  <SEMICOLON:  ";">
+|  <COMMA:      ",">
+|  <DOT:        ".">
+|  <EQUALS:     "=">
+|  <AND:        "&&">
+|  <LT:         "<">
+|  <GT:         ">">
+|   <LPAREN:    "(" >
+|   <RPAREN:    ")" >
+|   <LBRACKET:    "[" >
+|   <RBRACKET:    "]" >
+|   <LCURLY:    "{" >
+|   <RCURLY:    "}" >
+|  <ADD_OP:    "+" | "-" >
+|  <MULT_OP:   "*" | "/" >
+|  <NUMBER:    (["0"-"9"])+ >
+|  <ID:        (["a"-"z"]|"_"|["A"-"Z"])(["a"-"z"]|"_"|["A"-"Z"]|["0"-"9"])* >
+}
+
+/* Program Syntax */
+
+ASTStart Start() #Start:
+{}
+{
+  Statements()
+  <EOF>
+  { return jjtThis; }
+}
+
+void Statements() #Statements :
+{}
+{
+   Statement() Statements()
+  |
+  {}
+}
+
+void Statement() :
+{}
+{
+  <PRINTLN> <LPAREN> Exp() <RPAREN> <SEMICOLON> #Println
+  |
+  <ID> <EQUALS> Exp() <SEMICOLON> #VarAssign
+}
+
+void Exp() #Exp:
+{}
+{ 
+  Exp4() Exp4a()
+
+}
+
+void Exp4a():
+{}
+{
+  <AND> Exp4() Exp4a()
+  |
+  {}
+}
+
+void Exp4() #Exp4:
+{}
+{ 
+  Exp9() Exp9a()
+
+}
+
+void Exp9a():
+{}
+{
+  <LT> Exp9() Exp9a()
+  |
+  {}
+}
+
+
+void Exp9() #Exp9:
+{}
+{ 
+  Exp11() Exp11a()
+
+}
+
+void Exp11a():
+{}
+{
+  <ADD_OP> Exp11() Exp11a()
+  |
+  {}
+}
+
+void Exp11() #Exp11:
+{}
+{ 
+  Exp12() Exp12a()
+
+}
+
+void Exp12a():
+{}
+{
+  <MULT_OP> Exp12() Exp12a()
+  |
+  {}
+}
+
+void Exp12() :
+{}
+{ 
+  Exp16() 
+
+}
+
+void Exp16() #Exp16:
+{}
+{
+  <NUMBER>
+  |
+  <ID>
+  |
+  <LPAREN> Exp() <RPAREN>
+}
+
+
+
+
