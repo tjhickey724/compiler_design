@@ -125,7 +125,23 @@
     --indent;
     return data;
   }
-   public Object visit(ASTExp16 node, Object data) {
+
+  public Object visit(ASTExp16 node, Object data) {
+    System.out.println(indentString() + node);
+    ++indent;
+    data = node.childrenAccept(this, data);
+    --indent;
+    return data;
+  }
+
+   public Object visit(ASTNumber node, Object data) {
+    System.out.println(indentString() + node);
+    ++indent;
+    data = node.childrenAccept(this, data);
+    --indent;
+    return data;
+  }
+  public Object visit(ASTVariable node, Object data) {
     System.out.println(indentString() + node);
     ++indent;
     data = node.childrenAccept(this, data);

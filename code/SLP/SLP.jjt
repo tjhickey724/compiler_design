@@ -175,14 +175,14 @@ void Exp12() :
 
 }
 
-void Exp16() #Exp16:
+void Exp16() #Exp16: 
 {}
 {
-  <NUMBER>
+  <NUMBER> #Number
   |
-  <ID>
+  <ID>   #Variable
   |
-  <LPAREN> Exp() <RPAREN>
+  <LPAREN> Exp() <RPAREN> 
 }
 
 
