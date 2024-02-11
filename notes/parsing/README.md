@@ -17,8 +17,9 @@ These are [recursive descent parsers](./recursive_descent.md) which generates a 
 
 The [javacc compiler generator](./javacc.md) generates a lexical analyzer and an LL(1) recursive descent parser from annotated specifications.
 
-Most programming languages do not have natural LL(1) grammars, so we need to remove left recursion and left factoring. Here is an example of how to that with 
-[a grammar for arithmetic java expression](./expressionDemo.md).
+Most programming languages do not have natural LL(1) grammars, so we need to remove left recursion and left factoring. 
+[Here](./expressionDemo.md) is an example of how to that with 
+a grammar for arithmetic java expression.
 
 ##  LR(k) parsers
 These are [shift-reduce parsers](./shift-reduce.md) that generate a parse tree from the bottom up, and left to right. They use the grammar rules as to reduce a sequence of terminals (and later, terminala and non-terminals) into a nonterminal. That is, given a rules $A\rightarrow \alpha$ if $\alpha$ is on the top of the parsing stack, then it gets repaced by (i.e. reduced to) $A$.
