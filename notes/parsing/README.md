@@ -46,6 +46,40 @@ There are parsers for general context free grammars, that generate sets of LR(0)
 These can be useful for parsing Natural Language, but are too inefficient (time complexity of $O(n^3)$) to be useful for programming languages.
 Here is an example of using the Earley algorithm for an LR(0) grammar to show the ideas: [LR Parsing]./(LRparsing.md)
 
+## Implementing interpreters and compilers with javacc
+It is possible to use javacc to implement interpreters and compilers for simple languages,
+but this approach doesn't scale as the code gets very complex very quickly.  Still here is an example
+of a javacc program for interpreting arithmetic expressions:
+* [Calculator.jj](https://gist.github.com/jac18281828/2435b575b699684a4ee36201af472d04)
+
+This examples shows how to define the javacc functions corresponding to non-terminals so that they return a value
+(in this case the value of the subexpression in the tree whose root is that non-terminal). Here is an example of the
+rule for expressions (which are are a term followed by one or more sums or differences of terms:
+```
+double expr():
+{
+    double a;
+    double b;
+}
+{
+    a=term()
+    (
+        "+" b=expr()    { a += b; }
+    |   "-" b=expr()    { a -= b; }
+    )*
+                        { return a; }
+}
+```
+This uses the javacc feature where the right hand side of a rule can be a regular expression with "|" and "*"
+in addition to tokens (e.g. "+", "-") and nonterminals (e.g. term() and expre()). This code gets the value of the
+first term and stores it in the variable "a", then for each "+T" or "-T" that follows it add or subtracts the term
+value with "a", finally returning "a".
+
+We could use this same technique to generate a parse tree for the expression, but we will use the jjTree package
+instead, which automatically generates a tree implementing the Visitor Pattern 
+that we'll talk about in the "Abstract Syntax Trees" section.
+
+
 
   
 
