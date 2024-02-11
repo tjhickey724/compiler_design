@@ -22,7 +22,8 @@ These are [shift-reduce parsers](./shift-reduce.md) that generate a parse tree f
 
 ### LR(0) grammars
 The challenge with shift-reduce parsing is determining which rule to apply next. The LR parsers solve this by generating a Deterministic Finite Automata, that scans the parsing stack and determines whether to shift or to reduce. This DFA is generated from LR(0) items using the GoTo and Predict operations. Sometimes the grammar has the property that DFA generated this way always terminates in states with either a shift operation or a single reduce operation.
-These are the LR(0) grammars. Here is an example showing how to generate an LR(0) parser [shift-reduce](./shift-reduce.md).
+These are the LR(0) grammars.  
+Here is an example showing how to generate an LR(0) parser [shift-reduce](./shift-reduce.md).
 
 ### SLR - simple LR parsers,
 If a grammar is not LR(0), there might be two or more rules that could be used to reduce the top of the stack, say $A_i\rightarrow\alpha_i$ for $i=1,\ldots,r$.  If we used the ith rule to reduce the top of the stack, then the next terminal in the string would follow $A_i$ in the derivation, and so it would be in the follow set for $A_i$.  If the follow sets for all such rules are disjoint, then the grammar is said to be SLR, and we can slightly modify the LR(0) parser to look ahead to the next character to decide which rule to use. 
@@ -39,6 +40,7 @@ annotated grammar file and automatically generates a concrete parse tree for the
 ### Earley parsers
 There are parsers for general context free grammars, that generate sets of LR(0) items  e.g. [Earley's parser](https://en.wikipedia.org/wiki/Earley_parser).
 These can be useful for parsing Natural Language, but are too inefficient (time complexity of $O(n^3)$) to be useful for programming languages.
+Here is an example of using the Earley algorithm for an LR(0) grammar to show the ideas: [LR Parsing]./(LRparsing.md)
 
 
   
