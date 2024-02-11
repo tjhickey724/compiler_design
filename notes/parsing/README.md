@@ -1,4 +1,4 @@
-# Overview of Parsing
+s# Overview of Parsing
 
 Programming Languages are defined, syntactically by a formal grammar, called a [Context Free Grammar](./CFG.md).
 
@@ -13,11 +13,12 @@ If the grammar satisfies certain syntactic properties, we can easily construct a
 The main kinds of grammars considered in compiler design are LL(k) and LR(k) grammars (where $k\ge 0$ is a integer specifying the "lookahead" needed by the parser).
 
 ## LL(k) parsers
-Thes are [recursive descent parsers](./recursive_descent.md)  
-  which generates a left-most derivation using a lookahead of k characters to decide which rule to use. They rely on a parsing table to lookup for the leftmost non-terminal and the currently unmatched terminal, which rule to use to expand the nonterminal. Generating the parsing table requires finding the nullable non-terminals and the first and follow sets of terminals for each non-terminal. The LL parsers generate a parse tree from the top down and left to right.
+These are [recursive descent parsers](./recursive_descent.md) which generates a left-most derivation using a lookahead of k characters to decide which rule to use. They rely on a parsing table to lookup for the leftmost non-terminal and the currently unmatched terminal, which rule to use to expand the nonterminal. Generating the parsing table requires finding the nullable non-terminals and the first and follow sets of terminals for each non-terminal. The LL parsers generate a parse tree from the top down and left to right.
 
-##  [LR(k) shift-reduce parsers](./shift-reduce.md) 
-These parsers generate a parse tree from the bottom up, and left to right. They use the grammar rules as to reduce a sequence of terminals (and later, terminala and non-terminals) into a nonterminal. That is, given a rules $A\rightarrow \alpha$ if $\alpha$ is on the top of the parsing stack, then it gets repaced by (i.e. reduced to) $A$.
+The [javacc compiler generator](./javacc.md) generates a lexical analyzer and an LL(1) recursive descent parser from annotated specifications.
+
+##  LR(k) parsers
+These are [shift-reduce parsers](./shift-reduce.md) that generate a parse tree from the bottom up, and left to right. They use the grammar rules as to reduce a sequence of terminals (and later, terminala and non-terminals) into a nonterminal. That is, given a rules $A\rightarrow \alpha$ if $\alpha$ is on the top of the parsing stack, then it gets repaced by (i.e. reduced to) $A$.
 
 ### LR(0) grammars
 The challenge with shift-reduce parsing is determining which rule to apply next. The LR parsers solve this by generating a Deterministic Finite Automata, that scans the parsing stack and determines whether to shift or to reduce. This DFA is generated from LR(0) items using the GoTo and Predict operations. Sometimes the grammar has the property that DFA generated this way always terminates in states with either a shift operation or a single reduce operation.
@@ -27,17 +28,18 @@ These are the LR(0) grammars. Here is an example showing how to generate an LR(0
 If a grammar is not LR(0), there might be two or more rules that could be used to reduce the top of the stack, say $A_i\rightarrow\alpha_i$ for $i=1,\ldots,r$.  If we used the ith rule to reduce the top of the stack, then the next terminal in the string would follow $A_i$ in the derivation, and so it would be in the follow set for $A_i$.  If the follow sets for all such rules are disjoint, then the grammar is said to be SLR, and we can slightly modify the LR(0) parser to look ahead to the next character to decide which rule to use. 
 
 ### LR(1) parsers
-If a grammar is not SLR, then 
-* LALR(l) - lookahead shift-reduce parsers
-  most commonly used LR parser (efficient in time and space)
+If a grammar is not SLR, then we can modify the LR(0) items to include a lookahead for each rule!
+This method generate a more specific notion of "follow" sets which determines which terminal can follow a non-terminal at a particular node of the parser DFA. The challenge with these parsers is that the DFA can be **much** larger than the SLR DFA.
 
-the [javacc compiler generator](./javacc.md) generates a lexical analyzer and an LL(1) recursive descent parser from annotated specifications.
+### LALR(l) parsers
+There are lookahead shift-reduce parsers like ther LR(1) parsers but they generate smaller tables by merging LR(1) states that differ only in the lookaheads for each rule. By combining the lookaheads for the same rules, they might generate shift-reduce or reduce-reduce conflicts, but in practice most grammars for programming languages are LALR(1).
+The [sablecc](https://sablecc.org/) parser generator generates an LALR(1) parser from an
+annotated grammar file and automatically generates a concrete parse tree for the grammar.
 
-There are parsers for general context free grammars, e.g. [Earley's parser](https://en.wikipedia.org/wiki/Earley_parser).
+### Earley parsers
+There are parsers for general context free grammars, that generate sets of LR(0) items  e.g. [Earley's parser](https://en.wikipedia.org/wiki/Earley_parser).
 These can be useful for parsing Natural Language, but are too inefficient (time complexity of $O(n^3)$) to be useful for programming languages.
 
-The [javacc](https://javacc.github.io/javacc/) parser generator uses an LL(1) parser
-while the [sablecc](https://sablecc.org/) parser generator uses an LALR(1) parser.
 
   
 
