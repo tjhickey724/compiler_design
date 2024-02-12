@@ -8,5 +8,6 @@ generate the trees. This is an application that takes an annotated javacc file
 
 and produces
 * a javacc file test.jj
-* set set of Java cla
+* set set of Java classes, with names starting with AST, implementing the Visitor pattern
+* a DefaultVisitor class for traversing the Abstract Syntax Tree.
 
