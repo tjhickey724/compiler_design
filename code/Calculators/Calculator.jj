@@ -1,0 +1,81 @@
+options
+{
+    LOOKAHEAD=2;
+}
+PARSER_BEGIN(Calculator)
+public class Calculator
+{
+    public static void main(String args[]) throws ParseException 
+    {
+        Calculator parser = new Calculator(System.in);
+        while (true)
+        {
+            parser.parseOneLine();
+        }
+    }
+}
+PARSER_END(Calculator)
+SKIP :
+{
+    " "
+|   "\r"
+|   "\t"
+}
+TOKEN:
+{
+    < NUMBER: (<DIGIT>)+ ( "." (<DIGIT>)+ )? >
+|   < DIGIT: ["0"-"9"] >
+|   < EOL: "\n" >
+}
+void parseOneLine():
+{
+    double a;
+}
+{
+    a=expr() <EOL>      { System.out.println(a); }
+  | <EOL>
+  | <EOF>               { System.exit(-1); }
+}
+double expr():
+{
+    double a;
+    double b;
+}
+{
+    a=term()
+    (
+        "+" b=expr()    { a += b; }
+    |   "-" b=expr()    { a -= b; }
+    )*
+                        { return a; }
+}
+double term():
+{
+    double a;
+    double b;
+}
+{
+    a=unary()
+    (
+        "*" b=term()    { a *= b; }
+    |   "/" b=term()    { a /= b; }
+    )*
+                        { return a; }
+}
+double unary():
+{
+    double a;
+}
+{
+    "-" a=element()     { return -a; }
+|   a=element()         { return a; }
+}
+double element():
+{
+    Token t;
+    double a;
+}
+{
+    t=<NUMBER>          { return Double.parseDouble(t.toString()); }
+|   "(" a=expr() ")"    { return a; }
+}
