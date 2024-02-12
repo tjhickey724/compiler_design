@@ -1,0 +1,73 @@
+options
+{
+    //LOOKAHEAD=1;
+}
+PARSER_BEGIN(CalculatorInt)
+public class CalculatorInt
+{
+    public static void main(String args[]) throws ParseException 
+    {
+        CalculatorInt parser = new CalculatorInt(System.in);
+        while (true)
+        {
+            parser.parseOneLine();
+        }
+    }
+}
+PARSER_END(CalculatorInt)
+SKIP :
+{
+    " "
+|   "\r"
+|   "\t"
+}
+TOKEN:
+{
+    < NUMBER: (<DIGIT>)+ ( "." (<DIGIT>)+ )? >
+|   < DIGIT: ["0"-"9"] >
+|   < EOL: "\n" >
+}
+void parseOneLine():
+{
+    int a;
+}
+{
+    a=expr() <EOL>      { System.out.println(a); }
+
+}
+int expr():
+{
+    int a;
+    int b;
+}
+{
+    a=term()
+    ( 
+        "+" b=term()    { a += b; }
+    |   "-" b=term()    { a -= b; }
+    )*
+                        { return a; }
+}
+int term():
+{
+    int a;
+    int b;
+}
+{
+    a=element()
+    (
+        "*" b=element()    { a *= b; }
+    |   "/" b=element()    { a /= b; }
+    )*
+                        { return a; }
+}
+
+int element():
+{
+    Token t;
+    int a;
+}
+{
+    t=<NUMBER>          { return Integer.parseInt(t.toString()); }
+|   "(" a=expr() ")"    { return a; }
+}
