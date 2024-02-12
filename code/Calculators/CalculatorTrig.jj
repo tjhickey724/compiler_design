@@ -1,0 +1,77 @@
+options
+{
+    //LOOKAHEAD=1;
+}
+PARSER_BEGIN(Calculator)
+public class Calculator
+{
+    public static void main(String args[]) throws ParseException 
+    {
+        Calculator parser = new Calculator(System.in);
+        while (true)
+        {
+            parser.parseOneLine();
+        }
+    }
+}
+PARSER_END(Calculator)
+SKIP :
+{
+    " "
+|   "\r"
+|   "\t"
+}
+TOKEN:
+{
+    < NUMBER: (<DIGIT>)+ ( "." (<DIGIT>)+ )? >
+|   < DIGIT: ["0"-"9"] >
+|   < EOL: "\n" >
+}
+void parseOneLine():
+{
+    double a;
+}
+{
+    a=expr() <EOL>      { System.out.println(a); }
+
+}
+double expr():
+{
+    double a;
+    double b;
+}
+{
+    a=term()
+    ( 
+        "+" b=term()    { a += b; }
+    |   "-" b=term()    { a -= b; }
+    )*
+                        { return a; }
+}
+double term():
+{
+    double a;
+    double b;
+}
+{
+    a=element()
+    (
+        "*" b=element()    { a *= b; }
+    |   "/" b=element()    { a /= b; }
+    )*
+                        { return a; }
+}
+
+double element():
+{
+    Token t;
+    double a;
+}
+{
+    t=<NUMBER>          { return Double.parseDouble(t.toString()); }
+|   "(" a=expr() ")"    { return a; }
+|   "sin" "(" a = expr() ")" {return Math.sin(a); }
+|   "cos" "(" a = expr() ")" {return Math.cos(a); }
+|   "tan" "(" a = expr() ")" {return Math.tan(a); }
+|   "pi" { return Math.PI; }
+}
