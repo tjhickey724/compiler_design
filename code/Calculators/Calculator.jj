@@ -1,3 +1,4 @@
+/* from https://gist.github.com/jac18281828/2435b575b699684a4ee36201af472d04  */
 options
 {
     LOOKAHEAD=2;
