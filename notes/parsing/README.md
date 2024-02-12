@@ -50,7 +50,7 @@ Here is an example of using the Earley algorithm for an LR(0) grammar to show th
 It is possible to use javacc to implement interpreters and compilers for simple languages,
 but this approach doesn't scale as the code gets very complex very quickly.  Still here is an example
 of a javacc program for interpreting arithmetic expressions:
-* [Calculator.jj](../code/Calculators/Caculator.jj)
+* [Calculator.jj](../../code/Calculators/Caculator.jj)
 
 This examples shows how to define the javacc functions corresponding to non-terminals so that they return a value
 (in this case the value of the subexpression in the tree whose root is that non-terminal). Here is an example of the
@@ -64,8 +64,8 @@ double expr():
 {
     a=term()
     (
-        "+" b=expr()    { a += b; }
-    |   "-" b=expr()    { a -= b; }
+        "+" b=term()    { a += b; }
+    |   "-" b=term()    { a -= b; }
     )*
                         { return a; }
 }
