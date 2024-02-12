@@ -1,7 +1,7 @@
 /* from https://gist.github.com/jac18281828/2435b575b699684a4ee36201af472d04  */
 options
 {
-    LOOKAHEAD=2;
+    //LOOKAHEAD=1;
 }
 PARSER_BEGIN(Calculator)
 public class Calculator
@@ -34,8 +34,7 @@ void parseOneLine():
 }
 {
     a=expr() <EOL>      { System.out.println(a); }
-  | <EOL>
-  | <EOF>               { System.exit(-1); }
+
 }
 double expr():
 {
@@ -44,9 +43,9 @@ double expr():
 }
 {
     a=term()
-    (
-        "+" b=expr()    { a += b; }
-    |   "-" b=expr()    { a -= b; }
+    ( 
+        "+" b=term()    { a += b; }
+    |   "-" b=term()    { a -= b; }
     )*
                         { return a; }
 }
@@ -56,21 +55,14 @@ double term():
     double b;
 }
 {
-    a=unary()
+    a=element()
     (
-        "*" b=term()    { a *= b; }
-    |   "/" b=term()    { a /= b; }
+        "*" b=element()    { a *= b; }
+    |   "/" b=element()    { a /= b; }
     )*
                         { return a; }
 }
-double unary():
-{
-    double a;
-}
-{
-    "-" a=element()     { return -a; }
-|   a=element()         { return a; }
-}
+
 double element():
 {
     Token t;
