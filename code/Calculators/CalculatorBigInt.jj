@@ -1,0 +1,73 @@
+options
+{
+    //LOOKAHEAD=1;
+}
+PARSER_BEGIN(CalculatorBigInt)
+public class CalculatorBigInt
+{
+    public static void main(String args[]) throws ParseException 
+    {
+        CalculatorBigInt parser = new CalculatorBigInt(System.in);
+        while (true)
+        {
+            parser.parseOneLine();
+        }
+    }
+}
+PARSER_END(CalculatorBigInt)
+SKIP :
+{
+    " "
+|   "\r"
+|   "\t"
+}
+TOKEN:
+{
+    < NUMBER: (<DIGIT>)+ ( "." (<DIGIT>)+ )? >
+|   < DIGIT: ["0"-"9"] >
+|   < EOL: "\n" >
+}
+void parseOneLine():
+{
+    java.math.BigInteger a;
+}
+{
+    a=expr() <EOL>      { System.out.println(a); }
+
+}
+java.math.BigInteger expr():
+{
+    java.math.BigInteger a;
+    java.math.BigInteger b;
+}
+{
+    a=term()
+    ( 
+        "+" b=term()    { a = a.add(b); }
+    |   "-" b=term()    { a = a.subtract(b); }
+    )*
+                        { return a; }
+}
+java.math.BigInteger term():
+{
+    java.math.BigInteger a;
+    java.math.BigInteger b;
+}
+{
+    a=element()
+    (
+        "*" b=element()    { a = a.multiply(b); }
+    |   "/" b=element()    { a = a.divide(b); }
+    )*
+                        { return a; }
+}
+
+java.math.BigInteger element():
+{
+    Token t;
+    java.math.BigInteger a;
+}
+{
+    t=<NUMBER>          { return new java.math.BigInteger(t.toString()); }
+|   "(" a=expr() ")"    { return a; }
+}

@@ -2,19 +2,19 @@ options
 {
     //LOOKAHEAD=1;
 }
-PARSER_BEGIN(Calculator)
-public class Calculator
+PARSER_BEGIN(CalculatorTrig)
+public class CalculatorTrig
 {
     public static void main(String args[]) throws ParseException 
     {
-        Calculator parser = new Calculator(System.in);
+        CalculatorTrig parser = new CalculatorTrig(System.in);
         while (true)
         {
             parser.parseOneLine();
         }
     }
 }
-PARSER_END(Calculator)
+PARSER_END(CalculatorTrig)
 SKIP :
 {
     " "
