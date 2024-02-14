@@ -4,7 +4,9 @@ Once we have a parser for a programming language, it is fairly easy to create a 
 Here are some notes on how to pretty print mini-java. I won't show the whole code here, just snippets.
 
 First is the main program for the parser.
-The idea is that when we recognize a
+The idea is that when we print out the code nicely as we parse it.
+Another way, we will explore below, is to have the parsing functions return the code as a String
+which we print in the main method.
 ```
 /*
  * This is MiniJavaPP.jj file.
@@ -68,7 +70,10 @@ void MainClass(int indent) :
 ```
 
 
-Here is part of the code for Statement:
+Here is part of the code for Statement.
+Points to note
+* we are passing in the amount to indent as a parameter of the parsing functions
+* We can get the value of a token, e.g. an <id> using t.image
 ```
 
 void Statement(int indent) :
@@ -97,6 +102,14 @@ void Statement(int indent) :
   Statement(indent+1)
       {System.out.println();}
 
+|
+  LOOKAHEAD(2) 
+  t=<ID> <EQUALS> 
+      {System.out.format("%1$"+4*indent+"s", "");}
+      {System.out.print(t.image+" = ");}
+  Exp() 
+  <SEMICOLON> 
+      {System.out.println(";");}
   |
 // et cetera
 }
