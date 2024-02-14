@@ -29,16 +29,16 @@ TOKEN:
 }
 void parseOneLine():
 {
-    int a;
+    java.lang.math.BigInteger a;
 }
 {
     a=expr() <EOL>      { System.out.println(a); }
 
 }
-int expr():
+java.lang.math.BigInteger expr():
 {
-    int a;
-    int b;
+    java.lang.math.BigInteger a;
+    java.lang.math.BigInteger b;
 }
 {
     a=term()
@@ -48,10 +48,10 @@ int expr():
     )*
                         { return a; }
 }
-int term():
+java.lang.math.BigInteger term():
 {
-    int a;
-    int b;
+    java.lang.math.BigInteger a;
+    java.lang.math.BigInteger b;
 }
 {
     a=element()
@@ -62,12 +62,12 @@ int term():
                         { return a; }
 }
 
-int element():
+java.lang.math.BigInteger element():
 {
     Token t;
-    int a;
+    java.lang.math.BigInteger a;
 }
 {
-    t=<NUMBER>          { return Integer.parseInt(t.toString()); }
+    t=<NUMBER>          { return new java.lang.math.BigInteger(t.toString()); }
 |   "(" a=expr() ")"    { return a; }
 }

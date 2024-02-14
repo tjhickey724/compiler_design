@@ -1,0 +1,74 @@
+options
+{
+    //LOOKAHEAD=1;
+}
+PARSER_BEGIN(CalculatorPP)
+public class CalculatorPP
+{
+    public static void main(String args[]) throws ParseException 
+    {
+        CalculatorPP parser = new CalculatorPP(System.in);
+        while (true)
+        {
+            parser.parseOneLine();
+        }
+    }
+}
+PARSER_END(CalculatorPP)
+SKIP :
+{
+    " "
+|   "\r"
+|   "\t"
+}
+TOKEN:
+{
+    < NUMBER: (<DIGIT>)+ ( "." (<DIGIT>)+ )? >
+|   < DIGIT: ["0"-"9"] >
+|   < EOL: "\n" >
+}
+void parseOneLine():
+{
+    String a;
+}
+{
+    a=expr() <EOL>      { System.out.println(a); }
+
+}
+String expr():
+{
+    String a;
+    String b;
+}
+{
+    a=term()
+    ( 
+        "+" b=term()    { a +=     ".add("+b+")"; }
+    |   "-" b=term()    { a +=     ".subtract("+b+")"; }
+    )*
+                        { return a; }
+}
+String term():
+{
+    String a;
+    String b;
+}
+{
+    a=element()
+    (
+        "*" b=element()    { a = a + ".multiply(" + b+")"; }
+    |   "/" b=element()    { a +=    ".divide("+b+")"; }
+    )*
+                        { return a; }
+}
+
+String element():
+{
+    Token t;
+    String a;
+}
+{
+    t=<NUMBER>          { return "(new java.math.BigInteger(\""+ 
+                          t.toString() + "\"))"; }
+|   "(" a=expr() ")"    { return "("+a+")"; }
+}
