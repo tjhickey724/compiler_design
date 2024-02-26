@@ -23,9 +23,6 @@ public class ExpTree {
       System.out.println(e);
       Visitor v = new DumpVisitor();
       e.accept(v,null);
-      //ASTStart n = t.Start();
-      //ExpTreeVisitor v = new ExpTreeDumpVisitor();
-      //n.jjtAccept(v, null);
       System.out.println("Thank you.");
     } catch (Exception e) {
       System.out.println("Oops.");
