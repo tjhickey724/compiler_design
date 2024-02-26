@@ -38,12 +38,13 @@ The textbook we will use is
 
 ## Week 6: 2/12/2024-2/16/2024 Syntax Directed Translation
 * Homework:
-  * Read Chapter 3 of MCIJ
-
+  * Read Chapter 3,4,5 of MCIJ
 * L14: Mon 2/12/2024
 * L15: Wed 2/14/2024
 * L16: Thu 2/15/2024
 
+## Week 7: 2/26/2024-3/12024  Abstract Syntax Trees
+* L17: Mon 2/26/2024 
 
 
 
