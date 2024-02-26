@@ -32,7 +32,7 @@ public class DumpVisitor implements Visitor{
     System.out.print(")");
     return(data);}
   public Object visit(Minus node, Object data){
-    System.out.print("plus(");
+    System.out.print("minus(");
     node.e1.accept(this,data);
     System.out.print(",");
     node.e2.accept(this,data);

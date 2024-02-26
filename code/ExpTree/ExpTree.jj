@@ -77,7 +77,8 @@ TOKEN:
 |   <RBRACKET:    "]" >
 |   <LCURLY:    "{" >
 |   <RCURLY:    "}" >
-|  <ADD_OP:    "+" | "-" >
+|  <PLUS:    "+" >
+|  <MINUS:    "-" >
 |  <MULT_OP:   "*" | "/" >
 |  <NUMBER:    (["0"-"9"])+ >
 |  <ID:        (["a"-"z"]|"_"|["A"-"Z"])(["a"-"z"]|"_"|["A"-"Z"]|["0"-"9"])* >
@@ -97,30 +98,13 @@ Exp Start():
 Exp Exp():
 {Exp a,b;}
 { 
-  a=Exp4() (LOOKAHEAD(2) <AND> b=Exp4() 
-            {a = new And(a,b);}
-           )* 
-
-  {return(a);}
-  
-
-}
-
-Exp Exp4():
-{Exp a,b;}
-{ 
-  a=Exp9() 
-  (LOOKAHEAD(2) <LT> b=Exp9() {a = new LessThan(a,b);})* 
-  {return(a);}
-
-}
-
-
-Exp Exp9():
-{Exp a,b;}
-{ 
   a=Exp11() 
-    (LOOKAHEAD(2) <ADD_OP> b=Exp11(){a = new Plus(a,b);})* 
+    (
+    <PLUS> b=Exp11(){a = new Plus(a,b);}
+    |
+    <MINUS> b = Exp11() {a = new Minus(a,b);}
+    )* 
+
   {return(a);}
 }
 
@@ -138,28 +122,12 @@ Exp Exp12():
  Token t;}
 { 
   a=Exp14() 
-  ( 
-    LOOKAHEAD(2)
-    <DOT> <LENGTH> 
-        {return new ArrayLength(a);}
-    |
-    <DOT> t=<ID> <LPAREN> c=ExpList() <RPAREN> 
-    {a =  new Call(a,new Identifier(t.image),c);}
-    |
-    <LBRACKET> b=Exp()<RBRACKET> 
-    {return new ArrayLookup(a,b);}
-
-
-  )* 
   {return(a);}
 }
 
 Exp Exp14():
 {Exp a,b;}
 {
-  <BANG> a=Exp16() 
-       {return(new Not(a));}
-  |
   a=Exp16() 
   {return(a);}
 }
@@ -172,35 +140,11 @@ Exp Exp16() :
 {
   t=<NUMBER> {return new IntegerLiteral(Integer.parseInt(t.image));}
   |
-  <TRUE> {return new True();}
-  |
-  <FALSE>  {return new False();}
-  |
-  <THIS>  {return new This();}
-  |
-  t=<ID>  {return new IdentifierExp(t.image);}
-  |
-  LOOKAHEAD(2)
-  <NEW> <INT> <LBRACKET> a=Exp() <RBRACKET>
-  {return new NewArray(a);}
-  |
-  <NEW> t=<ID> <LPAREN> <RPAREN> 
-  {return new NewObject(new Identifier(t.image));}
-  |
   <LPAREN> a=Exp() <RPAREN>
   {return(a);}
 }
 
 
-
-ExpList ExpList() :
-{ExpList a;
- Exp b;}
-{
-  b=Exp() {a = new ExpList(null,b);}
-  (<COMMA> b=Exp() {a=new ExpList(a,b);})*
-  {return a;}
-}
 
 
 
