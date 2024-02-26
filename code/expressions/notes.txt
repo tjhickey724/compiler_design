@@ -1,0 +1,24 @@
+void expr():
+{
+}
+{
+    term()
+    ( 
+        "+" term() 
+    |   "-" term() 
+    )*
+            
+}
+
+
+void expr():
+{}
+{ term()  exprA()}
+
+void exprA():
+{}
+{
+ <ADD_OP>  term() exprA()
+|
+{ }
+}

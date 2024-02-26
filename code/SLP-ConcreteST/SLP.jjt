@@ -1,5 +1,5 @@
 /*
- * This is SLP.jj file.
+ * This is SLP.jjt file.
  * It will build a tree for straightline programs that we can traverse using the Visitor pattern!
  */
 

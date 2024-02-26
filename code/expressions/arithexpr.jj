@@ -1,0 +1,125 @@
+/*
+ * This is arithexpr.jj file.
+ * it is a grammar for simple arithmetic expressions
+ * it converts arithmetic expressions from infix to postfix
+ * run this using the following where ^D means CTRL-D  
+ *  %java -classpath javacc.jar javacc arithexpr.jj
+ *  %javac arithexpr.java
+ *  %javac arithexpr
+ *  5*(2+3)*4+6*7+8  ^D
+ *  5 2 3 + * 4 * 6 7 * + 8 + 
+ *
+ * for minijava the operators are:
+ *  && <  + * . [ ! 
+ */
+
+options {
+  IGNORE_CASE = false;
+}
+
+PARSER_BEGIN(arithexpr)
+class arithexpr {
+    /** Main entry point. */
+  public static void main(String args[]) throws ParseException {
+    arithexpr parser = new arithexpr(System.in);
+    parser.Program();
+  }
+
+}
+PARSER_END(arithexpr)
+
+SKIP: /* Whitespace */
+{
+  "\t"
+| "\n"
+| "\r"
+| " "
+}
+
+TOKEN:
+{
+ 
+   <LPAREN:    "(" >
+|  <RPAREN:    ")" >
+|  <ADD_OP:    "+" | "-" >
+|  <MULT_OP:   "*" | "/" >
+|  <NUMBER:    (["0"-"9"])+ >
+|  <ID:        (["a"-"z"]|"_"|["A"-"Z"])(["a"-"z"]|"_"|["A"-"Z"]|["0"-"9"])* >
+}
+
+/* Program Syntax */
+
+void Program():
+{}
+{
+  Exp()
+  <EOF>
+}
+
+// Here is a parser for this simplified 
+// grammar for Java arithmetic expressions
+//  E  -> E9    E is the top level non-terminal
+//  E9 -> E9 ADD_OP E9
+//  E9 -> E11
+//  E11 -> E11 MULT_OP E11
+//  E11 -> E12
+//  E12 -> E16  (skilling the E12 operators)
+//  E16 -> NUMBER
+//  E16 -> ID
+//  E16 -> LPAREN E9 RPAREN 
+
+void Exp():
+{}
+{
+    Exp9()
+}
+
+void Exp9():
+{}
+{ 
+  Exp11() Exp9a()
+
+}
+
+void Exp9a():
+{}
+{
+  <ADD_OP> Exp11() {System.out.print("+ ");} Exp9a()
+  |
+  {}  
+}
+
+void Exp11():
+{}
+{ 
+  Exp12() Exp11a()
+
+}
+
+void Exp11a():
+{}
+{
+  <MULT_OP> Exp12(){System.out.print("* ");} Exp11a()
+  |
+  {} 
+}
+
+void Exp12():
+{}
+{ 
+  Exp16()  // skipping the precedence 12 operators
+}
+
+
+void Exp16():
+{ Token t;}
+{
+  t=<NUMBER> {System.out.print(t.image+" ");}
+  |
+  t=<ID> {System.out.print(t.image+" ");}
+  |
+  <LPAREN> Exp() <RPAREN>
+
+}
+
+
