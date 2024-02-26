@@ -48,7 +48,7 @@ TOKEN:
 |  <RPAREN:    ")" >
 |  <PLUS:    "+" >
 |  <MINUS:    "-" >
-|  <MULT_OP:   "*" >
+|  <MULT:   "*" >
 |  <NUMBER:    (["0"-"9"])+ >
 }
 
@@ -80,7 +80,7 @@ Exp Exp11():
 {Exp a,b;}
 { 
   a=Exp12() 
-  (LOOKAHEAD(2) <MULT_OP> b=Exp12() {a = new Times(a,b);})* 
+  (LOOKAHEAD(2) <MULT> b=Exp12() {a = new Times(a,b);})* 
   {return(a);}
 }
 
