@@ -17,3 +17,18 @@ contains classes as defined in the textbook, but the only ones we care about for
 * Minus(a,b)
 * IntegerLiteral(n)
 
+The parser generates a tree from the expression, for example from
+* 2*(1+4-3)
+
+it would generate the same tree as this code...
+```
+new Times(new IntegerLiteral(2),
+          new Minus(
+              new Plus(new IntegerLiteral(1),new IntegerLiteral(4)),
+              new IntegerLiteral(3)))
+```
+
+When we call the visitor on this tree it will produce
+```
+time(2,minus(plu(1,4),3)))
+```
