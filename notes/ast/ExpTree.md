@@ -65,7 +65,7 @@ It prints "plus(" and then calls
 ```
 node.e1.accept(this,data)
 ```
-where the Plus node as two instance variables e1 and e2 corresponding to the two subtrees of the addition tree.
+where the Plus node has two instance variables e1 and e2 corresponding to the two subtrees of the addition tree.
 
 We don't know what type ```node.e1``` is, it could be a Plus or Minus or IntegerLiteral or Times.
 
@@ -132,8 +132,9 @@ public class DumpNoVisitor {
     
 }
 ```
-and compare that to the implementation using the Visitor pattern, shown below.
-This is more elegant as the code for each class is encapsulated in its own method
+
+Now let's look at the implementation using the Visitor pattern, shown below.
+This is fairly elegant as the code for each class is encapsulated in its own method
 and you don't need to do any casting or explicit type checking in your code.
 ```
 import syntaxtree.*;
@@ -169,46 +170,28 @@ public class DumpVisitor implements Visitor{
     System.out.print(node.i);
     return(data);}
 
-// here are all of the methods for the classes we don't need for expressions
-  public Object visit(ArrayLookup node, Object data){return(data);}
-  public Object visit(ArrayLength node, Object data){return(data);}
-  public Object visit(Call node, Object data){return(data);}
-  public Object visit(Program node, Object data){return(data);}
-  public Object visit(MainClass node, Object data){return(data);}
-  public Object visit(ClassDecl node, Object data){return(data);}
-  public Object visit(VarDecl node, Object data){return(data);}
-  public Object visit(MethodDecl node, Object data){return(data);}
-  public Object visit(Formal node, Object data){return(data);}
-  public Object visit(Type node, Object data){return(data);}
-  public Object visit(IntArrayType node, Object data){return(data);}
-  public Object visit(IntegerType node, Object data){return(data);}
-  public Object visit(BooleanType node, Object data){return(data);}
-  public Object visit(IdentifierType node, Object data){return(data);}
-  public Object visit(Block node, Object data){return(data);}
-  public Object visit(If node, Object data){return(data);}
-  public Object visit(While node, Object data){return(data);}
-  public Object visit(Print node, Object data){return(data);}
-  public Object visit(Assign node, Object data){return(data);}
-  public Object visit(ArrayAssign node, Object data){return(data);}
-  public Object visit(And node, Object data){return(data);}
-  public Object visit(LessThan node, Object data){return(data);}
-  public Object visit(True node, Object data){return(data);}
-  public Object visit(False node, Object data){return(data);}
-  public Object visit(IdentifierExp node, Object data){return(data);}
-  public Object visit(This node, Object data){return(data);}
-  public Object visit(NewArray node, Object data){return(data);}
-  public Object visit(NewObject node, Object data){return(data);}
-  public Object visit(Not node, Object data){return(data);}
-  public Object visit(Identifier node, Object data){return(data);}
-  public Object visit(ClassDeclList node, Object data){return(data);}
-  public Object visit(ExpList node, Object data){return(data);}
-  public Object visit(FormalList node, Object data){return(data);}
-  public Object visit(MethodDeclList node, Object data){return(data);}
-  public Object visit(StatementList node, Object data){return(data);}
-  public Object visit(VarDeclList node, Object data){return(data);}
+// followed by all of the methods for the classes we don't need for expressions, omitted here
 }
-
 ```
+You might want to get the best of both worlds as replace the 
+```
+node.e1.accept(this,data);
+```
+with 
+```
+this.visit(node.e1,data);
+```
+Unfortunately, this will not compile because Java doesn't know the type of ```node.e1`` at compile time.
+All it knows is that ```node.e1``` has the abstract class ```Exp``` and it relies on the compile time class
+to decide which method of the DumpVisitor class to invoke.
+
+Since you are going to be writing a miniJava compiler, you could change the implementation so that it
+looks at the dynamic type of the arguments to a call to decide which method to invoke, but that could slow
+down the compiled code and make it harder to do certain interprocedural optimizations.
+
+
+
+
 
 
 
