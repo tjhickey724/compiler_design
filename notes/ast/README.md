@@ -6,5 +6,9 @@ then to convert that AST into some sort of Intermediate Representation structure
 There are tools, such as [jjTree](./jjTree.md) for automatically gnerating abstract syntax trees, but we will show how to build them directly
 which gives us more control over the structure of the trees.
 
+We begin with showing how to use javacc to generate ASTs for miniJava expressions
+* [ExpTree](./ExpTree.md)
+
+
 
 
