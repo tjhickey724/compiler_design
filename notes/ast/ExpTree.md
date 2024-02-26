@@ -1,4 +1,4 @@
-# ExprTree
+# ExprTree and the Visitor Pattern
 
 In this note, we show how to use javacc to generate Abstract Syntax Trees for miniJava Expressions
 and how to use the Visitor pattern to convert those trees to a procedural language (e.g. python, C, javascript, etc.)
@@ -92,7 +92,8 @@ but at compile time the java compiler doesn't know the type of node.e1 (it could
 and so it doesn't know which visit method to call...
 
 ## Looking closer at the visitor pattern
-We could use a single static method with a cascade of conditionals to achieve the same effect as using the Visitor pattern, e.g.
+We could use a single static method with a cascade of conditionals to achieve the same effect as using the Visitor pattern,
+as shown below, but this requires manually checking the class of the node argument, and then casting it to the right type.
 ```
 import syntaxtree.*;
 
@@ -131,7 +132,9 @@ public class DumpNoVisitor {
     
 }
 ```
-and compare that to the implementation using the Visitor pattern:
+and compare that to the implementation using the Visitor pattern, shown below.
+This is more elegant as the code for each class is encapsulated in its own method
+and you don't need to do any casting or explicit type checking in your code.
 ```
 import syntaxtree.*;
 
@@ -166,6 +169,7 @@ public class DumpVisitor implements Visitor{
     System.out.print(node.i);
     return(data);}
 
+// here are all of the methods for the classes we don't need for expressions
   public Object visit(ArrayLookup node, Object data){return(data);}
   public Object visit(ArrayLength node, Object data){return(data);}
   public Object visit(Call node, Object data){return(data);}
