@@ -10,3 +10,10 @@ Let's explore this looking a the expression grammar for miniJava.
 Here is a javacc program for parsing miniJava expressions and generating an AST
 * [exptree.jj](../../code/ExpTree/ExpTree.jj)
 
+The Abstract Syntax Tree is created using the classes in the [syntaxtree package](../../code/ExpTree/syntaxtree/). This package
+contains classes as defined in the textbook, but the only ones we care about for now are:
+* Times(a,b)
+* Plus(a,b)
+* Minus(a,b)
+* IntegerLiteral(n)
+
