@@ -23,19 +23,29 @@ public class MiniC {
     MiniC t = new MiniC(System.in);
     try {
       MethodDeclList n = t.Start();
-      //Visitor v = new AST_Visitor();
-      //n.accept(v, 0);
-      Visitor v = new MiniC_Visitor();
-      String s = (String) n.accept(v, 0);
+      Visitor v1 = new AST_Visitor();  // pretty prints the Abstract Syntax Tree
+      n.accept(v1, 0);
+      Visitor v2 = new MiniC_Visitor();  // pretty prints the MiniC program
+      String s = (String) n.accept(v2, 0);
       System.out.println("#include <stdio.h>\nvoid print(int n){printf(\"%10d\\n\",n);}");
       System.out.println(s);
+      SymbolTableVisitor v3 = new SymbolTableVisitor(); // generates a SymbolTable
+      SymbolTable st = v3.symbolTable;
+      n.accept(v3,"");
+      System.out.println("Symbol Table");
+      System.out.println(st);
+      TypeCheckingVisitor v4 = new TypeCheckingVisitor(st);
+      n.accept(v4,"");
     } catch (Exception e) {
       System.out.println("Oops.");
       System.out.println(e.getMessage());
       e.printStackTrace();
     }
   }
+
+
 }
+
 PARSER_END(MiniC)
 
 SKIP: /* Whitespace */
