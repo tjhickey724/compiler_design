@@ -33,9 +33,7 @@ and uses that to construct a MiniC parsing object.
 * ```MiniC t = new MiniC(System.in);```
 
 Then we invoke the Start method on the parser to generate the top level node of the AST
-which will be a MethodDeclList object. Our version of miniC does not allow global
-variable declarations (though we could easily add the with a rule 
-* Program -> VarDeclList() MethodDeclList()
+which will be a MethodDeclList object. 
 
 * ```MethodDeclList n = t.Start();```
 
