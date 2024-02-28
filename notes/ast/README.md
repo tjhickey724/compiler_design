@@ -26,6 +26,7 @@ into an abstract syntax tree. The classes we use to build the abstract syntax tr
 miniJava and miniC are in the package syntaxtree.  
 * [generating the miniC Abstract Syntax Tree](./miniC_AST.md)
 * [printing the miniC AST](./miniC_printAST.md)
+* [pretty printing the miniC program](miniC_prettyprint.md)
 * [computing the miniC symbol table](./miniC_symbol_table.md)
 * [type checking miniC](./miniC_type_checking.md]
 
