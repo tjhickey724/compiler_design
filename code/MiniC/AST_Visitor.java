@@ -3,6 +3,7 @@ import syntaxtree.*;
 /* 
  * this class uses the Visitor pattern 
  * to pretty print the miniJava program abstract syntax tree
+ * It works for all of miniJava, not just the miniC subset
 */
 
  public class AST_Visitor implements Visitor
@@ -164,13 +165,6 @@ import syntaxtree.*;
         --indent;
         return data;
    }
-//    public Object visit(Exp node, Object data){
-//         System.out.println(indentString() + getClassName(node));
-//             ++indent;
-//             data = node.childrenAccept(this, data);
-//             --indent;
-//             return data;
-//    }
 
    public Object visit(And node, Object data){
         System.out.println(indentString() + getClassName(node));

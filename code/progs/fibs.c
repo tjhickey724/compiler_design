@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdbool.h>
 void print(int n){printf("%10d\n",n);}
 
 
@@ -17,7 +18,7 @@ int fibs(int n) {
     int r;
     int s;
     int result2;
-    boolean b;
+    bool b;
     b=(0<0);
 
     if (0<n){

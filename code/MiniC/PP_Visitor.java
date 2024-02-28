@@ -78,7 +78,7 @@ import syntaxtree.*;
    public Object visit(BooleanType node, Object data){
         // 
         int indent = (int) data; 
-        return "boolean ";
+        return "bool ";
    }
    public Object visit(IdentifierType node, Object data){
      return null;
@@ -125,14 +125,17 @@ import syntaxtree.*;
         //--indent;
         return indentString(indent)+i+" = "+e+";\n";
    }
-   public Object visit(ArrayAssign node, Object data){
-     return null;
-   }
+
+   
+   public Object visit(ArrayAssign node, Object data){ 
+     return data; 
+   } 
 
 
    public Object visit(And node, Object data){
      return null;
    }
+
    public Object visit(LessThan node, Object data){
         // 
         int indent = (int) data; 

@@ -31,7 +31,7 @@ public class MiniC {
       System.out.println("\n\nPretty Print the Program");
       Visitor v2 = new PP_Visitor();  // pretty prints the MiniC program
       String s = (String) n.accept(v2, 0);
-      System.out.println("#include <stdio.h>\nvoid print(int n){printf(\"%10d\\n\",n);}");
+      System.out.println("#include <stdio.h>\n#include <stdbool.h>\nvoid print(int n){printf(\"%10d\\n\",n);}");
       System.out.println(s);
 
       System.out.println("\n\nGenerating Symbol Table");
@@ -70,7 +70,7 @@ SKIP: /* Whitespace */
 TOKEN:
 {
    <PUBLIC:     "public">
-|  <PREFACE:    "#include <stdio.h>\nvoid print(int n){printf(\"%10d\\n\",n);}">
+|  <PREFACE:    "#include <stdio.h>\n#include <stdbool.h>\nvoid print(int n){printf(\"%10d\\n\",n);}">
 |  <CLASS:      "class">
 |  <STATIC:     "static">
 |  <VOID:       "void">
@@ -78,7 +78,7 @@ TOKEN:
 |  <EXTENDS:    "extends">
 |  <RETURN:     "return">
 |  <INT:        "int">
-|  <BOOLEAN:    "boolean">
+|  <BOOLEAN:    "bool">
 |  <TRUE:       "true">
 |  <FALSE:      "false">
 |  <IF:         "if">

@@ -48,8 +48,10 @@ public class TypeCheckingVisitor implements Visitor {
 
     public Object visit(ArrayAssign node, Object data){ 
         // not in miniC
+        Identifier i = node.i;
         Exp e1=node.e1;
         Exp e2=node.e2;
+        node.i.accept(this,data);
         node.e1.accept(this, data);
         node.e2.accept(this, data);
 

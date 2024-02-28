@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdbool.h>
 void print(int n){printf("%10d\n",n);}
 int  fib(int  n){
     int  result;
@@ -16,21 +17,32 @@ int  fib(int  n){
 int  fibs(int  n){
     int  r;
     int  s;
+    int  result2;
+    bool  b;
+    b = ( 0 < 0 );
     if ( 0 < n )
         {
             s = fibs( n  -  1 );
             r = fib( n );
             print( r  *  1000  +  n );
+            b = ( 0 < 1 );
         }
     else
         {
-            r =  1 ;
+            b = ( 0 < 0 );
         }
-    return ( r );
+    if ( b )
+        {
+            result2 =  r ;
+        }
+    else
+        {
+            result2 =  0 ;
+        }
+    return  result2 ;
 }
 
 int  main(int  x){
-    print(fibs( 20 ));
+    print(fibs( 40 ));
     return ( 1 );
 }
-
