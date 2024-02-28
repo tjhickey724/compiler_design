@@ -59,6 +59,7 @@ for the AST_Visitor.java
    }
 ```
 where indentString and getClassName are methods defined at the top of the AST_Visitor class
+(with help from github copilot in vscode!)
 ```
  public class AST_Visitor implements Visitor
  {
@@ -81,4 +82,24 @@ where indentString and getClassName are methods defined at the top of the AST_Vi
    }
 
 ...
+```
+We then modify the MiniC.jj file to create a visitor and call it on the AST as follows:
+```
+  public static void main(String args[]) {
+    MiniC t = new MiniC(System.in);
+    try {
+      MethodDeclList n = t.Start();
+
+      System.out.println("\n\nPretty Printing the Abstract Syntax Tree");
+      Visitor v1 = new AST_Visitor();  // pretty prints the Abstract Syntax Tree
+      n.accept(v1, 0);  // pass in 0 for the initial value of the data parameter
+
+      System.out.println("\n\nDone!");
+
+    } catch (Exception e) {
+      System.out.println("Oops.");
+      System.out.println(e.getMessage());
+      e.printStackTrace();
+    }
+  }
 ```
