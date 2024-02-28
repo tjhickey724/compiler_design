@@ -39,6 +39,91 @@ variable declarations (though we could easily add the with a rule
 
 * ```MethodDeclList n = t.Start();```
 
+Each Grammar Rule in the miniC language is annotated with some additional code
+to generate the Abstract Syntax Tree for that node.  Let's look at the MethodDecl rule
+as a good example:
 
+```
+MethodDecl MethodDecl()  :
+{
+  Type ty;
+  Token t;
+  FormalList flist;
+  VarDeclList vlist;
+  StatementList slist;
+  Exp e;
+}
+{
+  ty=Type() t=<ID> <LPAREN> flist=FormalList() <RPAREN>
+
+      <LCURLY>
+           vlist=VarDecls() 
+           slist = Statements()
+           <RETURN> e=Exp() <SEMICOLON>
+      <RCURLY>
+  {return new MethodDecl(ty,new Identifier(t.image),flist,vlist,slist,e);}
+
+}
+```
+The MethodDecl class will have 6 instance variables for each of the components of
+the method declaration ... We declare variables ty,t,flist,vlist,slist,e in the
+javacc preable to hold these subtrees.  
+```
+{
+  Type ty;
+  Token t;
+  FormalList flist;
+  VarDeclList vlist;
+  StatementList slist;
+  Exp e;
+}
+```
+Then in the grammar rule, we capture the
+subtrees from the nonterminals, which will all return classes in the syntaxtree package.
+```
+ty=Type() t=<ID> <LPAREN> flist=FormalList() <RPAREN>
+
+      <LCURLY>
+           vlist=VarDecls() 
+           slist = Statements()
+           <RETURN> e=Exp() <SEMICOLON>
+      <RCURLY>
+```
+finally we use these subtrees to create the MethodDecl node, which we return to the caller
+(probably the MethoDeclList())
+```
+  {return new MethodDecl(ty,new Identifier(t.image),flist,vlist,slist,e);}
+```
+Note that we create a new Identifier from the <ID> token, We could also have done this using
+an Identifier() non-terminal instead of an <ID> token.
+
+The code for the MethodDecl class is as shown below (from the [syntaxtree package](../../code/MiniC/syntaxtree).
+It simply has fields for each of the components of a method declaration.
+
+We use the same approach as shown here for all of the grammar rules. 
+```
+package syntaxtree;
+
+public class MethodDecl {
+    public Type t;
+    public Identifier i;
+    public FormalList f;
+    public VarDeclList v;
+    public StatementList s;
+    public Exp e;
+
+    public MethodDecl(Type t, Identifier i, FormalList f,
+                       VarDeclList v,StatementList s, Exp e){
+        this.t=t;this.i=i;this.f=f;this.v=v;this.s=s;this.e=e;
+    }
+
+    public Object accept(Visitor visitor, Object data) {
+        return
+            visitor.visit(this, data);
+      }
     
+}
+```
+
+For PA4, you will be asked to extend (and modify) the MiniC.jj file to get a MiniJava.jj file which will create the AST for a MiniJava program.
     
