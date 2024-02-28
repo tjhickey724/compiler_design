@@ -1,4 +1,4 @@
-# miniC and Type Checking
+# miniC
 miniC is a (slightly modified) subset of miniJava obtained by 
 
 removing
@@ -23,6 +23,13 @@ and then to circle back and optimize it over several rounds.
 Here is an example of [a miniC program to print a table of fibonacci numbers](../../code/progs/fibs.c). The first two lines
 are the header and are always the same for every miniC program, it allows us to do some formatted
 printing of integer values.
+
+Observe:
+* we only have if/else statements, not plain if's
+* ever function has a return which must be the last statement in the body
+* there is no true and false literals, we have to use (0<0) or (0<1) or some other expression
+   that returns a true or false
+* there are no input functions, so you have to change the program to get a different result
 ```
 #include <stdio.h>
 void print(int n){printf("%10d\n",n);}
