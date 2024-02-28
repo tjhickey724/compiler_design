@@ -28,7 +28,17 @@ $test$b  of type boolean
 $test2$x of type boolean
 $test2$a of type boolean
 $test2$b of type int
+$test  of type MethodDecl
+$test2 of type MethodDecl
 ```
 When we store and lookup types we will need to prepend the prefix...
+
+The [SymbolTable.java]](../../code/MiniC/SymbolTable.java) code defines a simple class which creates those four HashMaps 
+and includes a toString to print them out.
+
+We can now define a Visitor which will populate the SymbolTable each time it finds a MethodDecl, VarDecl, or Formal
+[SymbolTableVisitor.java](../../code/MiniC/SymbolTableVisitor.java)
+
+
 
 
