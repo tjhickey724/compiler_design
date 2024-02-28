@@ -26,6 +26,7 @@ public class DumpVisitor implements Visitor{
   public Object visit(LessThan node, Object data){return(data);}
   public Object visit(Plus node, Object data){
     System.out.print("plus(");
+    //this.visit(node.e1,data); // try to see why this doensn't work!!
     node.e1.accept(this,data);
     System.out.print(",");
     node.e2.accept(this,data);

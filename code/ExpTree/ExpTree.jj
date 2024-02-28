@@ -24,6 +24,7 @@ public class ExpTree {
       Visitor v = new DumpVisitor();
       e.accept(v,null);
       System.out.println("Thank you.");
+      DumpNoVisitor.visit(e);
     } catch (Exception e) {
       System.out.println("Oops.");
       System.out.println(e.getMessage());
