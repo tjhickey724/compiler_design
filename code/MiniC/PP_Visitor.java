@@ -6,7 +6,7 @@ import syntaxtree.*;
  * The idea is to have each node return its string representation!
 */
 
- public class MiniC_Visitor implements Visitor
+ public class PP_Visitor implements Visitor
  {
  
    private String indentString(int indent) {

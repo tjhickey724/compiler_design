@@ -19,7 +19,9 @@ public class TypeCheckingVisitor implements Visitor {
 
     public SymbolTable st;
 
-    public static MiniC_Visitor miniC = new MiniC_Visitor();
+    public int num_errors=0;
+
+    public static PP_Visitor miniC = new PP_Visitor();
 
     public TypeCheckingVisitor(SymbolTable st) {
         this.st = st;
@@ -75,10 +77,10 @@ public class TypeCheckingVisitor implements Visitor {
         Exp e=node.e;
         String t1 = (String) node.i.accept(this, data);
         String t2 = (String) node.e.accept(this, data);
-        System.out.println("i.s="+i.s+" t1: "+t1+" t2: "+t2);   
         if (!t1.equals(t2)) {
             System.out.println("Assign Type error: " + t1 + " != " + t2+" in node"+node);
             System.out.println("in "+node.accept(miniC,0));
+            num_errors++;
         }
         return "*void"; 
     } 
@@ -102,8 +104,7 @@ public class TypeCheckingVisitor implements Visitor {
         //Exp e1 = node.e1; // in miniC there is no e1 for a call
         Identifier i = node.i;
         ExpList e2=node.e2;
-        System.out.println("typechecking call to method "+i.s);
-        System.out.println(node.accept(miniC,0));
+
         
 
 
@@ -111,33 +112,25 @@ public class TypeCheckingVisitor implements Visitor {
         // e.g. "int int boolean int"
   
         MethodDecl m = st.methods.get("$"+i.s);
-        System.out.println("looking up "+i.s+" gives "+m);
-        System.out.println("return type is "+getTypeName(m.t));
-        System.out.println("node is "+node.accept(miniC,0));
-        //System.out.println("calling method is "+m.accept(miniC,0));
+
 
         // we get the parameter types by "typing" the formals
         // this is somewhat inefficient, we should do this
         // when we construct the symbol table....
         String paramTypes = (String) m.f.accept(this,m.i.s); 
-        System.out.println("paramTypes: |"+paramTypes+"|");
-
-
-        //node.e1.accept(this, data);
-        //node.i.accept(this, data);  // we don't need to type the identifier
         String argTypes = "";
         if (node.e2 != null){
             argTypes = (String) node.e2.accept(this, data);
         }
-        System.out.println("argTypes: |"+argTypes+"|");
         
 
         if (!paramTypes.equals(argTypes)) {
 
             System.out.println("Call Type error: " + paramTypes + " != " + argTypes+" in method "+i.s);
             System.out.println("in \n"+node.accept(miniC,0));
+            num_errors++;
         }
-        System.out.println("returning "+m.t+" as "+getTypeName(m.t));
+
         return getTypeName(m.t);
     } 
 
@@ -202,6 +195,7 @@ public class TypeCheckingVisitor implements Visitor {
             return "int";
         } else {
             System.out.println("Formal Type error: " + node.t + " is not a valid type");
+            num_errors++;
             return "*void";
         }
     }
@@ -221,8 +215,6 @@ public class TypeCheckingVisitor implements Visitor {
     public Object visit(Identifier node, Object data){ 
         String s=node.s;  
         String result = st.typeName.get(data+"$"+s);
-        System.out.println(data +"$"+s);
-        System.out.println("type of "+s+" is "+result);
 
         return result; 
     }
@@ -230,7 +222,7 @@ public class TypeCheckingVisitor implements Visitor {
     public Object visit(IdentifierExp node, Object data){ 
         String s=node.s;
         String result = st.typeName.get(data+"$"+s);
-        System.out.println("data$s="+data+"$"+s);
+
         return result; 
     }
 
@@ -273,7 +265,8 @@ public class TypeCheckingVisitor implements Visitor {
         String t1 = (String) node.e1.accept(this, data);
         String t2 = (String) node.e2.accept(this, data);
         if (!t1.equals("int") || !t2.equals("int")) {
-            System.out.println("Type error: " + t1 + " != " + t2+" in node"+node);
+            System.out.println("Comparison Type error: " + t1 + " != " + t2+" in node"+node);
+            num_errors++;
         }
 
         return "boolean";
@@ -309,13 +302,10 @@ public class TypeCheckingVisitor implements Visitor {
         }
         
         String returnType = (String) node.e.accept(this, data+"$"+i.s);
-        System.out.println("node.e = "+node.e.accept(miniC,0));
-        System.out.println("returnType: "+returnType);
-        System.out.println("method is "+node.accept(miniC,0));
-        System.out.println("node.t="+node.t);
-        System.out.println("getTypeName(node.t)="+getTypeName(node.t));
+
         if (!returnType.equals(getTypeName(node.t))) {
             System.out.println("Method Return Type error: " + returnType + " != " + getTypeName(node.t)+" in method"+i.s);
+            num_errors++;
         }
 
         return "*void"; 
@@ -342,6 +332,7 @@ public class TypeCheckingVisitor implements Visitor {
         String t2 = (String) node.e2.accept(this, data);
         if (!t1.equals("int") || !t2.equals("int")) {
             System.out.println("Type error: " + t1 + " != " + t2+" in node"+node);
+            num_errors++;
         }
 
         return "int"; 
@@ -381,6 +372,7 @@ public class TypeCheckingVisitor implements Visitor {
         String t2 = (String) node.e2.accept(this, data);
         if (!t1.equals("int") || !t2.equals("int")) {
             System.out.println("Type error: " + t1 + " != " + t2+" in node"+node);
+            num_errors++;  
         }
 
         return "int"; 
@@ -392,6 +384,7 @@ public class TypeCheckingVisitor implements Visitor {
         String t1 = (String) node.e.accept(this, data);
         if (!t1.equals("int")) {
             System.out.println("Print Type error: " + t1 + " is not a valid type for print");
+            num_errors++;
         }
 
         return "*void"; 
@@ -439,6 +432,7 @@ public class TypeCheckingVisitor implements Visitor {
         String t2 = (String) node.e2.accept(this, data);
         if (!t1.equals("int") || !t2.equals("int")) {
             System.out.println("Type error: " + t1 + " != " + t2+" in node"+node);
+            num_errors++;
         }
 
         return "int"; 
@@ -460,7 +454,8 @@ public class TypeCheckingVisitor implements Visitor {
         } else if (node.t instanceof IntegerType) {
             return "int";
         } else {
-            System.out.println("Unknown Type error: " + node.t + " is not a valid type");
+            System.out.println("Unknown Type, Type error: " + node.t + " is not a valid type");
+            num_errors++;
             return "*void";
         }
 

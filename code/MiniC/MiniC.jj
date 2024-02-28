@@ -23,19 +23,30 @@ public class MiniC {
     MiniC t = new MiniC(System.in);
     try {
       MethodDeclList n = t.Start();
+
+      System.out.println("\n\nPretty Printing the Abstract Syntax Tree");
       Visitor v1 = new AST_Visitor();  // pretty prints the Abstract Syntax Tree
       n.accept(v1, 0);
-      Visitor v2 = new MiniC_Visitor();  // pretty prints the MiniC program
+
+      System.out.println("\n\nPretty Print the Program");
+      Visitor v2 = new PP_Visitor();  // pretty prints the MiniC program
       String s = (String) n.accept(v2, 0);
       System.out.println("#include <stdio.h>\nvoid print(int n){printf(\"%10d\\n\",n);}");
       System.out.println(s);
+
+      System.out.println("\n\nGenerating Symbol Table");
       SymbolTableVisitor v3 = new SymbolTableVisitor(); // generates a SymbolTable
       SymbolTable st = v3.symbolTable;
       n.accept(v3,"");
-      System.out.println("Symbol Table");
       System.out.println(st);
+
+      System.out.println("\n\nType Checking");
       TypeCheckingVisitor v4 = new TypeCheckingVisitor(st);
       n.accept(v4,"");
+      System.out.println(v4.num_errors+" type errors found");
+
+      System.out.println("\n\nDone!");
+
     } catch (Exception e) {
       System.out.println("Oops.");
       System.out.println(e.getMessage());
