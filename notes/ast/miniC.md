@@ -20,7 +20,9 @@ text in the way we generate code. Our approach will be to first build a very ine
 and then to circle back and optimize it over several rounds.
 
 ## Example miniC program
-Here is an example of a miniC program to print a table of fibonacci numbers.
+Here is an example of [a miniC program to print a table of fibonacci numbers](../../code/progs/fibs.c). The first two lines
+are the header and are always the same for every miniC program, it allows us to do some formatted
+printing of integer values.
 ```
 #include <stdio.h>
 void print(int n){printf("%10d\n",n);}
