@@ -58,3 +58,27 @@ for the AST_Visitor.java
         return data;
    }
 ```
+where indentString and getClassName are methods defined at the top of the AST_Visitor class
+```
+ public class AST_Visitor implements Visitor
+ {
+   private int indent = 0;
+ 
+   private String indentString() {
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < 4*indent; ++i) {
+        sb.append(' ');
+        }
+        return sb.toString();
+   }
+
+     /*
+  getClassName(c) returns name of the Java class c without the package prefix
+  */
+  public static String getClassName(Object c){
+     String s = c.getClass().getName();
+     return s.substring(s.lastIndexOf('.')+1);
+   }
+
+...
+```
