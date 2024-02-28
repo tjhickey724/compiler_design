@@ -105,11 +105,12 @@ public class TypeCheckingVisitor implements Visitor {
         Identifier i = node.i;
         ExpList e2=node.e2;
 
+        
+        // first we get the method m that this call is calling
+        MethodDecl m = st.methods.get("$"+i.s);
+        
         // paramTypes is the type of the parameters of the method
         // e.g. "int int boolean int"
-  
-        MethodDecl m = st.methods.get("$"+i.s);
-
         // we get the parameter types by "typing" the formals
         // this is somewhat inefficient, we should do this
         // when we construct the symbol table....
