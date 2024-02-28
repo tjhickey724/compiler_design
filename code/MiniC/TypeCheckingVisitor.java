@@ -105,14 +105,10 @@ public class TypeCheckingVisitor implements Visitor {
         Identifier i = node.i;
         ExpList e2=node.e2;
 
-        
-
-
         // paramTypes is the type of the parameters of the method
         // e.g. "int int boolean int"
   
         MethodDecl m = st.methods.get("$"+i.s);
-
 
         // we get the parameter types by "typing" the formals
         // this is somewhat inefficient, we should do this
@@ -122,10 +118,7 @@ public class TypeCheckingVisitor implements Visitor {
         if (node.e2 != null){
             argTypes = (String) node.e2.accept(this, data);
         }
-        
-
         if (!paramTypes.equals(argTypes)) {
-
             System.out.println("Call Type error: " + paramTypes + " != " + argTypes+" in method "+i.s);
             System.out.println("in \n"+node.accept(miniC,0));
             num_errors++;
