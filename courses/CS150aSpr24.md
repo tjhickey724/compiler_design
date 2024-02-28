@@ -44,7 +44,8 @@ The textbook we will use is
 * L16: Thu 2/15/2024
 
 ## Week 7: 2/26/2024-3/12024  Abstract Syntax Trees
-* L17: Mon 2/26/2024 
+* L17: Mon 2/26/2024
+* L18: Wed 2/28/2024 miniC and Type Checking
 
 
 
