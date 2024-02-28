@@ -28,7 +28,7 @@ miniJava and miniC are in the package syntaxtree.
 * [printing the miniC AST](./miniC_printAST.md)
 * [pretty printing the miniC program](miniC_prettyprint.md)
 * [computing the miniC symbol table](./miniC_symbol_table.md)
-* [type checking miniC](./miniC_type_checking.md]
+* [type checking miniC](./miniC_type_checking.md)
 
 
 
