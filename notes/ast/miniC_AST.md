@@ -40,9 +40,27 @@ variable declarations (though we could easily add the with a rule
 * ```MethodDeclList n = t.Start();```
 
 Each Grammar Rule in the miniC language is annotated with some additional code
-to generate the Abstract Syntax Tree for that node.  Let's look at the MethodDecl rule
-as a good example:
+to generate the Abstract Syntax Tree for that node.  The toplevel code is for the
+Start nonterminal and its javacc code is
+```
+MethodDeclList Start():
+{
+  MethodDeclList ms;
+}
+{
+  <PREFACE>
+   ms = MethodDecls()
+  {return ms;}
+  <EOF>
 
+}
+```
+Oberve that it returns a MethodDeclList node as the rool of the AST for the miniC program.
+It expects to see the <PREFACE> token which defines the print function in C,
+then it looks for the MethodDecls and returns it.
+
+
+Let's look at the MethodDecl ruleas a good example of a more complex rule:
 ```
 MethodDecl MethodDecl()  :
 {
