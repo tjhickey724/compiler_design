@@ -10,21 +10,31 @@ and to have another HashMap that returns the string representation of the type o
 
 Naming is a little tricky because two different methods can have the same variables names with different types, e.g.
 ```
+#include <stdio.h>
+#include <stdbool.h>
+void print(int n){printf("%10d\n",n);}
+
 
 int main(int x){
   int a;
-  boolean b;
+  bool b;
   b = test2(a);
-  if (b) return a;
+  if (b) 
+    b=a;
+  else
+    b=a*a;
+  return b;
 }
 
-int test2(boolean x){
-  boolean a;
+int test2(bool x){
+  bool a;
   int b;
   if (a) {
     b = main(a<0);
-    return b;
+  } else {
+    b = main(a);
   }
+  return b;
 }
 ```
 What are the type errors in this program (if any...)?
