@@ -1,4 +1,6 @@
 # Computing a Symbol Table for a miniC program
+
+## Defining the symbol table
 A symbol table is a map from identifiers to their "types". Our approach will be to implement it using hashtables for each of the major types:
 * methods
 * formal parameters
@@ -35,6 +37,8 @@ When we store and lookup types we will need to prepend the prefix...
 
 The [SymbolTable.java](../../code/MiniC/SymbolTable.java) code defines a simple class which creates those four HashMaps 
 and includes a toString to print them out.
+
+## Generating a Symbol Table with a Visitor
 
 We can now define a Visitor which will populate the SymbolTable each time it finds a MethodDecl, VarDecl, or Formal
 [SymbolTableVisitor.java](../../code/MiniC/SymbolTableVisitor.java)
@@ -94,5 +98,29 @@ When you extend this to MiniJava, you will need to add another layer of context 
 that the Methods, Formals, and Locals appear in. You'll also need to expand the types to include
 int[] and user-defined classes.
 
+## Invoking the Symbol Table Generator from javacc
+Below is the modified code from the main method in the MiniC.jj file which creates the SymbolTableVisitor and invokes it with the empty context "" as its data parameter, and 
+prints out the Symbol Table after processing:
 
+```
+public static void main(String args[]) {
+    MiniC t = new MiniC(System.in);
+    try {
+      MethodDeclList n = t.Start();
+
+      System.out.println("\n\nGenerating Symbol Table");
+      SymbolTableVisitor v3 = new SymbolTableVisitor(); // generates a SymbolTableVisitor
+      SymbolTable st = v3.symbolTable;
+      n.accept(v3,"");  // create the symbol table starting with empty context prefix: ""
+      System.out.println(st);  // print out the symbol table
+
+      System.out.println("\n\nDone!");
+
+    } catch (Exception e) {
+      System.out.println("Oops.");
+      System.out.println(e.getMessage());
+      e.printStackTrace();
+    }
+  }
+```
 
