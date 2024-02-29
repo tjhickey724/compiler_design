@@ -41,13 +41,13 @@ What are the type errors in this program (if any...)?
 
 Our approach will be to prepend the method name for all formals and local variables, so the keys of the symbol table for this program would be
 ```
-$test$x  of type int
-$test$a  of type int
-$test$b  of type boolean
+$main$x  of type int
+$main$a  of type int
+$main$b  of type boolean
 $test2$x of type boolean
 $test2$a of type boolean
 $test2$b of type int
-$test  of type MethodDecl
+$main  of type MethodDecl
 $test2 of type MethodDecl
 ```
 When we store and lookup types we will need to prepend the prefix...
