@@ -10,18 +10,25 @@ and to have another HashMap that returns the string representation of the type o
 
 Naming is a little tricky because two different methods can have the same variables names with different types, e.g.
 ```
+
 int test(int x){
   int a;
   boolean b;
+  b = test2(a);
   if (b) return a;
 }
 
 int test2(boolean x){
   boolean a;
   int b;
-  if (a) return b;
+  if (a) {
+    b = test(a<0);
+    return b;
+  }
 }
 ```
+What are the type errors in this program (if any...)?
+
 Our approach will be to prepend the method name for all formals and local variables, so the keys of the symbol table for this program would be
 ```
 $test$x  of type int
@@ -51,6 +58,7 @@ For miniC the only grammar rules we need to modify in the DefaultVisitor are:
 In each case we simply create the extended name for the identifier (by adding a prefix indicating
 its location in a method), and then put it into the SymbolTable.. 
 
+### Processing Method Declarations
 Here is the modified code for the MethodDecl.  It shows where we extend the prefix for
 declarations inside the method. Also, we add a link to the MethodDecl into our Symbol Table
 so that when type checking a method call we can look up the types and position of the formal
@@ -79,6 +87,8 @@ public Object visit(MethodDecl node, Object data){
         return data; 
     }
 ```
+
+### Processing Local Variable Declarations
 Processing a VarDecl is even simpler - we create the extended name and 
 put the VarDecl node in a symbol table as well as the type name.
 ```
