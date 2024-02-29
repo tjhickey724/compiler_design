@@ -22,7 +22,10 @@ repetitive nature of compiler code!
 
 ## Generating the miniC Abstract Syntax Trees
 Our first step is to complete the front end of the compiler by converting the program
-into an abstract syntax tree. The classes we use to build the abstract syntax trees for
+into an abstract syntax tree and then performing semantic analysis on the tree to
+report on all (if any) Type Errors. 
+
+The classes we use to build the abstract syntax trees for
 miniJava and miniC are in the package syntaxtree.  
 * [generating the miniC Abstract Syntax Tree](./miniC_AST.md)
 * [printing the miniC AST](./miniC_printAST.md)
