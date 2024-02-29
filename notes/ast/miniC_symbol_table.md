@@ -39,6 +39,60 @@ and includes a toString to print them out.
 We can now define a Visitor which will populate the SymbolTable each time it finds a MethodDecl, VarDecl, or Formal
 [SymbolTableVisitor.java](../../code/MiniC/SymbolTableVisitor.java)
 
+For miniC the only grammar rules we need to modify in the DefaultVisitor are:
+* Formal  - for the names of formal parameters in methods
+* MethodDecl - for the names of the methods and their return types and lists of formals
+* VarDecl - for the names and types of the local variables
+
+In each case we simply create the extended name for the identifier (by adding a prefix indicating
+its location in a method), and then put it into the SymbolTable.. 
+
+Here is the modified code for the MethodDecl.  It shows where we extend the prefix for
+declarations inside the method. Also, we add a link to the MethodDecl into our Symbol Table
+so that when type checking a method call we can look up the types and position of the formal
+parameters to make sure they agree with the types of the arguments, and we can check that the
+return type matches its context... 
+
+```
+public Object visit(MethodDecl node, Object data){ 
+        Type t=node.t;
+        Identifier i=node.i;
+        FormalList f=node.f;
+        VarDeclList v=node.v;
+        StatementList s=node.s;
+        Exp e=node.e;
+        String data2 = data + "$" + i.s;  // we change the prefix when processing formals and decls
+        //node.t.accept(this, data2);  // we don't need to traverse the type or identifier 
+        //node.i.accept(this, data2);
+        node.f.accept(this, data2);  // processing the formals (which can't be empty...)
+        if (node.v != null) {
+            node.v.accept(this, data2);  // processing the variable declarations (which can be empty)
+        }
+        //node.s.accept(this, data2);
+        //node.e.accept(this, data2);
+
+        symbolTable.methods.put(data + "$" + i.s, node);
+        return data; 
+    }
+```
+Processing a VarDecl is even simpler - we create the extended name and 
+put the VarDecl node in a symbol table as well as the type name.
+```
+    public Object visit(VarDecl node, Object data){ 
+        Type t=node.t;
+        Identifier i=node.i;
+        node.t.accept(this, data);
+        node.i.accept(this, data);
+        symbolTable.variables.put(data + "$" + i.s, node);
+        symbolTable.typeName.put(data + "$" + i.s, getTypeName(t));
+
+        return data;
+    }
+```
+
+When you extend this to MiniJava, you will need to add another layer of context for the Class
+that the Methods, Formals, and Locals appear in. You'll also need to expand the types to include
+int[] and user-defined classes.
 
 
 
