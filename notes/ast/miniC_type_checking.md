@@ -111,3 +111,14 @@ public Object visit(Call node, Object data){
         return getTypeName(m.t);
     } 
 ```
+
+
+## Type Checking MiniJava
+The same approach used here will work with MiniJava but 
+* you will have additional types (int[] and user defined classes), and
+and you will need to type check
+* constructors (new Object and new Array)
+* array access and assignment
+
+Also, you'll need to make sure that each of the MiniJavaTypeCheckingVisitor methods
+returns the correct type (possibly "*void")
