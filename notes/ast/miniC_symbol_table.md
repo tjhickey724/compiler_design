@@ -11,7 +11,7 @@ and to have another HashMap that returns the string representation of the type o
 Naming is a little tricky because two different methods can have the same variables names with different types, e.g.
 ```
 
-int test(int x){
+int main(int x){
   int a;
   boolean b;
   b = test2(a);
@@ -22,7 +22,7 @@ int test2(boolean x){
   boolean a;
   int b;
   if (a) {
-    b = test(a<0);
+    b = main(a<0);
     return b;
   }
 }
