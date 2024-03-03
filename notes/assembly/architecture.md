@@ -3,6 +3,7 @@
 For this section, we expect you to read Chapter 2 of the textbook on X86-64 Assembly Language Programming
 and we make a few comments about the text in regards to compilation.
 
+There are 16 64-bit registers that by convention have certain roles as listed below.
 ```
 rax - return value
 rbx - callee save value (preserved after calling)
