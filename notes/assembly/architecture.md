@@ -33,6 +33,21 @@ r15 - callee save
 
 ## Section 2.5
 Memory is laid out with the code and static data at the low end, followed by the heap which grows up, and the stack which grows down
+```
+Stack growing down
+...
+"top" of stack
+...
+unused space
+...
+"top" of heap
+...
+"start of heap"
+BSS 0 uninitialized data
+initialized data
+text (code)
+lowest bytes reserved for the operating system
+```
 
 
 
