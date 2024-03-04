@@ -1,4 +1,4 @@
-# Architecture ovewview
+# Architecture overview
 
 For this section, we expect you to read Chapter 2 of the textbook on 
 * [ X86-64 Assembly Language Programming in Ubuntu](http://www.egr.unlv.edu/~ed/assembly64.pdf)
