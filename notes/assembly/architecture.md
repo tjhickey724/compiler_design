@@ -31,10 +31,10 @@ rcx - arg 4
 rdx - arg 3
 rsi - arg 2
 rdi - arg 1
-rbp - callee save (frame pointer)
-rsp - stack pointer
 r8 -  5th arg
 r9 -  6th arg
+rbp - callee save (frame pointer)
+rsp - stack pointer
 r10 - temporary
 r11 - temporary
 r12 - callee save
@@ -103,5 +103,31 @@ The stack contains
 * the arguments to function calls
 * the local variables declared in a function
 * temporary variables needed to evaluate expressions
+
+Two registers are used to keep track of your place in the stack
+* rsp  is the pointer to the top of the stack
+* rbp  is the pointer to the beginning of the current Frame for the current function
+
+The structure of a frame for a function call f(a1,a2,a3,...,an)  with locals b1,b2,...,br
+```
+an
+...
+a3
+a3
+a1
+return address (and BEGINNING OF FRAME for f, this address is stored in %rbp)
+b1
+b2
+...
+b4
+t1 = temporaries used when evaluating big formulas
+t2
+...
+tk
+TOP OF THE STACK (this address is stored in %rsp
+```
+When the function exits is stores the returned value in the register %rax
+
+
 
 
