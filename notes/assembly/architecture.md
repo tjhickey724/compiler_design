@@ -1,7 +1,19 @@
 # Architecture ovewview
 
-For this section, we expect you to read Chapter 2 of the textbook on X86-64 Assembly Language Programming
+For this section, we expect you to read Chapter 2 of the textbook on 
+* [ X86-64 Assembly Language Programming in Ubuntu](http://www.egr.unlv.edu/~ed/assembly64.pdf)
+
 and we make a few comments about the text in regards to compilation.
+
+The Assembly language in the book is somewhat different from the code we will generated using
+C compilers and using our own compiler. We'll point out the differences as we go. Then main one
+is that the Source and Destination of assembly instructions are reversed
+* textbook    MOV DST SRC
+* cc compiler MOV SRC DST
+
+I encourage you to learn assembly language by writing short C programs and compiling them.
+This week, our goal will be to be able to generated and read/understand that output so we
+can use it to generate our own assembly language from miniJava
 
 ## Section 2.1
 The main components of the computer, from a compiler view, are
@@ -72,5 +84,24 @@ We won't worry about floating point, but it is in the textbook
 Also, we don't worry about Strings, but they are typically encoded with unicode (2 bytes per character)
 
 
+## Chpater 4: Program Format
+The program is laid out is several sections:
+data sections have labels for the data or code
+
+# Chapter 7: Instructions
+There are several kinds of instructions
+* data movement (between registers and/or memory)
+* arithmetic instructions
+* control instructions (e.g. jumps or conditional jumps)
+* logical instructions (and or not ...)
+* conversions (e.g. int to float, float to double, etc.)
+
+
+
+## Chapter 12: Function Calling and Stack Layout
+The stack contains 
+* the arguments to function calls
+* the local variables declared in a function
+* temporary variables needed to evaluate expressions
 
 
