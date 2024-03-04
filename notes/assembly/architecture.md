@@ -37,17 +37,40 @@ Memory is laid out with the code and static data at the low end, followed by the
 Stack growing down
 ...
 "top" of stack
+
 ...
+
 unused space
+
 ...
+
 "top" of heap
 ...
 "start of heap"
+
 BSS 0 uninitialized data
+
 initialized data
+
 text (code)
+
 lowest bytes reserved for the operating system
 ```
+
+## Chapter 3 Data representaiton
+All of our data will be either
+* 32 bit integer (but we could also make them all 64 bit to simplify the compiler)
+* integer arrays (which are allocated in the heap and represented by the 64 bit address of the lowest byte)
+* Java objects (which are also allocated in the heap)
+
+### Signed integers
+in 32 bit integers, the most significant bit is the sign bit
+If the unsigned binary number is n and if the sign bit is 1, then it represents n-2^32
+
+We won't worry about floating point, but it is in the textbook
+
+Also, we don't worry about Strings, but they are typically encoded with unicode (2 bytes per character)
+
 
 
 
