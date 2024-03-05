@@ -166,5 +166,5 @@ Let's walk through the execution of this assembly language program step-by-step
 using these slides on 
 
 [Stack Frame Tracing](./StackFrameTracing.pdf)
-[here is another link](https://docs.google.com/presentation/d/e/2PACX-1vSOVfZLOejeslpO0ugIV1N_L3XI9wvf-5snWRKVYsAURytCzNFlXK55nA8TReNmUxJ_GCqaA_nvbb1Y/pub?start=false&loop=false&delayms=3000&slide=id.p)
+
 
