@@ -61,7 +61,7 @@ _main:                                  ## @main
 	subq	$144, %rsp				## CREATE STACK FRAME (18 longs)
 	.cfi_offset %rbx, -32
 	.cfi_offset %r14, -24
-	movl	$0, -20(%rbp)
+	movl	$0, -20(%rbp)       # Store constants in the stack
 	movq	$11, -32(%rbp)
 	movq	$22, -40(%rbp)
 	movq	$33, -48(%rbp)
@@ -73,7 +73,7 @@ _main:                                  ## @main
 	movq	$99, -96(%rbp)
 	movq	$110, -104(%rbp)
 	movq	$-1, -112(%rbp)
-	movq	-32(%rbp), %rdi
+	movq	-32(%rbp), %rdi   # setup for calling test, by moving first six parameters to appropriates registers
 	movq	-40(%rbp), %rsi
 	movq	-48(%rbp), %rdx
 	movq	-56(%rbp), %rcx
@@ -83,23 +83,23 @@ _main:                                  ## @main
 	movq	-88(%rbp), %r10
 	movq	-96(%rbp), %r11
 	movq	-104(%rbp), %rbx
-	movq	%rax, (%rsp)
+	movq	%rax, (%rsp)       # move last four values to the top of the stack
 	movq	%r10, 8(%rsp)
 	movq	%r11, 16(%rsp)
 	movq	%rbx, 24(%rsp)
-	callq	_test
-	movq	%rax, -112(%rbp)
-	movq	-112(%rbp), %rsi
-	leaq	L_.str(%rip), %rdi
-	movb	$0, %al
-	callq	_printf
-	movl	$1, %r14d
-	movl	%eax, -116(%rbp)        ## 4-byte Spill
-	movl	%r14d, %eax
-	addq	$144, %rsp			## REMOVE STACK FRAME
-	popq	%rbx				## restore callee save registers
+	callq	_test              # call the test function (and jump to the test_ label
+	movq	%rax, -112(%rbp)   # move the return value into the stack
+	movq	-112(%rbp), %rsi   # move it back to the register in prep for calling printf
+	leaq	L_.str(%rip), %rdi # move the format string to the 1st argument position of printf
+	movb	$0, %al            # move 0 to the return address registeer, I don't know why
+	callq	_printf            # jump to the printf code
+	movl	$1, %r14d          # gt ready to return a "1"
+	movl	%eax, -116(%rbp)   ## 4-byte Spill  (as eax is a callee save register)
+	movl	%r14d, %eax        # 
+	addq	$144, %rsp	   ## REMOVE STACK FRAME
+	popq	%rbx		   ## restore callee save registers
 	popq	%r14
-	popq	%rbp				## restore the base of previous frame
+	popq	%rbp		   ## restore the base of previous frame
 	retq
 	.cfi_endproc
                                         ## -- End function
