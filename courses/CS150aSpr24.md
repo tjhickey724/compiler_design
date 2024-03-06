@@ -45,8 +45,12 @@ The textbook we will use is
 
 ## Week 7: 2/26/2024-3/12024  Abstract Syntax Trees
 * L17: Mon 2/26/2024
-* L18: Wed 2/28/2024 [miniC and Type Checking](../notes/ast)
-* L18: Thu 2/29/2024 [miniC and Type Checking](../notes/ast)
+* L18: Wed 2/28/2024 [miniC and Type Checking](../notes/ast/README.md)
+* L18: Thu 2/29/2024 [miniC and Type Checking](../notes/ast/RERADME.md)
+
+## Week 8: 3/4/2024-3/8/2024  X86-64 Assembly Language Progrmmaing
+* L19: Mon 3/4/2024 [Overview of X86-64](../notes/assembly/README.md)
+* L20: Mon 3/4/2024 [Stack Frames and Calling Conventions](../notes/assembly/README.md)
 
 
 
