@@ -3,8 +3,12 @@ This page contains links to the notes for the lectures
 in the Compiler Design Class at Brandeis University in Spring 2024 
 taught by Professor Tim Hickey.
 
-The textbook we will use is
+## Textbooks
+The main textbook we will use is
 * MCIJ: Modern Compiler Implementation in Java (2nd Edition) by Andrew W Appel
+
+For assembly language we wil use
+* [X86-64 Assembly Programming for Ubuntu](http://www.egr.unlv.edu/~ed/assembly64.pdf)
 
 ## Week 1 1/8/2024-1/12/2024  Overview of Course and Intro to Lexical Analysis
 * Homework
