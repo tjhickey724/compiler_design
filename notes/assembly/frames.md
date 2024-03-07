@@ -165,6 +165,6 @@ L_.str:                                 ## @.str
 Let's walk through the execution of this assembly language program step-by-step
 using these slides on 
 
-[Stack Frame Tracing](./StackFrameTracing.pdf)
+[Stack Frame Tracing](https://docs.google.com/presentation/d/1qsJ4KKx4N46kvxvNUNP1nLmnhnXTwX1srHDXHh2IKMc/edit#slide=id.p)https://docs.google.com/presentation/d/1qsJ4KKx4N46kvxvNUNP1nLmnhnXTwX1srHDXHh2IKMc/edit#slide=id.p)
 
 
