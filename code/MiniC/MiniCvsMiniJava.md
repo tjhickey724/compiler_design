@@ -40,3 +40,24 @@ Exp16 -> <ID> <LPAREN> ExpList <RPAREN>
 Exp16 -> <ID>
 ExpList -> Exp (<COMMA> Exp)*
 ```
+MiniJava adds the following rules:
+```
+Start -> MainClass ClassDeclList   (replaces the Start rule of MiniC)
+MainClass -> <CLASS> <ID> <LCURLY>
+               <PUBLIC> <STATIC> <VOID> <MAIN>
+                 <LPAREN> <STRING> <LBRACKET><RBRACKET> <ID> <RPAREN>
+                  <LCURLY> Statement <RCURLY>
+              <RCURLY>
+ClassDeclList -> ClassDecl *
+ClassDecl -> <CLASS> <ID> <LCURLY>
+                VarDeclList
+                MethodDeclList
+              <RCURLY>
+Type -> <INT> <LBRACKET> <RBRACKET>     (MiniC doesn't int array types)
+Type -> <ID>                            (MiniC doesn't have class types)
+Statement -> <WHILE> <LPAREN> Exp <RPAREN> Statement
+Statement -> <ID><LBRACKET>Exp<RBRACKET> <EQUALS> Exp <SEMICOLON>
+```
+and the <PRINT> token for MiniJava is "System.out.println"
+while it is "print" for MiniC.
+
