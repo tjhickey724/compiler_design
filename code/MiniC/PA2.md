@@ -32,6 +32,9 @@ There are about 8-10 rules to add and/or modify to turn the MiniC parser into a 
 Step 4. Write some MiniJava programs in your test folder and use them to see if the parser is working correctly.
 
 Step 5. Submit your PA2.jj with movies as requested in class.
+ * show yourself compiling PA2.jj to get PA2.java, then compiling that, to get PA2.class
+ * show yourself running PA2 on at least two inputs one that parses and one that doesn't
+ * explain how you implemented one of the grammar rules (e.g. class) in detail
 
 
 
