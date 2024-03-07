@@ -13,4 +13,17 @@ Your goal in this homework is to produce a parser for MiniJava.
 I have given you, in this folder, a parser (PA2.jj) for a subset of MiniJava called MiniC.
 You see the definitions of both languages at this link: [MiniC vs MiniJava](./MiniCvsMiniJava.md)
 
+## Steps
+* Step 1. Download the file [PA2.jj](./PA2.jj), the [javacc.jar](../javacc.jar) file, and the folder [test](./test), to your computer (or download this entire MiniC folder!)
+* Step 2. Test the code as it is
+```
+java -classpath javacc.jar javacc PA2.jj
+java PA2.java
+java PA2 < tests/hello.c
+java PA2 < tests/hello_bug1.c
+```
+it should give no errors on the first test, but find an syntax error on the second.
+* Step 3. Modify the PA2.jj file to use the MiniJava rules as described in [MiniC vs MiniJava](./MiniCvsMiniJava.md)
+
+
 
