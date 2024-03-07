@@ -57,7 +57,29 @@ Type -> <INT> <LBRACKET> <RBRACKET>     (MiniC doesn't int array types)
 Type -> <ID>                            (MiniC doesn't have class types)
 Statement -> <WHILE> <LPAREN> Exp <RPAREN> Statement
 Statement -> <ID><LBRACKET>Exp<RBRACKET> <EQUALS> Exp <SEMICOLON>
+
 ```
+and modifies following expression rules:
+```
+Exp -> Exp4 (<AND> Expr)*
+Exp4 -> Exp9 (<LT> Exp9)*
+Exp12 -> Exp14
+      (<DOT> <LENGTH>
+       |
+       <DOT> <ID> <LPAREN> Explist <RPAREN>
+       |
+        <LBRACKET> Exp <RBRACKET>
+      )
+Exp14 -> (<BANG> Exp16 | Exp16)
+Exp16 -> <THIS>
+Exp16 -> <NEW> <INT> <LBRACKET> Exp <RBRACKET>
+Exp16 -> <NEW> <ID> <LPAREN> <RPAREN>
+```
+and remove the following MiniC rule for function calls:
+```
+Exp16 -> <ID> <LPAREN> ExpList <RPAREN>
+```
+as we have method calls in MiniJava with the second rule of Exp14
 
 ## Tokens
 MiniC and MiniJava have almost the same tokens, except that
