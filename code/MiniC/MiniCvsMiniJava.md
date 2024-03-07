@@ -58,6 +58,15 @@ Type -> <ID>                            (MiniC doesn't have class types)
 Statement -> <WHILE> <LPAREN> Exp <RPAREN> Statement
 Statement -> <ID><LBRACKET>Exp<RBRACKET> <EQUALS> Exp <SEMICOLON>
 ```
-and the <PRINT> token for MiniJava is "System.out.println"
-while it is "print" for MiniC.
+
+## Tokens
+MiniC and MiniJava have almost the same tokens, except that
+* MiniJava has a <PREFACE> token with value
+```    #include <stdio.h>\n#include <stdbool.h>\nvoid print(int n){printf(\"%10d\\n\",n);}```
+and the Print tokens differ
+*  ```System.out.println``` for MiniJava
+*  ```print``` for MiniC
+
+So to extend a program from one that works on MiniC to one that works on MiniJava you need to handle 8 more grammar rules
+and change two tokens.
 
