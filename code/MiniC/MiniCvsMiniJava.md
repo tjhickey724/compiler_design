@@ -62,7 +62,7 @@ Statement -> <WHILE> <LPAREN> Exp <RPAREN> Statement
 Statement -> <ID><LBRACKET>Exp<RBRACKET> <EQUALS> Exp <SEMICOLON>
 
 ```
-and modifies following expression rules
+MiniJava also modifies following expression rules
 ```
 Exp -> Exp4 (<AND> Expr)*       // adding logical conjunction
 Exp4 -> Exp9 (<LT> Exp9)*       // moving < down the hierarchy
@@ -79,7 +79,7 @@ Exp16 -> <THIS>                   // adding the "this" variable
 Exp16 -> <NEW> <INT> <LBRACKET> Exp <RBRACKET>  // adding new array constructor
 Exp16 -> <NEW> <ID> <LPAREN> <RPAREN>  // adding new object constructor
 ```
-and remove the following MiniC rule for function calls..
+and removes the following MiniC rule for function calls as we already have a rule for method calls.
 ```
 Exp16 -> <ID> <LPAREN> ExpList <RPAREN>   // old rule for function calls
                                           // replace by Exp12 rule for method calls
