@@ -14,7 +14,8 @@ I have given you, in this folder, a parser (PA2.jj) for a subset of MiniJava cal
 You see the definitions of both languages at this link: [MiniC vs MiniJava](./MiniCvsMiniJava.md)
 
 ## Steps
-Step 1. Download the file [PA2.jj](./PA2.jj), the [javacc.jar](../javacc.jar) file, and the folder [test](./test), to your computer (or download this entire MiniC folder!)
+Step 1. Download the file [PA2.jj](./PA2.jj) and the folder [test](./test), to your computer (or download this entire MiniC folder!)
+Also find the javacc.jar file and download it to your folder.
 
 Step 2. Test the code as it is
 ```
@@ -26,6 +27,11 @@ java PA2 < tests/hello_bug1.c
 it should give no errors on the first test, but find an syntax error on the second.
 
 Step 3. Modify the PA2.jj file to use the MiniJava rules as described in [MiniC vs MiniJava](./MiniCvsMiniJava.md)
+There are about 8-10 rules to add and/or modify to turn the MiniC parser into a MiniJava parser
+
+Step 4. Write some MiniJava programs in your test folder and use them to see if the parser is working correctly.
+
+Step 5. Submit your PA2.jj with movies as requested in class.
 
 
 
