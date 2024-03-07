@@ -40,7 +40,8 @@ Exp16 -> <ID> <LPAREN> ExpList <RPAREN>
 Exp16 -> <ID>
 ExpList -> Exp (<COMMA> Exp)*
 ```
-MiniJava adds the following rules:
+MiniJava adds the following rules for defining classes (including the main class)
+and adding integer array types (int[]) and class types (e.g. ArrayList) 
 ```
 Start -> MainClass ClassDeclList   (replaces the Start rule of MiniC)
 MainClass -> <CLASS> <ID> <LCURLY>
@@ -59,27 +60,29 @@ Statement -> <WHILE> <LPAREN> Exp <RPAREN> Statement
 Statement -> <ID><LBRACKET>Exp<RBRACKET> <EQUALS> Exp <SEMICOLON>
 
 ```
-and modifies following expression rules:
+and modifies following expression rules
 ```
-Exp -> Exp4 (<AND> Expr)*
-Exp4 -> Exp9 (<LT> Exp9)*
+Exp -> Exp4 (<AND> Expr)*       // adding logical conjunction
+Exp4 -> Exp9 (<LT> Exp9)*       // moving < down the hierarchy
 Exp12 -> Exp14
-      (<DOT> <LENGTH>
+      (<DOT> <LENGTH>           // adding the array length operator x.length
        |
-       <DOT> <ID> <LPAREN> Explist <RPAREN>
+       <DOT> <ID> <LPAREN> Explist <RPAREN>  // adding method calls f.a(1,2)
        |
-        <LBRACKET> Exp <RBRACKET>
+        <LBRACKET> Exp <RBRACKET>   //adding array access
+                                  // e.g. f(5)[2] if f returns an int[]
       )
-Exp14 -> (<BANG> Exp16 | Exp16)
-Exp16 -> <THIS>
-Exp16 -> <NEW> <INT> <LBRACKET> Exp <RBRACKET>
-Exp16 -> <NEW> <ID> <LPAREN> <RPAREN>
+Exp14 -> (<BANG> Exp16 | Exp16)   // adding logical negation
+Exp16 -> <THIS>                   // adding the "this" variable
+Exp16 -> <NEW> <INT> <LBRACKET> Exp <RBRACKET>  // adding new array constructor
+Exp16 -> <NEW> <ID> <LPAREN> <RPAREN>  // adding new object constructor
 ```
-and remove the following MiniC rule for function calls:
+and remove the following MiniC rule for function calls..
 ```
-Exp16 -> <ID> <LPAREN> ExpList <RPAREN>
+Exp16 -> <ID> <LPAREN> ExpList <RPAREN>   // old rule for function calls
+                                          // replace by Exp12 rule for method calls
 ```
-as we have method calls in MiniJava with the second rule of Exp14
+
 
 ## Tokens
 MiniC and MiniJava have almost the same tokens, except that
