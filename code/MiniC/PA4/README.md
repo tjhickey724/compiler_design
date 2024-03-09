@@ -11,7 +11,15 @@ The learning goals of this assignment are for you to
 We could do all of this using a javacc file just as we did for PA3, but you will see that using the Visitor pattern
 is much simpler with code that is relatively easy to read, write, and modify.
 
-This assignment has four parts corresponding to the four steps listed above.
+This assignment has four parts corresponding to the four parts listed above.
+
+## STEPS
+1. copy the MiniC_v4.jj file to your folder, along with the syntaxtree folder, and the javacc.jar file as well
+2. Rename MiniC_v4.jj to be PA4.jj and replace all occurrences of MiniC_v4 in the code with PA4
+3. Follow the instructions below for PA4a to extend PA4.jj to generate ASTs for all of MiniJava
+4. Follow the instructions for PA4b to extend the PP_Visitor.java file to pretty print all of MiniJava, not just MiniC
+5. follow the instructions for PA4c to extend the SymbolTable_Vistor.java file to build a symbol table for all of MiniJava
+6. follow the instructions for PA4d to extend the TypeChecking_Visitor.java file to syntax check full MiniJava programs
 
 ## PA4a Generate an Abstract Syntax Tree
 An Abstract Syntax tree is a tree where each node corresponds to a grammar rule. We usually don't use a much
@@ -89,5 +97,32 @@ For example, if we applied this rule to (2*3*4) we would get
     new IntegerLiteral(4)
   )
 ```
+Now you need to do this for the 10-15 new rules of MiniJava that aren't in MiniC!
+For example, the rule for Program from PA3 is
+```
+void Start(int n):
+{}
+{
+  MainClass(n)
+  ClassDeclList(n)
+}
+```
+and this would change to
+```
+void Start(int n):
+{
+ MainClass m;
+ ClassDeclList clist;
+}
+{
+  m =MainClass(n)
+  clist = ClassDeclList(n)
+  {return new Program(m,clist);}
+}
+```
+The MiniC_v4.jj file pretty prints its Abstract Syntax Tree using the AST_Visitor.java file.
+When you modify 
+
+## PA4b - Pretty Printing with a Visitor
 
 
