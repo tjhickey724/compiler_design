@@ -129,9 +129,9 @@ XXX Exp16 -> Identifier <LPAREN> ExpList <RPAREN>
 
 ## Tokens
 MiniC and MiniJava have almost the same tokens, except that
-* MiniJava has a <PREFACE> token with value
+* MiniJava has a \<PREFACE\> token with value
 ```    #include <stdio.h>\n#include <stdbool.h>\nvoid print(int n){printf(\"%10d\\n\",n);}```
-and the Print tokens differ
+and the <\PRINT\> tokens differ
 *  ```System.out.println``` for MiniJava
 *  ```print``` for MiniC
 
