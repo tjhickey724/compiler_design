@@ -53,6 +53,7 @@ You must use a similar approach for the 10-12 additional rules in MiniJava that 
 * Not
 * And
 * This
+* ... and a few others!
 
 You will need to uncomment part of the code in the PA4.jj main method that creates the PP_visitor so it will call the Visitor on the tree:
 This code does the following:
