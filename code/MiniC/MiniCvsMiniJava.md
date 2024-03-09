@@ -1,8 +1,9 @@
 # MiniC vs MiniJava
 
-MiniC is a subset of C, containing function calls and integer variables.
+MiniC is a subset of C, containing function calls and integer variables, assignments, and if statements.
 
-MiniJava is a subset of Java, containing classes, instance variables and methods, and integer, boolean, and integer array variables.
+MiniJava is a subset of Java, containing classes, instance variables and methods, and integer, boolean, and integer array variables
+with assignments, if and while statements. 
 It is the language defined in Andrew Appel's textbook on Modern Compilers in Java.
 
 These two languages are very close, as you wll see below. This shows just how similar Java and C are.
