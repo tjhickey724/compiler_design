@@ -46,6 +46,7 @@ where Exp is an abstract class with the following concrete classes
   new And(Exp,Exp)
   new This()
   new ArrayLookup()
+  new ArrayLength()
 
 and we have several classes for lists of elements of the same class
 new ExpList(Exp, ExpList)
