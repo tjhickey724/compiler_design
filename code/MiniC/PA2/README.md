@@ -1,6 +1,6 @@
 # Programming Assignment 2
 The purpose of this assignment is to have you learn how to write a recursive descent LL(k) parser 
-using the [[javacc parser generator](https://javacc.github.io/javacc/). ](https://javacc.github.io/javacc/)
+using the [javacc parser generator](https://javacc.github.io/javacc/)
 
 Parsing is a fundamental tool of Computer Science that is used whenever we are designing software that
 needs to process commands defined in a formal language such as full programming languages or small
