@@ -56,10 +56,10 @@ MiniJava adds the following rules for
 
 ## the MiniJava grammar
 * the rules at have been added are prefixed with ***
-* the rules that have been modified are prefixed with +++
+* the rules that have been modified are prefixed with MMM
 * the rules that have been removed are prefixed with XXX
 ```
-+++ Start -> MainClass ClassDeclList   (replaces the Start rule of MiniC)
+MMM Start -> MainClass ClassDeclList   (replaces the Start rule of MiniC)
 *** MainClass -> <CLASS> Identifier <LCURLY>
                <PUBLIC> <STATIC> <VOID> <MAIN>
                  <LPAREN> <STRING> <LBRACKET><RBRACKET> Identifier <RPAREN>
@@ -92,7 +92,7 @@ MiniJava adds the following rules for
     Statement -> Identifier <EQUALS> Exp <SEMICOLON>
 *** Statement -> <WHILE> <LPAREN> Exp <RPAREN> Statement
 *** Statement -> Identifier<LBRACKET>Exp<RBRACKET> <EQUALS> Exp <SEMICOLON>
-+++ Exp -> Exp4 (<AND> Expr)*       // adding logical conjunction
+MMM Exp -> Exp4 (<AND> Expr)*       // adding logical conjunction
 *** Exp4 -> Exp9 (<LT> Exp9)*       // moving < down the hierarchy
     Exp9 -> Exp11 (<PLUS> Exp11 | <MINUS> Exp11) *
     Exp11 -> Exp12 (<TIMES> Exp12)*
@@ -104,7 +104,7 @@ MiniJava adds the following rules for
         <LBRACKET> Exp <RBRACKET>   //adding array access
                                   // e.g. f(5)[2] if f returns an int[]
       )
-+++ Exp14 -> (<BANG> Exp16 | Exp16)   // adding logical negation
+MMM Exp14 -> (<BANG> Exp16 | Exp16)   // adding logical negation
     Exp16 -> <NUMBER>
     Exp16 -> <TRUE>
     Exp16 -> <FALSE>
