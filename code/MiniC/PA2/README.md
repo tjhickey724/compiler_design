@@ -57,7 +57,11 @@ The rest of the changes are similar...
 
 ## Step 4. Test your code
 Write some MiniJava programs in your test folder and use them to see if the parser is working correctly.
-There are a few there for testing C programs, but  you need to add some for testing Java programs
+There are a few there for testing C programs, but  you need to add some for testing Java programs.
+The file "mjPP.java" is a MiniJava program with many of the features of MiniJava that is reasonably will styled.
+The file "mjPPa.java" is essentially the same program but with all linebreaks and extra spaces removed. 
+Your program should accept both of them even though they look so different.
+
 
 ## Step 5. Submit your PA2.jj 
 Use the Mastery Learning App to upload your PA2.jj with a comment containing linkes to 60 second movies as requested in class.
