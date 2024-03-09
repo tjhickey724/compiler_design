@@ -129,13 +129,14 @@ XXX Exp16 -> Identifier <LPAREN> ExpList <RPAREN>
 
 ## Tokens
 MiniC and MiniJava have almost the same tokens, except that
-* MiniJava has a \<PREFACE\> token with value
+
+* The \<PRINT\> tokens of MiniC and MiniJava differ
+  *  ```System.out.println``` for MiniJava
+  *  ```print``` for MiniC
+
+* MiniJava has a \<PREFACE\> token including the ".h" files and defining a print function
   
 ```    #include <stdio.h>\n#include <stdbool.h>\nvoid print(int n){printf(\"%10d\\n\",n);}```
-
-and the \<PRINT\> tokens of MiniC and MiniJava differ
-*  ```System.out.println``` for MiniJava
-*  ```print``` for MiniC
 
 So to extend a program from one that works on MiniC to one that works on MiniJava you need to
 make the modifications to the grammar and token rules as shown above.
