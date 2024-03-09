@@ -76,7 +76,11 @@ This needs to find the types of the arguments to the call with this code:
 ```
 where node.e2 is the ExprList for the call, e.g. for addvals(1,3)  it would be 
 ``` java
-new ExprList(new IntegerLiteral(1),new ExprList(IntegerLiteral(3),null))
+new ExprList(
+     new IntegerLiteral(1),
+     new ExprList(
+        new IntegerLiteral(3),
+        null))
 ```
 We invoke the TypeChecker on this and it will return a list of the types (as a string "int int" in our case)
 
