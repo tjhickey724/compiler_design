@@ -1,4 +1,4 @@
-## PA4a Generate an Abstract Syntax Tree
+## PA4a Generate an Abstract Syntax Tree for MiniJava programs
 An Abstract Syntax tree is a tree where each node corresponds to a grammar rule. We usually don't use a much
 simpler grammar for ASTs than we used for parsing because they don't need to be left-recursive or can even be
 ambiguous. 
