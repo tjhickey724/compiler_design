@@ -31,10 +31,10 @@ The SymbolTable_Visitor for MiniC keeps track of the prefix it needs to add and 
 
 You will need to extend this to ClassDecl nodes.
 
-You will also need to uncomment more code in the PA4.jj file
+You will also need to uncomment the code in the PA4.jj file that 
+creates the SymbolTable_Visitor, runs it on the Abstract Syntax Tree, and prints the result, as shown below.
 ``` java
 import syntaxtree.*;
-
 public class MiniC {
 
   /** Main entry point. */
@@ -43,29 +43,25 @@ public class MiniC {
     try {
       MethodDeclList n = t.Start();
 
-/* uncommenting this only in PA4a
-      System.out.println("\n\nPretty Printing the Abstract Syntax Tree");
-      Visitor v1 = new AST_Visitor();  // pretty prints the Abstract Syntax Tree
-      n.accept(v1, 0);
+/* uncomment this only for PA4a
+...
 */
 
-/* uncommenting this only in PA4b 
-      System.out.println("\n\nPretty Print the Program");
-      Visitor v2 = new PP_Visitor();  // pretty prints the MiniC program
-      String s = (String) n.accept(v2, 0);
-      System.out.println("#include <stdio.h>\n#include <stdbool.h>\nvoid print(int n){printf(\"%10d\\n\",n);}");
-      System.out.println(s);
+/* uncomment this only for PA4b
+...
 */
 
-/* uncommenting this in PA4c */
+/* uncomment this only for PA4c and PA4d */
       System.out.println("\n\nGenerating Symbol Table");
       SymbolTableVisitor v3 = new SymbolTableVisitor(); // generates a SymbolTable
       SymbolTable st = v3.symbolTable;
       n.accept(v3,"");
       System.out.println(st);
 
-/* commenting this out until PA4d ... */
 
+/* uncomment this only for PA4d
+...
+*/
       System.out.println("\n\nDone!");
 
     } catch (Exception e) {
