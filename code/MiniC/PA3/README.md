@@ -107,6 +107,7 @@ Use the Mastery Learning App to upload your PA3.jj with a comment containing lin
      * compiling that, to get PA3.class, then
      * printint out tests/mjPPa.java to show it is not pretty printed
      * finally, running PA4 on the tests/mjPPa.java to show it is pretty printed
+     * and testing it a shown above...
  * explain how you transformed one of the grammar rules to a pretty printer, as if you were teaching a classmate how to do this assignment! 
 
 
