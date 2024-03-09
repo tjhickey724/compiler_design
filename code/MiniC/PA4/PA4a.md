@@ -30,8 +30,19 @@ new Program(
  )
 )
 ```
-The javacc program MiniC_v4a constructs this abstract syntax tree for MiniC programs.
-Your job is to extend it to MiniJava programs by adding code for the additional 8-12 rules.
+The AST_Visitor would print this out as follows:
+```
+  Program
+    MainClass
+      Identifier Hello
+      Print
+        Times
+          IntegerLiteral 5
+          IntegerLiteral 5
+```
+The javacc program MiniC_v4a constructs this abstract syntax tree for MiniC programs and print out the AST
+
+Your job in PA4a is to extend it to MiniJava programs by adding code for the additional 8-12 rules in [MiniJava](../MiniCvsMiniJava.md)
 
 This code can be constructed by taking the MiniC_v3 code for pretty printing, and modifying each rule
 so that it returns an Abstract Syntax Tree instead of pretty print the program segment. For example,
