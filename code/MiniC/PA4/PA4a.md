@@ -3,7 +3,7 @@ An Abstract Syntax tree is a tree where each node corresponds to a grammar rule.
 simpler grammar for ASTs than we used for parsing because they don't need to be left-recursive or can even be
 ambiguous. 
 
-The syntax tree folder has a [README file][../syntaxtree/README.md) describing all of the constructors for the tree
+The syntax tree folder has a [README file](../syntaxtree/README.md) describing all of the constructors for the tree
 and giving a simple example. 
 
 For example, the Abstract Syntax Tree for the following simple program:
