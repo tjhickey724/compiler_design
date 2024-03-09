@@ -28,6 +28,17 @@ java PA3 < tests/hello.c
 java PA3 < tests/fibs.c
 ```
 it should pretty print these two programs with no errors.
+To make sure your code is working correctly, you should compile and run the original code and the pretty printed code to see that they have the same results.
+e.g. first see what mjPPa prints when your run it
+```
+cd tests
+javac mjPPa.java
+java mjPPa
+```
+The do the same with the result of pretty printing mjPPa
+```
+java PA3 < tests/mjPPa.java > mjPPa.java
+
 
 ## Step 3. Modify the PA3.jj file
 Modify the PA3.jj file to use the MiniJava rules as described in [MiniC vs MiniJava](./MiniCvsMiniJava.md)
