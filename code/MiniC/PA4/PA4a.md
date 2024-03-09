@@ -98,4 +98,56 @@ void Start(int n):
 }
 ```
 The MiniC_v4.jj file pretty prints its Abstract Syntax Tree using the AST_Visitor.java file.
-When you modify 
+
+You will also need to comment out those parts of the main method MiniC_v4.jj that correspond to PA4b,4c,4d as follows:
+``` java
+import syntaxtree.*;
+
+public class MiniC {
+
+  /** Main entry point. */
+  public static void main(String args[]) {
+    MiniC t = new MiniC(System.in);
+    try {
+      MethodDeclList n = t.Start();
+
+      System.out.println("\n\nPretty Printing the Abstract Syntax Tree");
+      Visitor v1 = new AST_Visitor();  // pretty prints the Abstract Syntax Tree
+      n.accept(v1, 0);
+
+/*  commenting this code out until PA4b
+      System.out.println("\n\nPretty Print the Program");
+      Visitor v2 = new PP_Visitor();  // pretty prints the MiniC program
+      String s = (String) n.accept(v2, 0);
+      System.out.println("#include <stdio.h>\n#include <stdbool.h>\nvoid print(int n){printf(\"%10d\\n\",n);}");
+      System.out.println(s);
+/*
+
+/* commenting this code out until PA4c
+      System.out.println("\n\nGenerating Symbol Table");
+      SymbolTableVisitor v3 = new SymbolTableVisitor(); // generates a SymbolTable
+      SymbolTable st = v3.symbolTable;
+      n.accept(v3,"");
+      System.out.println(st);
+*/
+
+/* commenting this code out until PA4d
+      System.out.println("\n\nType Checking");
+      TypeCheckingVisitor v4 = new TypeCheckingVisitor(st);
+      n.accept(v4,"");
+      System.out.println(v4.num_errors+" type errors found");
+*/
+      System.out.println("\n\nDone!");
+
+    } catch (Exception e) {
+      System.out.println("Oops.");
+      System.out.println(e.getMessage());
+      e.printStackTrace();
+    }
+  }
+
+
+}
+
+
+```
