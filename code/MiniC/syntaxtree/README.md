@@ -1,7 +1,10 @@
 # Abstract Syntax Trees for MiniJava
 
-The abstract syntax tree for MiniJava 
-is created using these constructors:
+The abstract syntax trees for MiniJava programs
+are created using the following constructors.
+From such a tree we can create a symbol table,
+do type checking, pretty print the program,
+generate the assembly language.
 
 ```
 new Program(MainClass, ClassDeclList)
