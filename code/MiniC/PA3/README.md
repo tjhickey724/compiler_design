@@ -31,7 +31,7 @@ it should pretty print these two programs with no errors.
 
 ## Step 3. Modify the PA3.jj file
 Modify the PA3.jj file to use the MiniJava rules as described in [MiniC vs MiniJava](./MiniCvsMiniJava.md)
-You can copy the rules you wrote for the parser PA2.jj and add code to have it pretty print.
+You can copy the new MiniJava rules you wrote for the parser PA2.jj to your PA3.jj and add code to have it pretty print.
 For example, the code for parsing the "Start" symbol in PA2 is
 ```
 void Start():
