@@ -1,50 +1,38 @@
-# Programming Assignment 2
-The purpose of this assignment is to have you learn how to write a recursive descent LL(k) parser 
-using the [[javacc parser generator](https://javacc.github.io/javacc/). ](https://javacc.github.io/javacc/)
+# Programming Assignment 3
+The purpose of this assignment is to have you learn how to write a pretty printer by modifying a
+recursive descent LL(k) parser (from [PA2](../PA2/README.md).
 
-Parsing is a fundamental tool of Computer Science that is used whenever we are designing software that
-needs to process commands defined in a formal language such as full programming languages or small
-domain specific command languages.  Parsing is the first step in building a compiler and this project
-will help you understand how to build LL(k) parsers and test them.  
+Recursive Descent in a very useful and common pattern in programming and this assignment will give
+you some experience using this approach to do something useful -- pretty printing a program. The same
+approach can be used to cross compile to another language, including machine language, but for full
+compilation we will use a better approach - first create the abstract syntax tree and then create modules
+that traverse that tree to perform the many different stages of compilation.  For now, though, the
+assignment is just to modify the code from [PA2](../PA2/README.md) to have it pretty print in addition to parse.
 
-We will use the javacc parser generator to build the parser rather than creating the parsing table by ourselves.
-
-Your goal in this homework is to produce a parser for MiniJava.
-I have given you, in this folder, a parser (MiniC_v2.jj) for a subset of MiniJava called MiniC.
+I have given you, in this folder, a pretty printer (MiniC_v3.jj) for a subset of MiniJava called MiniC.
 You see the definitions of both languages at this link: [MiniC vs MiniJava](../MiniCvsMiniJava.md)
+Your goal is to modify this pretty printer so that it works for MiniJava rather than MiniC.
 
 # Steps
 ## Step 1. Download needed files
-* Download the file [MiniC_v2.jj](./MiniC_v2.jj) and rename it to be PA2.JJ, 
-* Download the folder [test](./test), to your computer (or download this entire MiniC folder!)
+* Download the file [MiniC_v3.jj](./MiniC_v3.jj) and rename it to be PA3.JJ, also replace all occurrences of "MiniC_v3" in the "jj" file with "PA3"
+* Download the folder [tests](./tests), to your computer (or download this entire MiniC folder!)
 * Also find the javacc.jar file from [https://javacc.github.io/javacc/](https://javacc.github.io/javacc/) and download it to your folder.
 
 ## Step 2. Test the code you downloaded
 Test the code as it is using the following commands...
 ```
-java -classpath javacc.jar javacc PA2.jj
-java PA2.java
-java PA2 < tests/hello.c
-java PA2 < tests/hello_bug1.c
+java -classpath javacc.jar javacc PA3.jj
+java PA3.java
+java PA3 < tests/hello.c
+java PA3 < tests/fibs.c
 ```
-it should give no errors on the first test, but find an syntax error on the second.
+it should pretty print these two programs with no errors.
 
-## Step 3. Modify the PA2.jj file
-Modify the PA2.jj file to use the MiniJava rules as described in [MiniC vs MiniJava](./MiniCvsMiniJava.md)
-There are about 8-10 rules to add and/or modify to turn the MiniC parser into a MiniJava parser.
-For example, the rule in MiniC for the START symbol is ```Start -> \<PREFACE\> MethodDeclList```
-and the current code in PA2.jj for the START symbol is therefore
-```
-void Start():
-{}
-{
-  <PREFACE>
-   MethodDeclList()
-  <EOF>
-}
-```
-But the corresponding rule for MiniJava is ``` Start -> MainClass ClassDeclList```  so we must change this the
-PA2.jj code to the following
+## Step 3. Modify the PA3.jj file
+Modify the PA3.jj file to use the MiniJava rules as described in [MiniC vs MiniJava](./MiniCvsMiniJava.md)
+You can copy the rules you wrote for the parser PA2.jj and add code to have it pretty print.
+For example, the code for parsing the "Start" symbol in PA2 is
 ```
 void Start():
 {}
@@ -53,17 +41,60 @@ void Start():
   ClassDeclList()
 }
 ```
-The rest of the changes are similar...
+To get this to pretty print, we just modify the formals to pass in the indentation level "n"
+and pass that level to the MainClass and ClassDeclList methods.
+```
+void Start(int n):
+{}
+{
+  MainClass(n)
+  ClassDeclList(n)
+}
+```
+You have to do this to all of the rules.  For some rules you will need to add print statements.
+The main class in the PA3.jj file defines some printing functions you can use:
+```
+    static void indent(int indent_count){
+        System.out.print(String.format("\n%1$"+4*indent_count+"s", ""));}   
+    static void print(String s){ System.out.print(s); }
+    static void space(){System.out.print(" "); }
+```
+For example, the rule for VarDecl in PA2 is
+```
+void VarDecl() :
+{}
+{ 
+  Type() Identifier() <SEMICOLON>
+}
+```
+To turn this into a pretty printing rule we need to pass in the indent level, and print out
+some indentation spaces, and a space between the type and the identifier, and print out the semicolon.
+```
+void VarDecl(int n) :
+{}
+{ 
+  {indent(n);} Type()
+  {space();} Identifier()
+  <SEMICOLON> {print(";")}
+}
+```
+There are about 8-10 rules to add and/or modify to turn the MiniC parser into a MiniJava parser.
+
+The rest of the changes are similar... It is actually quite easy to generate this pretty printer!
 
 ## Step 4. Test your code
 Write some MiniJava programs in your test folder and use them to see if the parser is working correctly.
-There are a few there for testing C programs, but  you need to add some for testing Java programs
+You should try the "tests/mjPP.java" and "tests/mjPPa.java" files. They contain essentially the same program
+but the second has had all extra spaces and newlines returned. It is valid Java, but is unreadable!
 
-## Step 5. Submit your PA2.jj 
-Use the Mastery Learning App to upload your PA2.jj with a comment containing linkes to 60 second movies as requested in class.
- * show yourself compiling PA2.jj to get PA2.java, then compiling that, to get PA2.class
-and running PA2 on at least two inputs one that parses and one that doesn't
- * explain how you implemented one of the grammar rules (e.g. class) as if you were teaching a classmate how to do this assignment! 
+## Step 5. Submit your PA3.jj 
+Use the Mastery Learning App to upload your PA3.jj with a comment containing linkes to 60 second movies as requested in class.
+ * show yourself
+     * compiling PA3.jj to get PA3.java,
+     * compiling that, to get PA3.class, then
+     * printint out tests/mjPPa.java to show it is not pretty printed
+     * finally, running PA4 on the tests/mjPPa.java to show it is pretty printed
+ * explain how you transformed one of the grammar rules to a pretty printer, as if you were teaching a classmate how to do this assignment! 
 
 
 
