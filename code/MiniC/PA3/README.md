@@ -29,13 +29,25 @@ java PA3 < tests/fibs.c
 ```
 it should pretty print these two programs with no errors.
 To make sure your code is working correctly, you should compile and run the original code and the pretty printed code to see that they have the same results.
-e.g. first see what mjPPa prints when your run it
+e.g. first see what fibs.c prints when your run it
+```
+cd tests
+cc fibs.c
+./a.out
+```
+The do the same with the result of pretty printing fibs.c
+```
+java PA3 < tests/fibs.c > fibs.c
+cc fibs.c
+./a.out
+```
+When you have extended your code to work with MiniJava instead of C, you can run the same tests with java instead of C
+using the test file tests/mjPPa.java
 ```
 cd tests
 javac mjPPa.java
 java mjPPa
 ```
-The do the same with the result of pretty printing mjPPa
 ```
 java PA3 < tests/mjPPa.java > mjPPa.java
 javac mjPPa.java
