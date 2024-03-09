@@ -32,7 +32,8 @@ it should give no errors on the first test, but find an syntax error on the seco
 ## Step 3. Modify the PA2.jj file
 Modify the PA2.jj file to use the MiniJava rules as described in [MiniC vs MiniJava](./MiniCvsMiniJava.md)
 There are about 8-10 rules to add and/or modify to turn the MiniC parser into a MiniJava parser.
-For example, the current code in PA2.jj for the START symbol is
+For example, the rule in MiniC for the START symbol is ```Start -> \<PREFACE\> MethodDeclList```
+and the current code in PA2.jj for the START symbol is therefore
 ```
 void Start():
 {}
@@ -42,9 +43,8 @@ void Start():
   <EOF>
 }
 ```
-corresponding to the rule Start -> \<PREFACE\> MethodDeclList
-
-But the corresponding rule for MiniJava is Start -> MainClass ClassDeclList so we must change this to
+But the corresponding rule for MiniJava is ``` Start -> MainClass ClassDeclList```  so we must change this the
+PA2.jj code to the following
 ```
 void Start():
 {}
@@ -53,6 +53,7 @@ void Start():
   ClassDeclList()
 }
 ```
+The rest of the changes are similar...
 
 ## Step 4. Test your code
 Write some MiniJava programs in your test folder and use them to see if the parser is working correctly.
