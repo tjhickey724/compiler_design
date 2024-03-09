@@ -140,5 +140,10 @@ MiniC and MiniJava have almost the same tokens, except that
 
 So to extend a program from one that works on MiniC to one that works on MiniJava you need to
 make the modifications to the grammar and token rules as shown above.
+* add 12 new rules
+* modify 3 rules
+* delete 1 rule
+
+
 
 
