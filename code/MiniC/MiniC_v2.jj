@@ -1,0 +1,309 @@
+/*
+ * This is MiniC_v2.jj file.
+ * This currently parses and prtty prints MiniC programs
+ * your goal is to extend this so that it parses MiniJava programs
+ * you will have to add javacc rules for 8 grammar rules in MiniJava
+ * that aren't in MiniC
+ */
+
+options {
+  IGNORE_CASE=false;
+}
+
+PARSER_BEGIN(MiniC_v2)
+import syntaxtree.*;
+
+public class MiniC_v2 {
+
+  /** Main entry point. */
+  public static void main(String args[]) {
+    MiniC_v2 t = new MiniC_v2(System.in);
+    try {
+      t.Start(); // pretty print the program
+
+    } catch (Exception e) { // handle any errors that arise, e.g. parsing or tokenizing errors
+      System.out.println("Oops.");
+      System.out.println(e.getMessage());
+      e.printStackTrace();
+    }
+  }
+
+    static int indent_count = 1;
+ 
+    static void indent(){
+        System.out.print(String.format("\n%1$"+4*indent_count+"s", ""));
+    }   
+
+    static void print(String s){
+        System.out.print(s);
+    }
+
+    static void space(){
+        System.out.print(" ");
+    }
+
+}
+
+PARSER_END(MiniC_v2)
+
+SKIP: /* Whitespace */
+{
+  "\t"
+| "\n"
+| "\r"
+| " "
+}
+
+TOKEN:
+{
+   <PUBLIC:     "public">
+|  <PREFACE:    "#include <stdio.h>\n#include <stdbool.h>\nvoid print(int n){printf(\"%10d\\n\",n);}">
+|  <CLASS:      "class">
+|  <STATIC:     "static">
+|  <VOID:       "void">
+|  <STRING:     "String">
+|  <EXTENDS:    "extends">
+|  <RETURN:     "return">
+|  <INT:        "int">
+|  <BOOLEAN:    "bool">
+|  <TRUE:       "true">
+|  <FALSE:      "false">
+|  <IF:         "if">
+|  <ELSE:       "else">
+|  <WHILE:      "while">
+|  <PRINTLN:    "print">
+|  <LENGTH:     "length">
+|  <THIS:       "this">
+|  <NEW:        "new">
+|  <BANG:       "!">
+|  <COLON:      ":">
+|  <SEMICOLON:  ";">
+|  <COMMA:      ",">
+|  <DOT:        ".">
+|  <EQUALS:     "=">
+|  <AND:        "&&">
+|  <LT:         "<">
+|  <GT:         ">">
+|   <LPAREN:    "(" >
+|   <RPAREN:    ")" >
+|   <LBRACKET:    "[" >
+|   <RBRACKET:    "]" >
+|   <LCURLY:    "{" >
+|   <RCURLY:    "}" >
+|  <PLUS_OP:    "+" >
+|  <MINUS_OP:   "-" >
+|  <TIMES_OP:    "*" >
+|  <NUMBER:    (["0"-"9"])+ >
+|  <ID:        (["a"-"z"]|"_"|["A"-"Z"])(["a"-"z"]|"_"|["A"-"Z"]|["0"-"9"])* >
+}
+
+/* Program Syntax */
+
+void Start():
+{Token t;}
+{
+  t= <PREFACE>  {print(t.image); print("\n");}
+   MethodDeclList()
+  <EOF>
+
+}
+
+
+void VarDecls() : 
+{}
+{ 
+    (  LOOKAHEAD(2)  
+       VarDecl() 
+    )*
+}
+
+
+
+void VarDecl() :
+{}
+{   
+    {indent();} Type() 
+    {space();} Identifier() 
+    <SEMICOLON> {print(";");}
+}
+
+void Type():
+{Token t;}
+{ LOOKAHEAD(2)
+  
+  t=<BOOLEAN> {print(t.image);}
+  |
+  t=<INT> {print("int");}
+  
+}
+
+
+void MethodDeclList() : 
+{}
+{ 
+    (  MethodDecl() )*
+}
+
+
+
+void MethodDecl()  :
+{}
+{
+  {indent();} Type() 
+  {space();} Identifier() 
+            <LPAREN>  {print("(");}
+            FormalList() 
+            <RPAREN>  {print(")");}
+      <LCURLY> {indent(); print("{"); indent_count ++;}
+           VarDecls() 
+           Statements()
+           <RETURN> {indent(); print("return ");}
+           Exp() 
+           <SEMICOLON> {print(";");}
+      <RCURLY> {indent_count--; indent(); print("}"); }
+}
+
+
+void FormalList() : 
+{}
+{ 
+   Formal() 
+  ( 
+    <COMMA> Formal() 
+  )*
+}
+
+void Formal() :
+{}
+{
+  Type() {space();} Identifier() 
+}
+
+
+void Statements() :
+{}
+{
+   (Statement() ) * 
+}
+
+void Statement() :
+{}
+{
+  <LCURLY> {indent(); print("{");}
+     {indent_count++;} Statements() {indent_count--;}
+  <RCURLY> {indent(); print("}");}
+
+  |
+    {indent();} <IF> <LPAREN> {print("if (");} 
+                    Exp()
+                <RPAREN> {print(")");}
+    {indent_count++;} Statement() {indent_count--;}
+    {indent();} <ELSE> {print("else");} 
+    {indent_count++;} Statement() {indent_count--;}
+
+  |
+  {indent();} <PRINTLN> 
+            <LPAREN> {print("print(");} 
+            Exp() 
+            <RPAREN> <SEMICOLON> {print(");");}
+
+  |
+  LOOKAHEAD(2) 
+  {indent();} Identifier() <EQUALS> {print("=");} Exp() <SEMICOLON> {print(";");}
+
+}
+
+
+void Exp():
+{}
+{ 
+  Exp9() 
+  (
+    LOOKAHEAD(2) 
+    <LT> {print("<");}
+    Exp9()
+  )* 
+}
+
+
+void Exp9():
+{}
+{ 
+  Exp11() 
+    (LOOKAHEAD(2) 
+      (
+        "+" {print("+");} Exp11() 
+       |
+        "-" {print("-");} Exp11() 
+      )
+    )* 
+
+}
+
+void Exp11():
+{}
+{ 
+  Exp12() 
+  ( 
+    LOOKAHEAD(2) 
+    "*" {print("*");} Exp12() 
+   )* 
+
+}
+
+void Exp12():
+{}
+{ 
+  Exp14() 
+}
+
+void Exp14():
+{}
+{
+  Exp16() 
+}
+
+
+void Exp16() :
+{Token t;}
+{ 
+  t=<NUMBER> {print(t.image);}
+  |
+  t=<TRUE>  {print(t.image);}
+  |
+  t=<FALSE> {print(t.image);}
+  |
+    <LPAREN> {print("(");} 
+    Exp() 
+    <RPAREN> {print(")");}
+
+  |
+  LOOKAHEAD(3)
+  Identifier() 
+  <LPAREN> {print("(");}
+  ExpList() 
+  <RPAREN> {print(")");}
+ 
+  |
+  Identifier() 
+
+}
+
+void Identifier():
+{Token t;}
+{
+    t=<ID> {print(t.image);}
+}
+
+
+void ExpList() :
+{}
+{
+  Exp() 
+  (
+    <COMMA> {print(",");}
+    Exp()
+  )*
+}
+
+
