@@ -40,7 +40,7 @@ The AST_Visitor I have given you in this folder would print this out as follows:
           IntegerLiteral 5
           IntegerLiteral 5
 ```
-The javacc program MiniC_v4a constructs this abstract syntax tree for MiniC programs and print out the AST
+The javacc program MiniC_v4a constructs the abstract syntax trees for MiniC programs and prints out the AST
 
 Your job in PA4a is to extend it to MiniJava programs by adding code for the additional 8-12 rules in [MiniJava](../MiniCvsMiniJava.md)
 
