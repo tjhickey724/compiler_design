@@ -38,7 +38,9 @@ java mjPPa
 The do the same with the result of pretty printing mjPPa
 ```
 java PA3 < tests/mjPPa.java > mjPPa.java
-
+javac mjPPa.java
+java mjPPa
+```
 
 ## Step 3. Modify the PA3.jj file
 Modify the PA3.jj file to use the MiniJava rules as described in [MiniC vs MiniJava](./MiniCvsMiniJava.md)
