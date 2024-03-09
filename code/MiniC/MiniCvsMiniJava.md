@@ -43,10 +43,18 @@ Exp16 -> Identifier
 ExpList -> Exp (<COMMA> Exp)*
 Identifier -> <ID>
 ```
-MiniJava adds the following rules for defining classes (including the main class)
-and adding integer array types (int[]) and class types (e.g. ArrayList) 
+MiniJava adds the following rules for 
+* defining classes (including the main class)
+* integer array types (int[])
+* class types (e.g. ArrayList)
+* while statements
+* array index assignment
+* logical conjunction and negation
+* method calls and object creation
+* array access and creation
 
-Here is the MiniJava grammar
+
+## the MiniJava grammar
 * the rules at have been added are prefixed with ***
 * the rules that have been modified are prefixed with +++
 * the rules that have been removed are prefixed with XXX
