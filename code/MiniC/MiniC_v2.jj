@@ -19,7 +19,7 @@ public class MiniC_v2 {
   public static void main(String args[]) {
     MiniC_v2 t = new MiniC_v2(System.in);
     try {
-      t.Start(); // pretty print the program
+      t.Start(1); // pretty print the program, passing in indent level of 1
 
     } catch (Exception e) { // handle any errors that arise, e.g. parsing or tokenizing errors
       System.out.println("Oops.");
@@ -28,9 +28,8 @@ public class MiniC_v2 {
     }
   }
 
-    static int indent_count = 1;
  
-    static void indent(){
+    static void indent(int indent_count){
         System.out.print(String.format("\n%1$"+4*indent_count+"s", ""));
     }   
 
@@ -99,35 +98,35 @@ TOKEN:
 
 /* Program Syntax */
 
-void Start():
+void Start(int n):
 {Token t;}
 {
   t= <PREFACE>  {print(t.image); print("\n");}
-   MethodDeclList()
+   MethodDeclList(n)
   <EOF>
 
 }
 
 
-void VarDecls() : 
+void VarDecls(int n) : 
 {}
 { 
     (  LOOKAHEAD(2)  
-       VarDecl() 
+       VarDecl(n) 
     )*
 }
 
 
 
-void VarDecl() :
+void VarDecl(int n) :
 {}
 {   
-    {indent();} Type() 
-    {space();} Identifier() 
+    {indent(n);} Type(n) 
+    {space();} Identifier(n) 
     <SEMICOLON> {print(";");}
 }
 
-void Type():
+void Type(int n):
 {Token t;}
 { LOOKAHEAD(2)
   
@@ -138,133 +137,133 @@ void Type():
 }
 
 
-void MethodDeclList() : 
+void MethodDeclList(int n) : 
 {}
 { 
-    (  MethodDecl() )*
+    (  MethodDecl(n) )*
 }
 
 
 
-void MethodDecl()  :
+void MethodDecl(int n)  :
 {}
 {
-  {indent();} Type() 
-  {space();} Identifier() 
+  {indent(n);} Type(n) 
+  {space();} Identifier(n) 
             <LPAREN>  {print("(");}
-            FormalList() 
+            FormalList(n) 
             <RPAREN>  {print(")");}
-      <LCURLY> {indent(); print("{"); indent_count ++;}
-           VarDecls() 
-           Statements()
-           <RETURN> {indent(); print("return ");}
-           Exp() 
+      <LCURLY> {indent(n); print("{");}
+           VarDecls(n+1) 
+           Statements(n+1)
+           <RETURN> {indent(n+1); print("return ");}
+           Exp(n) 
            <SEMICOLON> {print(";");}
-      <RCURLY> {indent_count--; indent(); print("}"); }
+      <RCURLY> {indent(n); print("}"); }
 }
 
 
-void FormalList() : 
+void FormalList(int n) : 
 {}
 { 
-   Formal() 
+   Formal(n) 
   ( 
-    <COMMA> Formal() 
+    <COMMA> Formal(n) 
   )*
 }
 
-void Formal() :
+void Formal(int n) :
 {}
 {
-  Type() {space();} Identifier() 
+  Type(n) {space();} Identifier(n) 
 }
 
 
-void Statements() :
+void Statements(int n) :
 {}
 {
-   (Statement() ) * 
+   (Statement(n) ) * 
 }
 
-void Statement() :
+void Statement(int n) :
 {}
 {
-  <LCURLY> {indent(); print("{");}
-     {indent_count++;} Statements() {indent_count--;}
-  <RCURLY> {indent(); print("}");}
+  <LCURLY> {indent(n); print("{");}
+     Statements(n+1) 
+  <RCURLY> {indent(n); print("}");}
 
   |
-    {indent();} <IF> <LPAREN> {print("if (");} 
-                    Exp()
+    {indent(n);} <IF> <LPAREN> {print("if (");} 
+                    Exp(n+1)
                 <RPAREN> {print(")");}
-    {indent_count++;} Statement() {indent_count--;}
-    {indent();} <ELSE> {print("else");} 
-    {indent_count++;} Statement() {indent_count--;}
+                Statement(n+1) 
+                {indent(n);} <ELSE> {print("else");} 
+                Statement(n+1)
 
   |
-  {indent();} <PRINTLN> 
+  {indent(n);} <PRINTLN> 
             <LPAREN> {print("print(");} 
-            Exp() 
+            Exp(n+1) 
             <RPAREN> <SEMICOLON> {print(");");}
 
   |
   LOOKAHEAD(2) 
-  {indent();} Identifier() <EQUALS> {print("=");} Exp() <SEMICOLON> {print(";");}
+  {indent(n);} Identifier(n) <EQUALS> {print("=");} Exp(n) <SEMICOLON> {print(";");}
 
 }
 
 
-void Exp():
+void Exp(int n):
 {}
 { 
-  Exp9() 
+  Exp9(n) 
   (
     LOOKAHEAD(2) 
     <LT> {print("<");}
-    Exp9()
+    Exp9(n)
   )* 
 }
 
 
-void Exp9():
+void Exp9(int n):
 {}
 { 
-  Exp11() 
+  Exp11(n) 
     (LOOKAHEAD(2) 
       (
-        "+" {print("+");} Exp11() 
+        "+" {print("+");} Exp11(n) 
        |
-        "-" {print("-");} Exp11() 
+        "-" {print("-");} Exp11(n) 
       )
     )* 
 
 }
 
-void Exp11():
+void Exp11(int n):
 {}
 { 
-  Exp12() 
+  Exp12(n) 
   ( 
     LOOKAHEAD(2) 
-    "*" {print("*");} Exp12() 
+    "*" {print("*");} Exp12(n) 
    )* 
 
 }
 
-void Exp12():
+void Exp12(int n):
 {}
 { 
-  Exp14() 
+  Exp14(n) 
 }
 
-void Exp14():
+void Exp14(int n):
 {}
 {
-  Exp16() 
+  Exp16(n) 
 }
 
 
-void Exp16() :
+void Exp16(int n) :
 {Token t;}
 { 
   t=<NUMBER> {print(t.image);}
@@ -274,35 +273,35 @@ void Exp16() :
   t=<FALSE> {print(t.image);}
   |
     <LPAREN> {print("(");} 
-    Exp() 
+    Exp(n+1) 
     <RPAREN> {print(")");}
 
   |
   LOOKAHEAD(3)
-  Identifier() 
+  Identifier(n) 
   <LPAREN> {print("(");}
-  ExpList() 
+  ExpList(n+1) 
   <RPAREN> {print(")");}
  
   |
-  Identifier() 
+  Identifier(n) 
 
 }
 
-void Identifier():
+void Identifier(int n):
 {Token t;}
 {
     t=<ID> {print(t.image);}
 }
 
 
-void ExpList() :
+void ExpList(int n) :
 {}
 {
-  Exp() 
+  Exp(n) 
   (
     <COMMA> {print(",");}
-    Exp()
+    Exp(n)
   )*
 }
 
