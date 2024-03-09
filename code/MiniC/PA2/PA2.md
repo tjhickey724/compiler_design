@@ -11,7 +11,7 @@ We will use the javacc parser generator to build the parser rather than creating
 
 Your goal in this homework is to produce a parser for MiniJava.
 I have given you, in this folder, a parser (PA2.jj) for a subset of MiniJava called MiniC.
-You see the definitions of both languages at this link: [MiniC vs MiniJava](./MiniCvsMiniJava.md)
+You see the definitions of both languages at this link: [MiniC vs MiniJava](../MiniCvsMiniJava.md)
 
 ## Steps
 Step 1. Download the file [PA2.jj](./PA2.jj) and the folder [test](./test), to your computer (or download this entire MiniC folder!)
