@@ -1,5 +1,5 @@
 /*
- * This is MiniC_v1.jj file.
+ * This is MiniC_v2.jj file.
  * This currently parses MiniC programs (defined below)
  * your goal is to extend this so that it parses MiniJava programs
  * you will have to add javacc rules for 8 grammar rules in MiniJava
@@ -10,14 +10,13 @@ options {
   IGNORE_CASE=false;
 }
 
-PARSER_BEGIN(MiniC_v1)
-import syntaxtree.*;
+PARSER_BEGIN(MiniC_v2)
 
-public class MiniC_v1 {
+public class MiniC_v2 {
 
   /** Main entry point. */
   public static void main(String args[]) {
-    MiniC_v1 t = new MiniC_v1(System.in);
+    MiniC_v2 t = new MiniC_v2(System.in);
     try {
       t.Start();
       System.out.println("\n\nDone!");
@@ -32,7 +31,7 @@ public class MiniC_v1 {
 
 }
 
-PARSER_END(MiniC_v1)
+PARSER_END(MiniC_v2)
 
 SKIP: /* Whitespace */
 {

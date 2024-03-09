@@ -1,6 +1,6 @@
 #!/usr/bin/bash
-java -classpath ../javacc.jar javacc MiniC_v2.jj
-javac MiniC_v2.java
+java -classpath ../javacc.jar javacc MiniC_v1.jj
+javac MiniC_v1.java
 #javac MiniC_Visitor.java
-java MiniC_v2 < ../progs/fibs.c
+java MiniC_v1 < ../progs/fibs.c
 

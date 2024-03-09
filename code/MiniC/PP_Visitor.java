@@ -134,7 +134,7 @@ import syntaxtree.*;
      String id = (String) i.accept(this,0);
      String exp1 = (String) e1.accept(this,0);
      String exp2 = (String) e2.accept(this,0);
-     String data = id+"["+exp1+"] = "+exp2+";\n";
+     data = id+"["+exp1+"] = "+exp2+";\n";
      return data; 
    } 
 
