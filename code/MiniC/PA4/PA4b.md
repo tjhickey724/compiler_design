@@ -54,3 +54,53 @@ You must use a similar approach for the 10-12 additional rules in MiniJava that 
 * And
 * This
 
+You will need to uncomment part of the code in the PA4.jj main method that creates the PP_visitor so it will call the Visitor on the tree:
+This code does the following:
+1. create a PP_Visitor ```Visitor v2 = new PP_Visitor();```
+2. run it on the abstract syntax tree and store the resulting string ```String s = (String) n.accept(v2, 0);```
+3. print the C Preface (you will need to delete this line)
+4. print out the string ```System.out.println(s);```
+
+
+```
+PARSER_BEGIN(MiniC)
+import syntaxtree.*;
+
+public class MiniC {
+
+  /** Main entry point. */
+  public static void main(String args[]) {
+    MiniC t = new MiniC(System.in);
+    try {
+      MethodDeclList n = t.Start();
+
+      System.out.println("\n\nPretty Printing the Abstract Syntax Tree");
+      Visitor v1 = new AST_Visitor();  // pretty prints the Abstract Syntax Tree
+      n.accept(v1, 0);
+
+/* the following five lines have been uncommented */
+      System.out.println("\n\nPretty Print the Program");
+      Visitor v2 = new PP_Visitor();  // pretty prints the MiniC program
+      String s = (String) n.accept(v2, 0);
+      // comment out the following line when processing MiniJava not MiniC
+      System.out.println("#include <stdio.h>\n#include <stdbool.h>\nvoid print(int n){printf(\"%10d\\n\",n);}");
+      System.out.println(s);
+
+/* commenting code out for PA4c ... */
+/* commenting code out for PA4d ... */
+
+      System.out.println("\n\nDone!");
+
+    } catch (Exception e) {
+      System.out.println("Oops.");
+      System.out.println(e.getMessage());
+      e.printStackTrace();
+    }
+  }
+
+
+}
+
+PARSER_END(MiniC)
+
+```
