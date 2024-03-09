@@ -14,7 +14,8 @@ We describe the two langauges (and especially their diff) in this document.
 
 ### MiniC has the following grammar rules
 It is essentially what we get if we remove classes and arrays from MiniJava.
-We also have to replace the method call rule with a function call rule,  and change the \<PRINT\> token.
+We also have to replace the method call rule with a function call rule,  and change the \<PRINT\> token 
+from "System.out.print" to "print".  We also need to add a \<PREFACE\> token to define the "print" function and include the ".h" files.
 ```
 Start -> <PREFACE> MethodDeclList <SEMICOLON>
 Method DeclList -> MethodDecl *
