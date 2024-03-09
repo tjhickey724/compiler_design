@@ -76,9 +76,9 @@ Notice what we have done:
 1. the method now returns an Exp  (in this case a Times(Exp, Exp) object) instead of void
 2. we get the parse trees from the two expressions in the rule and store them in variables "a" and "b"
 3. for each "+ Exp" term that appears we create a new Times node in the tree
-4. at the end we return either the original "a" expressions, if there were no multiplications at this level, or a Times node
+4. at the end we return either the original "a" expression, if there were no multiplications at this level, or a Times node
 
-For example, if we applied this rule to (2*3*4) we would get
+For example, if we applied this rule to (2 * 3 * 4) we would get
 ```
   new Times(
     new Times( new IntegerLiteral(2), new IntegerLiteral(3))
