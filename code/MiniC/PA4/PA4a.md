@@ -30,7 +30,7 @@ new Program(
  )
 )
 ```
-The AST_Visitor would print this out as follows:
+The AST_Visitor I have given you in this folder would print this out as follows:
 ```
   Program
     MainClass
