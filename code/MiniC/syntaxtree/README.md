@@ -54,4 +54,27 @@ new ClassDeclList(ClassDecl,ClassDeclList)
 new Vardeclist(VarDecl VarDeclList)
 new FormalList(Formal, FormalList)  or null
 ```
-
+For example, let's create the Abstract Syntax Tree for the following simple program:
+```
+class Hello {
+  public static void main(String[] args){
+    {
+     System.out.println(5*5);
+    }
+  }
+}
+```
+The tree should be
+```
+new Program(
+  new MainClass(
+    new Identifier("Hello"),
+    new Print(
+      new Times(
+        new IntegerLiteral(5),
+        new IntegerLiteral(5)
+      )
+    )
+ )
+)
+```
