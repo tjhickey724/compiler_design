@@ -7,13 +7,13 @@ do type checking, pretty print the program,
 generate the assembly language.
 
 ```
-new Program(MainClass, ClassDeclList)
-new MainClass(Identifier, Statement)
-new ClassDecl(Identifier, VarDeclList, MethodDeclList)
-new VarDecl(Type, Identifier)
-new MethodDecl(Type, Identifier, FormalList, VarDeclList, StatementList, Exp)
-new Formal(Type, Identifier)
-new Identifier(String)
+Program(MainClass m, ClassDeclList c)
+MainClass(Identifier i, Statement s)
+ClassDecl(Identifier i, VarDeclList v, MethodDeclList m)
+VarDecl(Type t, Identifier i)
+MethodDecl(Type t, Identifier i, FormalList f, VarDeclList v, StatementList s, Exp e)
+Formal(Type t, Identifier i)
+Identifier(String s)
 
 where Type is an abstract class with the following concrete classes
   new BooleanType()
