@@ -19,7 +19,7 @@ where Type is an abstract class with the following concrete classes
   new BooleanType()
   new IntegerType()
   new IntArrayType()
-  new IdentifierType()
+  new IdentifierType(String s)
 
 where Statement is an abstract class with the following concrete classes
   new Assign(Identifier, Exp)
