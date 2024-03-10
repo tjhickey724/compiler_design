@@ -16,7 +16,7 @@ You see the definitions of both languages at this link: [MiniC vs MiniJava](../M
 # Steps
 ## Step 1. Download needed files
 * Download the file [MiniC_v2.jj](./MiniC_v2.jj) and rename it to be PA2.JJ, 
-* Download the folder [test](./test), to your computer (or download this entire MiniC folder!)
+* Download the folder [tests](./tests), to your computer (or download this entire MiniC folder!)
 * Also find the javacc.jar file from [https://javacc.github.io/javacc/](https://javacc.github.io/javacc/) and download it to your folder.
 
 ## Step 2. Test the code you downloaded
