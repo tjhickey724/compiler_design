@@ -24,37 +24,38 @@ where Type is an abstract class with the following concrete classes
 where Statement is an abstract class with the following concrete classes
   Assign(Identifier i, Exp e)
   ArrayAssign(Identifier i, Exp e1, Exp e2)
-  new Call(Exp e1,Identifier i,ExpList e2)  // should have been e, i, elist
-  new Block(StatementList slist)
-  new If(Exp e,Statement s1,Statement s2)
-  new Print(Exp e)
-  new While(Exp e,Statement s)
+  Call(Exp e1,Identifier i,ExpList e2)  // should have been e, i, elist
+  Block(StatementList slist)
+  If(Exp e,Statement s1,Statement s2)
+  Print(Exp e)
+  While(Exp e,Statement s)
 
 where Exp is an abstract class with the following concrete classes
-  new ExpGroup(Exp)
-  new IntegerListeral(int)
-  new IdentifierExp(Identifier)
-  new True()
-  new False()
-  new Plus(Exp,Exp)
-  new Minus(Exp,Exp)
-  new Times(Exp,Exp)
-  new NewArray(Exp)
-  new NewObject()
-  new LessThan(Exp,Exp)
-  new Not(Exp)
-  new And(Exp,Exp)
-  new This()
-  new ArrayLookup()
-  new ArrayLength()
+  ExpGroup(Exp e)
+  IntegerListeral(int i)
+  IdentifierExp(String s) // should have been (Identifier i) not (String s)
+  True()
+  False()
+  Plus(Exp e1,Exp e2)
+  Minus(Exp e1,Exp e2)
+  Times(Exp e1,Exp e2)
+  NewArray(Exp e)
+  NewObject(Identifier i)
+  LessThan(Exp e1,Exp e2)
+  Not(Exp e)
+  And(Exp e1,Exp e2)
+  This()
+  ArrayLookup(Exp e1, Exp e2)
+  new ArrayLength(Exp e)
 
 and we have several classes for lists of elements of the same class
-new ExpList(Exp, ExpList)
-new StatementList(Statement, StatementList) or null
-new MethodDeclList(MethodDecl, MethodDeclList) or null
-new ClassDeclList(ClassDecl,ClassDeclList)
-new Vardeclist(VarDecl VarDeclList)
-new FormalList(Formal, FormalList)  or null
+ClassDeclList(ClassDecl c,ClassDeclList clist) or null
+ExpList(Exp e, ExpList elist)  or null
+FormalList(Formal f, FormalList flist)  or null
+MethodDeclList(MethodDecl m, MethodDeclList mlist) or null
+StatementList(Statement s, StatementList slist) or null
+Vardeclist(VarDecl v,VarDeclList vlist) or null
+
 ```
 For example, let's create the Abstract Syntax Tree for the following simple program:
 ```
@@ -66,7 +67,7 @@ class Hello {
   }
 }
 ```
-The tree should be
+The tree should be the following
 ```
 new Program(
   new MainClass(
@@ -80,4 +81,6 @@ new Program(
  )
 )
 ```
+note we ignore the identifier "args" because our language does not have String[] types,
+so we can never process the args array anyway.
 
