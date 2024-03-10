@@ -14,7 +14,7 @@ is much simpler with code that is relatively easy to read, write, and modify.
 This assignment has four parts corresponding to the four parts listed above.
 
 ## STEPS
-1. copy the [MiniC_v4.jj](./MiniC_v4.jj) file to your folder, along with the [syntaxtree](./syntaxtree) folder, and the javacc.jar file as well
+1. copy the [MiniC_v4.jj](./MiniC_v4.jj) file to your folder, along with the [syntaxtree.zip](./syntaxtree.zip) zip of the syntaxtree folder, and the javacc.jar file as well
 2. Rename MiniC_v4.jj to be PA4.jj and replace all occurrences of MiniC_v4 in the code with PA4
 3. Follow the instructions for [PA4a](./PA4a.md) to extend PA4.jj to generate ASTs for all of MiniJava,
 4. Follow the instructions for [PA4b](./PA4b.md) to extend the PP_Visitor.java file to pretty print all of MiniJava, not just MiniC
