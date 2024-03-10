@@ -8,7 +8,7 @@ generate the assembly language.
 
 ```
 Program(MainClass m, ClassDeclList c)  // should have been clist instead of c
-MainClass(Identifier i, Statement s)
+MainClass(Identifier i, Statement s)  // we ignore the name of the String[] formal as we never use it
 ClassDecl(Identifier i, VarDeclList v, MethodDeclList m)  // should have been vlist and mlist instead of v and m....
 VarDecl(Type t, Identifier i)
 MethodDecl(Type t, Identifier i, FormalList f, VarDeclList v, StatementList s, Exp e)
