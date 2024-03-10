@@ -1,5 +1,5 @@
 /*
- * This is MiniC.jj file.
+ * This is MiniC_v4.jj file.
  * It will build a tree we can traverse using the Visitor pattern!
  * The language is MiniC, which is the subset of MiniJava
  * consisting of only MethodDecls (i.e. no classes or instance variables)
@@ -13,14 +13,14 @@ options {
   IGNORE_CASE=false;
 }
 
-PARSER_BEGIN(MiniC)
+PARSER_BEGIN(MiniC_v4)
 import syntaxtree.*;
 
-public class MiniC {
+public class MiniC_v4 {
 
   /** Main entry point. */
   public static void main(String args[]) {
-    MiniC t = new MiniC(System.in);
+    MiniC_v4 t = new MiniC_v4(System.in);
     try {
       MethodDeclList n = t.Start();
 
@@ -30,13 +30,13 @@ public class MiniC {
       n.accept(v1, 0);
 */
 
-/* uncomment this only for PA4b
+/* uncomment this only for PA4b */
       System.out.println("\n\nPretty Print the Program");
       Visitor v2 = new PP_Visitor();  // pretty prints the MiniC program
       String s = (String) n.accept(v2, 0);
       System.out.println("#include <stdio.h>\n#include <stdbool.h>\nvoid print(int n){printf(\"%10d\\n\",n);}");
       System.out.println(s);
-*/
+
 
 /* uncomment this only for PA4c and PA4d
       System.out.println("\n\nGenerating Symbol Table");
@@ -64,7 +64,7 @@ public class MiniC {
 
 }
 
-PARSER_END(MiniC)
+PARSER_END(MiniC_v4)
 
 SKIP: /* Whitespace */
 {
