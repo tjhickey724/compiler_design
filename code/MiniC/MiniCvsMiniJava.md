@@ -119,7 +119,7 @@ MMM Exp14 -> (<BANG> Exp16 | Exp16)   // adding logical negation
 XXX Exp16 -> Identifier <LPAREN> ExpList <RPAREN>
     Exp16 -> Identifier
 *** Exp16 -> <THIS>                   // adding the "this" variable
-*** Exp16 -> <NEW> Identifier <LBRACKET> Exp <RBRACKET>  // adding new array constructor
+*** Exp16 -> <NEW> <INT> <LBRACKET> Exp <RBRACKET>  // adding new array constructor
 *** Exp16 -> <NEW> Identifier <LPAREN> <RPAREN>  // adding new object constructor
     ExpList -> Exp (<COMMA> Exp)*
     Identifier -> <ID>
