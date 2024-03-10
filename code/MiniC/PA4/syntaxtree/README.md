@@ -46,7 +46,7 @@ where Exp is an abstract class with the following concrete classes
   And(Exp e1,Exp e2)
   This()
   ArrayLookup(Exp e1, Exp e2)
-  new ArrayLength(Exp e)
+  ArrayLength(Exp e)
 
 and we have several classes for lists of elements of the same class
 ClassDeclList(ClassDecl c,ClassDeclList clist) or null
