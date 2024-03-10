@@ -7,13 +7,13 @@ do type checking, pretty print the program,
 generate the assembly language.
 
 ```
-Program(MainClass m, ClassDeclList c)
+Program(MainClass m, ClassDeclList c)  // should have been clist instead of c
 MainClass(Identifier i, Statement s)
-ClassDecl(Identifier i, VarDeclList v, MethodDeclList m)
+ClassDecl(Identifier i, VarDeclList v, MethodDeclList m)  // should have been vlist and mlist instead of v and m....
 VarDecl(Type t, Identifier i)
 MethodDecl(Type t, Identifier i, FormalList f, VarDeclList v, StatementList s, Exp e)
 Formal(Type t, Identifier i)
-Identifier(String s)
+Identifier(String s)  
 
 where Type is an abstract class with the following concrete classes
   BooleanType()
@@ -22,13 +22,13 @@ where Type is an abstract class with the following concrete classes
   IdentifierType(String s)
 
 where Statement is an abstract class with the following concrete classes
-  new Assign(Identifier, Exp)
-  new ArrayAssign(Identifier, Exp, Exp)
-  new Call(Exp,Identifier,ExpList)
-  new Block(StatementList)
-  new If(Exp,Statement,Statement)
-  new Print(Exp)
-  new While(Exp,Statement)
+  Assign(Identifier i, Exp e)
+  ArrayAssign(Identifier i, Exp e1, Exp e2)
+  new Call(Exp e1,Identifier i,ExpList e2)  // should have been e, i, elist
+  new Block(StatementList slist)
+  new If(Exp e,Statement s1,Statement s2)
+  new Print(Exp e)
+  new While(Exp e,Statement s)
 
 where Exp is an abstract class with the following concrete classes
   new ExpGroup(Exp)
