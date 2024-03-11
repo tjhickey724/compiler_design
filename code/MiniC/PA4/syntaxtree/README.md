@@ -78,7 +78,8 @@ new Program(
         new IntegerLiteral(5)
       )
     )
- )
+ ),
+  null  // for ClassDeclList
 )
 ```
 note we ignore the identifier "args" because our language does not have String[] types,
