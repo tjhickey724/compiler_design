@@ -23,7 +23,7 @@ You see the definitions of both languages at this link: [MiniC vs MiniJava](../M
 Test the code as it is using the following commands...
 ```
 java -classpath javacc.jar javacc PA2.jj
-java PA2.java
+javac PA2.java
 java PA2 < tests/hello.c
 java PA2 < tests/hello_bug1.c
 ```
