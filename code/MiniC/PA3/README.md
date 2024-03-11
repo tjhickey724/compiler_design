@@ -23,7 +23,7 @@ Your goal is to modify this pretty printer so that it works for MiniJava rather 
 Test the code as it is using the following commands...
 ```
 java -classpath javacc.jar javacc PA3.jj
-java PA3.java
+javac PA3.java
 java PA3 < tests/hello.c
 java PA3 < tests/fibs.c
 ```
