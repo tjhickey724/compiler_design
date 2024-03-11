@@ -84,3 +84,26 @@ new Program(
 note we ignore the identifier "args" because our language does not have String[] types,
 so we can never process the args array anyway.
 
+This Syntax Tree is the parse tree using the following syntax rules:
+```
+MMM Start -> MainClass ClassDeclList
+    ClassDeclList -> epsilon
+*** MainClass -> <CLASS> Identifier <LCURLY>                  (MainClass)
+               <PUBLIC> <STATIC> <VOID> <MAIN>
+                 <LPAREN>
+                  <STRING> <LBRACKET><RBRACKET> Identifier
+                 <RPAREN>
+                  <LCURLY> Statement <RCURLY>
+              <RCURLY>
+    Statement -> <PRINTLN> <LPAREN> Exp <RPAREN> <SEMICOLON>  (Print)
+    Identifier -> <ID>                                        (Identifier)
+MMM Exp -> Exp4
+*** Exp4 -> Exp9 
+    Exp9 -> Exp11 
+    Exp11 -> Exp12 (<TIMES> Exp12)*                           (Times)
+*** Exp12 -> Exp14   
+MMM Exp14 -> Exp16
+    Exp16 -> <NUMBER>                                         (IntegerLiteral)
+
+```
+
