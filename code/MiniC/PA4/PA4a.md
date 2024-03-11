@@ -88,7 +88,7 @@ For example, if we applied this rule to (2 * 3 * 4) we would get
 Now you need to do this for the 10-15 new rules of MiniJava that aren't in MiniC!
 For example, the rule for Program from PA3 is
 ```
-Program Start(int n):
+void Start(int n):
 {}
 {
   MainClass(n)
@@ -97,7 +97,7 @@ Program Start(int n):
 ```
 and this would change to
 ```
-void Start(int n):
+Program Start(int n):
 {
  MainClass m;
  ClassDeclList clist;
