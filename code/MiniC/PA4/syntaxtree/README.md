@@ -100,7 +100,7 @@ MMM Start -> MainClass ClassDeclList
 MMM Exp -> Exp4
 *** Exp4 -> Exp9 
     Exp9 -> Exp11 
-    Exp11 -> Exp12 (<TIMES> Exp12)*                           (Times)
+    Exp11 -> Exp12 <TIMES> Exp12                           (Times)
 *** Exp12 -> Exp14   
 MMM Exp14 -> Exp16
     Exp16 -> <NUMBER>                                         (IntegerLiteral)
