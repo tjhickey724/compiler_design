@@ -147,6 +147,7 @@ make the modifications to the grammar and token rules as shown above.
 ---
 ## Summary of changes to move MiniC to MiniJava
 Here are the rules that need to be modified (MMM), added (***) or deleted (XXX):
+```
 MMM Start -> MainClass ClassDeclList   (replaces the Start rule of MiniC)
 *** MainClass -> <CLASS> Identifier <LCURLY>
                <PUBLIC> <STATIC> <VOID> <MAIN>
@@ -177,3 +178,4 @@ XXX Exp16 -> Identifier <LPAREN> ExpList <RPAREN>
 *** Exp16 -> <THIS>                   // adding the "this" variable
 *** Exp16 -> <NEW> <INT> <LBRACKET> Exp <RBRACKET>  // adding new array constructor
 *** Exp16 -> <NEW> Identifier <LPAREN> <RPAREN>  // adding new object constructor
+```
