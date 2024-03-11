@@ -144,6 +144,36 @@ make the modifications to the grammar and token rules as shown above.
 * modify 3 rules
 * delete 1 rule
 
-
-
-
+---
+## Summary of changes to move MiniC to MiniJava
+Here are the rules that need to be modified (MMM), added (***) or deleted (XXX):
+MMM Start -> MainClass ClassDeclList   (replaces the Start rule of MiniC)
+*** MainClass -> <CLASS> Identifier <LCURLY>
+               <PUBLIC> <STATIC> <VOID> <MAIN>
+                 <LPAREN> <STRING> <LBRACKET><RBRACKET> Identifier <RPAREN>
+                  <LCURLY> Statement <RCURLY>
+              <RCURLY>
+*** ClassDeclList -> ClassDecl *
+*** ClassDecl -> <CLASS> Identifier <LCURLY>
+                VarDeclList
+                MethodDeclList
+              <RCURLY>
+*** Type -> <INT> <LBRACKET> <RBRACKET>     (MiniC doesn't int array types)
+*** Type -> Identifier                            (MiniC doesn't have class types)
+*** Statement -> <WHILE> <LPAREN> Exp <RPAREN> Statement
+*** Statement -> Identifier<LBRACKET>Exp<RBRACKET> <EQUALS> Exp <SEMICOLON>
+MMM Exp -> Exp4 (<AND> Expr)*       // adding logical conjunction
+*** Exp4 -> Exp9 (<LT> Exp9)*       // moving < down the hierarchy
+*** Exp12 -> Exp14
+      (<DOT> <LENGTH>           // adding the array length operator x.length
+       |
+       <DOT> Identifier <LPAREN> Explist <RPAREN>  // adding method calls f.a(1,2)
+       |
+        <LBRACKET> Exp <RBRACKET>   //adding array access
+                                  // e.g. f(5)[2] if f returns an int[]
+      )
+MMM Exp14 -> (<BANG> Exp16 | Exp16)   // adding logical negation
+XXX Exp16 -> Identifier <LPAREN> ExpList <RPAREN>
+*** Exp16 -> <THIS>                   // adding the "this" variable
+*** Exp16 -> <NEW> <INT> <LBRACKET> Exp <RBRACKET>  // adding new array constructor
+*** Exp16 -> <NEW> Identifier <LPAREN> <RPAREN>  // adding new object constructor
