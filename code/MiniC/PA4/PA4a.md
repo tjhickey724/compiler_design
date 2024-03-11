@@ -97,7 +97,7 @@ void Start(int n):
 ```
 and this would change to
 ```
-Program Start(int n):
+MethodDeclList Start(int n):
 {
  MainClass m;
  ClassDeclList clist;
