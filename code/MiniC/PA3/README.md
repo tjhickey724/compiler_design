@@ -103,7 +103,7 @@ void VarDecl(int n) :
   <SEMICOLON> {print(";")}
 }
 ```
-There are about 8-10 rules to add and/or modify to turn the MiniC parser into a MiniJava parser.
+There are about 15 rules to add and/or modify to turn the MiniC parser into a MiniJava parser.
 
 The rest of the changes are similar... It is actually quite easy to generate this pretty printer!
 
