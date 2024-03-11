@@ -1,4 +1,4 @@
-# Programming Assignment 3
+# Programming Assignment 3 - Pretty Printing MiniJava
 The purpose of this assignment is to have you learn how to write a pretty printer by modifying a
 recursive descent LL(k) parser (from [PA2](../PA2/README.md).
 
