@@ -1,4 +1,4 @@
-# Programming Assignment 2
+# Programming Assignment 2 - Parsing MiniJava
 The purpose of this assignment is to have you learn how to write a recursive descent LL(k) parser 
 using the [javacc parser generator](https://javacc.github.io/javacc/)
 
