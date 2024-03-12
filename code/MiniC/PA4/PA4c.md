@@ -10,7 +10,7 @@ You will need to expand this by adding a HashMap for classes. and to extend the 
 
 Also, the MiniC identifiers are prefixed by their method, so "x" appearing in method "test2" is stored as
 ``` $test2$x```
-when you add classers you will need to prepend the class name as well, this is to disambiguate between the same identifier
+when you add classes you will need to prepend the class name as well, this is to disambiguate between the same identifier
 appearing in different methods and classes, e.g.
 ```
 class test { int x; int incr(int y){x = x+y;}}
