@@ -75,6 +75,67 @@ public class MiniC {
 }
 ```
 
+## Testing your Symbol Table Generator
+The file [Demo.java](./Demo.java) has been constructed to use all of the grammatical structures in MiniJava,
+(let me know if I missed anything).
+
+If you run your Symbol Table Visitor on this code it should print out the following Symbol Table:
+```
+Main Class:
+ $Demo:syntaxtree.MainClass@3d4eac69
+
+Classes: 
+$PrintList: syntaxtree.ClassDecl@42a57993, 
+$Debug: syntaxtree.ClassDecl@75b84c92, 
+
+Methods: 
+$Debug$getMe: syntaxtree.MethodDecl@6bc7c054, 
+$Debug$init: syntaxtree.MethodDecl@232204a1, 
+$PrintList$go: syntaxtree.MethodDecl@4aa298b7, 
+$PrintList$getData: syntaxtree.MethodDecl@7d4991ad, 
+$Debug$getDebugging: syntaxtree.MethodDecl@28d93b30, 
+$PrintList$printall: syntaxtree.MethodDecl@1b6d3586, 
+
+Variables: 
+$PrintList$printall$r: syntaxtree.VarDecl@4554617c, 
+$PrintList$go$sum: syntaxtree.VarDecl@74a14482, 
+$PrintList$printall$sum: syntaxtree.VarDecl@1540e19d, 
+$PrintList$getData$z: syntaxtree.VarDecl@677327b6, 
+$PrintList$data: syntaxtree.VarDecl@14ae5a5, 
+$Debug$init$oldVal: syntaxtree.VarDecl@7f31245a, 
+$PrintList$go$i: syntaxtree.VarDecl@6d6f6e28, 
+$PrintList$go$size: syntaxtree.VarDecl@135fbaa4, 
+$Debug$debugging: syntaxtree.VarDecl@45ee12a7, 
+$PrintList$go$r: syntaxtree.VarDecl@330bedb4, 
+$PrintList$go$oldVal: syntaxtree.VarDecl@2503dbd3, 
+$PrintList$size: syntaxtree.VarDecl@4b67cf4d, 
+$PrintList$debugging: syntaxtree.VarDecl@7ea987ac, 
+$PrintList$printall$test: syntaxtree.VarDecl@12a3a380, 
+
+TypeNames: 
+$PrintList$printall$r: int,
+ $PrintList$go$sum: int,
+ $PrintList: *class,
+ $PrintList$printall$n: int,
+ $PrintList$printall$sum: int,
+ $PrintList$getData$z: int[],
+ $PrintList$data: int[],
+ $Debug$init$oldVal: boolean,
+ $PrintList$go$i: int,
+ $PrintList$go$size: int,
+ $Debug$getDebugging$b: boolean,
+ $Debug$debugging: boolean,
+ $PrintList$go$n: int,
+ $Debug$getMe$b: boolean,
+ $PrintList$go$r: int,
+ $Debug: *class,
+ $PrintList$go$oldVal: boolean,
+ $Debug$init$v: boolean,
+ $PrintList$size: int,
+ $Demo: *class,
+ $PrintList$getData$b: boolean,
+ $PrintList$debugging: Debug,
+ $PrintList$printall$test: boolean,
 ```
 
 
