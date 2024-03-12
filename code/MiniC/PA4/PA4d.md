@@ -26,6 +26,26 @@ to get their types, which we expect to be "int"
 If either one (or both) is not "int" then we generate a type error, but we return the expected type "int"
 so that the type checking can continue and find all of the type errors.
 
+## Pretty Printing errors...
+The Type Checking Visitor defines a PP_Visitor variable called miniC (which you might want to change to be prettyPrint).
+It can be invoked to generate a pretty printed version of the offending code, e.g. we can modify the above method as follows
+to print out the expression that generated the error:
+```
+public Object visit(Times node, Object data){ 
+        Exp e1=node.e1;
+        Exp e2=node.e2;
+        String t1 = (String) node.e1.accept(this, data);
+        String t2 = (String) node.e2.accept(this, data);
+        if (!t1.equals("int") || !t2.equals("int")) {
+            System.out.println("Type error: " + t1 + " != " + t2+" in node"+node);
+            System.out.println("in "+node.accept(miniC,0));
+            num_errors++;
+        }
+
+        return "int"; 
+    }
+```
+
 ## Example for a Call node
 Let's also look at the case of the Call node representing a function call
 ``` java
@@ -103,6 +123,30 @@ and if not we print a Type Error message.
 
 In any case, we look up the type of value the method is supposed to return from its AST "m"
 and we return that value.
+
+## Instance Variables
+One tricky part of this assignment is dealing with instance variables.
+Consider, for example, the following simple program.
+```
+class Test {
+  public static void main(String[] args){
+     return (new Demo()).go(1)
+}
+class Demo {
+  int a;
+  Demo d;
+  int go(int n){
+        a=1;
+        a=a+n;
+        return a;
+  }  
+}
+```
+When the variable "a" will be encoded in the Symbol Table as $Demo$a  but it is being called in the method go where
+"n" is encoded as $Demo$go$n.  When you are looking up the type of "a" you would initially look for any variables "a"
+defined in the current method, so the prefix would be "$Demo$go$a$  but this won't exist in the symbol table, so you'll need
+to pop off the last environment "$go$, and look up "$Demo.a$ which it will find and which has type "int".
+
 
 ## What you need to do
 In addition to getting the type checker to work for "Call" nodes as described above, you also need too handle the following cases
