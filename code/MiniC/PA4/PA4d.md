@@ -9,10 +9,49 @@ Type checking is a process that assigns a type to every subtree of the Abstract 
 that certain typing rules hold..  Here are a few of the type rules:
 * for Times(a,b) both a and b must have type "int" and the Times node will have type int
 * for And(a,b) both a and b must have type "boolean" and the And node will have type boolean
-* for a call  Call(F,(a1,...,an)) we need to look at the signature of the method F, i.e. find its return value T and the types of its formals T1,...,Tn. The expression list (a1,...,an) must have type (T1 .... Tn) and the type of the Call node will be T.
 * for an ArrayLookup(e1,e2)  e1 must have type int[] and e2 must have type int and the ArrayLookup node will have type int
+* for a call  Call(F,(a1,...,an)) we need to look at the signature of the method F, i.e. find its return value T and the types of its formals T1,...,Tn. The expression list (a1,...,an) must have type (T1 .... Tn) and the type of the Call node will be T.
 
 
+## Practice
+Let's practice type checking with the following program
+```
+class Demo3 {
+    public static void main(String[] args){
+        System.out.println((new Test()).start(5));
+    }
+}
+class Test{
+    boolean debugging;
+    int[] log;
+    int max;
+
+    boolean init(boolean d,int m){
+        debugging = d;
+        max = m;
+        log = new int[m];
+        return d;
+    }
+
+    int start(int x){
+        boolean b;
+        Test t;
+        int i;
+        t = this;
+        max=10;
+        b=(0<max) && (max<10);
+        b=t.init(b,max);
+        i=0;
+        while (i<max){
+            log[i]=2*i-1;
+            i=i+1;
+        }
+        return log[max-1];
+    }
+
+}
+
+```
   
 ## Example for a multiplication node
 Let's see how it works on the Times(Exp,Exp) node
