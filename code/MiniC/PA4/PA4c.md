@@ -74,7 +74,71 @@ public class MiniC {
 
 }
 ```
+## Practice
+Let's get some practice... Try to calculate, by hand the symbol table for the following programs.
+In three steps:
+1. Find all declarations of identifiers in this program and list them with their full prefixes, e.g. $Demo3, $Demo3$main, $Test$log, $Test$init$d
+2. Record the types of each declared identifier ($Demo= *class, $Test$log = *method $Test$init$d=boolean ...)
+### Demo2a
+```
+class Demo2a {
+    public static void main(String[] args){
+       System.out.println((new Test()).test(57));
+    }
+  }
+  class Test {
+    int a;
+    int[] log;
+    boolean test(int b){
+      Test d;
+      boolean e;
+      int c;
+      a=1; c=2; e=true; d=this;
+      System.out.println(a+c);
+      return a<c;
+    }  
+  }
+```
 
+### Demo3
+Here is a more complex example ..
+```
+class Demo3 {
+    public static void main(String[] args){
+        System.out.println((new Test()).start(5));
+    }
+}
+class Test{
+    boolean debugging;
+    int[] log;
+    int max;
+
+    boolean init(boolean d,int m){
+        debugging = d;
+        max = m;
+        log = new int[m];
+        return d;
+    }
+
+    int start(int x){
+        boolean b;
+        Test t;
+        int i;
+        t = this;
+        max=10;
+        b=(0<max) && (max<10);
+        t.init(b,max);
+        i=0;
+        while (i<max){
+            log[i]=2*i-1;
+            i=i+1;
+        }
+        return log[max-1];
+    }
+
+}
+
+```
 ## Testing your Symbol Table Generator
 The file [Demo.java](./Demo.java) has been constructed to use all of the grammatical structures in MiniJava,
 (let me know if I missed anything).
