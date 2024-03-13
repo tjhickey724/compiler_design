@@ -252,10 +252,10 @@ In addition to getting the type checker to work for "Call" nodes as described ab
 * newArray(Exp e)
 * ArrayLookup(Exp e1, Exp e2)
 * ArrayLength(Exp e)
-* and possibly others...
+* and all classes in the syntaxtree package.
 
 and for each you will need to see if there is a type error (e.g. finding the length of a non-array)
-and return the expected type (e.g. an "int" for an ArrayLookup)
+and return the expected type (e.g. an "int" for an ArrayLookup). Return "*void" for nodes that don't return a type, like Statements.
 
 ## Updating the PA4.jj main file
 You will also need to uncomment the relevant parts of PA4.jj so that it
