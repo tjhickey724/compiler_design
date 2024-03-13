@@ -4,6 +4,25 @@ I have given you the TypeChecking_Visitor.java file, which type checks MiniC pro
 extend it to type check MiniJava programs. It expects to have access to the SymbolTable generated in PA4c and it
 will use that to look for Type errors.
 
+Type checking is a process that assigns a type to every subtree of the Abstract Syntax Tree and then tests to make sure
+that certain typing rules hold..  Here are a few of the type rules:
+* for Times(a,b) both a and b must have type "int" and the Times node will have type int
+* for And(a,b) both a and b must have type "boolean" and the And node will have type boolean
+* for a call  Call(F,(a1,...,an)) we need to look at the signature of the method F, i.e. find its return value T and the types of its formals T1,...,Tn. The expression list (a1,...,an) must have type (T1 .... Tn) and the type of the Call node will be T.
+* for an ArrayLookup(e1,e2)  e1 must have type int[] and e2 must have type int and the ArrayLookup node will have type int
+
+We can write these rules in the following shorthand, where we use *void to mean the node doesn't have a type
+* Times(int,int)-> int
+* Plus(int,int) -> int
+* Minus(int, int) -> int
+* And(boolean, boolean) -> boolean
+* Not(boolean) -> boolean
+* If(boolean, *void, *void) -> *void
+* While(boolean, *void) -> *void
+* Class(*class,*void,*void) -> *void
+* Call(method(T,(T1,..,Tn)), (T1,...,Tn)) -> T
+* etc. for each class in the syntaxtree package
+  
 ## Example for a multiplication node
 Let's see how it works on the Times(Exp,Exp) node
 ```
