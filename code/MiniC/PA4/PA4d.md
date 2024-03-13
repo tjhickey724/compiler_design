@@ -52,6 +52,33 @@ class Test{
 }
 
 ```
+Here is the Symbol Table for this program
+```
+ $Demo3: *class,
+ $Test$start$t: Test,
+ $Test$start$b: boolean,
+ $Test$init$m: int,
+ $Test: *class,
+ $Test$debugging: boolean,
+ $Test$init$d: boolean,
+ $Test$start$i: int,
+ $Test$max: int,
+ $Test$log: int[],
+ $Test$start$x: int,
+```
+Let's type check the While statement. Its AST is
+```
+While(
+   LessThan(IdentifierExp("i"),IdentifierExp("i")),
+   StatementList(ArrayAssign("log",
+                             IdentifierExp("i"),
+                             Minus(Times(IntegerLiteral(2),IdentifierExp("i")),IntegerLiteral(1))),
+                 Assign(IdentifierExp("i"),
+                        Plus(IdentifierExp("i"),IntegerLiteral(1)))))
+```
+Each node of this tree has a type... 
+## Now lets add some type errors!
+Let's practice adding type errors to the program above and finding them!
   
 ## Example for a multiplication node
 Let's see how it works on the Times(Exp,Exp) node
