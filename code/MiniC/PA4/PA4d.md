@@ -4,6 +4,7 @@ I have given you the TypeChecking_Visitor.java file, which type checks MiniC pro
 extend it to type check MiniJava programs. It expects to have access to the SymbolTable generated in PA4c and it
 will use that to look for Type errors.
 
+## Type Checking
 Type checking is a process that assigns a type to every subtree of the Abstract Syntax Tree and then tests to make sure
 that certain typing rules hold..  Here are a few of the type rules:
 * for Times(a,b) both a and b must have type "int" and the Times node will have type int
@@ -11,17 +12,7 @@ that certain typing rules hold..  Here are a few of the type rules:
 * for a call  Call(F,(a1,...,an)) we need to look at the signature of the method F, i.e. find its return value T and the types of its formals T1,...,Tn. The expression list (a1,...,an) must have type (T1 .... Tn) and the type of the Call node will be T.
 * for an ArrayLookup(e1,e2)  e1 must have type int[] and e2 must have type int and the ArrayLookup node will have type int
 
-We can write these rules in the following shorthand, where we use *void to mean the node doesn't have a type
-* Times(int,int)-> int
-* Plus(int,int) -> int
-* Minus(int, int) -> int
-* And(boolean, boolean) -> boolean
-* Not(boolean) -> boolean
-* If(boolean, *void, *void) -> *void
-* While(boolean, *void) -> *void
-* Class(*class,*void,*void) -> *void
-* Call(method(T,(T1,..,Tn)), (T1,...,Tn)) -> T
-* etc. for each class in the syntaxtree package
+
   
 ## Example for a multiplication node
 Let's see how it works on the Times(Exp,Exp) node
@@ -99,6 +90,9 @@ Let's also look at the case of the Call node representing a function call
         return getTypeName(m.t);
     }
 ```
+
+
+### Modifications of Call typing for MiniJava
 You will need to modify this code to uncomment the line
 ``` java
 //Exp e1 = node.e1; // in miniC there is no e1 for a call
@@ -165,6 +159,25 @@ When the variable "a" will be encoded in the Symbol Table as $Demo$a  but it is 
 "n" is encoded as $Demo$go$n.  When you are looking up the type of "a" you would initially look for any variables "a"
 defined in the current method, so the prefix would be "$Demo$go$a$  but this won't exist in the symbol table, so you'll need
 to pop off the last environment "$go$, and look up "$Demo.a$ which it will find and which has type "int".
+
+## Type Checking Rules
+We can write the type checking rules in the following shorthand, where we use *void to mean the node doesn't have a type.
+For each class in the package syntax tree we need to determine the type rules it must follow. Here are a few ...
+You'll need to work them all out based on your understanding of Java typing.
+* Times(int,int)-> int
+* Plus(int,int) -> int
+* Minus(int, int) -> int
+* And(boolean, boolean) -> boolean
+* Not(boolean) -> boolean
+* If(boolean, *void, *void) -> *void
+* While(boolean, *void) -> *void
+* Class(*class,*void,*void) -> *void
+* ExpList(e,elist) -> e+" "+elist  (so Explist("int","bool bool") -> "int bool bool"
+* Call(method(T,(T1,..,Tn)), (T1,...,Tn)) -> T
+* Assign(a,b) a,b must be same type
+* IdentifierExp(i) -> symbolTable.get(i) unless it is null, in which case look up symboltable.get(parent(i))
+* etc. for each class in the syntaxtree package
+
 
 
 ## What you need to do
