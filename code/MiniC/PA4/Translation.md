@@ -59,7 +59,7 @@ We only have to change a dozen of these methods to convert the pretty printer to
 ## Compiling MiniC to Python
 Let's do the same exercise with Python.
 
-We would like to translate the [fibs.c](./tests/fibs.c) program to [fibs.p](./tests/fibs.p) a Python program.
+We would like to translate the [fibs.c](./tests/fibs.c) program to [fibs.py](./tests/fibs.py) a Python program.
 
 List some of the syntactic differences between these two programs.
 
