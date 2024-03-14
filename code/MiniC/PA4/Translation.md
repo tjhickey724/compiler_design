@@ -19,6 +19,8 @@ Pascal was the preeminent programming language for teaching in the 1970's and 19
 
 Wikipedia has a nice article on [Pascal](https://en.wikipedia.org/wiki/Pascal_(programming_language))
 
+and you can write and run Pascal programs using an online IDE at [https://onecompiler.com](https://onecompiler.com/pascal/4277cam7g)
+
 We will translate the [fibs.c](./tests/fibs.c) program to [fibs.p](./tests/fibs.p) a Pascal program.
 
 Take a moment to look at the Pascal program and write down some of the ways it differs, syntactically, from the MiniC program.
