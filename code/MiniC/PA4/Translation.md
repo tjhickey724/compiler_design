@@ -63,3 +63,8 @@ We would like to translate the [fibs.c](./tests/fibs.c) program to [fibs.py](./t
 
 List some of the syntactic differences between these two programs.
 
+We could capture more of the MiniC code by compiling to Python with Type Anotations, 
+e.g. using [MyPy](https://mypy.readthedocs.io/en/stable/cheat_sheet_py3.html) 
+VSCode can use these annotations to infer types of expressions in Python.
+
+
