@@ -54,7 +54,14 @@ For assembly language we wil use
 
 ## Week 8: 3/4/2024-3/8/2024  X86-64 Assembly Language Progrmmaing
 * L19: Mon 3/4/2024 [Overview of X86-64](../notes/assembly/README.md)
-* L20: Mon 3/4/2024 [Stack Frames and Calling Conventions](../notes/assembly/README.md)
+* L20: Wed 3/6/2024 [Stack Frames and Calling Conventions](../notes/assembly/README.md)
+* L21: Thu 3/7/2024
+
+## Week 8: 3/11/2024-3/15/2024 Type Checking and Symbol Tables
+* L22: Mon 3/11/2024 [Review of PA2/PA3](../code/MiniC)
+* L23: Wed 3/13/2024 [Review of PA4](../code/MiniC/PA4/README.md)
+* L24: Thu 3/14/2024 [Language Translation](../code/MiniC/PA4/Translation.md)
+
 
 
 
