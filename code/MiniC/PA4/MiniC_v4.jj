@@ -30,12 +30,21 @@ public class MiniC_v4 {
       n.accept(v1, 0);
 */
 
-/* uncomment this only for PA4b */
+/* uncomment this only for PA4b 
       System.out.println("\n\nPretty Print the Program");
       Visitor v2 = new PP_Visitor();  // pretty prints the MiniC program
       String s = (String) n.accept(v2, 0);
       System.out.println("#include <stdio.h>\n#include <stdbool.h>\nvoid print(int n){printf(\"%10d\\n\",n);}");
       System.out.println(s);
+*/
+
+/* uncomment this only for MiniC2Pascal translator */
+      System.out.println("\n\nPretty Print the Program");
+      Visitor v2 = new Pascal_Visitor();  // pretty prints the MiniC program
+      String s = (String) n.accept(v2, 0);
+      System.out.println("PROGRAM Demo;\n");
+      System.out.println(s);
+      System.out.println("BEGIN\n main(1);\nEND.");
 
 
 /* uncomment this only for PA4c and PA4d

@@ -6,7 +6,7 @@ int main(int x){
   bool b;
   b = test(x,x);
   print(b);
-  b = x*2;
+  b = x*2*b;
   x = x-b;
   x = b;
   return b;
