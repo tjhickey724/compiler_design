@@ -14,7 +14,7 @@ Objects...
 
 In this note we show how to convert a MiniC program to a Pascal program.
 
-## Pascal
+## Compiling MiniC to Pascal
 Pascal was the preeminent programming language for teaching in the 1970's and 1980's but was replaced by C in the 1990's.
 
 Wikipedia has a nice article on [Pascal](https://en.wikipedia.org/wiki/Pascal_(programming_language))
@@ -56,4 +56,10 @@ public Object visit(VarDecl node, Object data){
 ```
 We only have to change a dozen of these methods to convert the pretty printer to a Pascal translator.
 
+## Compiling MiniC to Python
+Let's do the same exercise with Python.
+
+We would like to translate the [fibs.c](./tests/fibs.c) program to [fibs.p](./tests/fibs.p) a Python program.
+
+List some of the syntactic differences between these two programs.
 
