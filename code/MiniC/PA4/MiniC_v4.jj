@@ -38,30 +38,30 @@ public class MiniC_v4 {
       System.out.println(s);
 */
 
-/* uncomment this only for MiniC2Pascal translator */
-      System.out.println("\n\nPretty Print the Program");
+/* uncomment this only for MiniC2Pascal translator 
+      //System.out.println("\n\nPretty Print the Program");
       Visitor v2 = new Pascal_Visitor();  // pretty prints the MiniC program
       String s = (String) n.accept(v2, 0);
       System.out.println("PROGRAM Demo;\n");
       System.out.println(s);
       System.out.println("BEGIN\n main(1);\nEND.");
+*/
 
-
-/* uncomment this only for PA4c and PA4d
+/* uncomment this only for PA4c and PA4d*/
       System.out.println("\n\nGenerating Symbol Table");
       SymbolTableVisitor v3 = new SymbolTableVisitor(); // generates a SymbolTable
       SymbolTable st = v3.symbolTable;
       n.accept(v3,"");
       System.out.println(st);
-*/
 
-/* uncomment this only for PA4d
+
+/* uncomment this only for PA4d */
       System.out.println("\n\nType Checking");
       TypeCheckingVisitor v4 = new TypeCheckingVisitor(st);
       n.accept(v4,"");
       System.out.println(v4.num_errors+" type errors found");
-*/
-      System.out.println("\n\nDone!");
+
+      //System.out.println("\n\nDone!");
 
     } catch (Exception e) {
       System.out.println("Oops.");
