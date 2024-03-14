@@ -266,4 +266,24 @@ You will also need to uncomment the relevant parts of PA4.jj so that it
 * invokes the TypeChecker on the syntax tree ```n.accept(v4,"");```
 * prints out the number of errors ```System.out.println(v4.num_errors+" type errors found");```
 
+## Alternative approaches
+You might want to modify the SymbolTable generation so that instead of storing the MethodDecl node for a method in a HashMap,
+it computes and stores the Method Signature instead. This would make it easier to type check method calls.
 
+The Signature of a Method is a list consisting of the return type and the types of all parameters, e.g.
+```
+public Object visit(MainClass m, Object data)
+```
+has signature "Object MainClass Object", and
+```
+public int setValues(int c1, int n1, boolean b1){
+```
+has signature "int int int boolean", so we could modify the TypeNames HashMap to contain
+```
+$Demo$setValues:  "int int int boolean"
+```
+and then when we type check the call 
+```
+n=d.setValues(num,n,true);
+```
+we would need to check that "n" and "num" have type "int", and "true" is a "boolean"
