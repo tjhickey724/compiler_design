@@ -263,6 +263,7 @@ Here is the code for this operation:
 Observe that we need to create new labels  (label1 and label2) for the jump destinations.
 At the end of this code, 1 is on the stack if e1<e2 and 0 is on the stack otherwise.
 
+## Expanding our language to include if statements, booleans, and comparisons
 ### Conditional statements: if/then/else
 We compile the ```if Expr then S1 else S2 statement``` into code which
 evaluates the expression (which pushes either 1 for True or 0 for False on the stack)
@@ -301,7 +302,8 @@ We see if the expression is not 1, in which case we jump to the "else statement"
 otherwise we run the "then statement" and then jump to the end of this conditional at label 2.
 
 ## PA5
-You will need to implement the "And" nodes corresponding to the logical conjunction operation e.g.,
+You will need to implement the True and False literals (as 1 and 0 respectively),
+as well as the "And" nodes corresponding to the logical conjunction operation e.g.,
 ```
 (0<x) && (x<10)
 ```
