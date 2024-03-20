@@ -6,13 +6,10 @@ void print(int n){printf("%10d\n",n);}
 int main(int x){
     int a;
     int b;
-    x=100;
     print(x);
-    a = 3*x;
-    print(a);
-    b = a*a;
-    print(b);
-    b = b*b*b+b*b+b+1;
-    print(b);
+    a=10;
+    b=7;
+    x = (a+b)*(a-b);
+    print(x);
     return x;
 }

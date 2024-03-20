@@ -56,7 +56,8 @@ public class MiniC_v5 {
 /* uncomment this only for PA5 */
       //System.out.println("\n\nCode Generation");
       CodeGen_Visitor v5 = new CodeGen_Visitor();
-      n.accept(v5,"");
+      String result = (String) n.accept(v5,"");
+      System.out.println(result);
 
       //System.out.println("\n\nDone!");
 

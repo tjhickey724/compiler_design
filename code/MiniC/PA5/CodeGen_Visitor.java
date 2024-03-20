@@ -43,67 +43,82 @@ public class CodeGen_Visitor implements Visitor {
     private int labelNum = 0;
     private int stackOffset = 0;
     private int formalOffset = 0;
+    private Visitor ppVisitor = new PP_Visitor();
 
 
     public Object visit(And node, Object data){ 
+        // not in MiniC
         Exp e1=node.e1;
         Exp e2=node.e2;
         node.e1.accept(this, data);
         node.e2.accept(this, data);
-        return data; 
+        return "# AND not implemented\n"; 
     } 
 
     public Object visit(ArrayAssign node, Object data){ 
+        // not in MiniC
         Identifier i = node.i;
         Exp e1=node.e1;
         Exp e2=node.e2;
         node.i.accept(this,data);
         node.e1.accept(this, data);
         node.e2.accept(this, data);
-        return data; 
+        return "# ArrayAssign not implemented\n";
     } 
 
     public Object visit(ArrayLength node, Object data){ 
+        // not in MiniC
         Exp e=node.e;
         node.e.accept(this, data);
-        return data; 
+        return "#Array Length not implemented\n"; 
     } 
 
     public Object visit(ArrayLookup node, Object data){ 
+        // not in MiniC
         Exp e1=node.e1;
         Exp e2=node.e2;
         node.e1.accept(this, data);
         node.e2.accept(this, data);
-        return data; 
+        return "#ArrayLookup not implemented\n"; 
     } 
 
     public Object visit(Assign node, Object data){ 
         Identifier i=node.i;
         Exp e=node.e;
-        node.i.accept(this, data);
-        node.e.accept(this, data);
 
-        System.out.println("popq %rax");
+        //node.i.accept(this, data);
+        String expCode = (String) node.e.accept(this, data);
+
         String varName = currClass+"_"+currMethod+"_"+i.s;
         String location = varMap.get(varName);
-        System.out.println("movq %rax, " + location);
+
+        String result = 
+            
+            expCode
+            + "#"+node.accept(ppVisitor,0)+"\n"
+            + "popq %rax\n"
+            + "movq %rax, "+location+"\n";
         
-        return data; 
+        return result; 
     } 
 
     public Object visit(Block node, Object data){ 
         StatementList slist=node.slist;
+        String result="";
         if (node.slist != null){    
-            node.slist.accept(this, data);
+            result = (String) node.slist.accept(this, data);
         }
-        return data; 
+        return result; 
     } 
 
     public Object visit(BooleanType node, Object data){ 
-        return data;
+        // no code generated
+        return "# no code for BooleanType\n";
     } 
 
     public Object visit(Call node, Object data){ 
+        // not implemented yet ...
+
         Exp e1 = node.e1;
         Identifier i = node.i;
         ExpList e2=node.e2;
@@ -115,10 +130,11 @@ public class CodeGen_Visitor implements Visitor {
             node.e2.accept(this, data);
         }
 
-        return data;
+        return "# Call not implemented\n";
     } 
 
     public Object visit(ClassDecl node, Object data){ 
+        // not in MiniC
         Identifier i = node.i;
         VarDeclList v=node.v;
         MethodDeclList m=node.m;
@@ -137,10 +153,11 @@ public class CodeGen_Visitor implements Visitor {
             node.m.accept(this, data);
         }
 
-        return data;
+        return "# ClassDecl not implemented\n";
     } 
 
     public Object visit(ClassDeclList node, Object data){ 
+        // not in MiniC
         ClassDecl c=node.c;
         ClassDeclList clist=node.clist;
         node.c.accept(this, data);
@@ -148,31 +165,34 @@ public class CodeGen_Visitor implements Visitor {
             node.clist.accept(this, data);
         }
 
-        return data;
+        return "#ClassDeclList not implemented\n";
     } 
 
     public Object visit(ExpGroup node, Object data){ 
         Exp e=node.e;
-        node.e.accept(this, data);
+        String code = (String) node.e.accept(this, data);
 
-        return data; 
+        return code; 
     } 
 
     public Object visit(ExpList node, Object data){ 
+        // not implemented yet, only need for Call
         Exp e=node.e;
         ExpList elist=node.elist;
         node.e.accept(this, data);
         if (node.elist != null){
             node.elist.accept(this, data);
         }
-        return data; 
+        return "#ExpList not implemented \n"; 
     }
 
     public Object visit(False node, Object data){ 
-        return data;
+        // not implemented yet
+        return "# False not implemented ";
     } 
 
     public Object visit(Formal node, Object data){ 
+        // find location of formal in stack
         Identifier i=node.i;
         Type t=node.t;
 
@@ -181,50 +201,60 @@ public class CodeGen_Visitor implements Visitor {
         String location = formalOffset + "(%rbp)";
         varMap.put(varName, location);
 
-        node.i.accept(this, data);
-        node.t.accept(this, data);
+        //node.i.accept(this, data);
+        //node.t.accept(this, data);
 
-        return data; 
+        return "# " + varName+"->"+location+"\n"; 
     }
 
     public Object visit(FormalList node, Object data){ 
+        // find locations in stack for all formals, return no code
         Formal f=node.f;
         FormalList flist=node.flist;
-        
-        node.f.accept(this, data);
+        String result="";
+        result = (String) node.f.accept(this, data);
         if (node.flist != null) {
-            node.flist.accept(this, data);
+            result+="\n"+ (String) node.flist.accept(this, data);
         }
         
         
 
-        return data; 
+        return "# "+result+"\n"; 
     }
 
     public Object visit(Identifier node, Object data){ 
+        // no code generated for identifiers
         String s=node.s;  
 
-        return data; 
+        return "#no code for identifiers\n"; 
     }
 
     public Object visit(IdentifierExp node, Object data){ 
+        // lookup location of identifier in stack
+        // push that value onto the stack
         String s=node.s;
         // lookup the location of the identifier
         String varName = currClass+"_"+currMethod+"_"+s;
         String location = varMap.get(varName);
         // push it into the stack
-        System.out.println("pushq "+location);
+        String result = 
+            "#"+node.accept(ppVisitor,0)+"\n"
+            + "pushq "+location+" #"
+            + "  "+node.accept(ppVisitor, 0)
+            +"\n";
 
-        return data; 
+        return result ; 
     }
 
     public Object visit(IdentifierType node, Object data){ 
+        // not in MiniC
         String s=node.s;
 
         return data; 
     }
 
     public Object visit(If node, Object data){ 
+        // not implemented yet
         Exp e=node.e;
         Statement s1=node.s1;
         Statement s2=node.s2;
@@ -232,34 +262,42 @@ public class CodeGen_Visitor implements Visitor {
         node.s1.accept(this, data);
         node.s2.accept(this, data);
 
-        return data; 
+        return "# If not implemented yet\n"; 
     }
 
     public Object visit(IntArrayType node, Object data){ 
-        return data; 
+        // not in MiniC
+        return "# not in MiniC\n"; 
     }
 
     public Object visit(IntegerLiteral node, Object data){ 
+        // push the constant into the stack
         int i=node.i;
-        System.out.println("pushq $" + i);
 
-        return data; 
+        String result = 
+        "#"+node.accept(ppVisitor,0)+"\n"
+        + "pushq $" + i+"\n";
+
+        return result; 
     }
 
     public Object visit(IntegerType node, Object data){ 
-        return data; 
+        // no code generated
+        return "#no code generated for Type decls\n"; 
     }
 
     public Object visit(LessThan node, Object data){ 
+        // not implemented yet
         Exp e1=node.e1;
         Exp e2=node.e2;
         node.e1.accept(this, data);
         node.e2.accept(this, data);
 
-        return data;
+        return "# not implemented yet\n";
     }
 
     public Object visit(MainClass node, Object data){ 
+        // not in MiniC
         Identifier i=node.i;
         Statement s=node.s;
         labelMap.put(i.s, "_main");
@@ -268,10 +306,11 @@ public class CodeGen_Visitor implements Visitor {
         node.i.accept(this, data);
         node.s.accept(this, data);
 
-        return data; 
+        return "# not implemented\n"; 
     }
 
     public Object visit(MethodDecl node, Object data){ 
+        // generate code for a function declaration
         Type t=node.t;
         Identifier i=node.i;
         FormalList f=node.f;
@@ -279,119 +318,177 @@ public class CodeGen_Visitor implements Visitor {
         StatementList s=node.s;
         Exp e=node.e;
 
+        String prologue="";
+        String statementCode = "";
+        String expressionCode = "";
+        String epilogue = "";
+
+        String formals="# formals\n";
+        String locals="#locals\n";
+
 
 
         formalOffset = 8;
         String theLabel = i.s ; //labelMap.get(currClass) + i.s;
         labelMap.put(currClass + i.s, theLabel);
-        System.out.println(".globl "+"_"+theLabel);
-        System.out.println("_"+theLabel+":");
-        currMethod = i.s;
 
-        System.out.println("pushq %rbp");
-        System.out.println("movq %rsp, %rbp");
+        currMethod = i.s;  // set "global variable"
+        stackOffset = 0;
 
-        node.t.accept(this, data);
-        node.i.accept(this, data);
+        
+
+        //node.t.accept(this, data);
+        //node.i.accept(this, data);
+
+        // assign locations for formals
         if (node.f != null){
-            node.f.accept(this, data);
+            formals += (String) node.f.accept(this, data);
         }
+
+        
+
+        // assign locations for local variables
         if (node.v != null){
-            node.v.accept(this, data);
+            locals += (String) node.v.accept(this, data);
         }
 
         if (node.s != null){
-            node.s.accept(this, data);
+            statementCode = (String) node.s.accept(this, data);
         }
-        node.e.accept(this, data);
 
-        System.out.println("popq %rax");  
-        System.out.println("movq %rbp, %rsp");
-        System.out.println("popq %rbp");
+        expressionCode = (String) node.e.accept(this, data);
+
+        int stackChange = - stackOffset;
+
+        prologue = 
+        
+        ".globl "+"_"+theLabel+"\n"
+        +"_"+theLabel+":\n"
+        +formals
+        + "# prologue\n"
+        + "pushq %rbp\n"
+        + "movq %rsp, %rbp\n"
+        + locals
+        + "#make space for locals on stack\n"
+        + "subq $"+stackChange+", %rsp\n";
+
+        epilogue =
+        "# epilogue\n"
+        +   "popq %rax\n"
+        +   "addq $"+stackChange+", %rsp\n"
+        +   "movq %rbp, %rsp\n"
+        +   "popq %rbp\n"
         // maybe insert code her to print out the return value
-        System.out.println("retq");
+        +   "retq\n";
 
-        return data; 
+        return 
+          prologue 
+          + statementCode 
+          +"# calculate return value\n"
+          + expressionCode
+          +epilogue; 
     }
 
 
     public Object visit(MethodDeclList node, Object data){ 
+        // not implemented
         MethodDecl m=node.m;
         MethodDeclList mlist=node.mlist;
-        node.m.accept(this, data);
+        String result = "";
+
+        result = (String) node.m.accept(this, data);
         if (node.mlist != null) {
-            node.mlist.accept(this, data);
+            result += (String) node.mlist.accept(this, data);
         }
         
 
-        return data; 
+        return result; 
     }   
 
 
     public Object visit(Minus node, Object data){ 
         Exp e1=node.e1;
         Exp e2=node.e2;
-        node.e1.accept(this, data);
-        node.e2.accept(this, data);
+        String e1Code = (String) node.e1.accept(this, data);
+        String e2Code = (String) node.e2.accept(this, data);
 
-        System.out.println("popq %rdx");
-        System.out.println("popq %rax");
-        System.out.println("subq %rdx, %rax");
-        System.out.println("pushq %rax");
+        String minusCode = 
+        
+          e1Code
+        + e2Code
+        + "# minus:"+node.accept(ppVisitor,0)+"\n"
+        +   "popq %rdx\n"
+        +   "popq %rax\n"
+        +   "subq %rdx, %rax\n"
+        +   "pushq %rax\n";
 
-        return data; 
+        return minusCode; 
     }
 
     public Object visit(NewArray node, Object data){ 
+        // not in MiniC
         Exp e=node.e;
         node.e.accept(this, data);
 
-        return data; 
+        return "# NewArray not implemented\n";
     }
 
 
     public Object visit(NewObject node, Object data){ 
+        // not in MiniC
         Identifier i=node.i;
         node.i.accept(this, data);
 
-        return data; 
+        return "# NewObject not implemented\n"; 
     }
 
 
     public Object visit(Not node, Object data){ 
+        // not in MiniC
         Exp e=node.e;
         node.e.accept(this, data);
 
-        return data; 
+        return "#Not not implemented\n"; 
     }
 
 
     public Object visit(Plus node, Object data){ 
         Exp e1=node.e1;
         Exp e2=node.e2;
-        node.e1.accept(this, data);
-        node.e2.accept(this, data);
+        String e1Code = (String) node.e1.accept(this, data);
+        String e2Code = (String) node.e2.accept(this, data);
 
-        System.out.println("popq %rdx");
-        System.out.println("popq %rax");
-        System.out.println("addq %rdx, %rax");
-        System.out.println("pushq %rax");
+        String addCode = 
+        
+          e1Code
+        + e2Code
+        + "# plus:"+node.accept(ppVisitor,0)+"\n"
+        +   "popq %rdx\n"
+        +   "popq %rax\n"
+        +   "addq %rdx, %rax\n"
+        +   "pushq %rax\n";
 
-        return data; 
+        return addCode; 
     }
 
 
     public Object visit(Print node, Object data){ 
         Exp e=node.e;
-        node.e.accept(this, data);
-        System.out.println("popq %rdi");
-        System.out.println("callq _print");
+        String expCode = (String) node.e.accept(this, data);
 
-        return data; 
+        String result = 
+        
+            expCode
+        + "# "+node.accept(ppVisitor, 0)
+        +   "popq %rdi\n"
+        +   "callq _print\n";
+
+        return result;
     }
 
 
     public Object visit(Program node, Object data){ 
+        // not in MiniC
         MainClass m=node.m;
         ClassDeclList c=node.c;
         node.m.accept(this, data);
@@ -400,29 +497,31 @@ public class CodeGen_Visitor implements Visitor {
         }
         
 
-        return data; 
+        return "# Program not implemented\n"; 
     }
 
 
     public Object visit(StatementList node, Object data){ 
         Statement s=node.s;
         StatementList slist=node.slist;
+        String result="";
         
         
         
         if (node.slist != null){
-            node.slist.accept(this, data);
+            result += (String) node.slist.accept(this, data);
         }
-        node.s.accept(this, data);
+         result += "\n"+(String) node.s.accept(this, data);
         
         
 
-        return data; 
+        return result; 
     }
 
 
     public Object visit(This node, Object data){ 
-        return data; 
+        // not in MiniC
+        return "# This not implemented\n";
     }
 
 
@@ -430,24 +529,32 @@ public class CodeGen_Visitor implements Visitor {
     public Object visit(Times node, Object data){ 
         Exp e1=node.e1;
         Exp e2=node.e2;
-        node.e1.accept(this, data);
-        node.e2.accept(this, data);
+        String e1Code = (String) node.e1.accept(this, data);
+        String e2Code = (String) node.e2.accept(this, data);
 
-        System.out.println("popq %rdx");
-        System.out.println("popq %rax");
-        System.out.println("imulq %rdx, %rax");
-        System.out.println("pushq %rax");
+        String timesCode = 
+        
+        e1Code
+        + e2Code
+        + "# times:"+node.accept(ppVisitor,0)+"\n"
+        +   "popq %rdx\n"
+        +   "popq %rax\n"
+        +   "imulq %rdx, %rax\n"
+        +   "pushq %rax\n";
 
-        return data; 
+        return timesCode; 
     }
 
 
     public Object visit(True node, Object data){ 
-        return data; 
+        // not in MiniC
+        return "# True not implemented\n"; 
     }
 
 
     public Object visit(VarDecl node, Object data){ 
+        // find and store location of local variable
+        // don't generate any code.
         Type t=node.t;
         Identifier i=node.i;
 
@@ -455,35 +562,33 @@ public class CodeGen_Visitor implements Visitor {
         String location = (stackOffset) + "(%rbp)";
         String varName = currClass+"_"+currMethod+"_"+i.s;
         varMap.put(varName, location);
-        
-        System.out.println("movq $0, "+location);
-        System.out.println("pushq" + " "+location);
-
  
-        node.t.accept(this, data);
-        node.i.accept(this, data);
+        //node.t.accept(this, data);
+        //node.i.accept(this, data);
 
-        return data;
+        return "# "+varName+"->"+location+"\n";
     }
 
 
     public Object visit(VarDeclList node, Object data){ 
         VarDecl v=node.v;
         VarDeclList vlist=node.vlist;
-        node.v.accept(this, data);
+        String vars="";
+        vars += (String) node.v.accept(this, data);
         if (node.vlist != null) {
-            node.vlist.accept(this, data);
+            vars += node.vlist.accept(this, data);
         }
-        return data; 
+        return vars; 
     }
 
     public Object visit(While node, Object data){ 
+        // not in MiniC
         Exp e=node.e;
         Statement s=node.s;
         node.e.accept(this, data);
         node.s.accept(this, data);
 
-        return data; 
+        return "# while not implemented\n"; 
     }
 
 }
