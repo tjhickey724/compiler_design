@@ -104,3 +104,66 @@ assigns them a location:
         return "# " + varName+"->"+location+"\n"; 
     }
 ```
+Similarly for the Local Variables.
+
+Binary Operator Expressions  ```A op B``` are evaluated using the stack assuming that A and B
+are the top two elements of the stack, and after this operation they will be popped off
+and their sum, C, will be pushed on the stack..
+
+Let's see how this is done in code:
+
+```
+   public Object visit(Times node, Object data){ 
+        Exp e1=node.e1;
+        Exp e2=node.e2;
+        String e1Code = (String) node.e1.accept(this, data);
+        String e2Code = (String) node.e2.accept(this, data);
+
+        String timesCode = 
+        
+        e1Code
+        + e2Code
+        + "# times:"+node.accept(ppVisitor,0)+"\n"
+        +   "popq %rdx\n"
+        +   "popq %rax\n"
+        +   "imulq %rdx, %rax\n"
+        +   "pushq %rax\n";
+
+        return timesCode; 
+    }
+```
+
+```
+public Object visit(IntegerLiteral node, Object data){ 
+        // push the constant into the stack
+        int i=node.i;
+
+        String result = 
+        "#"+node.accept(ppVisitor,0)+"\n"
+        + "pushq $" + i+"\n";
+
+        return result; 
+    }
+
+```
+
+```
+
+    public Object visit(IdentifierExp node, Object data){ 
+        // lookup location of identifier in stack
+        // push that value onto the stack
+        String s=node.s;
+        // lookup the location of the identifier
+        String varName = currClass+"_"+currMethod+"_"+s;
+        String location = varMap.get(varName);
+        // push it into the stack
+        String result = 
+            "#"+node.accept(ppVisitor,0)+"\n"
+            + "pushq "+location+" #"
+            + "  "+node.accept(ppVisitor, 0)
+            +"\n";
+
+        return result ; 
+    }
+
+```
