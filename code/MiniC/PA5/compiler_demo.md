@@ -75,30 +75,40 @@ MethodDeclList
 ```
 Our compiler will generate the following code for this program (with comments inserted by the compiler)
 ```
-# prologue
 .globl _main
 _main:
-# 
+# formals
+# # _main_x->16(%rbp)
+
+# prologue
 pushq %rbp
 movq %rsp, %rbp
+#locals
+# _main_b->-8(%rbp)
+# _main_a->-16(%rbp)
+#make space for locals on stack
 subq $16, %rsp
+
 # x 
 pushq 16(%rbp) #   x 
 # print( x );
 popq %rdi
 callq _print
+
 # 10 
 pushq $10
 #a =  10 ;
 
 popq %rax
 movq %rax, -16(%rbp)
+
 # 7 
 pushq $7
 #b =  7 ;
 
 popq %rax
 movq %rax, -8(%rbp)
+
 # a 
 pushq -16(%rbp) #   a 
 # b 
@@ -126,6 +136,7 @@ pushq %rax
 
 popq %rax
 movq %rax, 16(%rbp)
+
 # x 
 pushq 16(%rbp) #   x 
 # print( x );
@@ -140,4 +151,6 @@ addq $16, %rsp
 movq %rbp, %rsp
 popq %rbp
 retq
+
+
 ```
