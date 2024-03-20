@@ -73,3 +73,34 @@ We also need some auxiliary variables to keep track of
  *  stackOffset - the current stack offset, to keep track of temporaries
  *  formalOffset - the current formal offset, to keep track of parameters
 
+``` java
+    private HashMap<String, String> labelMap = new HashMap<String, String>();
+    private HashMap<String, String> varMap = new HashMap<String, String>();
+    private HashMap<String, String> paramMap = new HashMap<String, String>();
+    private String currClass = "";
+    private String currMethod = "";
+    private int labelNum = 0;
+    private int stackOffset = 0;
+    private int formalOffset = 0;
+    private Visitor ppVisitor = new PP_Visitor()
+```
+
+The Formals variables will be stored "above" the current stack frame and the Visitor code
+assigns them a location:
+``` java
+    public Object visit(Formal node, Object data){ 
+        // find location of formal in stack
+        Identifier i=node.i;
+        Type t=node.t;
+
+        formalOffset += 8;
+        String varName = currClass+"_"+currMethod+"_"+i.s;
+        String location = formalOffset + "(%rbp)";
+        varMap.put(varName, location);
+
+        //node.i.accept(this, data);
+        //node.t.accept(this, data);
+
+        return "# " + varName+"->"+location+"\n"; 
+    }
+```
