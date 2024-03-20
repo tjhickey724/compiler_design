@@ -54,4 +54,22 @@ int main(int x){
 and we include a detailed explanation of the code in this link:
    [compiler_demo.md](./compiler_demo.md)
 
+## Compiler Architecture
+The PA5 compiler maintains several "global" variables so that it can determine where the
+variables of the program should be stored:
+
+We maintain a few hashmaps 
+ *  labelMap: to keep track of the labels for class methods
+    *     this will map method names to their labels
+ *  varMap: to keep track of the local variables in a method
+    *     this will map variable names to their negative offsets from the base pointer
+ *  paramMap: to keep track of the parameters of a method
+    *     this will map parameter names to their positive offsets from the base pointer
+  
+We also need some auxiliary variables to keep track of 
+ *  currClass - the current class
+ *  currMethod - the current method
+ *  labelNum - the current label number, for use in loops and conditionals
+ *  stackOffset - the current stack offset, to keep track of temporaries
+ *  formalOffset - the current formal offset, to keep track of parameters
 
