@@ -35,6 +35,7 @@ Here is the subset of MiniJava that we need to process in our compiler.
 
 ## Example 
 Here is an example of a straightline MiniC program that can be compiled by the PA5 base code ..
+```
 #include <stdio.h>
 #include <stdbool.h>
 void print(int n){printf("%10d\n",n);}
