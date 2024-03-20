@@ -28,10 +28,81 @@ Here is the subset of MiniJava that we need to process in our compiler.
 |Print | print(Expr)|
 |Times | Expr * Expr|
 |VarDecl | Type Id;|
-|FormalList|  ...|
-|MethodDeclList| ...|
-|StatementList|  ...|
-|VarDeclList|  ....|
+|FormalList|  Formal, Formal, ... , Formal|
+|MethodDeclList| Method Method ... Method|
+|StatementList|  Statement ... Statement|
+|VarDeclList|  VarDecl ... VarDecl|
 
+## Example 
+Let's consider how to compile the following MiniC program to X86 assembly language:
+``` Java
+#include <stdio.h>
+#include <stdbool.h>
+void print(int n){printf("%10d\n",n);}
 
+int main(int x){
+    int a;
+    int b;
+    print(x);
+    a=10;
+    b=7;
+    x = (a+b)*(a-b);
+    print(x);
+    return x;
+}
+```
+We will focus only on the main method. When we run the MiniC_v5.jj parser on this, it will generate the following syntax tree
+for this program:
+```
+MethodDeclList
+    MethodDecl
+        IntegerType                           int
+        Identifier main                           main
+        FormalList                                   (
+            Formal
+                IntegerType                              int
+                Identifier x                              x
+                                                    )
+                                              {
+        VarDeclList
+            VarDecl               
+                IntegerType                        int
+                Identifier b                                b
+            VarDeclList
+                VarDecl
+                    IntegerType                     int
+                    Identifier a                           a
+        StatementList
+            StatementList
+                StatementList
+                    StatementList
+                        StatementList
+                            Print                     print(
+                                IdentifierExp x            x );
+                        Assign               
+                            Identifier a               a =
+                            IntegerLiteral 10               10 ;
+                    Assign
+                        Identifier b                    b =
+                        IntegerLiteral 7                     7;
+                Assign
+                    Identifier x                        x =
+                    Times
+                        ExpGroup                             (
+                            Plus
+                                IdentifierExp a                a
+                                                              +
+                                IdentifierExp b                b
+                                                             )
+                                                            * 
+                        ExpGroup                            (
+                            Minus                              
+                                IdentifierExp a               a
+                                                             -
+                                IdentifierExp b               b
+                                                            );
+            Print                                    print(
+                IdentifierExp x                           x);
+        IdentifierExp x                              return x;
+```
 
