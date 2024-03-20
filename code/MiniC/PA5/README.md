@@ -169,3 +169,10 @@ and then pushing it onto the stack
     }
 
 ```
+
+## Statements
+Our version of MiniC has two kinds of statements:
+* print statements
+* assignment statements
+
+
