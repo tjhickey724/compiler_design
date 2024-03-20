@@ -309,3 +309,6 @@ You will also need to implement the "While" node corresponding to while loops, e
 ```
 while(x>0) { print(x); x = x-1; }
 ```
+For PA6, we'll have you implement integer arrays and
+for PA7, you'll implement classes and objects.
+
