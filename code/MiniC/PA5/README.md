@@ -175,4 +175,47 @@ Our version of MiniC has two kinds of statements:
 * print statements
 * assignment statements
 
+### Assignment Statements
+To compile an assignment statement (Id = Expr)
+we compile the expression into code "expCode" which
+evaluates the expression and stores the result at the top of the stack.
+Then we pop the stack into a register (%rax$) and move it to
+the location of the identifier in the Frame.
+```
+ public Object visit(Assign node, Object data){ 
+        Identifier i=node.i;
+        Exp e=node.e;
+        //node.i.accept(this, data);
+        String expCode = (String) node.e.accept(this, data);
+        String varName = currClass+"_"+currMethod+"_"+i.s;
+        String location = varMap.get(varName);
+
+        String result =            
+            expCode
+            + "#"+node.accept(ppVisitor,0)+"\n"
+            + "popq %rax\n"
+            + "movq %rax, "+location+"\n";     
+        return result; 
+    }
+```
+
+### Print Statements
+These are even easier, to compile "print(Exp)" we first generate code to
+evaluate the expression and push the value into the stack. Then we pop the
+stack into %rdi, which is the 1st argument register in the x86 C calling convention
+and call _print
+```
+    public Object visit(Print node, Object data){ 
+        Exp e=node.e;
+        String expCode = (String) node.e.accept(this, data);
+        String result =     
+            expCode
+        + "# "+node.accept(ppVisitor, 0)
+        +   "popq %rdi\n"
+        +   "callq _print\n";
+        return result;
+    }
+
+```
+
 
