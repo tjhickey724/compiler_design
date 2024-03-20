@@ -18,11 +18,11 @@ Here is the subset of MiniJava that we need to process in our compiler.
 | --- | --- |
 |Assign|  Var = Exp|
 |Block  | \{StatementList\}|
-|ExpGroup| (Expr)|
-|Formal | Type Id|
+|ExpGroup| \(Expr\)|
+|Formal | Type Id;|
 |IdentifierExp | Var|
 |IntegerLiteral | N|
-|MethodDecl  |    Type Id (Formals) { VarDecls Statements return Expr}|
+|MethodDecl  |    Type Id (Formals) \{VarDecls Statements return Expr;\}|
 |Minus | Expr - Expr|
 |Plus  | Expr + Expr|
 |Print | print(Expr)|
