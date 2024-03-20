@@ -106,6 +106,7 @@ assigns them a location:
 ```
 Similarly for the Local Variables.
 
+## Compiling Expressions
 Binary Operator Expressions  ```A op B``` are evaluated using the stack assuming that A and B
 are the top two elements of the stack, and after this operation they will be popped off
 and their sum, C, will be pushed on the stack..
@@ -132,7 +133,7 @@ Let's see how this is done in code:
         return timesCode; 
     }
 ```
-
+Integer literals will be compiled by pushing them onto the stack:
 ```
 public Object visit(IntegerLiteral node, Object data){ 
         // push the constant into the stack
@@ -146,7 +147,8 @@ public Object visit(IntegerLiteral node, Object data){
     }
 
 ```
-
+Identifier expressions are compiled by looking up their location in the stack
+and then pushing it onto the stack 
 ```
 
     public Object visit(IdentifierExp node, Object data){ 
