@@ -14,7 +14,7 @@ and Arrays.
 ## Abstract Syntax Trees of MiniC
 Here is the subset of MiniJava that we need to process in our compiler.
 
-|Node | Grammar Rule |
+|Node Class | Grammatical Contruct |
 | --- | --- |
 |Assign|  Var = Exp|
 |Block  | \{StatementList\}|
@@ -28,9 +28,10 @@ Here is the subset of MiniJava that we need to process in our compiler.
 |Print | print(Expr)|
 |Times | Expr * Expr|
 |VarDecl | Type Id;|
+|FormalList|  ...|
+|MethodDeclList| ...|
+|StatementList|  ...|
+|VarDeclList|  ....|
 
-FormalList ...
-MethodDeclList ...
-StatementList  ...
-VarDeclList  ....
+
 
