@@ -260,4 +260,52 @@ Here is the code for this operation:
          + label2+":\n" ;      // both branches end up here
     }
 ```
+Observe that we need to create new labels  (label1 and label2) for the jump destinations.
+At the end of this code, 1 is on the stack if e1<e2 and 0 is on the stack otherwise.
 
+### Conditional statements: if/then/else
+We compile the ```if Expr then S1 else S2 statement``` into code which
+evaluates the expression (which pushes either 1 for True or 0 for False on the stack)
+and then comparing that value to 1 to decide if to jump to S2 or continue to S1.
+Here is the code:
+```
+    public Object visit(If node, Object data){ 
+        // evaluate e, jmp to s1 if true, s2 if false, 
+        // jump to end after either case
+        Exp e=node.e;
+        Statement s1=node.s1;
+        Statement s2=node.s2;
+        String eCode = (String) node.e.accept(this, data);
+        String thenCode= (String) node.s1.accept(this, data);
+        String elseCode = (String) node.s2.accept(this, data);
+        String label1 = "L"+labelNum;
+        labelNum += 1;
+        String label2 = "L"+labelNum;
+        labelNum += 1;
+
+        return 
+         "# conditional statement\n" 
+         + eCode 
+         + "popq %rax\n"
+         + "cmpq	$1, %rax\n"
+         + "jne "+label1+"\n"
+         + thenCode
+         + "jmp "+label2+"\n"
+         + label1+":\n"
+         + elseCode
+         + label2+":\n";   
+    }
+```
+Here again we need to create two labels (label1 and label2) for the jump points.
+We see if the expression is not 1, in which case we jump to the "else statement" at label1
+otherwise we run the "then statement" and then jump to the end of this conditional at label 2.
+
+## PA5
+You will need to implement the "And" nodes corresponding to the logical conjunction operation e.g.,
+```
+(0<x) && (x<10)
+```
+You will also need to implement the "While" node corresponding to while loops, e.g.
+```
+while(x>0) { print(x); x = x-1; }
+```
