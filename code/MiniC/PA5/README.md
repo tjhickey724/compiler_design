@@ -218,4 +218,46 @@ and call _print
 
 ```
 
+### Conditional Expressions
+We will compile conditional expressions (A<B) into code which will 
+* pop A and B off of the stack
+* if A<B it will push 1 on the stack
+* else it will push 0 on the stack
+Here is the code for this operation:
+``` java
+
+    public Object visit(LessThan node, Object data){ 
+        /* We implement this in an inefficient but simple way.
+         * where we evaluate the two expressions in A<B
+         * and push them into the stack as values "a" and "b"
+         * then we do a comparison of "a" and "b"
+         * and if "a"<"b" we push 1 onto the stack, else we push 0
+         * So the result of LessThan is either 1 (if true) or 0 (if false)
+         * This is what C does, it treats 0 as False and nonzero as True
+         */
+        Exp e1=node.e1;
+        Exp e2=node.e2;
+        String e1Code = (String) node.e1.accept(this, data);
+        String e2Code = (String) node.e2.accept(this, data);
+        String label1 = "L"+labelNum;
+        labelNum += 1;
+        String label2 = "L"+labelNum;
+        labelNum += 1;
+
+        return 
+         "# "+node.accept(ppVisitor, data)+"\n"
+         + e1Code
+         + e2Code
+         + "# compare rdx<rax and push 1 on stack if true, 0 else\n"
+         + "popq %rdx\n"      // pop 1st expr value into rdx
+         + "popq %rax\n"      // pop 2nd expr value into rax
+         + "cmpq %rdx, %rax\n"// compare the two values
+         + "jge "+label1+"\n" // if rdx >= rax jump to label1
+         + "pushq $1\n"       // otherwise rdx<rax so push 1 on stack
+         + "jmp "+label2+"\n" // and jump to the end of this code
+         + label1+":\n"       // in this case, rdx is not < rax, so
+         + "pushq $0\n"       // push 0 on stack
+         + label2+":\n" ;      // both branches end up here
+    }
+```
 
