@@ -6,22 +6,21 @@ void print(int n){printf("%10d\n",n);}
 int main(int x){
     int a;
     int b;
-    int c;
     a=10;
     b=700;
     if (a<b){
         if (b<10*a){
-            c=100;
+            x=100;
         }else {
-            c=200;
+            x=200;
         }
     } else {
         if (a<10*b) {
-            c=300;
+            x=300;
         } else {
-            c=400;
+            x=400;
         }
     }
-    print(c);
-    return c;
+    print(x);
+    return x;
 }

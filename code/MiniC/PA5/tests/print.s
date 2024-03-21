@@ -5,7 +5,6 @@
 _print:                                 ## @print
 	.cfi_startproc
 ## %bb.0:
-
 	pushq	%rbp
 	.cfi_def_cfa_offset 16
 	.cfi_offset %rbp, -16
@@ -21,11 +20,6 @@ _print:                                 ## @print
 	popq	%rbp
 	retq
 	.cfi_endproc
-
-.globl _printSP
-_printSP: 
-movq %rsp, %rdi
-callq _print  
                                         ## -- End function
 	.section	__TEXT,__cstring,cstring_literals
 L_.str:                                 ## @.str

@@ -1,0 +1,43 @@
+.globl _main
+_main:
+# formals
+# # _main_x->16(%rbp)
+
+# prologue
+pushq %rbp
+movq %rsp, %rbp
+#locals
+# _main_b->-8(%rbp)
+# _main_a->-16(%rbp)
+#make space for locals on stack
+subq $16, %rsp
+
+# 10 
+pushq $10
+#a =  10 ;
+
+popq %rax
+movq %rax, -16(%rbp)
+
+# 700 
+pushq $700
+#b =  700 ;
+
+popq %rax
+movq %rax, -8(%rbp)
+
+# x 
+pushq 16(%rbp) #   x 
+# print( x );
+popq %rdi
+callq _print
+# calculate return value
+# x 
+pushq 16(%rbp) #   x 
+# epilogue
+popq %rax
+addq $16, %rsp
+movq %rbp, %rsp
+popq %rbp
+retq
+

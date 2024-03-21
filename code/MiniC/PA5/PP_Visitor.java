@@ -145,7 +145,7 @@ import syntaxtree.*;
 
    public Object visit(LessThan node, Object data){
         // 
-        int indent = (int) data; 
+        int indent = 0; // no indentation for expressions
         String e1 = (String) node.e1.accept(this,indent);
         String e2 = (String) node.e2.accept(this,indent);
         return e1+"<"+e2;

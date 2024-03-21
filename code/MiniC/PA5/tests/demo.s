@@ -1,76 +1,155 @@
 .globl _main
 _main:
-# formals
-# # _main_x->16(%rbp)
-
 # prologue
 pushq %rbp
 movq %rsp, %rbp
-#locals
-# _main_b->-8(%rbp)
-# _main_a->-16(%rbp)
-#make space for locals on stack
-subq $16, %rsp
+# formals
+# # _main_x->8(%rbp)
 
-# x 
-pushq 16(%rbp) #   x 
-# print( x );
-popq %rdi
-callq _print
+#locals
+# _main_c->-32(%rbp)
+# _main_b->-40(%rbp)
+# _main_a->-48(%rbp)
+#make space for locals on stack
+subq $48, %rsp
 
 # 10 
 pushq $10
 #a =  10 ;
 
 popq %rax
-movq %rax, -16(%rbp)
+movq %rax, -48(%rbp)
 
-# 7 
-pushq $7
-#b =  7 ;
+# 700 
+pushq $700
+#b =  700 ;
 
 popq %rax
-movq %rax, -8(%rbp)
+movq %rax, -40(%rbp)
 
+# conditional statement
+#  a < b 
 # a 
-pushq -16(%rbp) #   a 
+pushq -48(%rbp) #   a 
 # b 
-pushq -8(%rbp) #   b 
-# plus: a  +  b 
+pushq -40(%rbp) #   b 
+# compare rdx<rax and push 1 on stack if true, 0 else
 popq %rdx
 popq %rax
-addq %rdx, %rax
-pushq %rax
-# a 
-pushq -16(%rbp) #   a 
-# b 
-pushq -8(%rbp) #   b 
-# minus: a  -  b 
-popq %rdx
+cmpq %rdx, %rax
+jge L0
+pushq $1
+jmp L1
+L0:
+pushq $0
+L1:
 popq %rax
-subq %rdx, %rax
-pushq %rax
-# times:( a  +  b ) * ( a  -  b )
+cmpq	$1, %rax
+jne L10
+
+# conditional statement
+#  b < 10  *  a 
+# b 
+pushq -40(%rbp) #   b 
+# 10 
+pushq $10
+# a 
+pushq -48(%rbp) #   a 
+# times: 10  *  a 
 popq %rdx
 popq %rax
 imulq %rdx, %rax
 pushq %rax
-#x = ( a  +  b ) * ( a  -  b );
+# compare rdx<rax and push 1 on stack if true, 0 else
+popq %rdx
+popq %rax
+cmpq %rdx, %rax
+jge L2
+pushq $1
+jmp L3
+L2:
+pushq $0
+L3:
+popq %rax
+cmpq	$1, %rax
+jne L4
+
+# 100 
+pushq $100
+#c =  100 ;
 
 popq %rax
-movq %rax, 16(%rbp)
+movq %rax, -32(%rbp)
+jmp L5
+L4:
 
-# x 
-pushq 16(%rbp) #   x 
-# print( x );
+# 200 
+pushq $200
+#c =  200 ;
+
+popq %rax
+movq %rax, -32(%rbp)
+L5:
+jmp L11
+L10:
+
+# conditional statement
+#  a < 10  *  b 
+# a 
+pushq -48(%rbp) #   a 
+# 10 
+pushq $10
+# b 
+pushq -40(%rbp) #   b 
+# times: 10  *  b 
+popq %rdx
+popq %rax
+imulq %rdx, %rax
+pushq %rax
+# compare rdx<rax and push 1 on stack if true, 0 else
+popq %rdx
+popq %rax
+cmpq %rdx, %rax
+jge L6
+pushq $1
+jmp L7
+L6:
+pushq $0
+L7:
+popq %rax
+cmpq	$1, %rax
+jne L8
+
+# 300 
+pushq $300
+#c =  300 ;
+
+popq %rax
+movq %rax, -32(%rbp)
+jmp L9
+L8:
+
+# 400 
+pushq $400
+#c =  400 ;
+
+popq %rax
+movq %rax, -32(%rbp)
+L9:
+L11:
+
+# c 
+pushq -32(%rbp) #   c 
+# print( c );
 popq %rdi
+movb	$0, %al
 callq _print
 # calculate return value
-# x 
-pushq 16(%rbp) #   x 
+# c 
+pushq -32(%rbp) #   c 
 # epilogue
 popq %rax
-addq $16, %rsp
+addq $48, %rsp
 movq %rbp, %rsp
 popq %rbp
 retq
