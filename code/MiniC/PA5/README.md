@@ -301,12 +301,7 @@ Here again we need to create two labels (label1 and label2) for the jump points.
 We see if the expression is not 1, in which case we jump to the "else statement" at label1
 otherwise we run the "then statement" and then jump to the end of this conditional at label 2.
 
-### While statements
-You should be able to use the techniques shown for the if statement to generate code for the following
-Abstract Syntax Tree nodes
-* While
-* And
-* Not
+
 
 ## Arrays in MiniC
 We will implement arrays in MiniC in the Java way where an array of n longs will be allocated
@@ -346,16 +341,13 @@ we access the quad value stored in the first 8 bytes of the array
 ```
 movq (%rax,$rcx,), %r8
 ```
-With these instructions, you should be able to generate code for the following
-Abstract Syntax Tree nodes
-* ArrayLength
-* ArrayAssign
-* ArrayLookup
-* NewArray
 
 
 
-## PA5
+
+
+
+# PA5 - Adding loops and arrays to MiniC
 You will need to implement the True and False literals (as 1 and 0 respectively),
 as well as the "And" nodes corresponding to the logical conjunction operation e.g.,
 ```
@@ -365,7 +357,24 @@ You will also need to implement the "While" node corresponding to while loops, e
 ```
 while(x>0) { print(x); x = x-1; }
 ```
-We'll also have you implement integer arrays.
 
+More precisely, for PA5 you will need to modify the CodeGen_Visitor so that it generates
+code for the following Abstract Syntax Tree nodes, and to demonstrate that your code works
+on some sample programs.
+
+### While statements
+You should be able to use the techniques shown for the if statement to generate code for the following
+Abstract Syntax Tree nodes
+* While
+* And
+* Not
+
+### Array handling
+With these instructions, you should be able to generate code for the following
+Abstract Syntax Tree nodes
+* ArrayLength
+* ArrayAssign
+* ArrayLookup
+* NewArray
 
 
