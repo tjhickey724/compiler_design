@@ -308,10 +308,13 @@ We will implement arrays in MiniC in the Java way where an array of n longs will
 8*(n+1) bytes in the heap. The first 8 bytes will store the size of the array and the element a[i]
 will be in the 8 bytes starting at 8*(i+1).
 
+[Arrays in MiniJava](Arrays%20in%20Java.pdf)
+
 ### Allocating space in the heap in x86-64
 To allocate space in the heap we need to use the System call _malloc whose one argument %rdi is the number
 of bytes to allocate. The address of the first byte in that region of memory is returned in %rax.
-[malloc](./malloc.pdf)
+
+Here is a slide on [malloc](./malloc.pdf)
 
 ### Array Indexing
 Once we have allocate 8*(size+1) bytes in the heap to store the array "a" of longs,
@@ -342,6 +345,9 @@ we access the quad value stored in the first 8 bytes of the array
 movq (%rax,$rcx,), %r8
 ```
 
+Here are some slides on working with arrays in x86-64
+* [Array Manipulation](./Array%20manipulation%20in%20x86-64.pdf)
+* [Array Indexing](./Array%20indexing.pdf)
 
 
 
