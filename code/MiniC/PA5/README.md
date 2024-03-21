@@ -301,6 +301,60 @@ Here again we need to create two labels (label1 and label2) for the jump points.
 We see if the expression is not 1, in which case we jump to the "else statement" at label1
 otherwise we run the "then statement" and then jump to the end of this conditional at label 2.
 
+### While statements
+You should be able to use the techniques shown for the if statement to generate code for the following
+Abstract Syntax Tree nodes
+* While
+* And
+* Not
+
+## Arrays in MiniC
+We will implement arrays in MiniC in the Java way where an array of n longs will be allocated
+8*(n+1) bytes in the heap. The first 8 bytes will store the size of the array and the element a[i]
+will be in the 8 bytes starting at 8*(i+1).
+
+### Allocating space in the heap in x86-64
+To allocate space in the heap we need to use the System call _malloc whose one argument %rdi is the number
+of bytes to allocate. The address of the first byte in that region of memory is returned in %rax.
+[malloc](./malloc.pdf)
+
+### Array Indexing
+Once we have allocate 8*(size+1) bytes in the heap to store the array "a" of longs,
+we can access the element a[i] using the following x86 syntax
+```
+(%rax, %rcx, $8)
+```
+where
+* %rax is the address of the first byte of the array
+* %rcx is the index of the entry we want to access (i+1)
+* $8 is the size of each element
+
+For example, to move 200 into a[10] we use the following code
+```
+movq $10, %rcx   # store 10 in %rcx
+incq %rcx   # increment it, so 11 is not in %rcx
+movq $200, (%rax, %rcx, $8)
+```
+Likewise, to move a[10] to %r7 we use the following code
+```
+movq $10, %rcx   # store 10 in %rcx
+incq %rcx   # increment it, so 11 is not in %rcx
+movq (%rax, %rcx, $8), %r7
+```
+To store the length of the array "a" in %r8, 
+we access the quad value stored in the first 8 bytes of the array
+```
+movq (%rax,$rcx,), %r8
+```
+With these instructions, you should be able to generate code for the following
+Abstract Syntax Tree nodes
+* ArrayLength
+* ArrayAssign
+* ArrayLookup
+* NewArray
+
+
+
 ## PA5
 You will need to implement the True and False literals (as 1 and 0 respectively),
 as well as the "And" nodes corresponding to the logical conjunction operation e.g.,
@@ -311,7 +365,7 @@ You will also need to implement the "While" node corresponding to while loops, e
 ```
 while(x>0) { print(x); x = x-1; }
 ```
-We'll also have you implement integer arrays and
-for PA6, you'll implement classes and objects and have a complete compiler for MiniJava.
+We'll also have you implement integer arrays.
+
 
 
