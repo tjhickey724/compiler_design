@@ -211,9 +211,11 @@ public class CodeGen_Visitor implements Visitor {
 
 
         String varName = currClass+"_"+currMethod+"_"+i.s;
+        String location;
+
         formalOffset += 8;
-        String location = formalOffset + "(%rbp)";
-        // String location = "";
+        location = formalOffset + "(%rbp)";
+
         // if (numFormals < 6){
         //     stackOffset -= 8;
         //     location = (stackOffset) + "(%rbp)";
@@ -228,6 +230,7 @@ public class CodeGen_Visitor implements Visitor {
         //      */
         // }
         // numFormals += 1;
+        // formalOffset += 8;
         
         varMap.put(varName, location);
 
@@ -420,7 +423,7 @@ public class CodeGen_Visitor implements Visitor {
         }
 
         // String copyFormals = "# copy formals in registers to stack frame\n";
-        // for (int j=0; j<numFormals; j++){
+        // for (int j=0; j<Math.min(6,numFormals); j++){
         //     copyFormals += "movq "+regFormals[j]+", -"+(32+8*j)+"(%rbp)\n";
         // }
 
@@ -437,7 +440,27 @@ public class CodeGen_Visitor implements Visitor {
 
         expressionCode = (String) node.e.accept(this, data);
 
-        int stackChange = (- stackOffset);
+        int stackChange = (- stackOffset)+8;
+
+        // round stackChange up to the nearest multiple of 16
+        stackChange = ((int)Math.ceil(stackChange/16))*16;
+        /* VERY SUBTLE POINT!!!
+         * before a function call, 
+         * the stack must be aligned to a 16 byte boundary
+         * so we round up the stack change to the nearest multiple of 16
+         * When the call is made the return address is pushed onto the stack
+         * then the base pointer is pushed on to the stack
+         * So the stack pointer is a multiple of 16 as the return address
+         * and the base pointer are 8 byte values.
+         * Next we allocate space in the stack frame for the local variables
+         * and that must be a multiple of 16
+         * When we prepare for a function call we push the arguments onto the
+         * stack. It is usually better to just expand the stack frame
+         * by a mutiple of 16 and then move the arguments after the 6th
+         * to the correct position relative to the stack pointer, i.e.
+         * (%rsp), 8(%rsp), 16(%rsp), 24(%rsp), ...
+         * For now, we can assume that we will never have more than 6 arguments
+         */
 
         prologue = 
         
