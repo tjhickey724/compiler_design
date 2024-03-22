@@ -12,14 +12,14 @@ class Demo {
     int[] log;
     boolean debugging;
 
-    public int setValues(int c1, int n1, boolean b1){
+    int setValues(int c1, int n1, boolean b1){
        num=c1; 
        log = new int[n1];
        debugging = b1;
        return(log.length);
     }
 
-    public int go(int num,int v){
+    int go(int num,int v){
         Demo d; 
         int n;
         d = new Demo();
@@ -29,7 +29,7 @@ class Demo {
         return n;
     }
 
-    public int run(int k){
+    int run(int k){
         int j;
         int n;
         int sum;
@@ -50,7 +50,7 @@ class Demo {
         return(sum);
     }
 
-    public int misc(int v){
+    int misc(int v){
         int tmp;
         int c;
         boolean e;
@@ -61,12 +61,13 @@ class Demo {
         e = false;
         d = new Demo();
         e = e && e && e && e && (f+f)*f+f < f ;
-        System.out.println(e);
+        if (e) c=0; else c=1;
+        System.out.println(c);
         return this.incr(tmp);
     }
 
 
-    public int incr(int c){
+    int incr(int c){
         System.out.println(c);
         num = c + num;
         return num ;
