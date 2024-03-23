@@ -1,9 +1,9 @@
 #!/usr/bin/bash
-java -classpath ../../javacc.jar javacc MiniC_v5.jj
-javac MiniC_v5.java
+java -classpath ../../javacc.jar javacc PA5.jj
+javac PA5.java
 javac CodeGen_Visitor.java
 echo "compiled java files"
-#java MiniC_v5 < tests/demo1.c
-java MiniC_v5 < tests/demo.c > tests/demo.s
+cp tests/fibs.c tests/demo.c
+java PA5 < tests/demo.c > tests/demo.s
 cd tests; gcc demo.s print.s -o demo; ./demo
 

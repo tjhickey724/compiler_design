@@ -1,5 +1,5 @@
 /*
- * This is MiniC_v5.jj file.
+ * This is PA5.jj file.
  * It will build a tree we can traverse using the Visitor pattern!
  * The language is MiniC, which is the subset of MiniJava
  * consisting of only MethodDecls (i.e. no classes or instance variables)
@@ -13,14 +13,14 @@ options {
   IGNORE_CASE=false;
 }
 
-PARSER_BEGIN(MiniC_v5)
+PARSER_BEGIN(PA5)
 import syntaxtree.*;
 
-public class MiniC_v5 {
+public class PA5 {
 
   /** Main entry point. */
   public static void main(String args[]) {
-    MiniC_v5 t = new MiniC_v5(System.in);
+    PA5 t = new PA5(System.in);
     try {
       MethodDeclList n = t.Start();
 
@@ -32,7 +32,7 @@ public class MiniC_v5 {
 
 /* uncomment this only for PA4b
       System.out.println("\n\nPretty Print the Program");
-      Visitor v2 = new PP_Visitor();  // pretty prints the MiniC_v5 program
+      Visitor v2 = new PP_Visitor();  // pretty prints the PA5 program
       String s = (String) n.accept(v2, 0);
       System.out.println("#include <stdio.h>\n#include <stdbool.h>\nvoid print(int n){printf(\"%10d\\n\",n);}");
       System.out.println(s);
@@ -71,7 +71,7 @@ public class MiniC_v5 {
 
 }
 
-PARSER_END(MiniC_v5)
+PARSER_END(PA5)
 
 SKIP: /* Whitespace */
 {
