@@ -281,7 +281,15 @@ Statement Statement() :
 }
 
 
-Exp Exp():
+Exp Exp() :
+{Exp a,b;}
+{   
+  a=Exp4() (<AND> b=Exp4() {a = new And(a,b);} ) * 
+  {return a;}
+
+}
+
+Exp Exp4():
 {Exp a,b;}
 { 
   a=Exp9() 
@@ -289,6 +297,7 @@ Exp Exp():
   {return(a);}
 
 }
+
 
 
 Exp Exp9():
@@ -329,11 +338,12 @@ Exp Exp12():
 Exp Exp14():
 {Exp a,b;}
 {
-  a=Exp16() 
-
-  {return(a);}
+  (
+    <BANG>   a=Exp16() {return new Not(a);}
+    |
+    a = Exp16() {return a;}
+  )
 }
-
 
 Exp Exp16() :
 {Exp a;
