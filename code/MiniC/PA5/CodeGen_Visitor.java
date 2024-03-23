@@ -591,7 +591,7 @@ public class CodeGen_Visitor implements Visitor {
         int stackChange = (- stackOffset);
 
         // round stackChange up to the nearest multiple of 16
-        stackChange = ((int)Math.ceil(stackChange/16))*16;
+        stackChange = ((int)Math.ceil(stackChange/16.0))*16;
 
         /* VERY SUBTLE POINT!!!
          * before a function call, 
