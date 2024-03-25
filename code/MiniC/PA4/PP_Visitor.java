@@ -18,11 +18,15 @@ import syntaxtree.*;
    }
 
    public Object visit(Program node, Object data){
-     return null;
+     int indent = (int)data;
+     String mainClass = (String) node.mainClass.accept(this,indent);
+     String classDeclList = (String) node.classDeclList.accept(this,indent);
+
+     return mainClass+classDeclList;
    }
 
    public Object visit(MainClass node, Object data){
-     return null;
+     return "main";
    }
    public Object visit(ClassDecl node, Object data){
      return null;
