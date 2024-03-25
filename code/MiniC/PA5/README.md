@@ -383,4 +383,15 @@ Abstract Syntax Tree nodes
 * ArrayLookup
 * NewArray
 
+# Implementing the C Calling Convention
+The last part of the MiniC compiler is to incorporate function calls.  We will use the C calling convention for X86-64
+in which the first 6 parameters are passed in registers and the remaining ones are passed on the stack. To simplify the
+code, we will assume that no function has more than 6 parameters.
+
+One of the challenges of compiling function calls for the Mac is that the system requires that the stackpointer (%rsp)
+be aligned on a 16 byte boundary for each function call. That is, %rsp should be divisible by 16 (i.e. its last digit in
+hex should be a zero). In our compiler we assume all variables are long integers or addresses, both of which take 8 bytes
+so our stack is automatially aligned on 8 byte boundaries, but to get 16 byte alignments is a little tricky with the way
+we have implemented expression evaluation.
+
 
