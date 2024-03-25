@@ -394,6 +394,11 @@ hex should be a zero). In our compiler we assume all variables are long integers
 so our stack is automatially aligned on 8 byte boundaries, but to get 16 byte alignments is a little tricky with the way
 we have implemented expression evaluation.
 
+[The Frame Layout](./frameLayout.png) for a function in our implementation will store the values of the
+arguments a1,..., ar in the first r slots of the frame, followed by spaces for the local variables b1,...,bs
+and the stack pointer will increased by (8*(r+s)) but rounded up to the nearest 16 byte boundary!
+
+
 
 
 
