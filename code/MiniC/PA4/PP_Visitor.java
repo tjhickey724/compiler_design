@@ -19,14 +19,14 @@ import syntaxtree.*;
 
    public Object visit(Program node, Object data){
      int indent = (int)data;
-     String mainClass = (String) node.mainClass.accept(this,indent);
-     String classDeclList = (String) node.classDeclList.accept(this,indent);
+     String mainClass = (String) node.m.accept(this,indent);
+     String classDeclList = (String) node.c.accept(this,indent);
 
      return mainClass+classDeclList;
    }
 
    public Object visit(MainClass node, Object data){
-     return "main";
+     return "main\n";
    }
    public Object visit(ClassDecl node, Object data){
      return null;
@@ -244,7 +244,7 @@ import syntaxtree.*;
    }
 
    public Object visit(ClassDeclList node, Object data){
-     return null;
+     return "classDeclList\n";
    }
    public Object visit(ExpList node, Object data){
         // 
