@@ -40,7 +40,11 @@ We can compile these to assembly language with the command
 ``` bash
 gcc -c -S -O0 *.c
 ```
-which will create main.s, print.s, and test.s
+which will create main.s, print.s, and test.s. The "-c" says to compile
+them separately, the "-S" compiles to assembly and the "-O0$ say use the
+level 0 optimization (it could be 1,2, or 3 if you want more optimization).
+
+
 and we can compile those to get an executable (the default is a.out) with
 ``` bash
 gcc main.s test.s print.s
@@ -49,5 +53,7 @@ which we can run with
 ``` bash
 ./a.out
 ```
+You many need to ssh into a X86-64 based computer to run these exercises...
+
 
      
