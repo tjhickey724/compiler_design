@@ -17,6 +17,7 @@ int main(int argc, char *argv[]) {
 ```
 
 ``` C
+/* print.c */
 #include <stdio.h>
 
 void print(long x){
@@ -25,6 +26,8 @@ void print(long x){
 ```
 
 ``` C
+/* test.c */
+
 void print();
 
 long test(long a, long b, long c){
