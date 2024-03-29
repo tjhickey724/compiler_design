@@ -10,7 +10,7 @@ the first instruction it will run all of the instruction in order until the last
 Consider the following example from the suggested textbook Aho,Sethi,Ullman, ... Example 8.6.
 The following code initializes a 10x10 array to have zeroes everywhere except having ones on the diagonal,
 i.e. initializes it to be the identity matrix:
-```
+``` java=
 for (int i=0; i<10; i++)
   for (int j=0; j<10; j++)
     a[i][j] = 0;
