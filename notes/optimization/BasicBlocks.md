@@ -8,34 +8,42 @@ the first instruction it will run all of the instruction in order until the last
 
 ## Example 
 Consider the following example from the suggested textbook Aho,Sethi,Ullman, ... Example 8.6.
-The following code initializes a 10x10 array to have zeroes everywhere except having ones on the diagonal,
-i.e. initializes it to be the identity matrix:
-``` java=
+The following code initializes a 10x10 array to have zeroes everywhere except having ones on the diagonal. We assume that a 2 dimensional array a[i][j] is compiled into a 1 dimensional array where
+```
+a[i][j] = A[N*i + j]
+``` where N is the width of each row of the array.
+
+This code initializes the array to be the identity matrix:
+``` java
 for (int i=0; i<10; i++)
   for (int j=0; j<10; j++)
-    a[i][j] = 0;
+    a[i][j] = 0;  // A[10*i+j] = 0
 for (int i=0; i<10; i++)
-  a[i][i]=1;
+  a[i][i]=1;      // A[10*i+j] = 1
 ```
 We can convert this into the following three address code
+which decomposes into 5 basic blocks...
 ```
-  i = 1
-L1:
-  j = 1
-L2:
+  i = 0                # BB0
+
+L1:                    # BB1
+  j = 0
+
+L2:                    # BB2
   t1 = 10 * i
   t2 = t1 + j
-  t3 = 8 * t2
-  t4 = t3 - 88
-  a[t4] = 0
+  a[t2] = 0
   j = j + 1
   if j <= 10 goto L2:
-  i = i + 1
+
+  i = i + 1            # BB3
   if i <= 10 goto L1:
-  i = 1
-L3:
-  t5 = i = 1
-  t6 = 88 * t5
+
+  i = 0                # BB4
+
+L3:                    # BB5
+  t5 = 10 * i
+  t6 = t5 + i
   a[t6] = 1
   i = i + 1
   if i <= 10 goto L3:  
