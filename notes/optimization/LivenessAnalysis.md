@@ -34,12 +34,23 @@ increase the speed of the compiled code. This process is called **register alloc
 One of the most common approaches to register allocation is to determine for each
 instruction and each variable in that instruction, if that variable will be used
 again in some future instruction.  If so the variable is **live** for every instruction
-from the current instruction until its next use.
+from the current instruction until its next use. 
 
 If a variable is in a register and is not live then that register can use used for
 another variable!
 
 ## Liveness analysis for basic blocks
+Lets analyze the following basic 5 instruction block:
+```
+| n | instruction | i | j | t1 | t2 |
+| --- | --- | --- | --- | --- | --- |
+|1|  t1 = 10 * i |  |  |  |  |
+|2|  t2 = t1 + j |  |  |  |  |
+|3|  a[t2] = 0  |  |  |  |  |
+|4|  j = j + 1  |  |  |  |  |
+|5|  if j <= 10 goto L2:  |  |  |  |  |
+```
+Here is the 
 
 
 
