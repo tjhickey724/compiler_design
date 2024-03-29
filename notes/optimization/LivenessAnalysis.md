@@ -41,7 +41,7 @@ another variable!
 
 ## Liveness analysis for basic blocks
 Lets analyze the following basic 5 instruction block:
-```
+
 | n | instruction | i | j | t1 | t2 |
 | --- | --- | --- | --- | --- | --- |
 |1|  t1 = 10 * i |  |  |  |  |
@@ -49,7 +49,7 @@ Lets analyze the following basic 5 instruction block:
 |3|  a[t2] = 0  |  |  |  |  |
 |4|  j = j + 1  |  |  |  |  |
 |5|  if j <= 10 goto L2:  |  |  |  |  |
-```
+
 Here is the 
 
 
