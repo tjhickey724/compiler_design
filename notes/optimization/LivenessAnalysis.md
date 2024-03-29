@@ -54,17 +54,19 @@ and a - if it doesn't have a next use in the block
 
 From this table we see that for instruction 2, 
 if 
-* t1 is in register R1
+* i is in register R1
 * j is in register R2,
-* i is in register R3
+* t1 is in register R3
 then  t2 can use the same register, as t1 is not live after instruction 2,
 so we could use the instruction
 ```
-1. R1 = 10 * R3
-2. R1 = R1 + R2
-3. a[R1] = 0
+1. R3 = 10 * R1
+2. R3 = R3 + R2
+3. a[R3] = 0
+4. R2 = R2 + 1
+5. if R2 <= 10 goto L2
 ```
-and then R1 is free..
+and after instruction 3, the register R3 is free..
 
 Here is the algorithm for calculating the liveness and next use data for a basic block.
 
