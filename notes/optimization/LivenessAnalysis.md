@@ -52,6 +52,20 @@ and a - if it doesn't have a next use in the block
 |4|  j = j + 1    | ? | 5 | - | - | ? |
 |5|  if j <= 10 goto L2:  | ? | ? | - | - | ? |
 
+From this table we see that for instruction 2, 
+if 
+* t1 is in register R1
+* j is in register R2,
+* i is in register R3
+then  t2 can use the same register, as t1 is not live after instruction 2,
+so we could use the instruction
+```
+1. R1 = 10 * R3
+2. R1 = R1 + R2
+3. a[R1] = 0
+```
+and then R1 is free..
+
 Here is the algorithm for calculating the liveness and next use data for a basic block.
 
 1. Start at the last instruction and initialize a symbol table with all non-temporary values being live (indicated with a ? as we don't know where or if they will be used again in the program).
