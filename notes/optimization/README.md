@@ -1,6 +1,6 @@
 # Compiler Optimizations
 
-[Three Address Code](Three_Address_Code.md)
+[Three Address Code](ThreeAddressCode.md)
 
 [Basic Blocks](BasicBlocks.md)
 
