@@ -40,9 +40,9 @@ If a variable is in a register and is not live then that register can use used f
 another variable!
 
 ## Liveness analysis for basic blocks
-Lets analyze the following basic 5 instruction block,
+Let's analyze the following basic 5 instruction block,
 where we put the number of the next use of each variable in the table, 
-and a - if it doesn't have a next use in the block
+and a "-" if it doesn't have a next use after that instruction.
 
 | n | instruction | i | j | t1 | t2 | a |
 | --- | --- | --- | --- | --- | --- | --- |
