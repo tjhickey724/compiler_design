@@ -46,19 +46,20 @@ and a - if it doesn't have a next use in the block
 
 | n | instruction | i | j | t1 | t2 | a |
 | --- | --- | --- | --- | --- | --- | --- |
-|1|  t1 = 10 * i  | 1| 2 | 2 | - | ? |
-|2|  t2 = t1 + j  | ? | 4 | 2 | 3 | ? |
-|3|  a[t2] = 0   | ? | 4 | - | 3 | ? |
-|4|  j = j + 1  | ? | 5 | - | - | ? |
+|1|  t1 = 10 * i  | 1 | 2 | 2 | - | ? |
+|2|  t2 = t1 + j  | ? | 4 | - | 3 | ? |
+|3|  a[t2] = 0    | ? | 4 | - | - | ? |
+|4|  j = j + 1    | ? | 5 | - | - | ? |
 |5|  if j <= 10 goto L2:  | ? | ? | - | - | ? |
 
 Here is the algorithm for calculating the liveness and next use data for a basic block.
 
 1. Start at the last instruction and initialize a symbol table with all non-temporary values being live (indicated with a ? as we don't know where or if they will be used again in the program).
-2. For each instruction ```i: A = B op C``` do the following
+2. For each instruction ```i: A = B op C```,
+   * store the current values from the symbol table with that instruction, then
    * set A to be not-live (indicated with a "-")
    * set B and C to live with next use being ```i```
-3. Repeat step 2 for each instruction in the block moving up.
+4. Repeat step 2 for each instruction in the block moving up.
 
 
 
