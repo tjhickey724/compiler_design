@@ -23,6 +23,7 @@ for (int i=0; i<10; i++)
 ```
 We can convert this into the following three address code
 which decomposes into 5 basic blocks...
+![Flow Graph Example](./flowgraph.png){: style="float: left"}
 ```
   i = 0                # BB0
 
@@ -53,4 +54,4 @@ We can represent this program as a directed graph where the nodes are the basic 
 and there is an edge from one node to another if control can pass directly between those two
 blocks. Here is the flow graph for this program:
 
-![Flow Graph Example](./flowgraph.png)
+
