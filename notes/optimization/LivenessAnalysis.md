@@ -40,15 +40,17 @@ If a variable is in a register and is not live then that register can use used f
 another variable!
 
 ## Liveness analysis for basic blocks
-Lets analyze the following basic 5 instruction block:
+Lets analyze the following basic 5 instruction block,
+where we put the number of the next use of each variable in the table, 
+and a - if it doesn't have a next use in the block
 
-| n | instruction | i | j | t1 | t2 |
-| --- | --- | --- | --- | --- | --- |
-|1|  t1 = 10 * i |  |  |  |  |
-|2|  t2 = t1 + j |  |  |  |  |
-|3|  a[t2] = 0  |  |  |  |  |
-|4|  j = j + 1  |  |  |  |  |
-|5|  if j <= 10 goto L2:  |  |  |  |  |
+| n | instruction | i | j | t1 | t2 | a[t2] |
+| --- | --- | --- | --- | --- | --- | --- |
+|1|  t1 = 10 * i |  |  |  |  | |
+|2|  t2 = t1 + j |  |  |  |  | |
+|3|  a[t2] = 0  |  |  |  |  | |
+|4|  j = j + 1  |  |  |  |  | |
+|5|  if j <= 10 goto L2:  | - | - | - | - | - |
 
 Here is the 
 
