@@ -46,7 +46,7 @@ and a - if it doesn't have a next use in the block
 
 | n | instruction | i | j | t1 | t2 | a |
 | --- | --- | --- | --- | --- | --- | --- |
-| entry| - | 1 | 1 | -| - | 3 |
+| 0| - | 1 | 2 | -| - | 3 |
 |1|  t1 = 10 * i  | ? | 2 | 2 | - | 3 |
 |2|  t2 = t1 + j  | ? | 4 | - | 3 | 3 |
 |3|  a[t2] = 0    | ? | 4 | - | - | ? |
