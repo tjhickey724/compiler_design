@@ -3,10 +3,15 @@ A very common Intermediate representation for programs is called three address c
 This converts an abstract syntax tree into a sequence of labels and instructions
 where each instruction has one of the following forms:
 ```
+# arithmetic expressions
 X = Y op Z  op is +,-,*,/,%,//,&&,||, ...
 X = uop Z   uop is -,!,...
-if X op Y jump L1 else jump L2  op is <,<=,==,>,>=,!=
+
+# conditional and unconditional jumps
+if X op Y goto(L)  op is <,<=,==,>,>=,!=
 jump L
+
+# array operations
 X[Y] = Z
 X = Y[Z]
 X = int[Y]   # create an array of size Y
@@ -38,15 +43,20 @@ For example,
 ```
 could be converted as follows:
 ```
-t1 = x % 2
-if t == 0 jump L4 else jump L5
-L4:
-x = x / 2
-jump L6
-L5:
-t2 = 3 * x
-x = t2 + 1
-L6:
+  t1 = x % 2
+  if t != 0 goto(L1)
+  x = x / 2
+  jump L2
+L1:
+  t2 = 3 * x
+  x = t2 + 1
+L2:
 ```
 
-Try converting some simple program code to three address code:
+Try converting some simple program code to three address code, e.g.
+```
+for(int i=1; i<41; ++){
+  a[i] = i*i+i+41;
+}
+```
+
