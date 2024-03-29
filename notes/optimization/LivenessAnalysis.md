@@ -47,9 +47,9 @@ and a - if it doesn't have a next use in the block
 | n | instruction | i | j | t1 | t2 | a |
 | --- | --- | --- | --- | --- | --- | --- |
 |1|  t1 = 10 * i  | 1| - | - | - | ? |
-|2|  t2 = t1 + j  | - | 2 | 2 | 3 | ? |
-|3|  a[t2] = 0   | - | 4 | - | 3 | ? |
-|4|  j = j + 1  | - | 4 | - | - | ? |
+|2|  t2 = t1 + j  | ? | 2 | 2 | 3 | ? |
+|3|  a[t2] = 0   | ? | 4 | - | 3 | ? |
+|4|  j = j + 1  | ? | 4 | - | - | ? |
 |5|  if j <= 10 goto L2:  | ? | 5 | - | - | ? |
 
 Here is the algorithm for calculating the liveness and next use data for a basic block.
