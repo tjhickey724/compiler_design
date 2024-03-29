@@ -48,3 +48,9 @@ L3:                    # BB5
   i = i + 1
   if i <= 10 goto L3:  
 ```
+
+We can represent this program as a directed graph where the nodes are the basic blocks
+and there is an edge from one node to another if control can pass directly between those two
+blocks. Here is the flow graph for this program:
+
+![Flow Graph Example](./flowgraph.png)
