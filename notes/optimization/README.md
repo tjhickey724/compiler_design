@@ -33,7 +33,10 @@ This works but the code is much slower than it needs to be for a number of reaso
 
 ## Architecture notes
 1. Modern CPUs have multiple arithmetic and logic units and can handle multiple additions
-   at the same time, and multiple multiplications (though usually fewer than the additions),
+   at the same time, and multiple multiplications (though usually fewer than the additions).
+   [The basic structure of a CPU](https://en.wikipedia.org/wiki/Central_processing_unit) has a register and an arithmetic/logic unit on the chip, together with a control unit that fetches the
+   instructions and determines the next instruction. Each CPU may have multiple units for addition,
+   multiplication, shifts, etc. and can process multiple instructions at a time.
    ![CPU architecture](https://upload.wikimedia.org/wikipedia/commons/3/3a/ABasicComputer.svg)
 3. and they have units to prefetch the next instruction from memory
 4. and they have units to prefetch the arguments to instructions
@@ -43,7 +46,8 @@ This works but the code is much slower than it needs to be for a number of reaso
    where they can be accessed in relatively few cycles (e.g. 2, 5, 10 instead of 100's).
    Modern computers typically have many CPUs on a chip that all share the same memory
    and that each have their own caches. The higher caches are larger but slower.
-   ![Caches and Cores](https://upload.wikimedia.org/wikipedia/commons/9/95/Hwloc.png))
+   Below is an example of the memory hierarchy of am [AMD Bulldozer server](https://en.wikipedia.org/wiki/CPU_cache)
+   ![Caches and Cores](https://upload.wikimedia.org/wikipedia/commons/9/95/Hwloc.png)
 
 
 In the next three weeks we will show how to analyze programs to generate more efficient assembly
