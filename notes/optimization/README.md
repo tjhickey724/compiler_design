@@ -40,7 +40,10 @@ This works but the code is much slower than it needs to be for a number of reaso
    * e.g.  -8(%rbp) require doing an addition %rbp + (-8) and then a memory fetch
    * 16(%rax,%rdx,$8) requires calculating rax + rdx*8 + 16 and then a memory fetch
 5. and they have cache's (L1, L2, L3, ...) which prefetch blocks of memory onto the CPU chip
-   where they can be accessed in relatively few cycles (e.g. 2, 5, 10 instead of 100's)
+   where they can be accessed in relatively few cycles (e.g. 2, 5, 10 instead of 100's).
+   Modern computers typically have many CPUs on a chip that all share the same memory
+   and that each have their own caches. The higher caches are larger but slower.
+   !(Caches and Cores)[https://commons.wikimedia.org/wiki/File:Hwloc.png#/media/File:Hwloc.png]
 
 
 In the next three weeks we will show how to analyze programs to generate more efficient assembly
