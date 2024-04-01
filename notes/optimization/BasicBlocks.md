@@ -49,8 +49,23 @@ L3:                    # BB5
   i = i + 1
   if i <= 10 goto L3:  
 ```
-We can represent this program as a directed graph where the nodes are the basic blocks
+We can represent this program as a **flow graph**, that is directed graph where the nodes are the basic blocks
 and there is an edge from one node to another if control can pass directly between those two
 blocks. Here is the flow graph for this program:
 ![Flow Graph Example](./flowgraph.png)
+
+## Practice
+Consider the following simple program
+```
+while (n > 1) {
+  if (n%2==0) {
+    n = n/2;
+  else {
+    n = 3*n+1;
+  }
+}
+```
+1. compile this to three address code
+2. identify the basic blocks
+3. draw the flow graph of the program
 
