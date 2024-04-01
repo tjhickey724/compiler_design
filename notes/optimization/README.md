@@ -65,14 +65,17 @@ idea of the structure of modern computers, and especially their Central Processi
 In the next three weeks we will show how to analyze programs to generate more efficient assembly
 language. 
 
+## Compiling to an Intermediate Representation
+
 [Three Address Code](ThreeAddressCode.md) - the first step is to define an Intermediate Representation. We will use three address code, which assume infinitely many registers
 and all operations for the form R1 <- op (R2, R3, ..., Rn)
 
-
+## Converting the IR to a Directed Graph
 [Basic Blocks](BasicBlocks.md) - once we have a program converted to 3 address code, we
 need to decompose it into a directed graph of basic blocks, where each basic block has
 a single entry point, and a conditional jump at the end (or a return for a function)
 
+## Analyzing variable lifetimes in a Basic Block
 [Liveness Analysis](LivenessAnalysis.md) - a key idea in register allocation is to know which
 variables need to be stored in the memory at any given point in the program. Variables which won't be used again don't need to be in registers and hence their space can be occupied by another variable.  This is called liveness analysis and we first show how to do this for a basic block.
 
