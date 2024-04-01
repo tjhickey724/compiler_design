@@ -15,6 +15,9 @@ jump L
 X[Y] = Z
 X = Y[Z]
 X = int[Y]   # create an array of size Y
+
+# 2d arrays
+X[A,B] = X[A][B] = X'[N*A+B]  if X in int[N][M] where X' in int[N*M]
 ```
 We can convert arithmetic expressions into 3-address code 
 by introducing temporary variables for each non-leaf node in the Abstract Syntax Tree. 
@@ -55,8 +58,15 @@ L2:
 
 Try converting some simple program code to three address code, e.g.
 ```
-for(int i=1; i<41; ++){
-  a[i] = i*i+i+41;
+for(int i=1; i<41; i++){
+  a[i] = i*i+i+41;  // use
 }
 ```
+
+Also, try this one:
+for (int i=0; i<10; i++){
+  for (int j=0; j<10; j++){
+     a[i][j] = i*j;  // a[i][j] represented as b[10*i+j] for a 1-d array b
+  }
+}
 
