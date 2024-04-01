@@ -16,13 +16,14 @@ X[Y] = Z
 X = Y[Z]
 X = int[Y]   # create an array of size Y
 
-# 2d arrays
+# 2d integer arrays are handled as 1 dimension arrays with the rows stacked together
 X[A,B] = X[A][B] = X'[N*A+B]  if X in int[N][M] where X' in int[N*M]
 ```
 We can convert arithmetic expressions into 3-address code 
 by introducing temporary variables for each non-leaf node in the Abstract Syntax Tree. 
 We will use T1,T2,... to represent temporaries.
 
+### Example of compiling arithmetic expressions to 3 address code
 For example, 
 ```
 C = (A-B)*(A+B)
@@ -33,6 +34,14 @@ T1 = A-B
 T2 = A+B
 C = T1*T2
 ```
+### Practice
+Try converting the following to three address code:
+```
+X = (-B + sqrt(B*B - 4*A*C))/(2*A)
+```
+assuming there is a ```SQRT X``` machine instruction
+
+
 Likewise, we can convert control structures like if, while, switch, into three address code with labels,
 where we use L1, L2, L3, ... for labels.
 
