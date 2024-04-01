@@ -26,9 +26,9 @@ We will use T1,T2,... to represent temporaries.
 ### Example of compiling arithmetic expressions to 3 address code
 For example, 
 ```
-C = (A-B)*(A+B)
+c = (a-b)*(a+b)
 ```
-could be translated into 3 address code as
+could be translated into 3 address code as follows (where we indicate registers by upper case letters)
 ```
 T1 = A-B
 T2 = A+B
@@ -37,7 +37,7 @@ C = T1*T2
 ### Practice
 Try converting the following to three address code:
 ```
-X = (-B + sqrt(B*B - 4*A*C))/(2*A)
+x = (-b + sqrt(b*b - 4*a*c))/(2*a)
 ```
 assuming there is a ```SQRT X``` machine instruction
 
@@ -55,13 +55,13 @@ For example,
 ```
 could be converted as follows:
 ```
-  t1 = x % 2
-  if t != 0 goto(L1)
-  x = x / 2
+  T1 = X % 2
+  if T != 0 goto(L1)
+  X = X / 2
   jump L2
 L1:
-  t2 = 3 * x
-  x = t2 + 1
+  T2 = 3 * X
+  X = T2 + 1
 L2:
 ```
 ### Practice
