@@ -18,6 +18,7 @@ X86-68 assembly language. Our approach was to
    conditional jumps (JGEQ) and unconditional jumps (JMP)
 6. implement array operations using the system call to malloc and indirect addressing (R1,R2,8)
 
+## Sources of Inefficiency in Naive Compilation
 This works but the code is much slower than it needs to be for a number of reasons
 1. Inefficient use of registers - all data is moved from the registers into the stack and back
    and moving data from the stack into a register can take anywhere from 2 to hundreds of cycles
@@ -30,7 +31,7 @@ This works but the code is much slower than it needs to be for a number of reaso
 4. inefficient use of jumps  (sometime the compiler will generate a jump to a label,
    which has a jump to another label, etc, and this slows down the program.
 
-Architecture notes
+## Architecture notes
 1. Modern CPUs have multiple arithmetic and logic units and can handle multiple additions
    at the same time, and multiple multiplications (though usually fewer than the additions),
 2. and they have units to prefetch the next instruction from memory
