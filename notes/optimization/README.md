@@ -34,11 +34,12 @@ This works but the code is much slower than it needs to be for a number of reaso
 ## Architecture notes
 1. Modern CPUs have multiple arithmetic and logic units and can handle multiple additions
    at the same time, and multiple multiplications (though usually fewer than the additions),
-2. and they have units to prefetch the next instruction from memory
-3. and they have units to prefetch the arguments to instructions
+   ![CPU architecture](https://upload.wikimedia.org/wikipedia/commons/3/3a/ABasicComputer.svg)
+3. and they have units to prefetch the next instruction from memory
+4. and they have units to prefetch the arguments to instructions
    * e.g.  -8(%rbp) require doing an addition %rbp + (-8) and then a memory fetch
    * 16(%rax,%rdx,$8) requires calculating rax + rdx*8 + 16 and then a memory fetch
-4. and they have cache's (L1, L2, L3, ...) which prefetch blocks of memory onto the CPU chip
+5. and they have cache's (L1, L2, L3, ...) which prefetch blocks of memory onto the CPU chip
    where they can be accessed in relatively few cycles (e.g. 2, 5, 10 instead of 100's)
 
 
