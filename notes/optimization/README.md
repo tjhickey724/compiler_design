@@ -34,7 +34,8 @@ This works but the code is much slower than it needs to be for a number of reaso
 ## Architecture notes
 To understand the tradeoffs in different choices for code generation, it helps to have an 
 idea of the structure of modern computers, and especially their Central Processing Units (CPUs).
-[Architecture Notes](architecture_notes.md)
+
+[Architecture Notes](architecture_notes.md) gives a brief overview of some of the features of modern computer that impact choice in code generation.
 
 In the next three weeks we will show how to analyze programs to generate more efficient assembly
 language. 
