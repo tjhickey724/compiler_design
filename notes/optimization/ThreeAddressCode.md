@@ -41,7 +41,7 @@ X = (-B + sqrt(B*B - 4*A*C))/(2*A)
 ```
 assuming there is a ```SQRT X``` machine instruction
 
-
+## Example of Compiling control structures to 3 address code
 Likewise, we can convert control structures like if, while, switch, into three address code with labels,
 where we use L1, L2, L3, ... for labels.
 
@@ -64,18 +64,28 @@ L1:
   x = t2 + 1
 L2:
 ```
+### Practice
+Convert the following to 3 address code:
+```
+while(i*i < n){
+   s = s + i*i;
+   i = i + 1;
+}
+```
+We'll look at optimizing this code a little!
 
 Try converting some simple program code to three address code, e.g.
 ```
 for(int i=1; i<41; i++){
-  a[i] = i*i+i+41;  // use
+  a[i] = i*i+i+41;  // assume integers take 4 bytes, so a[i]=j would compile to A[4*I]=J
 }
 ```
-
 Also, try this one:
+```
 for (int i=0; i<10; i++){
   for (int j=0; j<10; j++){
-     a[i][j] = i*j;  // a[i][j] represented as b[10*i+j] for a 1-d array b
+     a[i][j] = i*j;  // a[i][j] represented as A[4*(10*I+J)]
   }
 }
+```
 
