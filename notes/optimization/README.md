@@ -43,7 +43,7 @@ This works but the code is much slower than it needs to be for a number of reaso
    where they can be accessed in relatively few cycles (e.g. 2, 5, 10 instead of 100's).
    Modern computers typically have many CPUs on a chip that all share the same memory
    and that each have their own caches. The higher caches are larger but slower.
-   ![Caches and Cores](https://commons.wikimedia.org/wiki/File:Hwloc.png#/media/File:Hwloc.png)
+   ![Caches and Cores](https://upload.wikimedia.org/wikipedia/commons/9/95/Hwloc.png))
 
 
 In the next three weeks we will show how to analyze programs to generate more efficient assembly
