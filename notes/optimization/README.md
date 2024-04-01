@@ -32,6 +32,8 @@ This works but the code is much slower than it needs to be for a number of reaso
    which has a jump to another label, etc, and this slows down the program.
 
 ## Architecture notes
+To understand the tradeoffs in different choices for code generation, it helps to have an 
+idea of the structure of modern computers, and especially their Central Processing Units (CPUs).
 1. Modern CPUs have multiple arithmetic and logic units and can handle multiple additions
    at the same time, and multiple multiplications (though usually fewer than the additions).
    [The basic structure of a CPU](https://en.wikipedia.org/wiki/Central_processing_unit) has a register and an arithmetic/logic unit on the chip, together with a control unit that fetches the
