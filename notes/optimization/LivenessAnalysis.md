@@ -5,6 +5,7 @@ registers.  It is relatively simple to design a compiler where all of the variab
 are stored in the stack, but accessing elements in the stack can take 10 times longer than accessing
 an element in a register.  
 
+## Why are registers important?
 Consider for example an add operation
 ```
 addq %rdx %rax
@@ -31,6 +32,7 @@ memory which could take hundreds of cycles.
 All of this is to point out that making effective use of registers can greatly
 increase the speed of the compiled code. This process is called **register allocation**.
 
+## Liveness Analysis 
 One of the most common approaches to register allocation is to determine for each
 instruction and each variable in that instruction, if that variable will be used
 again in some future instruction.  If so the variable is **live** for every instruction
