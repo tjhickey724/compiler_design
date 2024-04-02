@@ -82,6 +82,26 @@ Here is the algorithm for calculating the liveness and next use data for a basic
 4. Repeat step 2 for each instruction in the block moving up.
 
 
+## Practice
+Run the live variable analysis on the following Basic Block
+```
+  T2 = 3*N
+  N = T2 + 1
+  U = U + 1
+  T = T + 1
+  JUMP L2
+```
+
+| n | instruction | N | U | T | T1 | T2 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 0 | -  |  -  |  -  |  -  |  -  |  -  | 
+| 1 | T2 = 3*N|  -  |  -  |  -  |  -  |  -  | 
+| 2 |  N = T2 + 1|  -  |  -  |  -  |  -  |  -  | 
+| 3 |  U = U + 1|  -  |  -  |  -  |  -  |  -  | 
+| 4 |  T = T + 1|  -  |  -  |  -  |  -  |  -  | 
+| 5 |  JUMP L2|  -  |  -  |  -  |  -  |  -  | 
+```
+
 
 
 
