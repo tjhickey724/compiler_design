@@ -60,6 +60,7 @@ if
 * i is in register R1
 * j is in register R2,
 * t1 is in register R3
+
 then  t2 can use the same register, as t1 is not live after instruction 2,
 so we could use the instruction
 ```
