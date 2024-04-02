@@ -58,11 +58,18 @@ blocks. Here is the flow graph for this program:
 ## Practice
 Consider the following simple program
 ```
+u=0;
+d=0;
+t=0;
 while (n > 1) {
   if (n%2==0) {
     n = n/2;
+    d = d+1;
+    t = t+1
   else {
     n = 3*n+1;
+    u = u+1
+    t = t+1
   }
 }
 ```
@@ -70,15 +77,22 @@ while (n > 1) {
 
 Here is the compilation to three address code:
 ```
+U=0
+D=0
+T=0
 L1:
   if-false n>1 goto(L2)
   T1 = N % 2
   if-false T1==0 goto(L3)
   N = N / 2
+  D = D + 1
+  T = T + 1
   JUMP L1
 L3:
   T2 = 3*N
   N = T2 + 1
+  U = U + 1
+  T = T + 1
   JUMP L2
 L2:
 ```
