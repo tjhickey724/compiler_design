@@ -104,7 +104,7 @@ The last three have been completed.
 | 5 |  JUMP L2|  ?  |  ?  |  ?  |  -  |  -  | 
 ```
 
-
+We will show next week how to perform liveness analysis over an entire flowgraph, not just a Basic Block.
 
 
 
