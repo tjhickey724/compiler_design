@@ -66,7 +66,23 @@ while (n > 1) {
   }
 }
 ```
-1. compile this to three address code
-2. identify the basic blocks
-3. draw the flow graph of the program
+
+
+Here is the compilation to three address code:
+```
+L1:
+  if-false n>1 goto(L2)
+  T1 = N % 2
+  if-false T1==0 goto(L3)
+  N = N / 2
+  JUMP L1
+L3:
+  T2 = 3*N
+  N = T2 + 1
+  JUMP L2
+L2:
+```
+
+1. identify the basic blocks
+2. draw the flow graph of the program
 
