@@ -11,7 +11,8 @@ Consider the following example from the suggested textbook Aho,Sethi,Ullman, ...
 The following code initializes a 10x10 array to have zeroes everywhere except having ones on the diagonal. We assume that a 2 dimensional array a[i][j] is compiled into a 1 dimensional array where
 ```
 a[i][j] = A[N*i + j]
-``` where N is the width of each row of the array.
+```
+where N is the width of each row of the array.
 
 This code initializes the array to be the identity matrix:
 ``` java
