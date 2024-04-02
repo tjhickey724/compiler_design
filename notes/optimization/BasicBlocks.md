@@ -64,6 +64,22 @@ BB4 -> BB5
 BB5 -> BB5
 ```
 
+# Loops
+Loops are very important in compiler optimizations as the they are often the instructions in a program
+that require the most total time during execution. Hence, it is important to be able to identify the loops
+of a program. Here is formal definition of the loops of a flow diagram.
+
+A subset L of a flow graph is a loop if 
+1. it contains a node e (called an entry node) with the property that every path through the flow graph
+   that passes through any node f in L, must first pass through e.
+2. every node f in L has a path, entirely within L to e
+
+The loops in our flowgraph above are
+* BB2
+* BB5
+* BB1 BB2 BB3
+
+
 ## Practice
 Consider the following simple program
 ```
@@ -106,6 +122,7 @@ L3:
 L2:
 ```
 
-1. identify the basic blocks
+1. identify the basic blocks and give them sequential numbers BB0 BB1 BB2 ...
 2. draw the flow graph of the program
 
+What are the loops in this flowgraph?
