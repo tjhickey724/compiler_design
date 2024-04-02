@@ -91,6 +91,7 @@ Run the live variable analysis on the following Basic Block
   T = T + 1
   JUMP L2
 ```
+To fill in the following table.
 
 | n | instruction | N | U | T | T1 | T2 |
 | --- | --- | --- | --- | --- | --- | --- |
