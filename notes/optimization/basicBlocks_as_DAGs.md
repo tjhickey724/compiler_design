@@ -9,6 +9,18 @@ Consider the following basic block
 a = b + c
 d = b - c
 e = a * d
+f = b + c
 b = d - a
-d = a + b
+d = f + b
+```
+We first renumber the variables with indices representing whether the number of times their value has changed:
+```
+a = b + c
+d = b - c
+e = a * d
+f = b + c
+b1 = d - a
+d1 = f + b1
+```
 
+Then we create a DAG where the leaves are the original variables
