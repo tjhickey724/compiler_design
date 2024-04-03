@@ -24,6 +24,28 @@ d1 = f + b1
 ```
 
 Then we create a DAG where the leaves are the original variables
-![bbdag](https://github.com/tjhickey724/compiler_design/assets/195879/36187835-ded8-41a6-b7c8-901c39e59cc2)
+
+[BBDAG](bbdag0.jpg)
+
+And we can then compile this basic block back into three address code in a way that
+eliminates the duplicate computation of ```b+c``` and also introduce instruction level parallelism
+that a super scalar processor can exploit:
+```
+a = b + c  ;   d = b - c  #  these can be run in the same cycle
+b = d - a  ;   e = a * d ; f = a #  same cycle
+d = b + a
+```
+So this reduces the number of cycles (aka latency) from 6 to 3 and eliminates the recomputation of ```b+c```
+
+## Practice
+Let's have you practice optimizing the following code:
+```
+a = b + c
+d = c - a
+e = b + c
+b = e + d
+f = b + c
+a = f - e
+```
 
 
