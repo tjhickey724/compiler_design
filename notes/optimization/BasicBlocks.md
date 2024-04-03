@@ -53,16 +53,24 @@ L3:                    # BB5
 We can represent this program as a **flow graph**, that is directed graph where the nodes are the basic blocks
 and there is an edge from one node to another if control can pass directly between those two
 blocks. Here is the flow graph for this program
-![Flow Graph Example](./flowgraph.png)
+![Flow Graph Example](bb.jpg)
 or as a transition table:
 ```
+# bb.dot 
+# compile with dot -Tjpg -o bb.jpg bb.dot
+# using the graphviz app https://graphviz.org/
+digraph dfa {
 BB0 -> BB1
 BB1 -> BB2
-BB2 -> BB2 | BB3
-BB3 -> BB1 | BB4
+BB2 -> BB2 
+BB2 -> BB3
+BB3 -> BB1 
+BB3 -> BB4
 BB4 -> BB5
 BB5 -> BB5
+}
 ```
+
 
 # Loops
 Loops are very important in compiler optimizations as the they are often the instructions in a program
