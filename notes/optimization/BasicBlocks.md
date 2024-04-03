@@ -128,7 +128,7 @@ L3:
   N = T2 + 1
   U = U + 1
   T = T + 1
-  JUMP L2
+  JUMP L1
 L2:
 ```
 
