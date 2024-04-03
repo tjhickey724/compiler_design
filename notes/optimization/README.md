@@ -55,6 +55,16 @@ a single entry point, and a conditional jump at the end (or a return for a funct
 variables need to be stored in the memory at any given point in the program. Variables which won't be used again don't need to be in registers and hence their space can be occupied by another variable.  This is called liveness analysis and we first show how to do this for a basic block.
 
 ## Converting a Basic Block to a Directed Acyclic Graph
+There are several optimizations that can be performed just on a single basic block
+in isolations. Some of these are
+* Common Subexpression elimination (e.g. dont' recompute a+b if you need it and a and b haven't changed)
+* Dead Code Elimination (if you have an assignment x = ... but the value of x is never used before being
+  redefined, then just eliminate that assignment
+* Instruction level parallelism. Reorder the code so that multiple operations that don't depend on each other can be evaluated at the same time is separate arithmetic and logic units (ALUs) on the chip.
+
+These optimizations can be implemented by 
+[converting a basic block into a Directed Acyclic Graph](basicBlocks_as_DAGs.md) and then
+compiling the three address code from this graph.
 
 
 
