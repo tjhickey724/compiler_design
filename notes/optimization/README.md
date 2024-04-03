@@ -45,7 +45,7 @@ language.
 [Three Address Code](ThreeAddressCode.md) - the first step is to define an Intermediate Representation. We will use three address code, which assume infinitely many registers
 and all operations for the form R1 <- op (R2, R3, ..., Rn)
 
-## Converting the IR to a Directed Graph
+## Converting the IR to a Directed Graph of Basic Blocks
 [Basic Blocks](BasicBlocks.md) - once we have a program converted to 3 address code, we
 need to decompose it into a directed graph of basic blocks, where each basic block has
 a single entry point, and a conditional jump at the end (or a return for a function)
