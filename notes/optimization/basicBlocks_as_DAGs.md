@@ -25,7 +25,7 @@ d1 = f + b1
 
 Then we create a DAG where the leaves are the original variables
 
-[BBDAG](bbdag0.jpg)
+![BBDAG](bbdag0.jpg)
 
 And we can then compile this basic block back into three address code in a way that
 eliminates the duplicate computation of ```b+c``` and also introduce instruction level parallelism
