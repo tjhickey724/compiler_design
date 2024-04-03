@@ -133,6 +133,6 @@ L2:
 ```
 
 1. identify the basic blocks and give them sequential numbers BB0 BB1 BB2 ...
-2. draw the flow graph of the program
+2. draw the flow graph of the program and represented it as a graphviz dot file
 
 What are the loops in this flowgraph?
