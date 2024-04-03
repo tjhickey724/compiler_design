@@ -66,11 +66,10 @@ pushq $2
 # y 
 pushq -16(%rbp) #   y 
 # times: 2  *  y 
-popq %rdx  # pop y into rdx
-popq %rax  # pop 2 into rax 
-#movq %rdx, %rax # copy y into rax
-imulq %rdx, %rdx # store rdx*rax in rax
-pushq %rdx
+popq %rdx
+popq %rax
+imulq %rdx, %rax
+pushq %rax
 # epilogue
 popq %rax
 addq $16, %rsp
