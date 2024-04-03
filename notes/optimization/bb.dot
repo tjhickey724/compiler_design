@@ -1,0 +1,13 @@
+# bb.dot 
+# compile with dot -Tjpg -o bb.jpg bb.dot
+# using the graphviz app https://graphviz.org/
+digraph dfa {
+BB0 -> BB1
+BB1 -> BB2
+BB2 -> BB2 
+BB2 -> BB3
+BB3 -> BB1 
+BB3 -> BB4
+BB4 -> BB5
+BB5 -> BB5
+}
