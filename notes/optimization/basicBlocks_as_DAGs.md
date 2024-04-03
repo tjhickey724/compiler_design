@@ -24,3 +24,6 @@ d1 = f + b1
 ```
 
 Then we create a DAG where the leaves are the original variables
+![bbdag](https://github.com/tjhickey724/compiler_design/assets/195879/36187835-ded8-41a6-b7c8-901c39e59cc2)
+
+
