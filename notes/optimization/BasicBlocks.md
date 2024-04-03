@@ -53,7 +53,9 @@ L3:                    # BB5
 We can represent this program as a **flow graph**, that is directed graph where the nodes are the basic blocks
 and there is an edge from one node to another if control can pass directly between those two
 blocks. Here is the flow graph for this program
+
 ![Flow Graph Example](bb.jpg)
+
 or as a transition table:
 ```
 # bb.dot 
