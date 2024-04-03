@@ -56,7 +56,7 @@ blocks. Here is the flow graph for this program
 
 ![Flow Graph Example](bb.jpg)
 
-or as a transition table:
+or as a transition table using the [graphviz](https://graphviz.org) dot notation:
 ```
 # bb.dot 
 # compile with dot -Tjpg -o bb.jpg bb.dot
