@@ -1,6 +1,6 @@
 #! /usr/bin/bash
 mkdir save
-mv *Visitor.java save
+mv *Visitor*.java save
 mv SymbolTable* save
 rm *.class
 rm *.java
