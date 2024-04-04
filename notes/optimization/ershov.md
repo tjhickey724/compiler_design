@@ -18,7 +18,11 @@ For example,
 ```
 ((a*b)+(c*d))*e
 ```
-would have Ershov number 3 and would compile to
+would have Ershov number 3 
+
+![ershov1](ershov1.png)
+
+and would compile to
 ```
 LOAD b R2
 LOAD a R3
@@ -36,6 +40,8 @@ Find the Ershov number of the following expression and generate optimal code to 
 ```
 x +y*(z+(w+u)*(r+s))
 ```
+
+![ershov2](ershov2.png)
 
 
 
