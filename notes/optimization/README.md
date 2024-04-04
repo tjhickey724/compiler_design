@@ -66,5 +66,18 @@ These optimizations can be implemented by
 [converting a basic block into a Directed Acyclic Graph](basicBlocks_as_DAGs.md) and then
 compiling the three address code from this graph.
 
+## Register Allocation
+Optimal Register allocation is a very hard problem (NP-hard) but there are many heuristics that produce optimal code in particular situations or near optimal code in most situations. Here are a few:
+* [Arithmetic Expressions with Ershov's algorithm](ershov.md)
+* [Register Allocation by Graph Coloring](graphcoloring.md)
 
 
+## Data Flow Analysis
+The graph coloring register allocation method relies on knowing which variables are "live" for each instruction in the program and this requires extending our "liveness analysis" from a single basic block to the entire program. This can be done using a general technique known as data flow analysis, where we iteratively apply certain data flow equations to find a minimal (or maximal) solution as fixed point to those equations. 
+
+The general theory involves finding fixed points of certain functions on DAGs. We'll demonstrate it with the liveness analysis.
+* [Global Liveness Analysis](global_liveness.md)
+* [General Data Flow Analysis](data_flow_analysis.md)
+
+
+ 
