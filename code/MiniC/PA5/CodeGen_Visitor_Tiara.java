@@ -1,7 +1,6 @@
 import syntaxtree.*;
 import java.util.HashMap;
 
-import org.omg.CORBA.SystemException;
 
 /*
  * CodeGen_Visitor class
