@@ -1,0 +1,1 @@
+fibresult = "testing\n";
