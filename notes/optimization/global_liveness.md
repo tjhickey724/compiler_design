@@ -92,9 +92,10 @@ $T(L(B1)) = L(B1) \cup use(B1) - def(B1) = L(B1) \cup \\{r,n\\} - \\{r,s\\} = L(
 
 $T(L(B6)) = L(B6) \cup use(B6) - def(B6) = L(B6) \cup \\{m\\} - \\{\\}= L(B6) \cup \\{m\\}$
 
-$ L(B1) = T(L(B2)) \cup T(L(B3))$
+$L(B1) = T(L(B2)) \cup T(L(B3))$
 
-you can complete these formulas...
+you can complete these formulas for B1, B2, B3, B4, B5, B6.
+
 
 
 
