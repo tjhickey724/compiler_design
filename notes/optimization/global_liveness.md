@@ -86,15 +86,15 @@ S(B6) = emptyset
 and we can calculate the use/def sets for the basic blocks.
 Complete the following table ...
 
-| B | use(B) | def(B) |
-| --- | --- | --- |
-| B0 | n | m v }
-| B1 | r n| r s |
-| B2 | | |
-| B3 | | |
-| B4 | | |
-| B5 | | |
-| B6 | m | emptyset |
+| B | use(B) | def(B) | equation |
+| --- | --- | --- | --- |
+| B0 | n | m v | $in(B0) = out(B0) \cup \\{n\\} - \\{m,v\\}$|
+| B1 | r n| r s | |
+| B2 | | | |
+| B3 | | | |
+| B4 | | | |
+| B5 | | | |
+| B6 | m | $\\{\\}$ | |
 
 We can now calculate the Flow equations
 
