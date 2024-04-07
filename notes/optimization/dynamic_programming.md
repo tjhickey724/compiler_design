@@ -16,7 +16,7 @@ the following operations, where Ri are registers and Mi are memory locations
 |   ---    | --- |         ---                                                |  ---           |
 | ST Ri Mj | 10  | store the value of Ri in memory location Mj                | Mj <- Ri       |
 | LD Mj Ri | 10  | load the value at memory location Mj into register Ri      | Ri <- Mj       |
-| MV Ri Rj | 1   | copy the value of Ri into Rj                               | Rj <- Ri       |
+| LD Ri Rj | 1   | copy the value of Ri into Rj                               | Rj <- Ri       |
 | OP Ri Rj | 1   | apply the binary operation OP to Ri and Rj and store in Rj | Rj <- Rj OP Ri |
 
 
