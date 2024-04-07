@@ -27,4 +27,40 @@ $L(B) = \bigcup_{C\in S(B)} T(L(C))$
 
 where $S(B)$ is the set of all blocks that directly follow block $B$.
 
+We can define T(V) as follows:
+
+$T(V) = V \cup use(B) - def(B)$
+
+where 
+* $use(B)$ are the variables in B that are used in B before being defined in D and
+* $def(B)$ are the variables in B that are defined before being used
+
+Let's try this with a simple example program, where I have introduced labels for each basic block
+whether or not there is a jump to it.
+```
+B0:
+  m=0
+  v=0
+  if v>n goto L4
+B1:
+  r=v
+  s=0
+  if r<n goto B3
+B2:
+  v=v+1
+  goto B1
+B3:
+  x=M[r]
+  s=s+x
+  if s<=m goto B5
+B4: 
+  m=s
+B5: 
+  r=r+1
+  goto B1
+```
+
+
+
+
 
