@@ -88,8 +88,8 @@ Complete the following table ...
 
 | B | use(B) | def(B) | equation |
 | --- | --- | --- | --- |
-| B0 | n | m v | $in(B0) = out(B0) \cup \\{n\\} - \\{m,v\\}$|
-| B1 | r n| r s | |
+| B0 | n | m v | $in(B_0) = out(B_0) \cup \\{n\\} - \\{m,v\\}$|
+| B1 | r n| r s | $in(B_1) = out(B_1) \cup \\{n\\} - \\{s\\}$|
 | B2 | | | |
 | B3 | | | |
 | B4 | | | |
