@@ -35,9 +35,10 @@ What are some examples for r=3,4, ...
 So the Dynamic Programming model calculates several costs for each node E = A op B
 Calculate $c_0(E)$ by 
 1. evaluating A with r registers and B with r-1 then do one operation and store the result in memory
-   $c_r(A) + c_{r-1}(B) + c(Op) + c(LD)$
+   $c_r(A) + c_{r-1}(B) + c(Op) + c(ST)$
 2. or the same with A and B switched
 
+This gives the optimal time to evaluate E using all registers, and store the result in memory.
 
 Calculate $c_s(E)$ for $2\le s \le r$ as follows:
 1. Evaluate A ahead of time at cost $c_0(A)$, the evaluate B with s registers, load A into a register and do the operation
@@ -50,6 +51,11 @@ Calculate $c_s(E)$ for $2\le s \le r$ as follows:
    $c_s(B) + c_{s-1}(A) + 1$
    
 We then take the minimum of 1-5 and store that in $c_s(E)$ (along with the code $L_s(E)$ to achieve that minumum.
+
+In practice, this algorithm will result in code that first evaluates subtrees of the original expression, storing them
+in memory locations, and then evaluates the resulting expression using r registers and no stores!
+
+You might want to try to write the code to generate this optimal evaluation!
 
 
 
