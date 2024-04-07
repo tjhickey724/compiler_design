@@ -37,6 +37,8 @@ Calculate $c_0(E)$ by
 1. evaluating A with r registers and B with r-1 then do one operation and store the result in memory
    $c_r(A) + c_{r-1}(B) + c(Op) + c(LD)$
 2. or the same with A and B switched
+
+
 Calculate $c_r(E)$ for r >=2 by
 1. Evaluate A ahead of time at cost $c_0(A)$, the evaluate B with s registers, load A into a register and do the operation
    $c_0(A) + c_s(B) + c(LD) + c(Op)$
