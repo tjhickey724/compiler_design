@@ -48,7 +48,8 @@ Calculate $c_s(E)$ for $2\le s \le r$ as follows:
    $c_s(A) + c_{s-1}(B) + c(Op)$
 5. Do the same with A and B switched:
    $c_s(B) + c_{s-1}(A) + 1$
-We then take the minimum of 1-5 and store that in c_r(E) (along with the code to achieve that minumum).
+   
+We then take the minimum of 1-5 and store that in $c_s(E)$ (along with the code $L_s(E)$ to achieve that minumum.
 
 
 
