@@ -23,6 +23,6 @@ We start by assuming that L(B) is empty for each block and we will define a set 
 
 So for each block B we iterate the following equations and keep doing this until there are no changes
 
-$ L(B) = L(B) \cup \bigcup_{C\in S(B)} T(L(C)) $
+$L(B) = L(B) \cup \bigcup_{C\in S(B)} T(L(C))$
 
 
