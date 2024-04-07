@@ -41,7 +41,7 @@ whether or not there is a jump to it.
 B0:
   m=0
   v=0
-  if v>n goto L4
+  if v>n goto B6
 B1:
   r=v
   s=0
@@ -58,6 +58,8 @@ B4:
 B5: 
   r=r+1
   goto B1
+B6:
+  return m
 ```
 
 
