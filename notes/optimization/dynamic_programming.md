@@ -33,17 +33,17 @@ For r=2, some examples are (a+b) or (a*(b-c)) ...
 What are some examples for r=3,4, ...
 
 So the Dynamic Programming model calculates several costs for each node E = A op B
-Calculate c_0(E) by 
+Calculate $c_0(E)$ by 
 1. evaluating A with r registers and B with r-1 then do one operation and store the result in memory
    $c_r(A) + c_{r-1}(B) + c(Op) + c(LD)$
 2. or the same with A and B switched
-Calculate c_r(E) for r >=2 by
-1. Evaluate A ahead of time at cost c_0(A), the evaluate B with s registers, load A into a register and do the operation
-   $c_0(A) + c_s(B) + cost(LD) + cost(Op)$
+Calculate $c_r(E)$ for r >=2 by
+1. Evaluate A ahead of time at cost $c_0(A)$, the evaluate B with s registers, load A into a register and do the operation
+   $c_0(A) + c_s(B) + c(LD) + c(Op)$
 2. Do the same with B computed ahead of time:
-   $c_0(B) + c_s(A) + cost(LD) + cost(Op)$
+   $c_0(B) + c_s(A) + c(LD) + c(Op)$
 4. Evaluate A with s register (storing the result in one of them), then B with s-1 registers, then do one operation
-   $c_s(A) + c_{s-1}(B) + cost(Op)$
+   $c_s(A) + c_{s-1}(B) + c(Op)$
 5. Do the same with A and B switched:
    $c_s(B) + c_{s-1}(A) + 1$
 We then take the minimum of 1-5 and store that in c_r(E) (along with the code to achieve that minumum).
