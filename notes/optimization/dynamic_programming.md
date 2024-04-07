@@ -12,6 +12,10 @@ calculate the minimal cost of evaluating it with all "r" registers and then stor
 For this to work we must have a complete list of the assembly language operations and their costs. For today, we consider
 the following operations, where Ri are registers and Mi are memory locations
 | instruction | cost | meaning |
-|---|---|---|
-|ST Ri Mj| 10 | store the value of R in memory location Mj|
+|---|---|---|---|
+|ST Ri Mj| 10 | store the value of Ri in memory location Mj| Mj <- Ri|
+|LD Mj Ri| 10 | load the value at memory location Mj into register Ri| Ri <- Mj|
+|MV Ri Rj| 1  | copy the value of Ri into Rj| Rj <- Ri|
+|OP Ri Rj| 1  | apply the binary operation OP to Ri and Rj and store in Rj | Rj <- Rj OP Ri |
+
 
