@@ -69,12 +69,27 @@ S(B2) = B1
 S(B3) = B4, B5
 S(B4) = B5
 S(B5) = B1
+S(B6) = emptyset
 ```
-and we can calculate the use/def sets for the basic blocks
+and we can calculate the use/def sets for the basic blocks.
+Complete the following table ...
+
 | B | use(B) | def(B) |
 | --- | --- | --- |
-| B0 | | |
+| B0 | n | m v }
+| B1 | r n| r s |
+| B2 | | |
+| B3 | | |
+| B4 | | |
+| B5 | | |
+| B6 |  | |
 
+We can now calculate the Flow equations
+
+$ L(B0) = T(L(B1)) \cup T(L(B6)) \\
+= L(B1) \cup use(B) - def(B1) = L(B1) \cup \{r,n\} - \{r,s\} = L(B1) \cup \{r\} - \{s\} $
+
+$ L(B1) = 
 
 
 
