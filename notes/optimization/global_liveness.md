@@ -86,8 +86,8 @@ Complete the following table ...
 
 We can now calculate the Flow equations
 
-$ L(B0) = T(L(B1)) \cup T(L(B6)) \\
-= L(B1) \cup use(B) - def(B1) = L(B1) \cup \{r,n\} - \{r,s\} = L(B1) \cup \{r\} - \{s\} $
+$L(B0) = T(L(B1)) \cup T(L(B6)) \\
+= L(B1) \cup use(B) - def(B1) = L(B1) \cup \{r,n\} - \{r,s\} = L(B1) \cup \{r\} - \{s\}$
 
 $ L(B1) = 
 
