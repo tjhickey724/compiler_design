@@ -69,6 +69,7 @@ compiling the three address code from this graph.
 ## Register Allocation
 Optimal Register allocation is a very hard problem (NP-hard) but there are many heuristics that produce optimal code in particular situations or near optimal code in most situations. Here are a few:
 * [Arithmetic Expressions with Ershov's algorithm](ershov.md)
+* [Optimal Register allocation by Dynamic Programming](dynamic_programming.md)
 * [Register Allocation by Graph Coloring](graphcoloring.md)
 
 
