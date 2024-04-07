@@ -22,8 +22,7 @@ to find the set T(L(B)) of variables which are live at the start of block B.
 We start by assuming that L(B) is empty for each block and we will define a set of equations that propogate the uses of each variable throught the flow graph. When the equations stabilize we have a solution to our liveness analysis.
 
 So for each block B we iterate the following equations and keep doing this until there are no changes
-$$
-L(B) = L(B) \cup \bigcup_{C\in S(B)} T(L(C))
-$$
 
-$$
+$ L(B) = L(B) \cup \bigcup_{C\in S(B)} T(L(C)) $
+
+
