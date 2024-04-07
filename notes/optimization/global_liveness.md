@@ -27,6 +27,18 @@ $L(B) = \bigcup_{C\in S(B)} T(L(C))$
 
 where $S(B)$ is the set of all blocks that directly follow block $B$.
 
+Another way to write this is with 
+* $in(B)$ the variables which are live at the begining of the block B
+* $out(B)$ the variables which are live at the end of the block B
+
+The the flow equations become:
+
+$in(B) = T(out(B))$
+
+$out(B) = \bigcup{C in S(B)} in(B)$
+
+
+
 We can define T(V) as follows:
 
 $T(V) = V \cup use(B) - def(B)$
