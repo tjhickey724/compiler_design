@@ -61,6 +61,20 @@ B5:
 B6:
   return m
 ```
+The successor function on basic blocks is then
+```
+S(B0) = B1, B6
+S(B1) = B2, B3
+S(B2) = B1
+S(B3) = B4, B5
+S(B4) = B5
+S(B5) = B1
+```
+and we can calculate the use/def sets for the basic blocks
+| B | use(B) | def(B) |
+| --- | --- | --- |
+| B0 | | |
+
 
 
 
