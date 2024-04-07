@@ -90,7 +90,7 @@ $L(B0) = T(L(B1)) \cup T(L(B6))$
 
 $T(L(B1)) = L(B1) \cup use(B1) - def(B1) = L(B1) \cup \\{r,n\\} - \\{r,s\\} = L(B1) \cup \\{r\\} - \\{s\\}$
 
-$T(L(B6)) = L(B6) \cup use(B6) - def(B6) = L(B6) \cup \\{m\\} - \\{\\}$
+$T(L(B6)) = L(B6) \cup use(B6) - def(B6) = L(B6) \cup \\{m\\} - \\{\\}= L(B6) \cup \\{m\\}$
 
 $ L(B1) = T(L(B2)) \cup T(L(B3))$
 
