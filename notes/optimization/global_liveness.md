@@ -73,6 +73,9 @@ B5:
 B6:
   return m
 ```
+or in graph form:
+![flow graph](use_flowgraph.png)
+
 The successor function on basic blocks is then
 ```
 S(B0) = B1, B6
