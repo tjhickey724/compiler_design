@@ -96,6 +96,7 @@ $L(B1) = T(L(B2)) \cup T(L(B3))$
 
 you can complete these formulas for B1, B2, B3, B4, B5, B6.
 
+Starting off with $L(B)=\\{\\}$ for all B and iterating until there is no change we will calculate the variables which are live at the end of each block. From there we can use the Basic Block algorithm to see which variables are live or dead at each instruction in the basic block.
 
 
 
