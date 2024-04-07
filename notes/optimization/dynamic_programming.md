@@ -39,7 +39,7 @@ Calculate $c_0(E)$ by
 2. or the same with A and B switched
 
 
-Calculate $c_r(E)$ for r >=2 by
+Calculate $c_s(E)$ for $2\le s \le r$ as follows:
 1. Evaluate A ahead of time at cost $c_0(A)$, the evaluate B with s registers, load A into a register and do the operation
    $c_0(A) + c_s(B) + c(LD) + c(Op)$
 2. Do the same with B computed ahead of time:
