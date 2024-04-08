@@ -44,6 +44,8 @@ Try this with $(a*b+c*d)*(x*y+u*v) + (g*h+i*j)*(m*n+p*q)$
 * find the Ershov numbers
 * find an evaluation with 3 registers
 
+![e5 tree](e5tree.png)
+
 This won't necessarily be optimal though because you would like to minimize the Loads and Stores, but we can use dynamic programming to get a provably optimal evaluation, with our assumptions about execution time for the basic instructions.
 
 
