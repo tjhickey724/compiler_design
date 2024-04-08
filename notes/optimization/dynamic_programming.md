@@ -29,7 +29,9 @@ and no stores.
 What are the expressions (i.e. parse trees) that can be evaluated with r registers and no stores??
 * For r = 0,1 there are no such expressions as we assume the leaves are distinct and instructions take 2 registers.
 * For r=2, some examples are (a+b) or (a*(b-c)) ...
-* What are some examples for r=3,4, ...
+* Here are some examples for r=3,4, ...
+
+![ektrees](ektrees.png)
 
 So the Dynamic Programming model calculates several costs for each node E = A op B.
 * for any node in the parse tree we can decide to evaluate it first with all registers and store the result in memory
