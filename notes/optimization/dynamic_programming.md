@@ -18,7 +18,6 @@ the following operations, where Ri are registers or constants (as the first argu
 | LD Mj Ri | 10  | load the value at memory location Mj into register Ri      | Ri <- Mj       |
 | LD Rj Ri |  1  | copy the value of Ri into Rj                               | Ri <- Rj       |
 | OP Rj Ri |  5  | apply the binary operation OP to Ri and Rj and store in Rj | Ri <- Ri OP Rj |
-| OP Mj Ri | 12  | apply the binary operation OP to Ri and Rj and store in Rj | Ri <- Ri OP Mj |
 
 We also assume that all of the variables at the leaves of the tree are distinct, which we will get if we convert the
 tree into a DAG.
@@ -28,11 +27,26 @@ and store the result in memory, and then we'll be left with a tree that we want 
 and no stores. 
 
 What are the expressions (i.e. parse trees) that can be evaluated with r registers and no stores??
-For r = 0,1 there are no such expressions as we assume the leaves are distinct an instructions take 2 registers.
-For r=2, some examples are (a+b) or (a*(b-c)) ...
-What are some examples for r=3,4, ...
+* For r = 0,1 there are no such expressions as we assume the leaves are distinct and instructions take 2 registers.
+* For r=2, some examples are (a+b) or (a*(b-c)) ...
+* What are some examples for r=3,4, ...
 
-So the Dynamic Programming model calculates several costs for each node E = A op B
+So the Dynamic Programming model calculates several costs for each node E = A op B.
+* for any node in the parse tree we can decide to evaluate it first with all registers and store the result in memory
+* if we evaluated enough of the subtrees and stored their values in memory, then we can evaluate the remaining expression
+  with r registers and no stores.
+
+We can implement a heuristic model using this approach and Ershov numbers:
+* find the Ershov numbers of all nodes in the tree, then evaluate the leftmost one which can be evaluated with "r" registers into memory and repeat
+
+Try this with $(a*b+c*d)*(x*y+u*v) + (g*h+i*j)*(m*n+p*q)$
+* draw the tree
+* find the Ershov numbers
+* find an evaluation with 3 registers
+
+This won't necessarily be optimal though because you would like to minimize the Loads and Stores, but we can use dynamic programming to get a provably optimal evaluation, with our assumptions about execution time for the basic instructions.
+
+
 Calculate $c_0(E)$ by 
 1. evaluating A with r registers and B with r-1 then do one operation and store the result in memory
    $c_r(A) + c_{r-1}(B) + c(Op) + c(ST)$
