@@ -35,7 +35,7 @@ The the flow equations become:
 
 ${\rm in}(B) = T({\rm out}(B))$
 
-$out(B) = \bigcup{C \in S(B)} {\rm in}(B)$
+${\rm out}(B) = \bigcup{C \in S(B)} {\rm in}(B)$
 
 
 
