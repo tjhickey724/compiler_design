@@ -33,15 +33,15 @@ Another way to write this is with
 
 The the flow equations become:
 
-$in(B) = T(out(B))$
+${\rm in}(B) = T({\rm out}(B))$
 
-$out(B) = \bigcup{C in S(B)} in(B)$
+$out(B) = \bigcup{C \in S(B)} {\rm in}(B)$
 
 
 
-We can define T(V) as follows:
+We can define $T(V)$ as follows:
 
-$T(V) = V \cup use(B) - def(B)$
+$T(V) = V - {\rm def}(B) \cup {\rm use}(B)$
 
 where 
 * $use(B)$ are the variables in B that are used in B before being defined in D and
