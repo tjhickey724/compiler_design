@@ -44,8 +44,8 @@ We can define $T(V)$ as follows:
 $T(V) = V - {\rm def}(B) \cup {\rm use}(B)$
 
 where 
-* $use(B)$ are the variables in B that are used in B before being defined in D and
-* $def(B)$ are the variables in B that are defined before being used
+* ${\rm use}(B)$ are the variables in B that are used in B before being defined in D and
+* ${\rm def}(B)$ are the variables in B that are defined before being used
 
 Let's try this with a simple example program, where I have introduced labels for each basic block
 whether or not there is a jump to it.
