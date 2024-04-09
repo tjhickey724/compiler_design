@@ -149,7 +149,9 @@ Here we show
 * the solution of the flowgraph
 * the interference graph of the program where two variables have an edge if they are both live at some point in the flowgraph
 
-![primetestLiveness](primetestLiveness.png)
+[Liveness Analysis of the PowerModN code](primalityLiveness.pdf)
+
+
 
 
 
