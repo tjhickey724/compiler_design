@@ -117,7 +117,30 @@ Starting off with $L(B)=\\{\\}$ for all B and iterating until there is no change
 # Worked Example
 Let's look at a fully worked out example...
 Consider the following program which raises x to the power n mod d, and is used in probabilistic prime testing:
-![primetest](primetest.png)
+``` java
+/* code to calculate (x^n)%d in log_2(n) time 
+   used in probabilistic primality testing */
+p = 1;
+q = x;
+s = "";
+while (n > 0) { 
+   // invariant p*q^n%d is constant at this point in the program
+   u = n%2
+   if (u==0){
+      n = n/2;
+      t = "0";
+   } else {
+      n = (n-1);
+      p = p*q %d;
+      t = "1"; }
+    s = t+s;
+    if (t=="0") 
+        r=q; 
+    else
+        r = 1;
+    q = q*r%d;
+}
+```
 
 Here we show 
 * the 3 address code,
