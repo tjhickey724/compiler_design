@@ -114,7 +114,19 @@ you can complete these formulas for B1, B2, B3, B4, B5, B6.
 Starting off with $L(B)=\\{\\}$ for all B and iterating until there is no change we will calculate the variables which are live at the end of each block. From there we can use the Basic Block algorithm to see which variables are live or dead at each instruction in the basic block.
 
 
+# Worked Example
+Let's look at a fully worked out example...
+Consider the following program which raises x to the power n mod d, and is used in probabilistic prime testing:
+![primetest](primetest.png)
 
+Here we show 
+* the 3 address code,
+* the flow graph, then
+* the flow graph for the Liveness analysis, and
+* the solution of the flowgraph
+* the interference graph of the program where two variables have an edge if they are both live at some point in the flowgraph
+
+![primetestLiveness)[primetestLiveness.png)
 
 
 
