@@ -134,9 +134,15 @@ def test(a,b):
 In this program a and b are live at the beginning and x and r are live at the end.
 How can we compile this with just three registers....
 
-The approach we have is 
-1. Build the interference graph
-2. 
+The approach we have to compile code using k registers is 
+1. Build the interference graph from the flowgraph
+2. Simplify the graph (by removing nodes onto a stack with fewer than k edges (as we can always pick a register that differs)
+3. Spill (pick a node with k or more edges assuming it will be stored in memory) and go back to 2
+4. Pop the nodes and try to color the graph. If you reach a point where it can't be colored, then modify the code to include LOADS and Stores and start over.
+
+Here a worked example with one spill and one start over.
+
+[Register Allocation by Graph Coloring](regallocColoring.pdf)
 
 ## A real example
 Consider the following program which raises x to the power n mod d, and is used in probabilistic prime testing:
