@@ -114,8 +114,31 @@ you can complete these formulas for B1, B2, B3, B4, B5, B6.
 Starting off with $L(B)=\\{\\}$ for all B and iterating until there is no change we will calculate the variables which are live at the end of each block. From there we can use the Basic Block algorithm to see which variables are live or dead at each instruction in the basic block.
 
 
-# Worked Example
-Let's look at a fully worked out example...
+# Worked Examples
+Let's look some fully worked out examples...
+
+## A simple madeup example
+Consider the following program
+``` python
+def test(a,b):
+    x = a+5
+    y = 2*x
+    z = x+1
+    u = b+z
+    v = u+3
+    w = u*5
+    x = w*2
+    r = w+y
+    return (x,r)
+```
+In this program a and b are live at the beginning and x and r are live at the end.
+How can we compile this with just three registers....
+
+The approach we have is 
+1. Build the interference graph
+2. 
+
+## A real example
 Consider the following program which raises x to the power n mod d, and is used in probabilistic prime testing:
 ``` java
 /* code to calculate (x^n)%d in log_2(n) time 
