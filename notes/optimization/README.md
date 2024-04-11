@@ -74,11 +74,15 @@ Optimal Register allocation is a very hard problem (NP-hard) but there are many 
 
 
 ## Data Flow Analysis
-The graph coloring register allocation method relies on knowing which variables are "live" for each instruction in the program and this requires extending our "liveness analysis" from a single basic block to the entire program. This can be done using a general technique known as data flow analysis, where we iteratively apply certain data flow equations to find a minimal (or maximal) solution as fixed point to those equations. 
+The graph coloring register allocation method relies on knowing which variables are "live" for each instruction in the program and this requires extending our "liveness analysis" from a single basic block to the entire program. This can be done using a general technique known as data flow analysis, where we iteratively apply certain data flow equations to find a minimal (or maximal) solution as fixed point to those equations. Two other important optizations are constant folding and type inference and both of these rely on the general data flow analysis framework.
 
 The general theory involves finding fixed points of certain functions on DAGs. We'll demonstrate it with the liveness analysis.
 * [Global Liveness Analysis](global_liveness.md)
+* [Constant Folding](constant_folding.md)
+* [Type Inference](type_inference.md)
 * [General Data Flow Analysis](data_flow_analysis.md)
+
+
 
 
  
