@@ -42,7 +42,7 @@ goto L1:
 BB3:
 end
 ```
-and the flow graph is
+and the flow graph is as follows with one loop ```BB1->BB2-> BB1```
 ```
 BB0 -> BB1
 BB1 -> BB2
