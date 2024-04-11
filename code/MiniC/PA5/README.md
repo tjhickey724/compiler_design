@@ -337,12 +337,16 @@ Likewise, to move a[10] to %r7 we use the following code
 ```
 movq $10, %rcx   # store 10 in %rcx
 incq %rcx   # increment it, so 11 is not in %rcx
-movq (%rax, %rcx, $8), %r7
+movq (%rax, %rcx, 8), %r7
 ```
-To store the length of the array "a" in %r8, 
+To store the length of the array "a" in %rax, 
 we access the quad value stored in the first 8 bytes of the array
 ```
-movq (%rax,$rcx,), %r8
+movq (%rax,$0,8), %r8
+```
+or more simply
+```
+movq (%rax), %rax
 ```
 
 Here are some slides on working with arrays in x86-64
