@@ -84,6 +84,57 @@ For the example above, what are the final values for the symbol table
 |t2||
 |t3||
 
+```
+BB0:
+debugging = 0
+maxvasl=20
+minval=10
+scale=100
+x = minval
+
+BB1:
+if-false x<maxval goto BB3:
+
+BB2:
+t1 = maxval - x
+t2 = maxval-minval
+t3 = t1*scale
+z = t3/t2
+print(z)
+x = 2*x
+goto L1:
+
+BB3:
+end
+```
+
+and now we can optimize it by removing constant variables from the program
+and replacing them in expressions with their constant values
+```
+```
+BB0:
+debugging = 0
+maxvasl=20
+minval=10
+scale=100
+x = minval
+
+BB1:
+if-false x<maxval goto BB3:
+
+BB2:
+t1 = maxval - x
+t2 = maxval-minval
+t3 = t1*scale
+z = t3/t2
+print(z)
+x = 2*x
+goto L1:
+
+BB3:
+end
+```
+
 
 
 
