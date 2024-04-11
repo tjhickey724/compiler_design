@@ -74,7 +74,7 @@ For the example above, what are the final values for the symbol table
 | var | value |
 | --- | --- |
 |debugging ||
-|maxvasl||
+|maxval||
 |minval||
 |scale||
 |x||
