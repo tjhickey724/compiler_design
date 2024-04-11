@@ -18,7 +18,9 @@ while (x<maxval){
     x = 2*x;
 }
 ```
-this translates to 3 address code as follows where I'm using labels for every basic block
+With your basic programmer knowledge, which of these variables are not constant, and why?
+
+This program translates to 3 address code as follows where I'm using labels for every basic block
 ```
 BB0:
 debugging = 0
@@ -62,6 +64,12 @@ We then process each instruction and update the symbol table as follows:
   * if B or C is NotContant, then assign NotConstant to A
 
 We then traverse the flow graph  iteratively until there is no change.
+
+### NOTE on Graph Traveral...
+The best way to traverse the graph is using a multiple pass where in each pass we perform a depth first left-to-right traveral but not following edges that lead to a node that has already been visited. The paths we traverse decompose the graph into a spanning tree with the untravelled edges corresponding to loops.
+For constant folding we could process the instructions in any random order and it wouldn't effect the outcome, but could slow down the convergence.
+
+Why does this algorithm always terminate? (Hint: the values always go up from Undefined, to a constant value, and possibly to NotConstant).
 
 ### Optimization pass
 Once we know which variables are constant, we can optimize the 3 address code, by 
