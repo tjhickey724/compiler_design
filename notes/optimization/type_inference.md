@@ -7,6 +7,11 @@ where the values are
 * int
 * int[]
 * $\top$ overdefined
-```
-where $\bot$ is the smallest element and $\top$ is the largest.
+
+where 
+
+$$\bot \lt {\rm boolean}, {\rm int}, {\rm int[]} \lt \top$$
+
+
+
 
