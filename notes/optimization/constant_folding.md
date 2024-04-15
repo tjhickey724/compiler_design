@@ -119,7 +119,6 @@ end
 and now we can optimize it by removing constant variables from the program
 and replacing them in expressions with their constant values
 ```
-```
 BB0:
 debugging = 0
 maxvasl=20
