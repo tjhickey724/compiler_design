@@ -13,7 +13,7 @@ int minval = 10;
 int scale = 100;
 int x = minval;
 while (x<maxval){
-    in z = scale*(maxval-x)/(maxval-minval))
+    z = scale*(maxval-x)/(maxval-minval))
     System.out.println(z);
     x = 2*x;
 }
