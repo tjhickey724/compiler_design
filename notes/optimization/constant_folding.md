@@ -156,7 +156,7 @@ where s3 = ????
 
 Doing one more iteration we will reach our fixed point....
 ```
-s = (debugging = 0, maxvasl=20, minval=10, scale=100, x=N, t1=B, t2=10, t3=N, z=N)
+s = (debugging = 0, maxvasl=20, minval=10, scale=100, x=N, t1=N, t2=10, t3=N, z=N)
 
 ### Optimization pass
 Once we know which variables are constant, we can optimize the 3 address code, by 
