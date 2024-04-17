@@ -35,6 +35,7 @@ while any OUT value changes:
         OUT[B] = f_B(IN[B])
 ```
 
+## Algorithm for backward data flow analysis
 The algorithm for backward data flow analysis is similar:
 ```
 IN[EXIT] = v_exit
@@ -46,10 +47,20 @@ while any IN value changes:
         IN[B] = f_B(OUT[B])
 ```
 
+## General idea for Data Flow Analysis
 The idea is that we keep track of the values at the beginning and ending of each block
 and we use the transfer functions $f_B$ to update the OUT value of a block from its IN value
 (or vice versa for backward flow analysis). Then we update the IN value by looking at all of the
 OUT values of blocks that lead into that block, and using our MEET operator to join all of those values.
+
+## Dual form
+We can also use the dual approach where we initialize all of the blocks with the smallest element $\bot$
+and then use the least upper bound operator, $\bigvee$, to join the values coming into a block. We used
+this approach for live variable analysis, where we find the set of live variables at the beginning and end of each
+block starting with the empty set and then gradually adding to those sets as we traverse the flow graph until
+no changes occur.
+
+Almost all of the static program analysis algorithms are based on this approach.
 
 
 ***Under Construction***
