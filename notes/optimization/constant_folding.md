@@ -132,12 +132,22 @@ s2 = (debugging = 0, maxvasl=20, minval=10, scale=100, x=10,
      t2=maxval-minval = 10,
      t3=t1*scale = 1000,
      z=t3/t2 = 100)
+ = (debugging = 0, maxvasl=20, minval=10, scale=100, x=10, t1=10, t2=10, t3=1000, z=100)
 ```
+So everything has a value, but we know that the next time we go through the loop x,t1,t3,and z will
+get different values and so they will be multiply defined and hence have value $N$
+
 Now lets use this to calculate IN[BB1]
 ```
-IN[BB1] = OUT[BB0] join OUT[BB2] = s1 join s2 = s3
-where s3 = ???
+IN[BB1] = OUT[BB0] join OUT[BB2] = s1 join s2 = s2
 ```
+
+So now IN[BB2] = s2 and 
+```
+OUT[BB2] = F(IN[BB2]) = s3
+where s3 = ????
+```
+
 Doing one more iteration we will reach our fixed point....
 ```
 s = (debugging = 0, maxvasl=20, minval=10, scale=100, x=N, t1=B, t2=10, t3=N, z=N)
