@@ -140,7 +140,12 @@ get different values and so they will be multiply defined and hence have value $
 
 Now lets use this to calculate IN[BB1]
 ```
-IN[BB1] = OUT[BB0] join OUT[BB2] = s1 join s2 = s2
+IN[BB1] = OUT[BB0] join OUT[BB2] = s1 join s2 = s3
+where s3 =
+ (debugging = 0, maxval=20, minval=10, scale=100, x=10, t1=U, t2=U, t3=U, z=U)
+join
+(debugging = 0, maxval=20, minval=10, scale=100, x=20, t1=10, t2=10, t3=1000, z=100)
+=  (debugging = 0, maxval=20, minval=10, scale=100, x=N, t1=10, t2=10, t3=1000, z=100)
 ```
 
 So now IN[BB2] = s2 and 
