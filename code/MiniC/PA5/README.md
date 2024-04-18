@@ -403,6 +403,32 @@ arguments a1,..., ar in the first r slots of the frame, followed by spaces for t
 and the stack pointer will increased by (8*(r+s)) but rounded up to the nearest 16 byte boundary!
 
 
+# Debugging assembly code
+You may want to use the LLDB debugger to debug the assembly code your compiler produces.
+
+Here are the steps
+``` bash
+# compile your code to an executable
+cc demo.s print.s -o demo
+# start the debugger
+lldb ./demo
+# set a breakpoint on the fibs method
+b fibs
+# start the program, it will stop at the fibs label
+r
+# step over the next instruction
+n
+# look at the contents of the rax register
+register read rax
+# look at all of the registers contents in decimal
+register read -f decimal
+# get help about the register read command
+help register read
+# get help about the debugger
+help
+# quit the debugger
+quit
+```
 
 
 
