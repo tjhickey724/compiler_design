@@ -316,14 +316,14 @@ of bytes to allocate. The address of the first byte in that region of memory is 
 
 Here is a slide on [malloc](./malloc.pdf)
 
-So the create an array of size 10 we would do the following
+So the create an array of size 1000 we would do the following
 ``` X86_64
-movq $10, %rdi  # store 10 in %rdi
+movq $1000, %rdi  # store 10 in %rdi
 incq %rdi  # add 1 to it, as we store the length at position 0 of the array
-shlq $3, %rdi   #  multiply it by 8, as malloc allocates bytes and our ints are 8 bytes long
-callq _malloc  # this calls the malloc function which gcc or cc or clang will link to our code
-pushq %rax    # the address of the first byte of the array is returned from malloc in %rax
-
+shlq $3, %rdi   #  multiply it by 8, 
+callq _malloc  # this calls the malloc function 
+pushq %rax    # the address of the first byte of the array
+movq $1000, (%rax) # store 10 in position 0 of the array
 ```
 
 ### Array Indexing
@@ -349,14 +349,14 @@ movq $10, %rcx   # store 10 in %rcx
 incq %rcx   # increment it, so 11 is not in %rcx
 movq (%rax, %rcx, 8), %r7
 ```
-To store the length of the array "a" in %rax, 
+To store the length of the array "a" in %r8, 
 we access the quad value stored in the first 8 bytes of the array
 ```
 movq (%rax,$0,8), %r8
 ```
 or more simply
 ```
-movq (%rax), %rax
+movq (%rax), %r8
 ```
 
 Here are some slides on working with arrays in x86-64
