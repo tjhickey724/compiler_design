@@ -318,12 +318,12 @@ Here is a slide on [malloc](./malloc.pdf)
 
 So the create an array of size 1000 we would do the following
 ``` X86_64
-movq $1000, %rdi  # store 10 in %rdi
+movq $1000, %rdi  # store 1000 in %rdi
 incq %rdi  # add 1 to it, as we store the length at position 0 of the array
 shlq $3, %rdi   #  multiply it by 8, 
 callq _malloc  # this calls the malloc function 
 pushq %rax    # the address of the first byte of the array
-movq $1000, (%rax) # store 10 in position 0 of the array
+movq $1000, (%rax) # store 1000 in position 0 of the array
 ```
 
 ### Array Indexing
