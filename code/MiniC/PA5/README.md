@@ -316,6 +316,16 @@ of bytes to allocate. The address of the first byte in that region of memory is 
 
 Here is a slide on [malloc](./malloc.pdf)
 
+So the create an array of size 10 we would do the following
+``` X86_64
+movq $10, %rdi  # store 10 in %rdi
+incq %rdi  # add 1 to it, as we store the length at position 0 of the array
+shlq $3, %rdi   #  multiply it by 8, as malloc allocates bytes and our ints are 8 bytes long
+callq _malloc  # this calls the malloc function which gcc or cc or clang will link to our code
+pushq %rax    # the address of the first byte of the array is returned from malloc in %rax
+
+```
+
 ### Array Indexing
 Once we have allocate 8*(size+1) bytes in the heap to store the array "a" of longs,
 we can access the element a[i] using the following x86 syntax
