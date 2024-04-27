@@ -6,9 +6,8 @@ This folder contains several programming projects to help you learn about each o
 * Pretty Printing from an AST in [PA4/PA4b](./PA4/PA4b.md)
 * Generating a Symbol Table from an AST in [PA4/PA4c](./PA4/PA4c.md)
 * Type Checking a program from an AST in [PA4/PA4d](./PA4/PA4d.md)
-* Compiling MiniC to X86-64 in [PA5/PA5a](./PA5/PA5a.md)
-* Compiling Array operations to X86-64 in [PA5/PA5a](./PA5/PA5b.md)
+* Compiling MiniC to X86-64 in [PA5ab](./PA5/README.md)
 
 In each case, you are given a solution for the [MiniC language](./MiniCvsMiniJava.md) and
 asked to generate a solution for MiniJava, which is essentially a super set of MiniC containing
-classes and integer arrays.
+classes and integer arrays and while loops.
