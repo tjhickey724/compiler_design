@@ -4,7 +4,7 @@ void print(int n){printf("%10d\n",n);}
 
 int arrayDemo(int s,int t){
     int a;
-    int b;
+    int[] b;
     a = 0;
     b = new int[s];
     b[0]=100;
